@@ -114,10 +114,12 @@ An alternate method (rfc include) is described in the references. -->
   </front>
 
   <middle>
+
     <section title="Introduction">
       <t>
       </t>
     </section>
+
     <section title="Terminology">
       <t>
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -150,6 +152,7 @@ An alternate method (rfc include) is described in the references. -->
     <section title="IANA Considerations" anchor="iana">
       <t>
       </t>
+    </section>
 
     <section title="Security Considerations" anchor="security">
       <t>TBD</t>
@@ -169,7 +172,6 @@ An alternate method (rfc include) is described in the references. -->
       <t>
       </t>
     </section>
-
 
   </middle>
   <back>
