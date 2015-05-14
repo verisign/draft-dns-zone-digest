@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!-- One method to get references from the online citation libraries.
+There has to be one entity for each item to be referenced. 
+An alternate method (rfc include) is described in the references. -->
+<!ENTITY RFC5966 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
+<!ENTITY I-D.ietf-tcpm-fastopen SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tcpm-fastopen">
+<!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
+<!ENTITY RFC0768 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0768.xml">
+<!ENTITY RFC0793 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.0793.xml">
+<!ENTITY RFC1034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
+<!ENTITY RFC1035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC1123 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1123.xml">
+<!ENTITY RFC2119 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2119 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2616 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2616.xml">
+<!ENTITY RFC2629 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC2671 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2671.xml">
+<!ENTITY RFC2920 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2920.xml">
+<!ENTITY RFC3552 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3552.xml">
+<!ENTITY RFC4033 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
+<!ENTITY RFC4034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
+<!ENTITY RFC4035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
+<!ENTITY RFC5011 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5011.xml">
+<!ENTITY RFC5155 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5155.xml">
+<!ENTITY RFC5358 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5358.xml">
+<!ENTITY RFC5625 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5625.xml">
+<!ENTITY RFC5625 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5625.xml">
+<!ENTITY RFC6824 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6824.xml">
+<!ENTITY RFC6891 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6891.xml">
+<!ENTITY RFC7230 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
+<!ENTITY RFC7323 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7323.xml">
+]>
+
+<?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" docName="draft-edns-key-tag" ipr="trust200902">
+  <!-- category values: std, bcp, info, exp, and historic
+  ipr values: full3667, noModification3667, noDerivatives3667
+  you can add the attributes updates="NNNN" and obsoletes="NNNN" 
+  they will automatically be output with "(if approved)" -->
+
+  <!-- ***** FRONT MATTER ***** -->
+
+  <front>
+    <!-- The abbreviated title is used in the page header - it is only necessary if the 
+    full title is longer than 39 characters -->
+
+    <title abbrev="EDNS Key Tag Option">The EDNS Key Tag Option</title>
+
+    <!-- add 'role="editor"' below for the editors if appropriate -->
+
+    <!-- Another author who claims to be an editor -->
+
+    <author fullname="Duane Wessels" initials="D." surname="Wessels">
+      <organization>Verisign Labs</organization>
+      <address>
+        <postal>
+          <street>12061 Bluemont Way</street>
+          <city>Reston</city>
+          <region>VA</region>
+          <code>20190</code>
+        </postal>
+        <phone>+1 703 948-3200</phone>
+        <email>dwessels@verisign.com</email>
+        <uri>http://verisigninc.com</uri>
+      </address>
+    </author>
+
+    <date month="May" year="2015" />
+
+    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
+          in the current day for you. If only the current year is specified, xml2rfc will fill 
+    in the current day and month for you. If the year is not the current one, it is 
+    necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
+    purpose of calculating the expiry date).  With drafts it is normally sufficient to 
+    specify just the year. -->
+
+    <!-- Meta-data Declarations -->
+
+    <area>General</area>
+
+    <workgroup>Internet Engineering Task Force</workgroup>
+
+    <!-- WG name at the upperleft corner of the doc,
+    IETF is fine for individual submissions.  
+    If this element is not present, the default is "Network Working Group",
+    which is used by the RFC Editor as a nod to the history of the IETF. -->
+
+    <keyword>DNS</keyword>
+    <keyword>TCP/IP</keyword>
+    <keyword>transport</keyword>
+    <!-- Keywords will be incorporated into HTML output
+    files in a meta tag but they have no effect on text or nroff
+    output. If you submit your draft to the RFC Editor, the
+    keywords will be used for the search engine. -->
+
+<!-- text liberally borrowed from RFC 6975 -->
+
+    <abstract>
+      <t>
+	This document describes how to compute, sign, and validate a message digest
+	covering a DNS zone file.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section title="Introduction">
+      <t>
+      </t>
+    </section>
+    <section title="Terminology">
+      <t>
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+        document are to be interpreted as described in <xref
+          target="RFC2119"/>.
+      </t>
+    </section>
+
+    <section title="New Record Type">
+      <t>
+      </t>
+    </section>
+
+    <section title="Calculating Zone Message Digest" anchor="calculating">
+      <t>
+      </t>
+    </section>
+
+    <section title="Signing Zone Message Digest" anchor="signing">
+      <t>
+      </t>
+    </section>
+
+    <section title="Validating Zone Message Digest" anchor="validating">
+      <t>
+      </t>
+    </section>
+
+    <section title="IANA Considerations" anchor="iana">
+      <t>
+      </t>
+
+    <section title="Security Considerations" anchor="security">
+      <t>TBD</t>
+    </section>
+
+    <section title="Privacy Considerations" anchor="privacy">
+      <t>TBD</t>
+    </section>
+
+    <section title="Acknowledgements" anchor="acknowledgements">
+      <t>
+        Thanks to ...
+      </t>
+    </section>
+
+    <section anchor="Implementation" title="Implementation Status">
+      <t>
+      </t>
+    </section>
+
+
+  </middle>
+  <back>
+
+    <references title="Normative References">
+    &RFC2119;
+    &RFC1034;
+    &RFC1035;
+    &RFC4033;
+    &RFC4034;
+    &RFC4035;
+    &RFC6891;
+    </references>
+
+    <references title="Informative References">
+    &RFC5011;
+    </references>
+
+  </back>
+</rfc>
