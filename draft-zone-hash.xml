@@ -75,35 +75,17 @@ An alternate method (rfc include) is described in the references. -->
       </address>
     </author>
 
-    <date month="May" year="2015" />
-
-    <!-- If the month and year are both specified and are the current ones, xml2rfc will fill 
-          in the current day for you. If only the current year is specified, xml2rfc will fill 
-    in the current day and month for you. If the year is not the current one, it is 
-    necessary to specify at least a month (xml2rfc assumes day="1" if not specified for the 
-    purpose of calculating the expiry date).  With drafts it is normally sufficient to 
-    specify just the year. -->
-
-    <!-- Meta-data Declarations -->
+    <date month="March" year="2018" />
 
     <area>General</area>
 
     <workgroup>Internet Engineering Task Force</workgroup>
 
-    <!-- WG name at the upperleft corner of the doc,
-    IETF is fine for individual submissions.  
-    If this element is not present, the default is "Network Working Group",
-    which is used by the RFC Editor as a nod to the history of the IETF. -->
-
     <keyword>DNS</keyword>
-    <keyword>TCP/IP</keyword>
-    <keyword>transport</keyword>
-    <!-- Keywords will be incorporated into HTML output
-    files in a meta tag but they have no effect on text or nroff
-    output. If you submit your draft to the RFC Editor, the
-    keywords will be used for the search engine. -->
-
-<!-- text liberally borrowed from RFC 6975 -->
+    <keyword>DNSSEC</keyword>
+    <keyword>Checksum</keyword>
+    <keyword>Hash</keyword>
+    <keyword>Zone Transfer</keyword>
 
     <abstract>
       <t>
