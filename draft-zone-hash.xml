@@ -31,7 +31,9 @@ An alternate method (rfc include) is described in the references. -->
 <!ENTITY RFC6891 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6891.xml">
 <!ENTITY RFC7230 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7230.xml">
 <!ENTITY RFC7323 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7323.xml">
+<!ENTITY RRNAME "ZHASH">
 ]>
+
 
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes" ?>
@@ -42,7 +44,7 @@ An alternate method (rfc include) is described in the references. -->
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" docName="draft-edns-key-tag" ipr="trust200902">
+<rfc category="std" docName="draft-dns-zone-message-digest" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -54,7 +56,7 @@ An alternate method (rfc include) is described in the references. -->
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
     full title is longer than 39 characters -->
 
-    <title abbrev="EDNS Key Tag Option">The EDNS Key Tag Option</title>
+    <title abbrev="dns-zone-message-digest">Message Digest for DNS Zones</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
@@ -89,8 +91,12 @@ An alternate method (rfc include) is described in the references. -->
 
     <abstract>
       <t>
-	This document describes how to compute, sign, and validate a message digest
-	covering a DNS zone file.
+	This document describes the implementation of a message
+	digest over DNS zone data.  In particular, it describes how
+	to compute, sign, represent, and use the message digest to
+	validate the contents of a zone for accuracy and completeness.
+	The &RRNAME; Resource Record type is introduced for conveying
+	the message digest data.
       </t>
     </abstract>
   </front>
@@ -111,7 +117,7 @@ An alternate method (rfc include) is described in the references. -->
       </t>
     </section>
 
-    <section title="New Record Type">
+    <section title="The &RRNAME; Resource Record" anchor="rrtype">
       <t>
       </t>
     </section>
@@ -121,7 +127,7 @@ An alternate method (rfc include) is described in the references. -->
       </t>
     </section>
 
-    <section title="Signing Zone Message Digest" anchor="signing">
+    <section title="Interaction with DNSSEC" anchor="signing">
       <t>
       </t>
     </section>
