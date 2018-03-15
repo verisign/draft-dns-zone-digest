@@ -73,7 +73,7 @@ An alternate method (rfc include) is described in the references. -->
         </postal>
         <phone>+1 703 948-3200</phone>
         <email>dwessels@verisign.com</email>
-        <uri>http://verisigninc.com</uri>
+        <uri>http://verisign.com</uri>
       </address>
     </author>
 
@@ -91,12 +91,13 @@ An alternate method (rfc include) is described in the references. -->
 
     <abstract>
       <t>
-	This document describes the implementation of a message
-	digest over DNS zone data.  In particular, it describes how
-	to compute, sign, represent, and use the message digest to
-	validate the contents of a zone for accuracy and completeness.
-	The &RRNAME; Resource Record type is introduced for conveying
-	the message digest data.
+        This document describes a protocol and DNS Resource Record
+        used to provide a message digest over DNS zone data.
+        In particular, it describes how to compute, sign, represent,
+        and use the message digest to validate the contents of a
+        zone for accuracy and completeness.
+        The &RRNAME; Resource Record type is introduced for conveying
+        the message digest data.
       </t>
     </abstract>
   </front>
@@ -105,6 +106,45 @@ An alternate method (rfc include) is described in the references. -->
 
     <section title="Introduction">
       <t>
+        In the DNS, a zone is the collection of authoritative resource
+        records (RRs) sharing a common origin (<xref target="RFC7719"/>),
+	which can be distributed from primary to secondary name
+	servers.
+        Zones are often stored as files on disk in the so-called
+        master file format <xref target="RFC1034"/>.
+	Sometimes zones are distributed outside of the DNS, with
+	such protocols as FTP, HTTP, rsync, and so on.
+        While zone files are self-contained, currently there is
+        no way to validate the authenticity of a stand-alone zone
+        file.
+        This document introduces a new RR type that serves as a
+        cryptographic message digest of the data in a zone file.
+	It allows a receiver of the zone file to validate its
+	authenticity, especially when used in combination with DNSSEC.
+      </t>
+      <t>
+        Message digests are also found in the TSIG protocol.
+        DNS transaction signatures (TSIG, RFCXXX) uses a message
+        digest to protect individual query and response messages.
+        TSIG is generally used to authenticate and validate UPDATE
+        and AXFR/IXFR messages.
+        However, TSIG's protections are ephemeral, existing only "on
+        the wire," are not retained after the transaction is complete.
+        Additionally, TSIG utilizes shared secret keys, which
+        are not available to third parties.
+      </t>
+      <t>
+        The technique described in this document makes the message
+        digest a part of the zone file itself, and allows anyone
+        to validate the zone file as a whole, no matter how it is
+        transmitted.
+      </t>
+      <t>
+	The zone message digest relies on DNSSEC to provide strong
+	security guarantees.  Without DNSSEC, an attacker can modify
+	zone data and recalculate the message digest and not be detected.
+	For discussion: currently this document does not require DNSSEC
+	but the authors are open to changing that.
       </t>
     </section>
 
@@ -119,7 +159,54 @@ An alternate method (rfc include) is described in the references. -->
 
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
       <t>
+        This section describes the &RRNAME; Resource Record, including its fields, wire format, presentation format.
       </t>
+
+      <section title="&RRNAME; RDATA Wire Format">
+        <t>The &RRNAME; RDATA wire format is encoded as follows:</t>
+        <figure><artwork align="left"><![CDATA[
+       +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    0: |                                                               |
+       |                            SERIAL                             |
+       |                                                               |
+       +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+    4: |                               |                               |
+       |            DIGEST-TYPE        |                               | 
+       |                               |                               |
+       +---+---+---+---+---+---+---+---+        DIGEST-DATA            +
+       /                                                               /
+       /                                                               /
+       /                                                               /
+       +---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+]]></artwork></figure>
+        <t>where:
+
+   SERIAL: a 32-bit unsigned integer in network order, equal to the
+   serial number from the zone's SOA record, as defined in section
+   3.3.13 of <xref target="RFC1035"/>.
+
+   For Discussion: the serial number is included in order to make
+   DNS response messages of type &RRNAME; meaningful.  Without the
+   serial number, a stand-alone &RRNAME; digest has no association
+   to any particular zone file.  If &RRNAME; were to be made a
+   so-called meta type that cannot be queried for (like OPT), then
+   serial would not be necessary.
+
+   DIGEST-TYPE: an 8-bit unsigned integer, with meaning equivalent to
+   the DIGEST-TYPE of the DS RR type (<xref target="RFC4034"/>).
+
+   DIGEST-DATA: Variable length sequence of octets containing the
+   message digest.
+        </t>
+      </section>
+      <section title="&RRNAME; Presentation Format">
+        <t>
+          The &RRNAME; RR presentation format is identical to the DS RR format:
+        </t>
+        <t>
+          &RRNAME; SERIAL DIGEST-TYPE DIGEST-DATA
+        </t>
+      </section>
     </section>
 
     <section title="Calculating Zone Message Digest" anchor="calculating">
@@ -129,6 +216,11 @@ An alternate method (rfc include) is described in the references. -->
 
     <section title="Interaction with DNSSEC" anchor="signing">
       <t>
+        1. insert "dummy" &RRNAME; record and dummy RRSIG over &RRNAME;
+        2. foreach ZSK, sign the zone.
+        3. calculate the digest.
+        4. update the &RRNAME; RDATA.
+        5. foreach ZSK, update &RRNAME; RRISG.
       </t>
     </section>
 
@@ -150,7 +242,7 @@ An alternate method (rfc include) is described in the references. -->
       <t>TBD</t>
     </section>
 
-    <section title="Acknowledgements" anchor="acknowledgements">
+    <section title="Acknowledgments" anchor="acknowledgments">
       <t>
         Thanks to ...
       </t>
