@@ -148,7 +148,7 @@ An alternate method (rfc include) is described in the references. -->
 
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
       <t>
-        This section describes the &RRNAME; Resource Record, including its fields, wire format, presentation format.
+        This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
       </t>
 
       <section title="&RRNAME; RDATA Wire Format">
@@ -191,14 +191,32 @@ An alternate method (rfc include) is described in the references. -->
             as defined in section 5.1.3 of <xref target="RFC4034"/>.
           </t>
           <t>
-            At the time of this writing the following digest types are defined:
-            <list style="symbols">
-            <t>SHA1 <xref target="RFC3658"/></t>
-            <t>SHA256 <xref target="RFC4509"/></t>
-            <t>GOST R 34.11-94 <xref target="RFC5933"/></t>
-            <t>SHA384 <xref target="RFC6605"/></t>
-            </list>
+	    The status of &RRNAME; digest types (e.g., mandatory,
+	    optional, deprecated) shall always match the status for
+	    DS records.  This information can be found in the IANA
+	    protocol registry for DS digest types <xref target="iana-ds-digest-types"/>.
           </t>
+          <t>
+            At the time of this writing the following digest types are defined:
+	  </t>
+            <texttable anchor="digest-type-table" title="Digest Types">
+            <ttcol align='left'>Description</ttcol>
+            <ttcol align='left'>Status</ttcol>
+            <ttcol align='left'>Reference</ttcol>
+            <c>SHA1</c>
+            <c>Mandatory</c>
+            <c><xref target="RFC3658"/></c>
+            <c>SHA256</c>
+            <c>Mandatory</c>
+            <c><xref target="RFC4509"/></c>
+            <c>GOST R 34.11-94</c>
+            <c>Optional</c>
+            <c><xref target="RFC5933"/></c>
+            <c>SHA384</c>
+            <c>Optional</c>
+            <c><xref target="RFC6605"/></c>
+            <!-- postamble>Data from https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml</postamble -->
+            </texttable>
         </section>
 
         <section title="The Digest Field">
@@ -245,6 +263,13 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
 
     <section title="Calculating the Digest" anchor="calculating">
       <t>
+        Calculation of the zone digest requires the RRs in a zone
+	to be in a consistent format and ordering.  Thus, digest
+	calculation uses the canonical form and ordering of RRs as
+	described in section 6 of <xref target="RFC4034"/>.
+      </t>
+      <t>
+	For simplicity, a zone MUST NOT contain more one &RRNAME; RR at a time.
       </t>
     </section>
 
@@ -301,6 +326,17 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
     &RFC4509;
     &RFC5933;
     &RFC6605;
+
+     <reference anchor="iana-ds-digest-types" target="https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml">
+        <front>
+          <title>Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms</title>
+          <author>
+            <organization>IANA</organization>
+          </author>
+          <date year="2012" month="April" day="3"/>
+        </front>
+     </reference>
+
     </references>
 
     <references title="Informative References">
