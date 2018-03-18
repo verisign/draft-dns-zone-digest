@@ -106,6 +106,8 @@ An alternate method (rfc include) is described in the references. -->
         While zone files are self-contained, currently there is
         no way to validate the authenticity of a stand-alone zone
         file.
+      </t>
+      <t>
         This document introduces a new RR type that serves as a
         cryptographic message digest of the data in a zone file.
         It allows a receiver of the zone file to validate its
@@ -132,8 +134,8 @@ An alternate method (rfc include) is described in the references. -->
         The zone message digest relies on DNSSEC to provide strong
         security guarantees.  Without DNSSEC, an attacker can modify
         zone data and recalculate the message digest and not be detected.
-        For discussion: currently this document does not require DNSSEC
-        but the authors are open to changing that.
+        For discussion: currently this document does not require DNSSEC.
+        Should it be a prerequisite?
       </t>
     </section>
 
@@ -179,8 +181,8 @@ An alternate method (rfc include) is described in the references. -->
         <section title="The Serial Field">
           <t>
             The Serial field is a 32-bit unsigned integer in network
-            order. It is equal to the serial number (from the zone's
-            SOA record, <xref target="RFC1035"/> section 3.3.13) for
+            order. It is equal to the serial number from the zone's
+            SOA record (<xref target="RFC1035"/> section 3.3.13) for
             which the message digest was generated.
           </t>
           <t>
