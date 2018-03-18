@@ -20,7 +20,7 @@ An alternate method (rfc include) is described in the references. -->
 <!ENTITY RFC4509 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
 <!ENTITY RFC6605 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
-<!ENTITY RRNAME "ZHASH">
+<!ENTITY RRNAME "ZONEMD">
 ]>
 
 
@@ -118,7 +118,7 @@ An alternate method (rfc include) is described in the references. -->
         TSIG is generally used to authenticate and validate UPDATE
         and AXFR/IXFR messages.
         However, TSIG's protections are ephemeral, existing only "on
-        the wire," are not retained after the transaction is complete.
+        the wire," and are not retained after the transaction is complete.
         Additionally, TSIG utilizes shared secret keys, which
         are not available to third parties.
       </t>
@@ -149,6 +149,16 @@ An alternate method (rfc include) is described in the references. -->
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
       <t>
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
+        The Type value for the &RRNAME; RR is TBD.
+        The &RRNAME; RR is class independent.
+        The RDATA of the resource record consists of three fields: Serial, Digest Type, and Digest.
+      </t>
+      <t>
+        For discussion: This document is currently written as though
+        a zone will only contain a single &RRNAME; RR.
+        Having exactly one &RRNAME; record per zone could simplify this
+        protocol and eliminate confusion around downgrade attacks, at
+        the expense of algorithm agility.
       </t>
 
       <section title="&RRNAME; RDATA Wire Format">
@@ -191,14 +201,14 @@ An alternate method (rfc include) is described in the references. -->
             as defined in section 5.1.3 of <xref target="RFC4034"/>.
           </t>
           <t>
-	    The status of &RRNAME; digest types (e.g., mandatory,
-	    optional, deprecated) shall always match the status for
-	    DS records.  This information can be found in the IANA
-	    protocol registry for DS digest types <xref target="iana-ds-digest-types"/>.
+            The status of &RRNAME; digest types (e.g., mandatory,
+            optional, deprecated) shall always match the status for
+            DS records.  This information can be found in the IANA
+            protocol registry for DS digest types <xref target="iana-ds-digest-types"/>.
           </t>
           <t>
             At the time of this writing the following digest types are defined:
-	  </t>
+          </t>
             <texttable anchor="digest-type-table" title="Digest Types">
             <ttcol align='left'>Description</ttcol>
             <ttcol align='left'>Status</ttcol>
@@ -256,7 +266,7 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
                                            17057BEE7EB1A7B641A4
                                            7BA7FED2DD5B97AE499F
                                            AFA4F22C6BD647DE )
-</artwork></figure>
+        </artwork></figure>
       </section>
 
     </section>
@@ -264,46 +274,91 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
     <section title="Calculating the Digest" anchor="calculating">
       <t>
         Calculation of the zone digest requires the RRs in a zone
-	to be in a consistent format and ordering.  Thus, digest
-	calculation uses the canonical form and ordering of RRs as
-	described in section 6 of <xref target="RFC4034"/>.
+        to be in a consistent format and ordering.  Thus, digest
+        calculation uses the canonical form and ordering of RRs as
+        described in section 6 of <xref target="RFC4034"/>.
       </t>
       <t>
-	For simplicity, a zone MUST NOT contain more one &RRNAME; RR at a time.
+        When calculating the zone digest, any existing &RRNAME; records
+        MUST first be deleted from the zone.
       </t>
-    </section>
+      <t>
+        Under the assumption that the zone will be signed with
+        DNSSEC, a placeholder &RRNAME; record MUST be added to the
+        zone.  In the placeholder record, the Serial field MUST be
+        set to the SOA Serial, the Digest Type field MUST be set
+        to the value for the chosen digest algorithm, and the Digest
+        field MUST be set to all zeroes and of length appropriate
+        for the chosen algorithm.
+      </t>
+      <t>
+        Next, the zone MAY be signed with DNSSEC.
+      </t>
+      <t>
+        The zone digest is calculated by concatenating the canonical form of all
+        records in the zone, in canonical order, including the &RRNAME; placeholder,
+        and including DNSSEC records if the zone is signed, and then applying
+        the digest algorithm:
+      </t>
+      <figure><artwork>
+digest = digest_algorithm( RR(1) | RR(2) | RR(3) | ... )
 
-    <section title="Interaction with DNSSEC" anchor="signing">
+where "|" denotes concatenation, and
+
+RR(i) = owner | type | class | TTL | RDATA length | RDATA
+      </artwork></figure>
       <t>
-        1. insert "dummy" &RRNAME; record and dummy RRSIG over &RRNAME;
-        2. foreach ZSK, sign the zone.
-        3. calculate the digest.
-        4. update the &RRNAME; RDATA.
-        5. foreach ZSK, update &RRNAME; RRISG.
+        The calculated digest is then copied to the Digest field of the &RRNAME; record.
+      </t>
+      <t>
+        If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
+        record must then be added.  Because the &RRNAME; placeholder was added prior to signing,
+        the zone should already have the appropriate denial-of-existence (NSEC, NSEC3) records.
       </t>
     </section>
 
     <section title="Validating Zone Message Digest" anchor="validating">
       <t>
+        The recipient of a zone that has a message digest record can validate the zone
+        by calculating the digest as described in <xref target="calculating"/>.
+      </t>
+      <t>
+        The following conditions must be true for a successful validation of the zone using the zone digest:
+        <list style="numbers">
+        <t>The SOA Serial field must exactly match the &RRNAME; Serial field.</t>
+        <t>The calculated digest must exactly match the &RRNAME; Digest field.</t>
+        <t>If the zone is signed with DNSSEC, the &RRNAME; RRset must have a valid signature, chaining up to a trust anchor.</t>
+        </list>
+      </t>
+      <t>
+	For zones signed with DNSSEC, the denial-of-existence records
+	can prove the existence or non-existence of the &RRNAME;
+	record in the zone.
       </t>
     </section>
 
     <section title="IANA Considerations" anchor="iana">
       <t>
+	The &RRNAME; Digest Type field has the same semantics as the DS RR Digest Type field.
+	Thus, it does not add new IANA protocol registry requirements.
       </t>
     </section>
 
     <section title="Security Considerations" anchor="security">
-      <t>TBD</t>
+      <t>
+	For an unsigned zone, an attacker can trivially modify zone content and adjust the zone digest to match.
+      </t>
+      <t>
+	DNSSEC provides stronger security guarantees, but only when a recipient knows to expect a signed zone.  
+      </t>
     </section>
 
     <section title="Privacy Considerations" anchor="privacy">
-      <t>TBD</t>
+      <t>None.</t>
     </section>
 
     <section title="Acknowledgments" anchor="acknowledgments">
       <t>
-        Thanks to ...
       </t>
     </section>
 
