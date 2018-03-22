@@ -242,18 +242,23 @@ An alternate method (rfc include) is described in the references. -->
             At the time of this writing the following digest types are defined:
           </t>
             <texttable anchor="digest-type-table" title="Digest Types">
+            <ttcol align='left'>Value</ttcol>
             <ttcol align='left'>Description</ttcol>
             <ttcol align='left'>Status</ttcol>
             <ttcol align='left'>Reference</ttcol>
+            <c>1</c>
             <c>SHA1</c>
             <c>Mandatory</c>
             <c><xref target="RFC3658"/></c>
+            <c>2</c>
             <c>SHA256</c>
             <c>Mandatory</c>
             <c><xref target="RFC4509"/></c>
+            <c>3</c>
             <c>GOST R 34.11-94</c>
             <c>Optional</c>
             <c><xref target="RFC5933"/></c>
+            <c>4</c>
             <c>SHA384</c>
             <c>Optional</c>
             <c><xref target="RFC6605"/></c>
