@@ -9,12 +9,15 @@ An alternate method (rfc include) is described in the references. -->
 <!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
 <!ENTITY RFC1034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY RFC1035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC1995 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
 <!ENTITY RFC2119 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2136 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
 <!ENTITY RFC2629 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
 <!ENTITY RFC2845 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
 <!ENTITY RFC4033 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY RFC4034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY RFC4035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
+<!ENTITY RFC5936 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC7719 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
 <!ENTITY RFC3658 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4509 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
@@ -147,8 +150,8 @@ An alternate method (rfc include) is described in the references. -->
         Message digests are also found in the TSIG protocol.
         DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
         digest to protect individual query and response messages.
-        TSIG is generally used to authenticate and validate UPDATE
-        and AXFR/IXFR messages.
+        TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>
+        AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
         However, TSIG's protections are ephemeral, existing only "on
         the wire," and are not retained after the transaction is complete.
         Additionally, TSIG utilizes shared secret keys, which
@@ -345,12 +348,19 @@ where "|" denotes concatenation, and
 RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </artwork></figure>
       <t>
-        The calculated digest is then copied to the Digest field of the &RRNAME; record.
+	When AXFR is used to transfer zone data, the first and last
+	records are always the SOA RR (<xref target="RFC5936"/>
+	Section 2.2).  Because of this, zone files on disk often
+	contain two SOA RRs.  When calculating the zone digest, the first
+	SOA RR MUST be included and any subsequent SOA RRs MUST be ignored.
+      </t>
+      <t>
+        Once the zone digest has been calculated, its value is then copied to the Digest field of the &RRNAME; record.
       </t>
       <t>
         If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
         record must then be added.  Because the &RRNAME; placeholder was added prior to signing,
-        the zone should already have the appropriate denial-of-existence (NSEC, NSEC3) records.
+        the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
       </t>
     </section>
 
@@ -432,7 +442,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </references>
 
     <references title="Informative References">
+    &RFC1995;
+    &RFC2136;
     &RFC2845;
+    &RFC5936;
     &RFC7719;
     </references>
 
