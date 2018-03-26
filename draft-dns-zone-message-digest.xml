@@ -260,7 +260,7 @@ An alternate method (rfc include) is described in the references. -->
           </t>
           <t>
             The status of &RRNAME; digest types (e.g., mandatory,
-            optional, deprecated) shall always match the status for
+            optional, deprecated) SHALL always match the status for
             DS records.  This information can be found in the IANA
             protocol registry for DS digest types <xref target="iana-ds-digest-types"/>.
           </t>
@@ -294,9 +294,11 @@ An alternate method (rfc include) is described in the references. -->
 
         <section title="The Digest Field">
           <t>
-            The Digest field is a variable length sequence of octets
+            The Digest field is a variable-length sequence of octets
             containing the message digest.  <xref target="calculating"/>
             describes how to calculate the digest for a zone.
+            <xref target="validating"/> describes how to use the digest to
+            validate the contents of a zone.
           </t>
         </section>
       </section>
@@ -336,16 +338,18 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
 
     <section title="Calculating the Digest" anchor="calculating">
       <t>
-        Calculation of the zone digest requires the RRs in a zone
+        Calculation of the zone digest REQUIRES the RRs in a zone
         to be in a consistent format and ordering.  Thus, digest
         calculation uses the canonical form and ordering of RRs as
         described in section 6 of <xref target="RFC4034"/>.
+        XXX sort by type.
       </t>
       <t>
         When calculating the zone digest, any existing &RRNAME; records
         MUST first be deleted from the zone.
       </t>
       <t>
+        XXX fix wrong assumption.  
         Under the assumption that the zone will be signed with
         DNSSEC, a placeholder &RRNAME; record MUST be added to the
         zone.  In the placeholder record, the Serial field MUST be
@@ -382,7 +386,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </t>
       <t>
         If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-        record must then be added.  Because the &RRNAME; placeholder was added prior to signing,
+        record MUST then be added.  Because the &RRNAME; placeholder was added prior to signing,
         the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
       </t>
     </section>
@@ -393,11 +397,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         by calculating the digest as described in <xref target="calculating"/>.
       </t>
       <t>
-        The following conditions must be true for a successful validation of the zone using the zone digest:
+        The following conditions MUST be true for a successful validation of the zone using the zone digest:
         <list style="numbers">
-        <t>The SOA Serial field must exactly match the &RRNAME; Serial field.</t>
-        <t>The calculated digest must exactly match the &RRNAME; Digest field.</t>
-        <t>If the zone is signed with DNSSEC, the &RRNAME; RRset must have a valid signature, chaining up to a trust anchor.</t>
+        <t>The SOA Serial field MUST exactly match the &RRNAME; Serial field.</t>
+        <t>The calculated digest MUST exactly match the &RRNAME; Digest field.</t>
+        <t>If the zone is signed with DNSSEC, the &RRNAME; RRset MUST have a valid signature, chaining up to a trust anchor.</t>
         </list>
       </t>
       <t>
@@ -408,10 +412,20 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </section>
 
     <section title="IANA Considerations" anchor="iana">
-      <t>
-	The &RRNAME; Digest Type field has the same semantics as the DS RR Digest Type field.
-	Thus, it does not add new IANA protocol registry requirements.
-      </t>
+      <section title="&RRNAME; RRtype">
+        <t>
+          This document uses a new DNS RR type, &RRNAME;, whose
+          value TBD has been allocated by IANA from the "Resource
+          Record (RR) TYPEs" subregistry of the "Domain Name System
+          (DNS) Parameters" registry.
+        </t>
+      </section>
+      <section title="&RRNAME; Digest Type">
+        <t>
+          The &RRNAME; Digest Type field has the same semantics as the DS RR Digest Type field.
+          Thus, it does not add new IANA protocol registry requirements.
+        </t>
+      </section>
     </section>
 
     <section title="Security Considerations" anchor="security">
