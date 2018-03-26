@@ -444,9 +444,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC2119;
     &RFC1034;
     &RFC1035;
-    &RFC4033;
     &RFC4034;
-    &RFC4035;
     &RFC3658;
     &RFC4509;
     &RFC5933;
