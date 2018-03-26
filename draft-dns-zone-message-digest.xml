@@ -337,58 +337,100 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
     </section>
 
     <section title="Calculating the Digest" anchor="calculating">
-      <t>
-        Calculation of the zone digest REQUIRES the RRs in a zone
-        to be in a consistent format and ordering.  Thus, digest
-        calculation uses the canonical form and ordering of RRs as
-        described in section 6 of <xref target="RFC4034"/>.
-        XXX sort by type.
-      </t>
-      <t>
-        When calculating the zone digest, any existing &RRNAME; records
-        MUST first be deleted from the zone.
-      </t>
-      <t>
-        XXX fix wrong assumption.  
-        Under the assumption that the zone will be signed with
-        DNSSEC, a placeholder &RRNAME; record MUST be added to the
-        zone.  In the placeholder record, the Serial field MUST be
-        set to the SOA Serial, the Digest Type field MUST be set
-        to the value for the chosen digest algorithm, and the Digest
-        field MUST be set to all zeroes and of length appropriate
-        for the chosen algorithm.
-      </t>
-      <t>
-        Next, the zone MAY be signed with DNSSEC.
-      </t>
-      <t>
-        The zone digest is calculated by concatenating the canonical form of all
-        records in the zone, in canonical order, including the &RRNAME; placeholder,
-        and including DNSSEC records if the zone is signed, and then applying
-        the digest algorithm:
-      </t>
-      <figure><artwork>
+      <section title="Canonical Format and Ordering">
+        <t>
+          Calculation of the zone digest REQUIRES the RRs in a zone
+          to be in a consistent format and ordering.  Correct ordering
+          of the zone depends on (1) ordering of owner names in the zone, (2)
+          ordering of RRsets with the same owner name, and (3) ordering of
+          RRs within an RRset.
+        </t>
+        <t>
+          This specification adopts DNSSEC's canonical ordering for names <xref
+          target="RFC4034"/> Section 6.1, and canonical ordering for
+          RRs within an RRset <xref target="RFC4034"/> Section 6.3.  It also
+          adopts DNSSEC's canonical RR form <xref target="RFC4034"/> Section 6.2.
+          However, since DNSSEC does not define a canonical ordering for RRsets
+          having the same owner name, that ordering is defined here.
+        </t>
+        <section title="Order of RRsets Having the Same Owner Name">
+          <t>
+            For the purposes of calculating the zone digest, RRsets having
+            the same owner name MUST be ordered by their numeric RR type.
+          </t>
+        </section>
+        <section title="Special Considerations for SOA RRs">
+          <t>
+            When AXFR is used to transfer zone data, the first and last
+            records are always the SOA RR (<xref target="RFC5936"/>
+            Section 2.2).  Because of this, zone files on disk often
+            contain two SOA RRs.  When calculating the zone digest, the first
+            SOA RR MUST be included and any subsequent SOA RRs MUST NOT be included.
+          </t>
+          <t>
+            Additionally, per established practices, the SOA record
+            is generally the first record in a zone file.  However,
+            according to the requirement to sort RRsets with the
+            same owner name by type, the SOA RR (type value 2) might not
+            be first in the digest calculation.  If the zone has
+            an A RR (type value 1) at the apex, it MUST be processed before
+            the SOA RR.
+          </t>
+        </section>
+      </section>
+      <section title="Add &RRNAME; Placeholder">
+        <t>
+          In preparation for calculating the zone digest, any existing &RRNAME; records
+          MUST first be deleted from the zone.
+        </t>
+        <t>
+          Prior to calculation of the digest, and prior to signing with
+          DNSSEC, a placeholder &RRNAME; record MUST be added to the
+          zone.  This serves two purposes: (1) it allows the digest to cover
+          the Serial and Digest Type field values, and (2) ensures that 
+          appropriate denial-of-existence (NSEC, NSEC3) records are created
+          if the zone is signed with DNSSEC.
+        </t>
+        <t>
+          In the placeholder record, the Serial field MUST be
+          set to the current SOA Serial.  The Digest Type field MUST be set
+          to the value for the chosen digest algorithm. The Digest
+          field MUST be set to all zeroes and of length appropriate
+          for the chosen algorithm.
+        </t>
+      </section>
+      <section title="Optionally Sign the Zone">
+        <t>
+          Following addition of the placeholder record, the zone MAY be signed with DNSSEC.
+          Note that when the digest calculation is complete, and the &RRNAME; record is updated,
+	  the signature(s) for that record MUST be recalculated and updated as well.
+        </t>
+      </section>
+      <section title="Calculate the Digest">
+        <t>
+          The zone digest is calculated by concatenating the canonical form of all
+          records in the zone, in the order described above, including the &RRNAME; placeholder,
+          and including DNSSEC records if the zone is signed, and then applying
+          the digest algorithm:
+        </t>
+        <figure><artwork>
 digest = digest_algorithm( RR(1) | RR(2) | RR(3) | ... )
 
 where "|" denotes concatenation, and
 
 RR(i) = owner | type | class | TTL | RDATA length | RDATA
-      </artwork></figure>
-      <t>
-        When AXFR is used to transfer zone data, the first and last
-        records are always the SOA RR (<xref target="RFC5936"/>
-        Section 2.2).  Because of this, zone files on disk often
-        contain two SOA RRs.  When calculating the zone digest, the first
-        SOA RR MUST be included and any subsequent SOA RRs MUST be ignored.
-      </t>
-      <t>
-        Once the zone digest has been calculated, its value is then copied to the Digest field of the &RRNAME; record.
-      </t>
-      <t>
-        If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-        record MUST then be added.  Because the &RRNAME; placeholder was added prior to signing,
-        the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
-      </t>
+        </artwork></figure>
+      </section>
+      <section title="Update &RRNAME; RR">
+        <t>
+          Once the zone digest has been calculated, its value is then copied to the Digest field of the &RRNAME; record.
+        </t>
+        <t>
+          If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
+          record MUST then be added.  Because the &RRNAME; placeholder was added prior to signing,
+          the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
+        </t>
+      </section>
     </section>
 
     <section title="Validating Zone Message Digest" anchor="validating">
