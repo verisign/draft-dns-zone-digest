@@ -174,24 +174,24 @@ An alternate method (rfc include) is described in the references. -->
         Should it be a prerequisite?
       </t>
       <t>
-	The motivation for including a message digest in a zone
-	file comes largely from the DNS root zone.
-	At the time of this writing, there is increased attention
-	to the idea of widely distributing the root zone, beyond
-	the root server system.
-	<xref target="RFC7706"/> describes how a recursive resolver
-	can serve the root zone via a loopback address.
-	As the root zone spreads beyond its traditional deployment
-	boundaries, the need for validation of the zone contents
-	becomes more and more important.
+        The motivation for including a message digest in a zone
+        file comes largely from the DNS root zone.
+        At the time of this writing, there is increased attention
+        to the idea of widely distributing the root zone, beyond
+        the root server system.
+        <xref target="RFC7706"/> describes how a recursive resolver
+        can serve the root zone via a loopback address.
+        As the root zone spreads beyond its traditional deployment
+        boundaries, the need for validation of the zone contents
+        becomes more and more important.
       </t>
       <t>
-	Nothing in this specification, however, is specific to the root zone.  The zone digest is
-	designed to work equally well for any DNS zone.
+        Nothing in this specification, however, is specific to the root zone.  The zone digest is
+        designed to work equally well for any DNS zone.
       </t>
       <t>
-	This specification is OPTIONAL to implement by both publishers
-	and consumers of zone file data.
+        This specification is OPTIONAL to implement by both publishers
+        and consumers of zone file data.
       </t>
     </section>
 
@@ -375,11 +375,11 @@ where "|" denotes concatenation, and
 RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </artwork></figure>
       <t>
-	When AXFR is used to transfer zone data, the first and last
-	records are always the SOA RR (<xref target="RFC5936"/>
-	Section 2.2).  Because of this, zone files on disk often
-	contain two SOA RRs.  When calculating the zone digest, the first
-	SOA RR MUST be included and any subsequent SOA RRs MUST be ignored.
+        When AXFR is used to transfer zone data, the first and last
+        records are always the SOA RR (<xref target="RFC5936"/>
+        Section 2.2).  Because of this, zone files on disk often
+        contain two SOA RRs.  When calculating the zone digest, the first
+        SOA RR MUST be included and any subsequent SOA RRs MUST be ignored.
       </t>
       <t>
         Once the zone digest has been calculated, its value is then copied to the Digest field of the &RRNAME; record.
@@ -405,9 +405,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </list>
       </t>
       <t>
-	For zones signed with DNSSEC, the denial-of-existence records
-	can prove the existence or non-existence of the &RRNAME;
-	record in the zone.
+        For zones signed with DNSSEC, the denial-of-existence records
+        can prove the existence or non-existence of the &RRNAME;
+        record in the zone.
       </t>
     </section>
 
@@ -430,10 +430,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="Security Considerations" anchor="security">
       <t>
-	For an unsigned zone, an attacker can trivially modify zone content and adjust the zone digest to match.
+        For an unsigned zone, an attacker can trivially modify zone content and adjust the zone digest to match.
       </t>
       <t>
-	DNSSEC provides stronger security guarantees, but only when a recipient knows to expect a signed zone.  
+        DNSSEC provides stronger security guarantees, but only when a recipient knows to expect a signed zone.  
       </t>
     </section>
 
