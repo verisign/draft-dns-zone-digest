@@ -18,6 +18,7 @@ An alternate method (rfc include) is described in the references. -->
 <!ENTITY RFC4034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY RFC4035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
 <!ENTITY RFC5936 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
+<!ENTITY RFC7706 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
 <!ENTITY RFC7719 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
 <!ENTITY RFC3658 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4509 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
@@ -167,8 +168,30 @@ An alternate method (rfc include) is described in the references. -->
         The zone message digest relies on DNSSEC to provide strong
         security guarantees.  Without DNSSEC, an attacker can modify
         zone data and recalculate the message digest and not be detected.
+      </t>
+      <t>
         For discussion: currently this document does not require DNSSEC.
         Should it be a prerequisite?
+      </t>
+      <t>
+	The motivation for including a message digest in a zone
+	file comes largely from the DNS root zone.
+	At the time of this writing, there is increased attention
+	to the idea of widely distributing the root zone, beyond
+	the root server system.
+	<xref target="RFC7706"/> describes how a recursive resolver
+	can serve the root zone via a loopback address.
+	As the root zone spreads beyond its traditional deployment
+	boundaries, the need for validation of the zone contents
+	becomes more and more important.
+      </t>
+      <t>
+	Nothing in this specification, however, is specific to the root zone.  The zone digest is
+	designed to work equally well for any DNS zone.
+      </t>
+      <t>
+	This specification is OPTIONAL to implement by both publishers
+	and consumers of zone file data.
       </t>
     </section>
 
@@ -446,6 +469,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC2136;
     &RFC2845;
     &RFC5936;
+    &RFC7706;
     &RFC7719;
     </references>
 
