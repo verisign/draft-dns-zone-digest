@@ -453,15 +453,15 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </t>
       <t>
         <list style="numbers">
-          <t>
+          <t anchor="verify-check-dnssec">
             The verifier SHOULD first determine
             whether or not to expect DNSSEC records in the zone.
             This can be done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
             parent zone.  For zones that are provably unsigned,
-            digest validation continues at step <xref target="step-check-serials" format="counter"/> below.
+            digest validation continues at step <xref target="verify-check-serials" format="counter"/> below.
           </t>
-          <t>
+          <t anchor="verify-check-existence">
             For zones that are provably signed, the existence of
             the &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
@@ -476,7 +476,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             or &RRNAME; records fails, digest verification MUST NOT
             be considered successful.
           </t>
-          <t anchor="step-check-serials">
+          <t anchor="verify-check-serials">
             The SOA Serial field MUST exactly match the &RRNAME;
             Serial field.  If the fields to not match, digest
             verification MUST NOT be considered successful.
@@ -521,12 +521,57 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </section>
 
     <section title="Security Considerations" anchor="security">
-      <t>
-        For an unsigned zone, an attacker can trivially modify zone content and adjust the zone digest to match.
-      </t>
-      <t>
-        DNSSEC provides stronger security guarantees, but only when a recipient knows to expect a signed zone.  
-      </t>
+      <section title="Attacks Against the Zone Digest">
+        <t>
+          The zone digest allows the receiver to verify that the zone
+          contents haven't been modified since the zone was
+          generated/published.  Verification is strongest when the
+          zone is also signed with DNSSEC.
+          An attacker, whose goal is to modify zone content before
+          it is used by the victim, may consider a number of different
+          approaches.
+        </t>
+        <t>
+          The attacker might perform a downgrade attack to an unsigned
+          zone.  This is why <xref target="verifying"/> RECOMMENDS
+          that the verifier determine whether or not to expect DNSSEC
+          signatures for the zone in step <xref target="verify-check-dnssec" format="counter"/>.
+        </t>
+        <t>
+          The attacker might perform a downgrade attack by removing
+          the &RRNAME; record.  This is why <xref target="verifying"/>
+          REQUIRES that the verifier checks DNSSEC denial-of-existence
+          proofs in step <xref target="verify-check-existence" format="counter"/>.
+        </t>
+        <t>
+          The attacker might alter the Digest Type or Digest fields
+          of the &RRNAME; record.  Such modifications are detectable
+          only with DNSSEC validation.
+        </t>
+      </section>
+      <section title="Attacks Utilizing the Zone Digest">
+        <t>
+          Nothing in this specification prevents clients from making,
+          and servers from responding to, &RRNAME; queries.  It is
+          natural to wonder if &RRNAME; responses could be used in
+          a distributed denial-of-service amplification attack.
+        </t>
+        <t>
+          The &RRNAME; RR is moderately sized, much like the DS RR.
+          A single &RRNAME; RR contributes approximately 40 to 65
+          octets to a DNS response, for currently defined digest
+          types.  Certainly other query types result in larger
+          amplification effects (i.e., DNSKEY).
+        </t>
+        <t>
+          For discussion:
+          The primary purpose of the &RRNAME; record is to verify
+          a zone file prior to being loaded or served by a name server.
+          We could allow a name server implementation to respond to
+          &RRNAME; queries with the REFUSED RCODE without loss of
+          functionality.
+        </t>
+      </section>
     </section>
 
     <section title="Privacy Considerations" anchor="privacy">
