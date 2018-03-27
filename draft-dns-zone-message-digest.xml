@@ -160,10 +160,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         transmitted.
       </t>
       <t>
-        The zone message digest relies on DNSSEC to provide strong
-        security guarantees.  Without DNSSEC, an attacker can either modify
-        zone data and recalculate the message digest, or remove the digest
-        record entirely.
+        DNSSEC provides three strong security guarantees relevant
+        to this protocol: (1) whether or not to expect DNSSEC
+        records in the zone, (2) whether or not to expect a
+        &RRNAME; record in a signed zone, and (3) whether or not
+        the &RRNAME; record has been altered since it was signed.
       </t>
       <t>
         For discussion: currently this document does not require DNSSEC.
@@ -441,15 +442,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <section title="Verifying Zone Message Digest" anchor="verifying">
       <t>
         The recipient of a zone that has a message digest record can validate the zone
-        by calculating the digest as follows.
-      </t>
-      <t>
-        [XXX make this fit better]
-        DNSSEC provides three strong security guarantees relevant
-        to this protocol: (1) whether or not to expect DNSSEC
-        records in the zone ; (2) whether or not to expect a
-        &RRNAME; record in a signed zone; and (3) whether or not
-        the &RRNAME; record has been altered since it was signed.
+        by calculating the digest as follows:
       </t>
       <t>
         <list style="numbers">
