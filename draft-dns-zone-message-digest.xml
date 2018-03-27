@@ -416,7 +416,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </artwork></figure>
         <section title="Inclusion/Exclusion Rules">
           <t>
-            When calcuating the digest, the following inclusion/exclusion rules apply:
+            When calculating the digest, the following inclusion/exclusion rules apply:
             <list style="symbols">
             <t>More than one SOA MUST NOT be included.</t>
             <t>The placeholder &RRNAME; RR MUST be included.</t>
@@ -459,7 +459,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             This can be done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
             parent zone.  For zones that are provably unsigned,
-            digest validation continues at step <xref target="foo" format="counter"/> below.
+            digest validation continues at step <xref target="step-check-serials" format="counter"/> below.
           </t>
           <t>
             For zones that are provably signed, the existence of
@@ -476,7 +476,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             or &RRNAME; records fails, digest verification MUST NOT
             be considered successful.
           </t>
-          <t anchor="foo">
+          <t anchor="step-check-serials">
             The SOA Serial field MUST exactly match the &RRNAME;
             Serial field.  If the fields to not match, digest
             verification MUST NOT be considered successful.
