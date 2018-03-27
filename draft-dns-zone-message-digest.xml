@@ -1,33 +1,29 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
-
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!-- One method to get references from the online citation libraries.
 There has to be one entity for each item to be referenced. 
-An alternate method (rfc include) is described in the references. -->
-<!ENTITY RFC5966 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
+An alternate method (rfc include) is described in the references. --><!ENTITY RFC5966 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
 <!ENTITY I-D.ietf-tcpm-fastopen SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tcpm-fastopen">
 <!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
-<!ENTITY RFC1034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
-<!ENTITY RFC1035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
-<!ENTITY RFC1995 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
-<!ENTITY RFC2119 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC2136 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
-<!ENTITY RFC2629 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
-<!ENTITY RFC2845 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
-<!ENTITY RFC4033 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
-<!ENTITY RFC4034 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
-<!ENTITY RFC4035 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
-<!ENTITY RFC5936 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
-<!ENTITY RFC7706 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
-<!ENTITY RFC7719 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
-<!ENTITY RFC3658 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
-<!ENTITY RFC4509 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
-<!ENTITY RFC5933 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
-<!ENTITY RFC6605 PUBLIC '' "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
+<!ENTITY RFC1034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
+<!ENTITY RFC1035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC1995 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
+<!ENTITY RFC2119 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2136 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
+<!ENTITY RFC2629 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC2845 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
+<!ENTITY RFC4033 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
+<!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
+<!ENTITY RFC4035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
+<!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
+<!ENTITY RFC7706 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
+<!ENTITY RFC7719 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
+<!ENTITY RFC3658 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
+<!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
+<!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
+<!ENTITY RFC6605 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
-
-
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
 <?rfc strict="yes" ?>
 <?rfc toc="yes"?>
@@ -36,7 +32,6 @@ An alternate method (rfc include) is described in the references. -->
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-
 <rfc category="std" docName="draft-dns-zone-message-digest" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
@@ -100,7 +95,7 @@ An alternate method (rfc include) is described in the references. -->
       </address>
     </author>
 
-    <date month="March" year="2018" />
+    <date month="March" year="2018"/>
 
     <area>General</area>
 
@@ -166,8 +161,9 @@ An alternate method (rfc include) is described in the references. -->
       </t>
       <t>
         The zone message digest relies on DNSSEC to provide strong
-        security guarantees.  Without DNSSEC, an attacker can modify
-        zone data and recalculate the message digest and not be detected.
+        security guarantees.  Without DNSSEC, an attacker can either modify
+        zone data and recalculate the message digest, or remove the digest
+        record entirely.
       </t>
       <t>
         For discussion: currently this document does not require DNSSEC.
@@ -199,8 +195,7 @@ An alternate method (rfc include) is described in the references. -->
       <t>
         The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
         "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-        document are to be interpreted as described in <xref
-          target="RFC2119"/>.
+        document are to be interpreted as described in <xref target="RFC2119"/>.
       </t>
     </section>
 
@@ -268,10 +263,10 @@ An alternate method (rfc include) is described in the references. -->
             At the time of this writing the following digest types are defined:
           </t>
             <texttable anchor="digest-type-table" title="Digest Types">
-            <ttcol align='left'>Value</ttcol>
-            <ttcol align='left'>Description</ttcol>
-            <ttcol align='left'>Status</ttcol>
-            <ttcol align='left'>Reference</ttcol>
+            <ttcol align="left">Value</ttcol>
+            <ttcol align="left">Description</ttcol>
+            <ttcol align="left">Status</ttcol>
+            <ttcol align="left">Reference</ttcol>
             <c>1</c>
             <c>SHA1</c>
             <c>Mandatory</c>
@@ -297,7 +292,7 @@ An alternate method (rfc include) is described in the references. -->
             The Digest field is a variable-length sequence of octets
             containing the message digest.  <xref target="calculating"/>
             describes how to calculate the digest for a zone.
-            <xref target="validating"/> describes how to use the digest to
+            <xref target="verifying"/> describes how to use the digest to
             validate the contents of a zone.
           </t>
         </section>
@@ -346,8 +341,7 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
           RRs within an RRset.
         </t>
         <t>
-          This specification adopts DNSSEC's canonical ordering for names <xref
-          target="RFC4034"/> Section 6.1, and canonical ordering for
+          This specification adopts DNSSEC's canonical ordering for names <xref target="RFC4034"/> Section 6.1, and canonical ordering for
           RRs within an RRset <xref target="RFC4034"/> Section 6.3.  It also
           adopts DNSSEC's canonical RR form <xref target="RFC4034"/> Section 6.2.
           However, since DNSSEC does not define a canonical ordering for RRsets
@@ -406,7 +400,7 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
           the signature(s) for that record MUST be recalculated and updated as well.
         </t>
       </section>
-      <section title="Calculate the Digest">
+      <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
           The zone digest is calculated by concatenating the canonical
           form of RRs in the zone, in the order described
@@ -444,44 +438,68 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
     </section>
 
-    <section title="Validating Zone Message Digest" anchor="validating">
+    <section title="Verifying Zone Message Digest" anchor="verifying">
       <t>
         The recipient of a zone that has a message digest record can validate the zone
         by calculating the digest as follows.
       </t>
-      <section title="DNSSEC Validation">
-        <t>
-          DNSSEC provides three strong security guarantees relevant
-          to this protocol: (1) whether or not to expect DNSSEC
-          records in the zone ; (2) whether or not to expect a
-          &RRNAME; record in a signed zone; and (3) whether or not
-          the &RRNAME; record has been altered since it was signed.
-        </t>
-        <t>
-          An implementation of this protocol SHOULD first determine
-          whether or not to expect DNSSEC records in the zone.  This
-          can be done by examining locally configured trust anchors,
-          or querying for (and validating) DS RRs in the parent
-          zone.
-        </t>
-        <t>
-          If the zone is signed with DNSSEC, the SOA RR and
-          &RRNAME; RR(set) MUST have valid signatures, chaining up
-          to a trust anchor.
-        </t>
-      </section>
       <t>
-        The following conditions MUST be true for a successful validation of the zone using the zone digest:
-        <list style="numbers">
-        <t>The SOA Serial field MUST exactly match the &RRNAME; Serial field.</t>
-        <t>The calculated digest MUST exactly match the &RRNAME; Digest field.</t>
-        <t>If the zone is signed with DNSSEC, the &RRNAME; RRset MUST have a valid signature, chaining up to a trust anchor.</t>
-        </list>
+        [XXX make this fit better]
+        DNSSEC provides three strong security guarantees relevant
+        to this protocol: (1) whether or not to expect DNSSEC
+        records in the zone ; (2) whether or not to expect a
+        &RRNAME; record in a signed zone; and (3) whether or not
+        the &RRNAME; record has been altered since it was signed.
       </t>
       <t>
-        For zones signed with DNSSEC, the denial-of-existence records
-        can prove the existence or non-existence of the &RRNAME;
-        record in the zone.
+        <list style="numbers">
+          <t>
+            The verifier SHOULD first determine
+            whether or not to expect DNSSEC records in the zone.
+            This can be done by examining locally configured trust
+            anchors, or querying for (and validating) DS RRs in the
+            parent zone.  For zones that are provably unsigned,
+            digest validation continues at step <xref target="foo" format="counter"/> below.
+          </t>
+          <t>
+            For zones that are provably signed, the existence of
+            the &RRNAME; record MUST be verified.  If the &RRNAME;
+            record provably does not exist, digest verification
+            cannot be done.  If the &RRNAME; record does provably
+            exist, but is not found in the zone, digest verification
+            MUST NOT be considered successful.
+          </t>
+          <t>
+            For zones that are provably signed, the SOA RR and
+            &RRNAME; RR(set) MUST have valid signatures, chaining
+            up to a trust anchor.  If DNSSEC validation of the SOA
+            or &RRNAME; records fails, digest verification MUST NOT
+            be considered successful.
+          </t>
+          <t anchor="foo">
+            The SOA Serial field MUST exactly match the &RRNAME;
+            Serial field.  If the fields to not match, digest
+            verification MUST NOT be considered successful.
+          </t>
+          <t>
+            The &RRNAME; Digest Type field must be checked.  If the
+            verifier does not support the given digest type, it
+            SHOULD report that the zone digest could not be verified
+            due to an unsupported algorithm.
+          </t>
+          <t>
+            The zone digest is calculated using the algorithm
+            described in <xref target="calculating-calculating"/>.
+            Note in particular that the Digest field of any &RRNAME;
+            RRs MUST be zeroed prior to calculation of the digest.
+          </t>
+          <t>
+            The calculated digest is compared to the received digest.
+            If the two digest values match, verification is considered
+            successful.  Otherwise, verification MUST NOT be
+            considered successful.
+          </t>
+        </list>
       </t>
     </section>
 
