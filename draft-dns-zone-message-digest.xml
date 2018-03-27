@@ -403,15 +403,15 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
         <t>
           Following addition of the placeholder record, the zone MAY be signed with DNSSEC.
           Note that when the digest calculation is complete, and the &RRNAME; record is updated,
-	  the signature(s) for that record MUST be recalculated and updated as well.
+          the signature(s) for that record MUST be recalculated and updated as well.
         </t>
       </section>
       <section title="Calculate the Digest">
         <t>
-          The zone digest is calculated by concatenating the canonical form of all
-          records in the zone, in the order described above, including the &RRNAME; placeholder,
-          and including DNSSEC records if the zone is signed, and then applying
-          the digest algorithm:
+          The zone digest is calculated by concatenating the canonical
+          form of RRs in the zone, in the order described
+          above, subject to the inclusion/exclusion rules described
+          below, and then applying the digest algorithm:
         </t>
         <figure><artwork>
 digest = digest_algorithm( RR(1) | RR(2) | RR(3) | ... )
@@ -420,6 +420,17 @@ where "|" denotes concatenation, and
 
 RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </artwork></figure>
+        <section title="Inclusion/Exclusion Rules">
+          <t>
+            When calcuating the digest, the following inclusion/exclusion rules apply:
+            <list style="symbols">
+            <t>More than one SOA MUST NOT be included.</t>
+            <t>The placeholder &RRNAME; RR MUST be included.</t>
+            <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
+            <t>The RRSIG covering &RRNAME; MUST NOT be included.</t>
+            </list>
+          </t>
+        </section>
       </section>
       <section title="Update &RRNAME; RR">
         <t>
@@ -436,8 +447,29 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <section title="Validating Zone Message Digest" anchor="validating">
       <t>
         The recipient of a zone that has a message digest record can validate the zone
-        by calculating the digest as described in <xref target="calculating"/>.
+        by calculating the digest as follows.
       </t>
+      <section title="DNSSEC Validation">
+        <t>
+          DNSSEC provides three strong security guarantees relevant
+          to this protocol: (1) whether or not to expect DNSSEC
+          records in the zone ; (2) whether or not to expect a
+          &RRNAME; record in a signed zone; and (3) whether or not
+          the &RRNAME; record has been altered since it was signed.
+        </t>
+        <t>
+          An implementation of this protocol SHOULD first determine
+          whether or not to expect DNSSEC records in the zone.  This
+          can be done by examining locally configured trust anchors,
+          or querying for (and validating) DS RRs in the parent
+          zone.
+        </t>
+        <t>
+          If the zone is signed with DNSSEC, the SOA RR and
+          &RRNAME; RR(set) MUST have valid signatures, chaining up
+          to a trust anchor.
+        </t>
+      </section>
       <t>
         The following conditions MUST be true for a successful validation of the zone using the zone digest:
         <list style="numbers">
