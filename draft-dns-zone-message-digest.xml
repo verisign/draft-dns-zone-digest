@@ -542,7 +542,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <section title="Authors' Implementation">
         <t>
           The authors are currently working on an implementation in
-          C, using the ldns library.  This implementation is able to
+          C, using the ldns library <xref target="ldns"/>.  This implementation is able to
           perform the following functions:
           <list style="symbols">
           <t>Read input zone file, output zone file with &RRNAME; placeholder. [done]</t>
@@ -578,6 +578,16 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <organization>IANA</organization>
           </author>
           <date year="2012" month="April" day="3"/>
+        </front>
+     </reference>
+
+     <reference anchor="ldns" target="https://www.nlnetlabs.nl/projects/ldns/">
+        <front>
+          <title>The ldns Library</title>
+          <author>
+            <organization>NLNet Labs</organization>
+          </author>
+          <date year="2018" month="March" day="27"/>
         </front>
      </reference>
 
