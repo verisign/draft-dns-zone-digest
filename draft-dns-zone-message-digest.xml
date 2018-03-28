@@ -588,7 +588,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <list style="symbols">
           <t>Read input zone file, output zone file with &RRNAME; placeholder. [done]</t>
           <t>Compute zone digest over signed zone file and update &RRNAME; record. [done]</t>
-          <t>Re-compute DNSSEC signature over &RRNAME; record. [tbd]</t>
+          <t>Re-compute DNSSEC signature over &RRNAME; record. [done]</t>
           <t>Verify zone digest from input zone file. [tbd]</t>
           </list>
         </t>
