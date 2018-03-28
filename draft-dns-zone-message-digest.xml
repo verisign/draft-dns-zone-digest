@@ -32,7 +32,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-dns-zone-message-digest" ipr="trust200902">
+<rfc category="std" docName="draft-dns-zone-digest" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -44,7 +44,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
     full title is longer than 39 characters -->
 
-    <title abbrev="dns-zone-message-digest">Message Digest for DNS Zones</title>
+    <title abbrev="dns-zone-digest">Message Digest for DNS Zones</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
@@ -112,7 +112,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This document describes a protocol and DNS Resource Record
         used to provide a message digest over DNS zone data.
         In particular, it describes how to compute, sign, represent,
-        and use the message digest to validate the contents of a
+        and use the message digest to verify the contents of a
         zone for accuracy and completeness.
         The &RRNAME; Resource Record type is introduced for conveying
         the message digest data.
@@ -133,13 +133,13 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         Sometimes zones are distributed outside of the DNS, with
         such protocols as FTP, HTTP, rsync, and so on.
         While zone files are self-contained, currently there is
-        no way to validate the authenticity of a stand-alone zone
+        no way to verify the authenticity of a stand-alone zone
         file.
       </t>
       <t>
         This document introduces a new RR type that serves as a
         cryptographic message digest of the data in a zone file.
-        It allows a receiver of the zone file to validate its
+        It allows a receiver of the zone file to verify its
         authenticity, especially when used in combination with DNSSEC.
       </t>
       <t>
@@ -156,17 +156,20 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <t>
         The technique described in this document makes the message
         digest a part of the zone file itself, and allows anyone
-        to validate the zone file as a whole, no matter how it is
+        to verify the zone file as a whole, no matter how it is
         transmitted.
       </t>
       <t>
-        The zone message digest relies on DNSSEC to provide strong
-        security guarantees.  Without DNSSEC, an attacker can either modify
-        zone data and recalculate the message digest, or remove the digest
-        record entirely.
+        DNSSEC provides three strong security guarantees relevant
+        to this protocol:
+        <list style="numbers">
+        <t>whether or not to expect DNSSEC records in the zone,</t>
+        <t>whether or not to expect a &RRNAME; record in a signed zone, and</t>
+        <t>whether or not the &RRNAME; record has been altered since it was signed.</t>
+        </list>
       </t>
       <t>
-        For discussion: currently this document does not require DNSSEC.
+        FOR DISCUSSION: currently this document does not require DNSSEC.
         Should it be a prerequisite?
       </t>
       <t>
@@ -179,7 +182,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         can serve the root zone via a loopback address.
         As the root zone spreads beyond its traditional deployment
         boundaries, the need for validation of the zone contents
-        becomes more and more important.
+        becomes increasingly important.
       </t>
       <t>
         Nothing in this specification, however, is specific to the root zone.  The zone digest is
@@ -207,7 +210,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         The RDATA of the resource record consists of three fields: Serial, Digest Type, and Digest.
       </t>
       <t>
-        For discussion: This document is currently written as though
+        FOR DISCUSSION: This document is currently more-or-less written as though
         a zone MUST NOT contain more than one &RRNAME; RR.
         Having exactly one &RRNAME; record per zone could simplify this
         protocol and eliminate confusion around downgrade attacks, at
@@ -237,13 +240,13 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             which the message digest was generated.
           </t>
           <t>
-            For Discussion: the serial number is included in order
+            FOR DISCUSSION: the serial number is included in order
             to make DNS response messages of type &RRNAME; meaningful.
             Without the serial number, a stand-alone &RRNAME; digest
             has no association to any particular zone file.  If
-            &RRNAME; were to be made a so-called meta type that cannot
-            be queried for (like OPT), then serial would not be
-            necessary.
+	    there is agreement that &RRNAME; responses are not useful,
+	    this field could be removed.  See also the end of
+	    Security Considerations.
           </t>
         </section>
 
@@ -293,7 +296,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             containing the message digest.  <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
-            validate the contents of a zone.
+            verify the contents of a zone.
           </t>
         </section>
       </section>
@@ -440,16 +443,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="Verifying Zone Message Digest" anchor="verifying">
       <t>
-        The recipient of a zone that has a message digest record can validate the zone
-        by calculating the digest as follows.
-      </t>
-      <t>
-        [XXX make this fit better]
-        DNSSEC provides three strong security guarantees relevant
-        to this protocol: (1) whether or not to expect DNSSEC
-        records in the zone ; (2) whether or not to expect a
-        &RRNAME; record in a signed zone; and (3) whether or not
-        the &RRNAME; record has been altered since it was signed.
+        The recipient of a zone that has a message digest record can verify the zone
+        by calculating the digest as follows:
       </t>
       <t>
         <list style="numbers">
@@ -564,7 +559,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           amplification effects (i.e., DNSKEY).
         </t>
         <t>
-          For discussion:
+          FOR DISCUSSION:
           The primary purpose of the &RRNAME; record is to verify
           a zone file prior to being loaded or served by a name server.
           We could allow a name server implementation to respond to
