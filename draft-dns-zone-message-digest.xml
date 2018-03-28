@@ -353,7 +353,8 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
         <section title="Order of RRsets Having the Same Owner Name">
           <t>
             For the purposes of calculating the zone digest, RRsets having
-            the same owner name MUST be ordered by their numeric RR type.
+            the same owner name MUST first be ordered by their numeric RR CLASS,
+            and second by their numeric RR TYPE.
           </t>
         </section>
         <section title="Special Considerations for SOA RRs">
