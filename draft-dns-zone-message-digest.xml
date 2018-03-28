@@ -244,9 +244,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             to make DNS response messages of type &RRNAME; meaningful.
             Without the serial number, a stand-alone &RRNAME; digest
             has no association to any particular zone file.  If
-	    there is agreement that &RRNAME; responses are not useful,
-	    this field could be removed.  See also the end of
-	    Security Considerations.
+            there is agreement that &RRNAME; responses are not useful,
+            this field could be removed.  See also the end of
+            Security Considerations.
           </t>
         </section>
 
