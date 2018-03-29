@@ -1,4 +1,4 @@
-DOC=draft-dns-zone-message-digest
+DOC=draft-dns-zone-digest
 VER=00
 
 all: ${DOC}-${VER}.txt
