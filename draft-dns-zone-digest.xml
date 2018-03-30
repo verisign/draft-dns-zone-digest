@@ -181,7 +181,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <xref target="RFC7706"/> describes how a recursive resolver
         can serve the root zone via a loopback address.
         As the root zone spreads beyond its traditional deployment
-        boundaries, the need for validation of the zone contents
+        boundaries, the need for verification of the zone contents
         becomes increasingly important.
       </t>
       <t>
@@ -344,9 +344,12 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
           RRs within an RRset.
         </t>
         <t>
-          This specification adopts DNSSEC's canonical ordering for names <xref target="RFC4034"/> Section 6.1, and canonical ordering for
-          RRs within an RRset <xref target="RFC4034"/> Section 6.3.  It also
-          adopts DNSSEC's canonical RR form <xref target="RFC4034"/> Section 6.2.
+          This specification adopts DNSSEC's canonical ordering for names
+          (Section 6.1 of <xref target="RFC4034"/>),
+          and canonical ordering for RRs within an RRset
+          (Section 6.3 of <xref target="RFC4034"/>).
+	  It also adopts DNSSEC's canonical RR form
+          (Section 6.2 of <xref target="RFC4034"/>).
           However, since DNSSEC does not define a canonical ordering for RRsets
           having the same owner name, that ordering is defined here.
         </t>
@@ -394,7 +397,7 @@ example.com. 86400 IN &RRNAME; 2018031500 4 ( FEBE3D4CE2EC2FFA4BA9
           set to the current SOA Serial.  The Digest Type field MUST be set
           to the value for the chosen digest algorithm. The Digest
           field MUST be set to all zeroes and of length appropriate
-          for the chosen algorithm.
+          for the chosen digest algorithm.
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -478,7 +481,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             verification MUST NOT be considered successful.
           </t>
           <t>
-            The &RRNAME; Digest Type field must be checked.  If the
+            The &RRNAME; Digest Type field MUST be checked.  If the
             verifier does not support the given digest type, it
             SHOULD report that the zone digest could not be verified
             due to an unsupported algorithm.
