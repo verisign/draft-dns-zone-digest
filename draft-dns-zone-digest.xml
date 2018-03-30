@@ -186,7 +186,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <t>
         Nothing in this specification, however, is specific to the root zone.  The zone digest is
-        designed to work equally well for any DNS zone.
+        designed to work for any DNS zone.
       </t>
       <t>
         This specification is OPTIONAL to implement by both publishers
@@ -210,7 +210,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         The RDATA of the resource record consists of three fields: Serial, Digest Type, and Digest.
       </t>
       <t>
-        FOR DISCUSSION: This document is currently more-or-less written as though
+        FOR DISCUSSION: This document is currently written as though
         a zone MUST NOT contain more than one &RRNAME; RR.
         Having exactly one &RRNAME; record per zone could simplify this
         protocol and eliminate confusion around downgrade attacks, at
@@ -548,8 +548,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <section title="Attacks Utilizing the Zone Digest">
         <t>
           Nothing in this specification prevents clients from making,
-          and servers from responding to, &RRNAME; queries.  It is
-          natural to wonder if &RRNAME; responses could be used in
+          and servers from responding to, &RRNAME; queries.  One might
+          consider how well &RRNAME; responses could be used in
           a distributed denial-of-service amplification attack.
         </t>
         <t>
