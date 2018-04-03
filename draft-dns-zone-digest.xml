@@ -589,10 +589,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           C, using the ldns library <xref target="ldns"/>.  This implementation is able to
           perform the following functions:
           <list style="symbols">
-          <t>Read input zone file, output zone file with &RRNAME; placeholder. [done]</t>
-          <t>Compute zone digest over signed zone file and update &RRNAME; record. [done]</t>
-          <t>Re-compute DNSSEC signature over &RRNAME; record. [done]</t>
-          <t>Verify zone digest from input zone file. [tbd]</t>
+          <t>Read input zone file, output zone file with &RRNAME; placeholder.</t>
+          <t>Compute zone digest over signed zone file and update &RRNAME; record.</t>
+          <t>Re-compute DNSSEC signature over &RRNAME; record.</t>
+          <t>Verify zone digest from input zone file.</t>
           </list>
         </t>
         <t>
