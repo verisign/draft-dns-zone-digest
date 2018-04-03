@@ -348,7 +348,7 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
           (Section 6.1 of <xref target="RFC4034"/>),
           and canonical ordering for RRs within an RRset
           (Section 6.3 of <xref target="RFC4034"/>).
-	  It also adopts DNSSEC's canonical RR form
+          It also adopts DNSSEC's canonical RR form
           (Section 6.2 of <xref target="RFC4034"/>).
           However, since DNSSEC does not define a canonical ordering for RRsets
           having the same owner name, that ordering is defined here.
@@ -579,6 +579,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="Acknowledgments" anchor="acknowledgments">
       <t>
+        The authors wish to thank David Blacka, Scott Hollenbeck, and Rick Wilhelm
+        for providing feedback on early drafts of this document.
       </t>
     </section>
 
