@@ -32,7 +32,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-dns-zone-digest" ipr="trust200902">
+<rfc category="std" docName="draft-wessels-dns-zone-digest" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -44,7 +44,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <!-- The abbreviated title is used in the page header - it is only necessary if the 
     full title is longer than 39 characters -->
 
-    <title abbrev="dns-zone-digest">Message Digest for DNS Zones</title>
+    <title abbrev="DNS Zone Digest">Message Digest for DNS Zones</title>
 
     <!-- add 'role="editor"' below for the editors if appropriate -->
 
