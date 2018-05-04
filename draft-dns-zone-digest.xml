@@ -629,6 +629,17 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
     </section>
 
+    <section anchor="Changes" title="Change Log">
+      <t>RFC Editor: Please remove this section.</t>
+      <t>This section lists substantial changes to the document as it is being worked on.</t>
+      <t>From -00 to -01:
+      <list style="symbols">
+        <t>Removed requirement to sort by RR CLASS.</t>
+        <t>Added Kumari and Hardaker as coauthors.</t>
+        <t>Added Change Log section.</t>
+      </list></t>
+    </section>
+
   </middle>
   <back>
 
