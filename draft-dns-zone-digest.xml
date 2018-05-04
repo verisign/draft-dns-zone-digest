@@ -95,7 +95,33 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </address>
     </author>
 
-    <date month="March" year="2018"/>
+    <author fullname="Warren Kumari" initials="W." surname="Kumari">
+      <organization>Google</organization>
+      <address>
+        <postal>
+          <street>1600 Amphitheatre Parkway</street>
+          <city>Mountain View</city>
+          <region>CA</region>
+          <code>94043</code>
+        </postal>
+        <email>warren@kumari.net</email>
+      </address>
+    </author>
+
+    <author fullname="Wes Hardaker" initials="W." surname="Hardaker">
+      <organization>USC/ISI</organization>
+      <address>
+        <postal>
+          <street>P.O. Box 382</street>
+          <city>Davis</city>
+          <region>CA</region>
+          <code>95617</code>
+        </postal>
+        <email>ietf@hardakers.net</email>
+      </address>
+    </author>
+
+    <date month="May" year="2018"/>
 
     <area>General</area>
 
