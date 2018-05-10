@@ -160,16 +160,15 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         such protocols as FTP, HTTP, rsync, and so on.
         While zone files are self-contained, currently there is
         no way to verify the authenticity of a stand-alone zone
-        file.
+        file without relying on an external checksum or signature.
       </t>
       <t>
         This document introduces a new RR type that serves as a
         cryptographic message digest of the data in a zone file.
-        It allows a receiver of the zone file to verify its
+        It allows a receiver of the zone file to verify the zone file's
         authenticity, especially when used in combination with DNSSEC.
       </t>
       <t>
-        Message digests are also found in the TSIG protocol.
         DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
         digest to protect individual query and response messages.
         TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>
@@ -181,7 +180,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <t>
         The technique described in this document makes the message
-        digest a part of the zone file itself, and allows anyone
+        digest a part of the zone file itself, allowing anything
         to verify the zone file as a whole, no matter how it is
         transmitted.
       </t>
@@ -207,12 +206,12 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <xref target="RFC7706"/> describes how a recursive resolver
         can serve the root zone via a loopback address.
         As the root zone spreads beyond its traditional deployment
-        boundaries, the need for verification of the zone contents
-        becomes increasingly important.
+        boundaries, the need for verification of the completeness of
+        the zone contents becomes increasingly important.
       </t>
       <t>
         Nothing in this specification, however, is specific to the root zone.  The zone digest is
-        designed to work for any DNS zone.
+        designed to work with any DNS zone.
       </t>
       <t>
         This specification is OPTIONAL to implement by both publishers
@@ -382,7 +381,7 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
         <section title="Order of RRsets Having the Same Owner Name">
           <t>
             For the purposes of calculating the zone digest, RRsets having
-            the same owner name MUST be ordered by their numeric RR TYPE.
+            the same owner name MUST be numerically ordered by their numeric RR TYPE.
           </t>
         </section>
         <section title="Special Considerations for SOA RRs">
@@ -429,12 +428,14 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
         <t>
           Following addition of the placeholder record, the zone MAY be signed with DNSSEC.
           Note that when the digest calculation is complete, and the &RRNAME; record is updated,
-          the signature(s) for that record MUST be recalculated and updated as well.
+          the signature(s) for that record MUST be recalculated and
+          updated as well.  (Alternatively, the calculation of that
+          RRSIG value can be delayed until after the steps below are completed).
         </t>
       </section>
       <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
-          The zone digest is calculated by concatenating the canonical
+          The zone digest is calculated by concatenating the canonical on-the-wire
           form of RRs in the zone, in the order described
           above, subject to the inclusion/exclusion rules described
           below, and then applying the digest algorithm:
@@ -515,13 +516,19 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             The zone digest is calculated using the algorithm
             described in <xref target="calculating-calculating"/>.
             Note in particular that the Digest field of any &RRNAME;
-            RRs MUST be zeroed prior to calculation of the digest.
+            RRs MUST be zeroed prior to calculation of the digest and
+            the RRSIGs for it must be removed.
           </t>
           <t>
             The calculated digest is compared to the received digest.
             If the two digest values match, verification is considered
             successful.  Otherwise, verification MUST NOT be
             considered successful.
+          </t>
+          <t>
+	    If the zone is to be served and transferred, the original
+	    Digest value of the &RRNAME; must be replace the zeroed field so
+	    downstream clients can retrieve and verify it also.
           </t>
         </list>
       </t>
@@ -593,7 +600,13 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           a zone file prior to being loaded or served by a name server.
           We could allow a name server implementation to respond to
           &RRNAME; queries with the REFUSED RCODE without loss of
-          functionality.
+          functionality.  Note that refusal would prevent ensuring that a
+          zone-walk is complete. 
+        </t>
+        <t>
+	  General record modification, addition or deletion will
+	  be caught by checking either the value of the &RRNAME;
+	  or regular DNSSEC validation.
         </t>
       </section>
     </section>
