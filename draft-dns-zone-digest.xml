@@ -429,8 +429,9 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
           Following addition of the placeholder record, the zone MAY be signed with DNSSEC.
           Note that when the digest calculation is complete, and the &RRNAME; record is updated,
           the signature(s) for that record MUST be recalculated and
-          updated as well.  (Alternatively, the calculation of that
-          RRSIG value can be delayed until after the steps below are completed).
+          updated as well.
+          Therefore, the signer is not required to calculate a signature over the placeholder record at
+          this step in the process, but it is harmless to do so.
         </t>
       </section>
       <section title="Calculate the Digest" anchor="calculating-calculating">
