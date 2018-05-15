@@ -651,6 +651,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Removed requirement to sort by RR CLASS.</t>
         <t>Added Kumari and Hardaker as coauthors.</t>
         <t>Added Change Log section.</t>
+        <t>Minor clarifications and grammatical edits.</t>
       </list></t>
     </section>
 
