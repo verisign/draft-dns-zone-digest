@@ -604,11 +604,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           functionality.  Note that refusal would prevent ensuring that a
           zone-walk is complete. 
         </t>
-        <t>
+        <!-- t>
 	  General record modification, addition or deletion will
 	  be caught by checking either the value of the &RRNAME;
 	  or regular DNSSEC validation.
-        </t>
+        </t -->
       </section>
     </section>
 
