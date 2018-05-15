@@ -516,9 +516,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <t>
             The zone digest is calculated using the algorithm
             described in <xref target="calculating-calculating"/>.
-            Note in particular that the Digest field of any &RRNAME;
-            RRs MUST be zeroed prior to calculation of the digest and
-            the RRSIGs for it must be removed.
+            Note in particular that digested &RRNAME;
+            RRs MUST be placeholders and
+            their RRSIGs are not included in the digest.
           </t>
           <t>
             The calculated digest is compared to the received digest.
@@ -528,8 +528,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t>
 	    If the zone is to be served and transferred, the original
-	    Digest value of the &RRNAME; must be replace the zeroed field so
-	    downstream clients can retrieve and verify it also.
+	    (not placeholder) &RRNAME; RRs MUST be sent to recipients
+	    so that downstream clients can verify the zone.
           </t>
         </list>
       </t>
