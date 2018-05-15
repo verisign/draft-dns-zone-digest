@@ -527,9 +527,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             considered successful.
           </t>
           <t>
-	    If the zone is to be served and transferred, the original
-	    (not placeholder) &RRNAME; RRs MUST be sent to recipients
-	    so that downstream clients can verify the zone.
+            If the zone is to be served and transferred, the original
+            (not placeholder) &RRNAME; RRs MUST be sent to recipients
+            so that downstream clients can verify the zone.
           </t>
         </list>
       </t>
@@ -605,9 +605,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           zone-walk is complete. 
         </t>
         <!-- t>
-	  General record modification, addition or deletion will
-	  be caught by checking either the value of the &RRNAME;
-	  or regular DNSSEC validation.
+          General record modification, addition or deletion will
+          be caught by checking either the value of the &RRNAME;
+          or regular DNSSEC validation.
         </t -->
       </section>
     </section>
