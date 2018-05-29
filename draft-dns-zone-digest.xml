@@ -396,9 +396,9 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
             Additionally, per established practices, the SOA record
             is generally the first record in a zone file.  However,
             according to the requirement to sort RRsets with the
-            same owner name by type, the SOA RR (type value 2) might not
-            be first in the digest calculation.  If the zone has
-            an A RR (type value 1) at the apex, it MUST be processed before
+            same owner name by type, the SOA RR (type value 6) will not
+            be first in the digest calculation.  The zone's 
+            NS RRset (type value 2) at the apex MUST be processed before
             the SOA RR.
           </t>
         </section>
