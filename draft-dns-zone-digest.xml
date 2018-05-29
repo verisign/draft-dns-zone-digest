@@ -469,6 +469,13 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           record MUST then be added.  Because the &RRNAME; placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
+        <t>
+          Some implementations of incremental DNSSEC signing might
+          update the zone's serial number for each resigning.
+          However, to preserve the calculated digest, generation
+          of the &RRNAME; signature at this time MUST NOT also
+          result in a change of the SOA serial number.
+        </t>
       </section>
     </section>
 
