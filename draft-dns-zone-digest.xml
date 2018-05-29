@@ -437,7 +437,7 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
       <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
           The zone digest is calculated by concatenating the canonical on-the-wire
-          form of RRs in the zone, in the order described
+          form of all RRs in the zone, in the order described
           above, subject to the inclusion/exclusion rules described
           below, and then applying the digest algorithm:
         </t>
