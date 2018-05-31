@@ -22,6 +22,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
 <!ENTITY RFC6605 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
+<!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -219,12 +220,15 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
     </section>
 
-    <section title="Terminology">
-      <t>
-        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-        "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
-        document are to be interpreted as described in <xref target="RFC2119"/>.
-      </t>
+      <section title="Requirements Language">
+        <t>
+          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+          "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+          "OPTIONAL" in this document are to be interpreted as described in
+          BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
+          capitals, as shown here.
+        </t>
+      </section>
     </section>
 
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
@@ -674,6 +678,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC4509;
     &RFC5933;
     &RFC6605;
+    &RFC8174;
 
      <reference anchor="iana-ds-digest-types" target="https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml">
         <front>
