@@ -159,28 +159,15 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         master file format <xref target="RFC1034"/>.
         Sometimes zones are distributed outside of the DNS, with
         such protocols as FTP, HTTP, rsync, and so on.
-        While zone files are self-contained, currently there is
-        no way to verify the authenticity of a stand-alone zone
-        file without relying on an external checksum or signature.
+        Currently there is no standard way to verify the authenticity
+        of a stand-alone zone file.
       </t>
       <t>
         This document introduces a new RR type that serves as a
         cryptographic message digest of the data in a zone file.
         It allows a receiver of the zone file to verify the zone file's
         authenticity, especially when used in combination with DNSSEC.
-      </t>
-      <t>
-        DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
-        digest to protect individual query and response messages.
-        TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>
-        AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
-        However, TSIG's protections are ephemeral, existing only "on
-        the wire," and are not retained after the transaction is complete.
-        Additionally, TSIG utilizes shared secret keys, which
-        are not available to third parties.
-      </t>
-      <t>
-        The technique described in this document makes the message
+        This technique makes the message
         digest a part of the zone file itself, allowing anything
         to verify the zone file as a whole, no matter how it is
         transmitted.
@@ -199,26 +186,78 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         Should it be a prerequisite?
       </t>
       <t>
-        The motivation for including a message digest in a zone
-        file comes largely from the DNS root zone.
-        At the time of this writing, there is increased attention
-        to the idea of widely distributing the root zone, beyond
-        the root server system.
-        <xref target="RFC7706"/> describes how a recursive resolver
-        can serve the root zone via a loopback address.
-        As the root zone spreads beyond its traditional deployment
-        boundaries, the need for verification of the completeness of
-        the zone contents becomes increasingly important.
-      </t>
-      <t>
-        Nothing in this specification, however, is specific to the root zone.  The zone digest is
-        designed to work with any DNS zone.
-      </t>
-      <t>
         This specification is OPTIONAL to implement by both publishers
         and consumers of zone file data.
       </t>
-    </section>
+      <section title="Motivation">
+        <t>
+          The motivation for a self-contained zone verification technique
+          comes largely from the DNS root zone.
+          At the time of this writing, there is increased attention
+          to the idea of widely distributing the root zone, beyond
+          the root server system.
+          <xref target="RFC7706"/> describes how a recursive resolver
+          can serve the root zone via a loopback address.
+          As the root zone spreads beyond its traditional deployment
+          boundaries, the need for verification of the completeness of
+          the zone contents becomes increasingly important.
+          Nothing in this specification, however, is specific to the root zone.  The zone digest is
+          designed to work with any DNS zone.
+        </t>
+        <t>
+          There are some existing techniques that can be used to
+          detect changes to zone files, however they each fall short
+          in some way or another.
+        </t>
+        <section title="TSIG">
+          <t>
+            DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
+            digest to protect individual query and response messages.
+            TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>,
+            AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
+            However, TSIG's protections are ephemeral, existing only "on
+            the wire," and are not retained after the transaction is complete.
+            Additionally, TSIG utilizes shared secret keys, which
+            are not intended to be shared with third parties.
+          </t>
+        </section>
+        <section title="Detached Signatures">
+          <t>
+            Sometimes, detached checksums and signatures can be found
+            adjacent to zone files.  This is the case for the root
+            and other zone files published on the internic.net sites
+            <xref target="InterNIC"/>.  For example, the files
+            root.zone.md5 and root.zone.sig are in the same directory
+            as the root.zone file.  Unfortunately, since the checksum
+            and signature are in separate files, they are only weakly
+            associated with the zone file.  They remain associated
+            only if the recipient is careful to keep them together.
+            Nothing in these files, other than their names and
+            timestamps, ties them to a specific revision of the
+            root.zone file.
+          </t>
+        </section>
+        <section title="DNSSEC">
+          <t>
+            For zones that are signed with DNSSEC, a recipient can
+            validate signed RRsets.  Additionally, the denial-of-existence
+            records can prove that RRsets have not been added or
+            removed.  Unfortunately for this purpose, not all RRsets
+            in a zone are signed.  The design of DNSSEC stipulates
+            that delegations (non-apex NS records) are not signed,
+            and neither are any glue records.  Furthermore, zones
+            that employ NSEC3 with opt-out are susceptible to the
+            removal or addition of names between the signed nodes.
+          </t>
+          <t>
+            Another disadvantage is the need to perform numerous
+            signature validations.  For large very zones, hashing
+            'N' RRsets followed by a single signature validation
+            is much more efficient than 'N' separate signature
+            validations.
+          </t>
+        </section>
+      </section>
 
       <section title="Requirements Language">
         <t>
@@ -709,6 +748,17 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC5936;
     &RFC7706;
     &RFC7719;
+
+     <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
+        <front>
+          <title>InterNIC FTP site</title>
+          <author>
+            <organization>ICANN</organization>
+          </author>
+          <date year="2018" month="May" day="31"/>
+        </front>
+     </reference>
+
     </references>
 
   </back>
