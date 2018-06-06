@@ -502,6 +502,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <t>The RRSIG covering &RRNAME; MUST NOT be included.</t>
             </list>
           </t>
+          <t>
+            FOR DISCUSSION: Ambiguities about records that are in/out of zone.  For example, see Jinmei
+            message to dnsop 2018-06-01 and followups.  BIND will load and axfr data "occluded" by DNAME/NS.
+          </t>
         </section>
       </section>
       <section title="Update &RRNAME; RR">
