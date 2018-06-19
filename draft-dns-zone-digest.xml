@@ -12,6 +12,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC2136 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
 <!ENTITY RFC2629 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
 <!ENTITY RFC2845 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
+<!ENTITY RFC2931 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml">
 <!ENTITY RFC4033 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY RFC4035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
@@ -219,6 +220,19 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             the wire," and are not retained after the transaction is complete.
             Additionally, TSIG utilizes shared secret keys, which
             are not intended to be shared with third parties.
+          </t>
+        </section>
+        <section title="SIG(0)">
+          <t>
+            DNS Request and Transaction Signatures (SIG(0) <xref
+            target="RFC2931"/>) is another protocol extension
+            designed to authenticate individual DNS transactions.
+            Whereas SIG records were originally deisgned to cover
+            specific RR types, SIG(0) is used to sign an entire DNS
+            message.  With SIG(0), "...keys used in transaction
+            security belong to the host composing the DNS response
+            message, not to the zone involved" which furthermore
+            makes it impractical for use as any kind of zone digest.
           </t>
         </section>
         <section title="Detached Signatures">
@@ -750,6 +764,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC1995;
     &RFC2136;
     &RFC2845;
+    &RFC2931;
     &RFC5936;
     &RFC7706;
     &RFC7719;
