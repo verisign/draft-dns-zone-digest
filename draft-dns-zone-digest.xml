@@ -12,13 +12,20 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC2136 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
 <!ENTITY RFC2629 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
 <!ENTITY RFC2845 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
+<!ENTITY RFC2315 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2315.xml">
+<!ENTITY RFC2065 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2065.xml">
+<!ENTITY RFC2535 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2535.xml">
 <!ENTITY RFC2931 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml">
+<!ENTITY RFC3851 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3851.xml">
+<!ENTITY RFC3852 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3852.xml">
 <!ENTITY RFC4033 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY RFC4035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
+<!ENTITY RFC4880 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4880.xml">
 <!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC7706 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
 <!ENTITY RFC7719 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
+<!ENTITY RFC7929 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7929.xml">
 <!ENTITY RFC3658 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
@@ -205,72 +212,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           Nothing in this specification, however, is specific to the root zone.  The zone digest is
           designed to work with any DNS zone.
         </t>
-        <t>
-          There are some existing techniques that can be used to
-          detect changes to zone files, however they each fall short
-          in some way or another.
-        </t>
-        <section title="TSIG">
-          <t>
-            DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
-            digest to protect individual query and response messages.
-            TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>,
-            AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
-            However, TSIG's protections are ephemeral, existing only "on
-            the wire," and are not retained after the transaction is complete.
-            Additionally, TSIG utilizes shared secret keys, which
-            are not intended to be shared with third parties.
-          </t>
-        </section>
-        <section title="SIG(0)">
-          <t>
-            DNS Request and Transaction Signatures (SIG(0) <xref
-            target="RFC2931"/>) is another protocol extension
-            designed to authenticate individual DNS transactions.
-            Whereas SIG records were originally deisgned to cover
-            specific RR types, SIG(0) is used to sign an entire DNS
-            message.  With SIG(0), "...keys used in transaction
-            security belong to the host composing the DNS response
-            message, not to the zone involved" which furthermore
-            makes it impractical for use as any kind of zone digest.
-          </t>
-        </section>
-        <section title="Detached Signatures">
-          <t>
-            Sometimes, detached checksums and signatures can be found
-            adjacent to zone files.  This is the case for the root
-            and other zone files published on the internic.net sites
-            <xref target="InterNIC"/>.  For example, the files
-            root.zone.md5 and root.zone.sig are in the same directory
-            as the root.zone file.  Unfortunately, since the checksum
-            and signature are in separate files, they are only weakly
-            associated with the zone file.  They remain associated
-            only if the recipient is careful to keep them together.
-            Nothing in these files, other than their names and
-            timestamps, ties them to a specific revision of the
-            root.zone file.
-          </t>
-        </section>
-        <section title="DNSSEC">
-          <t>
-            For zones that are signed with DNSSEC, a recipient can
-            validate signed RRsets.  Additionally, the denial-of-existence
-            records can prove that RRsets have not been added or
-            removed.  Unfortunately for this purpose, not all RRsets
-            in a zone are signed.  The design of DNSSEC stipulates
-            that delegations (non-apex NS records) are not signed,
-            and neither are any glue records.  Furthermore, zones
-            that employ NSEC3 with opt-out are susceptible to the
-            removal or addition of names between the signed nodes.
-          </t>
-          <t>
-            Another disadvantage is the need to perform numerous
-            signature validations.  For large very zones, hashing
-            'N' RRsets followed by a single signature validation
-            is much more efficient than 'N' separate signature
-            validations.
-          </t>
-        </section>
+
       </section>
 
       <section title="Requirements Language">
@@ -280,6 +222,142 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           "OPTIONAL" in this document are to be interpreted as described in
           BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
           capitals, as shown here.
+        </t>
+      </section>
+    </section>
+
+    <section title="Alternatives Considered" anchor="alternatives">
+      <t>
+        There are some existing techniques that can be used to
+        detect changes to zone files, however they each fall short
+        in some way or another.
+      </t>
+
+      <section title="DNSSEC Status Quo">
+        <t>
+          For zones that are signed with DNSSEC, a recipient can
+          validate signed RRsets.  Additionally, the denial-of-existence
+          records can prove that RRsets have not been added or
+          removed.  However, not all RRsets
+          in a zone are signed.  The design of DNSSEC stipulates
+          that delegations (non-apex NS records) are not signed,
+          and neither are any glue records.  Thus, changes to delegation
+          and glue records cannot be detected by DNSSEC alone. Furthermore, zones
+          that employ NSEC3 with opt-out are susceptible to the
+          removal or addition of names between the signed nodes.
+        </t>
+        <t>
+          Another disadvantage is the need to perform numerous
+          signature validations.  For large very zones, hashing
+          'N' RRsets followed by a single signature validation
+          is much more efficient than 'N' separate signature
+          validations.
+        </t>
+      </section>
+
+      <section title="TSIG">
+        <t>
+          DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
+          digest to protect individual query and response messages.
+          TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>,
+          AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
+          However, TSIG's protections are ephemeral, existing only "on
+          the wire," and are not retained after the transaction is complete.
+          Additionally, TSIG utilizes shared secret keys, which
+          are not intended to be shared with third parties.
+        </t>
+      </section>
+
+      <section title="SIG(0)">
+        <t>
+          DNS Request and Transaction Signatures (SIG(0) <xref
+          target="RFC2931"/>) is another protocol extension designed
+          to authenticate individual DNS transactions.  Whereas SIG
+          records were originally deisgned to cover specific RR
+          types, SIG(0) is used to sign an entire DNS message.  Like
+          TSIG, SIG(0) signatures are similarly ephemeral.  Unlike TSIG,
+          SIG(0) uses public key cryptography rather than shared
+          secrets.  Additionally, SIG(0) "...keys used in transaction
+          security belong to the host composing the DNS response
+          message, not to the zone involved" which furthermore makes
+          it impractical for use as any kind of zone digest.
+        </t>
+      </section>
+
+      <section title="AXFR SIG">
+        <t>
+          <xref target="RFC2065"/> is an obsoleted specification
+          of the first generation DNSSEC Security Extensions.  It
+          describes a zone transfer signature, aka AXFR SIG, which
+          is similar to the technique proposed by this document.
+          That is, it proposes ordering all RRsets in a zone,
+          hashing their signatures, and then signing the zone hash.
+          The AXFR SIG is described only for use during zone
+          transfers.  It did not postulate the need to validate
+          zone data distributed outside of the DNS.  Furthermore,
+          its successor, <xref target="RFC2535"/>, omits the AXFR
+          SIG, while at the same time introducting an IXFR SIG.
+        </t>
+      </section>
+
+      <section title="Detached Signatures">
+        <t>
+          Sometimes, detached checksums and signatures can be found
+          adjacent to zone files.  This is the case for the root
+          and other zone files published on the internic.net sites
+          <xref target="InterNIC"/>.  For example, the files
+          root.zone.md5 and root.zone.sig are in the same directory
+          as the root.zone file.  Unfortunately, since the checksum
+          and signature are in separate files, they are only weakly
+          associated with the zone file.  They remain associated
+          only if the recipient is careful to keep them together.
+          Nothing in these files, other than their names and
+          timestamps, ties them to a specific revision of the
+          root.zone file.
+        </t>
+      </section>
+
+      <section title="Non-detached, Non-DNSSEC Signatures">
+        <t>
+          A number of standards already exist for signing arbitrary
+          data.  With these, the data and signature are more tightly
+	  associated.  However, there are some drawbacks.
+        </t>
+        <t>
+	  If one were to look at solutions provided by OpenPGP <xref
+	  target="RFC4880"/>, the Cleartext Signature Framework
+	  seems most suitable.   The zone file data could be given
+	  in cleartext presentation format surrounded by "PGP SIGNED
+	  MESSAGE" markers, followed by a PGP signature block.  The
+	  message could be verified by being in posession of, and
+	  trusting, the OpenPGP key used to create the signature.
+	  Note, however, that there is currently no proposed way
+	  of knowing, from the zone data alone, which keys can be
+	  trusted to sign it.  The experimental DANE Bindings for
+	  OpenPGP <xref target="RFC7929"/> can be used to make
+	  assertions about OpenPGP keys, but its use case is for
+	  email addresses, and requires DNSSEC.
+        </t>
+        <t>
+	  S/MIME <xref target="RFC3851"/>, CMS <xref target="RFC3852"/>,
+	  and PKCS #7 <xref target="RFC2315"/> specify formats for
+	  attaching signatures to data or messages.  In this case,
+	  zone file data might be distributed as a .p7m file.
+	  Adopting these protocols means utilizing X.509 certificates,
+	  certificate authorities, and ASN.1.  There is no currently
+	  proposed way of knowing, from the zone data alone, which
+	  certificates should be trusted.
+        </t>
+        <t>
+	  Both OpenPGP and S/MIME formats result in files that are not
+	  zone files.  Although the signatures are attached, the data file
+	  could not be loaded into name servers as-is.   A decapsulation
+	  step would be required, making these formats unsuitable for
+	  applications that do not want to implement this specification.
+        </t>
+        <t>
+	  Neither OpenPGP nor S/MIME can support incremental updates
+	  of zone data.
         </t>
       </section>
     </section>
@@ -762,12 +840,19 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <references title="Informative References">
     &RFC1995;
+    &RFC2065;
     &RFC2136;
+    &RFC2315;
+    &RFC2535;
     &RFC2845;
     &RFC2931;
+    &RFC3851;
+    &RFC3852;
+    &RFC4880;
     &RFC5936;
     &RFC7706;
     &RFC7719;
+    &RFC7929;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
         <front>
