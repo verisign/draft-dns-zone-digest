@@ -224,7 +224,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           DNS Request and Transaction Signatures (SIG(0) <xref
           target="RFC2931"/>) is another protocol extension designed to
           authenticate individual DNS transactions.  Whereas SIG records
-          were originally deisgned to cover specific RR types, SIG(0)
+          were originally designed to cover specific RR types, SIG(0)
           is used to sign an entire DNS message.  Unlike TSIG, SIG(0)
           uses public key cryptography rather than shared secrets.
         </t>
@@ -290,7 +290,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           transfers.  It did not postulate the need to validate
           zone data distributed outside of the DNS.  Furthermore,
           its successor, <xref target="RFC2535"/>, omits the AXFR
-          SIG, while at the same time introducting an IXFR SIG.
+          SIG, while at the same time introducing an IXFR SIG.
         </t>
       </section>
 
