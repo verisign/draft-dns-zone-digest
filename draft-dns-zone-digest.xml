@@ -742,7 +742,18 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <section title="Acknowledgments" anchor="acknowledgments">
       <t>
         The authors wish to thank David Blacka, Scott Hollenbeck, and Rick Wilhelm
-        for providing feedback on early drafts of this document.
+        for providing feedback on early drafts of this document.  Additionally, they
+	thank
+        Mark Andrews,
+	Olafur Gudmundsson,
+	Shumon Huque,
+        Tatuya Jinmei,
+        Shane Kerr,
+	Mukund Sivaraman,
+	Petr Spacek,
+        and other members of
+        the dnsop working group
+        for their input.
       </t>
     </section>
 
