@@ -190,10 +190,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </list>
       </t>
       <t>
-        FOR DISCUSSION: currently this document does not require DNSSEC.
-        Should it be a prerequisite?
-      </t>
-      <t>
         This specification is OPTIONAL to implement by both publishers
         and consumers of zone file data.
       </t>
