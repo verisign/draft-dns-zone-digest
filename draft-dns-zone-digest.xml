@@ -294,6 +294,47 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
       </section>
 
+      <section title="Design Overview">
+        <!-- XXX apologies for the current informal nature of this text.  trying to meet the deadline -->
+        <t>
+          This document introduces a new Resource Record type designed
+          to convey a message digest of the content of a zone file.
+          The digest is calculated at the time of zone publication.
+          Ideally the zone is signed with DNSSEC to guarantee that any
+          modifications of the digest can be detected.
+        </t>
+        <t>
+          The zone digest is designed to be used on zones that are
+          relatively stable and have infrequent updates.  As currently
+          specified, the digest is re-calculated over the entire zone
+          content each time.  This specification does not provide
+          an efficient mechanism for incremental updates of zone
+          data.  The authors believe that the incremental updates
+          represent significant complexity which could be a barrier
+          to implementation at this time (see DNS Camel).  Nothing in
+          this specification prevents future work to support incremental
+          zone digest algorthms (e.g. using merkle trees and a differnt
+          RR type).
+        </t>
+        <t>
+          The cryptographic algorithms available for zone digest are
+          exactly the same as for DS records.  This avoids the need
+          for a separate digest algorithm registry.  Any updates to the
+          DS algorithms automatically updates the algorithm status for
+          zone digests.
+        </t>
+        <t>
+          It is expected that verification of a zone digest will be
+          implemented in name server software.  That is, a name server
+          can verify the zone data it was given and refuse to serve a
+          zone which fails verification.  For signed zones, the name
+          server would need a trust anchor for DNSSEC validation.
+          For signed non-root zones, the name server may need to send
+          queries to validate a chain-of-trust.  Digest verification
+          may also be performed externally.
+        </t>
+      </section>
+
 
       <section title="Requirements Language">
         <t>
