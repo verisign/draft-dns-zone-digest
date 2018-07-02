@@ -395,15 +395,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             SOA record (<xref target="RFC1035"/> section 3.3.13) for
             which the message digest was generated.
           </t>
-          <t>
-            FOR DISCUSSION: the serial number is included in order
-            to make DNS response messages of type &RRNAME; meaningful.
-            Without the serial number, a stand-alone &RRNAME; digest
-            has no association to any particular zone file.  If
-            there is agreement that &RRNAME; responses are not useful,
-            this field could be removed.  See also the end of
-            Security Considerations.
-          </t>
         </section>
 
         <section title="The Digest Type Field">
