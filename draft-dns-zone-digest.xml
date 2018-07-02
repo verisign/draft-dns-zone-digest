@@ -25,6 +25,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC7706 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
 <!ENTITY RFC7719 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7719.xml">
+<!ENTITY RFC7858 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
 <!ENTITY RFC7929 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7929.xml">
 <!ENTITY RFC3658 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
@@ -195,44 +196,64 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <section title="Motivation">
         <t>
-          The motivation for a self-contained zone verification technique
-          comes largely from the DNS root zone.
-          At the time of this writing, there is increased attention
-          to the idea of widely distributing the root zone, beyond
-          the root server system.
-          <xref target="RFC7706"/> describes how a recursive resolver
-          can serve the root zone via a loopback address.
-          As the root zone spreads beyond its traditional deployment
-          boundaries, the need for verification of the completeness of
-          the zone contents becomes increasingly important.
-          Nothing in this specification, however, is specific to the root zone.  The zone digest is
-          designed to work with any DNS zone.
+          The motivation and design of this protocol enhancement is tied
+          to the DNS root zone <xref target="InterNIC"/>.  The root zone
+          is perhaps the most widely distributed DNS zone on the Internet,
+          served by 930 separate instances <xref target="RootServers"/>
+          at the time of this writing.  Additionally, many organizations
+          configure their own name servers to serve the root zone locally.
+          Reasons for doing so include privacy and reduced access time.
+          <xref target="RFC7706"/> describes one, but not the only, way
+          to do this.  As the root zone spreads beyond its traditional
+          deployment boundaries, the need for verification of the
+          completeness of the zone contents becomes increasingly
+          important.
+        </t>
+        <t>
+          One approach to preventing data tampering and corruption is
+          to secure the distribution channel.  The DNS has a number
+          of features that can already be used for channel security.
+          Perhaps the most widely used is DNS transaction signatures
+          (TSIG <xref target="RFC2845"/>).  TSIG uses shared secret keys
+          and a message digest to protect individual query and response
+          messages. It is generally used to authenticate and validate
+          UPDATE <xref target="RFC2136"/>, AXFR <xref target="RFC5936"/>,
+          and IXFR <xref target="RFC1995"/> messages.
+        </t>
+        <t>
+          DNS Request and Transaction Signatures (SIG(0) <xref
+          target="RFC2931"/>) is another protocol extension designed to
+          authenticate individual DNS transactions.  Whereas SIG records
+          were originally deisgned to cover specific RR types, SIG(0)
+          is used to sign an entire DNS message.  Unlike TSIG, SIG(0)
+          uses public key cryptography rather than shared secrets.
+        </t>
+        <t>
+          The Transport Layer Security protocol suite is also designed
+          to provide channel security.  It is entirely possible, for
+          example, to perform zone transfers using DNS-over-TLS (<xref
+          target="RFC7858"/>).  Furthermore, one can easily imagine
+          the distribution of zone files over HTTPS-enabled web servers,
+          as well as DNS-over-HTTPS <xref target="dns-over-https"/>.
+        </t>
+        <t>
+          Unfortunately, the protections provided by these channel
+          security techniques are ephemeral and are not retained after the
+          data transfer is complete.  They can ensure that the client
+          receives the data from the expected server, and that the
+          data sent by the server is not modified during transmission.
+          However, they do not guarantee that the server transmits the
+          data as originally published, and do not provide any methods
+          to verify data that is read after transmission is complete.
+          For example, a name server loading saved zone data upon restart
+          cannot guarantee that the on-disk data has not been modified.
+          For these reasons, it is preferable to secure the data itself.
         </t>
 
-      </section>
-
-      <section title="Requirements Language">
         <t>
-          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
-          "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
-          "OPTIONAL" in this document are to be interpreted as described in
-          BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
-          capitals, as shown here.
-        </t>
-      </section>
-    </section>
-
-    <section title="Alternatives Considered" anchor="alternatives">
-      <t>
-        There are some existing techniques that can be used to
-        detect changes to zone files, however they each fall short
-        in some way or another.
-      </t>
-
-      <section title="DNSSEC Status Quo">
-        <t>
-          For zones that are signed with DNSSEC, a recipient can
-          validate signed RRsets.  Additionally, the denial-of-existence
+          DNSSEC provides certain data security guarantees.
+          For zones that are signed, a recipient can
+          validate all of the signed RRsets.  Additionally, the denial-of-existence
           records can prove that RRsets have not been added or
           removed.  However, not all RRsets
           in a zone are signed.  The design of DNSSEC stipulates
@@ -243,45 +264,22 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           removal or addition of names between the signed nodes.
         </t>
         <t>
-          Another disadvantage is the need to perform numerous
-          signature validations.  For large very zones, hashing
-          'N' RRsets followed by a single signature validation
-          is much more efficient than 'N' separate signature
-          validations.
+          There are existing tools and protocols that provide data
+          security, such as OpenPGP <xref target="RFC4880"/> and S/MIME
+          <xref target="RFC3851"/>.  In fact, the internic.net site
+          publishes PGP signatures along side the root zone and other
+          files available there.  However, this is a detached signature
+          with no strong association to the corresponding zone file other
+          than its timestamp.  Non-detached signatures are, of course,
+          possible, but these necessarily change the format of the file
+          being distributed.  That is, a zone file signed with OpenPGP or
+          S/MIME no longer looks like a zone file and could not directly
+          be loaded into a name server.  Once loaded the signature data
+          is lost, so it does not survive further propagation.
         </t>
-      </section>
-
-      <section title="TSIG">
         <t>
-          DNS transaction signatures (TSIG <xref target="RFC2845"/>) uses a message
-          digest to protect individual query and response messages.
-          TSIG is generally used to authenticate and validate UPDATE <xref target="RFC2136"/>,
-          AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/> messages.
-          However, TSIG's protections are ephemeral, existing only "on
-          the wire," and are not retained after the transaction is complete.
-          Additionally, TSIG utilizes shared secret keys, which
-          are not intended to be shared with third parties.
-        </t>
-      </section>
-
-      <section title="SIG(0)">
-        <t>
-          DNS Request and Transaction Signatures (SIG(0) <xref
-          target="RFC2931"/>) is another protocol extension designed
-          to authenticate individual DNS transactions.  Whereas SIG
-          records were originally deisgned to cover specific RR
-          types, SIG(0) is used to sign an entire DNS message.  Like
-          TSIG, SIG(0) signatures are similarly ephemeral.  Unlike TSIG,
-          SIG(0) uses public key cryptography rather than shared
-          secrets.  Additionally, SIG(0) "...keys used in transaction
-          security belong to the host composing the DNS response
-          message, not to the zone involved" which furthermore makes
-          it impractical for use as any kind of zone digest.
-        </t>
-      </section>
-
-      <section title="AXFR SIG">
-        <t>
+          It seems the desire for data security in DNS zones was envisioned
+          as far back as 1997.
           <xref target="RFC2065"/> is an obsoleted specification
           of the first generation DNSSEC Security Extensions.  It
           describes a zone transfer signature, aka AXFR SIG, which
@@ -296,64 +294,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
       </section>
 
-      <section title="Detached Signatures">
-        <t>
-          Sometimes, detached checksums and signatures can be found
-          adjacent to zone files.  This is the case for the root
-          and other zone files published on the internic.net sites
-          <xref target="InterNIC"/>.  For example, the files
-          root.zone.md5 and root.zone.sig are in the same directory
-          as the root.zone file.  Unfortunately, since the checksum
-          and signature are in separate files, they are only weakly
-          associated with the zone file.  They remain associated
-          only if the recipient is careful to keep them together.
-          Nothing in these files, other than their names and
-          timestamps, ties them to a specific revision of the
-          root.zone file.
-        </t>
-      </section>
 
-      <section title="Non-detached, Non-DNSSEC Signatures">
+      <section title="Requirements Language">
         <t>
-          A number of standards already exist for signing arbitrary
-          data.  With these, the data and signature are more tightly
-	  associated.  However, there are some drawbacks.
-        </t>
-        <t>
-	  If one were to look at solutions provided by OpenPGP <xref
-	  target="RFC4880"/>, the Cleartext Signature Framework
-	  seems most suitable.   The zone file data could be given
-	  in cleartext presentation format surrounded by "PGP SIGNED
-	  MESSAGE" markers, followed by a PGP signature block.  The
-	  message could be verified by being in posession of, and
-	  trusting, the OpenPGP key used to create the signature.
-	  Note, however, that there is currently no proposed way
-	  of knowing, from the zone data alone, which keys can be
-	  trusted to sign it.  The experimental DANE Bindings for
-	  OpenPGP <xref target="RFC7929"/> can be used to make
-	  assertions about OpenPGP keys, but its use case is for
-	  email addresses, and requires DNSSEC.
-        </t>
-        <t>
-	  S/MIME <xref target="RFC3851"/>, CMS <xref target="RFC3852"/>,
-	  and PKCS #7 <xref target="RFC2315"/> specify formats for
-	  attaching signatures to data or messages.  In this case,
-	  zone file data might be distributed as a .p7m file.
-	  Adopting these protocols means utilizing X.509 certificates,
-	  certificate authorities, and ASN.1.  There is no currently
-	  proposed way of knowing, from the zone data alone, which
-	  certificates should be trusted.
-        </t>
-        <t>
-	  Both OpenPGP and S/MIME formats result in files that are not
-	  zone files.  Although the signatures are attached, the data file
-	  could not be loaded into name servers as-is.   A decapsulation
-	  step would be required, making these formats unsuitable for
-	  applications that do not want to implement this specification.
-        </t>
-        <t>
-	  Neither OpenPGP nor S/MIME can support incremental updates
-	  of zone data.
+          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+          "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+          "OPTIONAL" in this document are to be interpreted as described in
+          BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
+          capitals, as shown here.
         </t>
       </section>
     </section>
@@ -839,6 +787,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC5936;
     &RFC7706;
     &RFC7719;
+    &RFC7858;
     &RFC7929;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
@@ -849,6 +798,30 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </author>
           <date year="2018" month="May" day="31"/>
         </front>
+     </reference>
+
+     <reference anchor="RootServers" target="https://www.root-servers.org/">
+        <front>
+          <title>Root Server Technical Operations</title>
+          <author>
+            <organization>Root Server Operators</organization>
+          </author>
+          <date year="2018" month="July" day="2"/>
+        </front>
+     </reference>
+
+     <reference anchor="dns-over-https" target="https://tools.ietf.org/html/draft-ietf-doh-dns-over-https-12">
+        <front>
+          <title>DNS Queries over HTTPS (DoH)</title>
+          <author initials="P." surname="Hoffman" fullname="Paul Hoffman">
+            <organization>ICANN</organization>
+          </author>
+          <author initials="P." surname="McManus" fullname="Patrick McManus">
+            <organization>Mozilla</organization>
+          </author>
+          <date year="2018" month="June" day="27"/>
+        </front>
+        <seriesInfo name="Internet-Draft" value="draft-ietf-doh-dns-over-https-12" />
      </reference>
 
     </references>
