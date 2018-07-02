@@ -310,7 +310,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           represent significant complexity which could be a barrier
           to implementation at this time (see DNS Camel).  Nothing in
           this specification prevents future work to support incremental
-          zone digest algorthms (e.g. using merkle trees and a differnt
+          zone digest algorithms (e.g. using Merkle trees and a different
           RR type).
         </t>
         <t>
