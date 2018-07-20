@@ -806,6 +806,22 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Added Change Log section.</t>
         <t>Minor clarifications and grammatical edits.</t>
       </list></t>
+      <t>From -01 to -02:
+      <list style="symbols">
+        <t>Emphasize desire for data security over channel security.</t>
+        <t>Expanded motivation into its own subsection.</t>
+        <t>Removed discussion topic whether or not to include serial in &RRNAME;.</t>
+        <t>Clarified that a zone's NS records always sort before the SOA record.</t>
+        <t>Clarified that all records in the zone must are digested, except as specified in
+        the exclusion rules.</t>
+        <t>Added for discussion out-of-zone and occluded records.</t>
+        <t>Clarified that update of &RRNAME; signature must not cause a serial number change.</t>
+        <t>Added persons to acknowledgements.</t>
+      </list></t>
+      <t>From -02 to -03:
+      <list style="symbols">
+        <t>XXX</t>
+      </list></t>
     </section>
 
   </middle>
