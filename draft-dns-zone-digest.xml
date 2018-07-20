@@ -760,19 +760,38 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <section anchor="Implementation" title="Implementation Status">
       <section title="Authors' Implementation">
         <t>
-          The authors are currently working on an implementation in
-          C, using the ldns library <xref target="ldns"/>.  This implementation is able to
+          The authors have an open source implementation in
+          C, using the ldns library <xref target="ldns-zone-digest"/>.  This implementation is able to
           perform the following functions:
           <list style="symbols">
-          <t>Read input zone file, output zone file with &RRNAME; placeholder.</t>
-          <t>Compute zone digest over signed zone file and update &RRNAME; record.</t>
-          <t>Re-compute DNSSEC signature over &RRNAME; record.</t>
-          <t>Verify zone digest from input zone file.</t>
+          <t>Read an input zone file and output a zone file with the &RRNAME; placeholder.</t>
+          <t>Compute zone digest over signed zone file and update the &RRNAME; record.</t>
+          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
+          <t>Verify the zone digest from an input zone file.</t>
+          </list>
+          This implementation does not:
+          <list style="symbols">
+          <t>Perform DNSSEC validation of the &RRNAME; record.</t>
+          <t>Support the Gost digest algorithm.</t>
+          <t>Output the &RRNAME; record in its defined presentation format.</t>
           </list>
         </t>
-        <t>
-          The authors expect to be able to release this implementation as open source following
-          submission of this Internet-Draft.
+      </section>
+      <section title="Shane Kerr's Implementation">
+        <t> Shane Kerr wrote an implementation of this specification during the IETF 102 hackathon
+          <xref target="ZoneDigestHackathon"/>.  This implementation is in Python and is able to
+          perform the following functions:
+          <list style="symbols">
+          <t>Read an input zone file and a output zone file with &RRNAME; record.</t>
+          <t>Verify the zone digest from an input zone file.</t>
+          <t>Output the &RRNAME; record in its defined presentation format.</t>
+          <t>Generate Gost digests.</t>
+          </list>
+          This implementation does not:
+          <list style="symbols">
+          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
+          <t>Perform DNSSEC validation of the &RRNAME; record.</t>
+          </list>
         </t>
       </section>
     </section>
@@ -810,16 +829,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <organization>IANA</organization>
           </author>
           <date year="2012" month="April" day="3"/>
-        </front>
-     </reference>
-
-     <reference anchor="ldns" target="https://www.nlnetlabs.nl/projects/ldns/">
-        <front>
-          <title>The ldns Library</title>
-          <author>
-            <organization>NLNet Labs</organization>
-          </author>
-          <date year="2018" month="March" day="27"/>
         </front>
      </reference>
 
@@ -871,6 +880,25 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <date year="2018" month="June" day="27"/>
         </front>
         <seriesInfo name="Internet-Draft" value="draft-ietf-doh-dns-over-https-12" />
+     </reference>
+
+     <reference anchor="ldns-zone-digest" target="https://github.com/verisign/ldns-zone-digest">
+        <front>
+          <title>Implementation of Message Digests for DNS Zones using the ldns library</title>
+          <author>
+            <organization>Verisign</organization>
+          </author>
+          <date year="2018" month="July" day="20"/>
+        </front>
+     </reference>
+
+     <reference anchor="ZoneDigestHackathon" target="https://github.com/shane-kerr/ZoneDigestHackathon">
+        <front>
+          <title>Prototype implementation of ZONEMD for the IETF 102 hackathon in Python</title>
+          <author initials="S." surname="Kerr" fullname="Shane Kerr">
+          </author>
+          <date year="2018" month="July" day="14"/>
+        </front>
      </reference>
 
     </references>
