@@ -525,6 +525,9 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
           if the zone is signed with DNSSEC.
         </t>
         <t>
+          It is RECOMMENDED that the TTL of the &RRNAME; record match the TTL of the SOA.
+        </t>
+        <t>
           In the placeholder record, the Serial field MUST be
           set to the current SOA Serial.  The Digest Type field MUST be set
           to the value for the chosen digest algorithm. The Digest
@@ -545,7 +548,7 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
       <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
           The zone digest is calculated by concatenating the canonical on-the-wire
-          form of all RRs in the zone, in the order described
+          form (without name compression) of all RRs in the zone, in the order described
           above, subject to the inclusion/exclusion rules described
           below, and then applying the digest algorithm:
         </t>
