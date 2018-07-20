@@ -820,7 +820,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -02 to -03:
       <list style="symbols">
-        <t>XXX</t>
+       <t>Added recommendation to set &RRNAME; TTL to SOA TTL.</t>
+       <t>Clarified that digest input uses uncompressed names.</t>
+       <t>Updated Implementations section.</t>
       </list></t>
     </section>
 
