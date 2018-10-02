@@ -142,13 +142,30 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
     <abstract>
       <t>
-        This document describes a protocol and DNS Resource Record
-        used to provide a message digest over DNS zone data.
-        In particular, it describes how to compute, sign, represent,
-        and use the message digest to verify the contents of a
-        zone for accuracy and completeness.
-        The &RRNAME; Resource Record type is introduced for conveying
-        the message digest data.
+        This document describes a protocol and new DNS Resource Record
+        that can be used to provide an message digest over DNS zone data.
+        The &RRNAME; Resource Record conveys the message digest data in
+        the zone itself.
+        When a zone publisher includes an &RRNAME; record, receipients
+        can verify the zone contents for accuracy and completeness.
+        This provides assurance that received zone data matches
+        published data, regardless of how the zone data has been
+        transmitted and received.
+      </t>
+      <t>
+        &RRNAME; is not designed to replace DNSSEC.
+        Whereas DNSSEC is designed to protect recursive name servers
+        and their caches, &RRNAME; protects applications that
+        consume zone files, whether they be authoritative name
+        servers, recursive name servers, or uses of zone file data.
+      </t>
+      <t>
+        As specified at this time, &RRNAME; is not designed for use
+        in large, dynamic zones due to the time and resources
+        required for digest calculation.
+        The &RRNAME; record described in this document includes
+        fields reserved for future work to support large, dynamic
+        zones.
       </t>
     </abstract>
   </front>
