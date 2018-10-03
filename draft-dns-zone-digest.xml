@@ -721,8 +721,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
       <section title="&RRNAME; Digest Type">
         <t>
-          The &RRNAME; Digest Type field has the same semantics as the DS RR Digest Type field.
-          Thus, it does not add new IANA protocol registry requirements.
+          The &RRNAME; Digest Type field has the same values as the DS RR Digest Type field, but
+          with indpendent implementation status.
+          Therefore, this document expects IANA will create a new
+          "&RRNAME; Digest Types" registry.
         </t>
       </section>
     </section>
@@ -874,7 +876,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Updated Implementations section.</t>
         <t>Changed intended status from Standards Track to Experimental.</t>
         <t>Updated Motivation, Introduction, and Design Overview sections in response to working group discussion.</t>
-        <t>Gave &RRNAME; digest types their own status, separate from DS digest types.</t>
+        <t>Gave &RRNAME; digest types their own status, separate from DS digest types.  Request IANA to create a registry.</t>
         <t>Added Reserved field for future work supporting dynamic updates.</t>
         <t>Be more rigorous about having just ONE &RRNAME; record in the zone.</t>
       </list></t>
