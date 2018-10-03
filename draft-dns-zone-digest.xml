@@ -425,25 +425,26 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             The Digest Type field is an 8-bit unsigned integer, with
             meaning equivalent to the Digest Type of the DS resource record,
-            as defined in section 5.1.3 of <xref target="RFC4034"/>.
+            as defined in section 5.1.3 of <xref target="RFC4034"/> and
+            values found in the IANA protocol registry for DS digest types
+            <xref target="iana-ds-digest-types"/>.
           </t>
           <t>
             The status of &RRNAME; digest types (e.g., mandatory,
-            optional, deprecated) SHALL always match the status for
-            DS records.  This information can be found in the IANA
-            protocol registry for DS digest types <xref target="iana-ds-digest-types"/>.
+            optional, deprecated), however, are independent of
+            those for DS digest types.
           </t>
           <t>
             At the time of this writing the following digest types are defined:
           </t>
-            <texttable anchor="digest-type-table" title="Digest Types">
+            <texttable anchor="digest-type-table" title="&RRNAME; Digest Types">
             <ttcol align="left">Value</ttcol>
             <ttcol align="left">Description</ttcol>
             <ttcol align="left">Status</ttcol>
             <ttcol align="left">Reference</ttcol>
             <c>1</c>
             <c>SHA1</c>
-            <c>Mandatory</c>
+            <c>Deprecated</c>
             <c><xref target="RFC3658"/></c>
             <c>2</c>
             <c>SHA256</c>
@@ -451,13 +452,12 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             <c><xref target="RFC4509"/></c>
             <c>3</c>
             <c>GOST R 34.11-94</c>
-            <c>Optional</c>
+            <c>Deprecated</c>
             <c><xref target="RFC5933"/></c>
             <c>4</c>
             <c>SHA384</c>
             <c>Optional</c>
             <c><xref target="RFC6605"/></c>
-            <!-- postamble>Data from https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml</postamble -->
             </texttable>
         </section>
 
