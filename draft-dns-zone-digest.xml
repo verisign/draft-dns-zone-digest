@@ -519,7 +519,7 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 0 FEBE3D4CE2EC2FFA4BA9
       <section title="Canonical Format and Ordering">
         <t>
           Calculation of the zone digest REQUIRES the RRs in a zone
-          to be in a consistent format and ordering.  Correct ordering
+          to be processed in a consistent format and ordering.  Correct ordering
           of the zone depends on (1) ordering of owner names in the zone, (2)
           ordering of RRsets with the same owner name, and (3) ordering of
           RRs within an RRset.
@@ -630,7 +630,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </t>
         <t>
           If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-          record MUST then be added.  Because the &RRNAME; placeholder was added prior to signing,
+          record MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
         <t>
@@ -656,7 +656,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             This can be done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
             parent zone.  For zones that are provably unsigned,
-            digest validation continues at step <xref target="verify-check-serials" format="counter"/> below.
+            digest validation continues at step <xref target="verify-check-digest-count" format="counter"/> below.
           </t>
           <t anchor="verify-check-existence">
             For zones that are provably signed, the existence of
@@ -673,6 +673,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             or &RRNAME; records fails, digest verification MUST NOT
             be considered successful.
           </t>
+          <t anchor="verify-check-digest-count">
+            If the zone contains more than one &RRNAME; RR, digest verification
+            MUST NOT be considered successful.
+          </t>
           <t anchor="verify-check-serials">
             The SOA Serial field MUST exactly match the &RRNAME;
             Serial field.  If the fields to not match, digest
@@ -687,9 +691,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <t>
             The zone digest is calculated using the algorithm
             described in <xref target="calculating-calculating"/>.
-            Note in particular that digested &RRNAME;
-            RRs MUST be placeholders and
-            their RRSIGs are not included in the digest.
+            Note in particular that the digested &RRNAME;
+            RR MUST be a placeholder and
+            its RRSIGs MUST NOT be included in the digest.
           </t>
           <t>
             The calculated digest is compared to the received digest.
@@ -699,7 +703,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t>
             If the zone is to be served and transferred, the original
-            (not placeholder) &RRNAME; RRs MUST be sent to recipients
+            (not placeholder) &RRNAME; RR MUST be sent to recipients
             so that downstream clients can verify the zone.
           </t>
         </list>
