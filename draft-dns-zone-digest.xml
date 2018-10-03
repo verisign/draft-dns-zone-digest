@@ -782,13 +782,24 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         The authors wish to thank David Blacka, Scott Hollenbeck, and Rick Wilhelm
         for providing feedback on early drafts of this document.  Additionally, they
 	thank
+	Joe Abley,
         Mark Andrews,
 	Olafur Gudmundsson,
+	Paul Hoffman,
+	Evan Hunt,
 	Shumon Huque,
         Tatuya Jinmei,
+	Burt Kaliski,
         Shane Kerr,
+	Matt Larson,
+	John Levine,
+	Ed Lewis,
 	Mukund Sivaraman,
 	Petr Spacek,
+	Ondrej Sury,
+	Florian Weimer,
+	Tim Wicinksi,
+	Paul Wouters,
         and other members of
         the dnsop working group
         for their input.
@@ -858,9 +869,14 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -02 to -03:
       <list style="symbols">
-       <t>Added recommendation to set &RRNAME; TTL to SOA TTL.</t>
-       <t>Clarified that digest input uses uncompressed names.</t>
-       <t>Updated Implementations section.</t>
+        <t>Added recommendation to set &RRNAME; TTL to SOA TTL.</t>
+        <t>Clarified that digest input uses uncompressed names.</t>
+        <t>Updated Implementations section.</t>
+        <t>Changed intended status from Standards Track to Experimental.</t>
+        <t>Updated Motivation, Introduction, and Design Overview sections in response to working group discussion.</t>
+        <t>Gave &RRNAME; digest types their own status, separate from DS digest types.</t>
+        <t>Added Reserved field for future work supporting dynamic updates.</t>
+        <t>Be more rigorous about having just ONE &RRNAME; record in the zone.</t>
       </list></t>
     </section>
 
