@@ -306,29 +306,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           SIG, while at the same time introducing an IXFR SIG.
         </t>
       </section>
-      <section title="Use Cases">
-        <section title="Root Zone">
-          <t>
-            The root zone <xref target="InterNIC"/>
-            is perhaps the most widely distributed DNS zone on the Internet,
-            served by 930 separate instances <xref target="RootServers"/>
-            at the time of this writing.  Additionally, many organizations
-            configure their own name servers to serve the root zone locally.
-            Reasons for doing so include privacy and reduced access time.
-            <xref target="RFC7706"/> describes one, but not the only, way
-            to do this.  As the root zone spreads beyond its traditional
-            deployment boundaries, the need for verification of the
-            completeness of the zone contents becomes increasingly
-            important.
-          </t>
-        </section>
-        <section title="Third Party DNS Providers">
-        </section>
-        <section title="Response Policy Zones">
-        </section>
-        <section title="Centralized Zone Data Service">
-        </section>
-      </section>
 
       <section title="Design Overview">
         <t>
@@ -369,6 +346,29 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
       </section>
 
+      <section title="Use Cases">
+        <section title="Root Zone">
+          <t>
+            The root zone <xref target="InterNIC"/>
+            is perhaps the most widely distributed DNS zone on the Internet,
+            served by 930 separate instances <xref target="RootServers"/>
+            at the time of this writing.  Additionally, many organizations
+            configure their own name servers to serve the root zone locally.
+            Reasons for doing so include privacy and reduced access time.
+            <xref target="RFC7706"/> describes one, but not the only, way
+            to do this.  As the root zone spreads beyond its traditional
+            deployment boundaries, the need for verification of the
+            completeness of the zone contents becomes increasingly
+            important.
+          </t>
+        </section>
+        <section title="Third Party DNS Providers">
+        </section>
+        <section title="Response Policy Zones">
+        </section>
+        <section title="Centralized Zone Data Service">
+        </section>
+      </section>
 
       <section title="Requirements Language">
         <t>
