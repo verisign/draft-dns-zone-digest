@@ -175,13 +175,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <section title="Introduction">
       <t>
         In the DNS, a zone is the collection of authoritative resource
-        records (RRs) sharing a common origin (<xref target="RFC7719"/>),
-        which can be distributed from primary to secondary name
-        servers.
+        records (RRs) sharing a common origin (<xref target="RFC7719"/>).
         Zones are often stored as files on disk in the so-called
         master file format <xref target="RFC1034"/>.
-        Sometimes zones are distributed outside of the DNS, with
-        such protocols as FTP, HTTP, rsync, and so on.
+        Zones are generally distributed between name servers using 
+        the AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/>
+        protocols.
+        Zone files can also be distributed outside of the DNS, with
+        such protocols as FTP, HTTP, rsync, and even via email.
         Currently there is no standard way to verify the authenticity
         of a stand-alone zone file.
       </t>
@@ -191,9 +192,12 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         It allows a receiver of the zone file to verify the zone file's
         authenticity, especially when used in combination with DNSSEC.
         This technique makes the message
-        digest a part of the zone file itself, allowing anything
-        to verify the zone file as a whole, no matter how it is
+        digest a part of the zone file itself, allowing
+        verification the zone file as a whole, no matter how it is
         transmitted.
+        Furthermore, the digest is based on the wire format of zone data.
+        Thus, it independent of presentation format, such as changes in
+        whitespace, capitalization, and comments.
       </t>
       <t>
         DNSSEC provides three strong security guarantees relevant
