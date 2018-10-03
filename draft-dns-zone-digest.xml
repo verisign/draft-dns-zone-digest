@@ -770,20 +770,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           types.  Certainly other query types result in larger
           amplification effects (i.e., DNSKEY).
         </t>
-        <t>
-          FOR DISCUSSION:
-          The primary purpose of the &RRNAME; record is to verify
-          a zone file prior to being loaded or served by a name server.
-          We could allow a name server implementation to respond to
-          &RRNAME; queries with the REFUSED RCODE without loss of
-          functionality.  Note that refusal would prevent ensuring that a
-          zone-walk is complete. 
-        </t>
-        <!-- t>
-          General record modification, addition or deletion will
-          be caught by checking either the value of the &RRNAME;
-          or regular DNSSEC validation.
-        </t -->
       </section>
     </section>
 
