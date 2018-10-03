@@ -404,8 +404,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                             Serial                            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  Digest Type  |                                               |
-+-+-+-+-+-+-+-+-+             Digest                            +
+|  Digest Type  |   Reserved    |                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
+|                             Digest                            |
 /                                                               /
 /                                                               /
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -460,6 +461,13 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             </texttable>
         </section>
 
+        <section title="The Reserved Field">
+          <t>
+            The Reserved field is an 8-bit unsigned integer, which is always set to zero.  This
+            field is reserved for future work to support efficient incremental updates.
+          </t>
+        </section>
+
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
@@ -479,6 +487,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The Serial field MUST be represented as an unsigned decimal integer.
         </t>
         <t>
+          The Reserved field MUST be represented as an unsigned decimal integer set to zero.
+        </t>
+        <t>
           The Digest Type field MUST be represented as an unsigned decimal
           integer.
         </t>
@@ -494,7 +505,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The following example shows a &RRNAME; RR.
         </t>
         <figure><artwork>
-example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
+example.com. 86400 IN &RRNAME; ( 2018031500 4 0 FEBE3D4CE2EC2FFA4BA9
                                             9D46CD69D6D29711E552
                                             17057BEE7EB1A7B641A4
                                             7BA7FED2DD5B97AE499F
@@ -550,14 +561,14 @@ example.com. 86400 IN &RRNAME; ( 2018031500 4 FEBE3D4CE2EC2FFA4BA9
       </section>
       <section title="Add &RRNAME; Placeholder">
         <t>
-          In preparation for calculating the zone digest, any existing &RRNAME; records
+          In preparation for calculating the zone digest, any existing &RRNAME; record
           MUST first be deleted from the zone.
         </t>
         <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
           zone.  This serves two purposes: (1) it allows the digest to cover
-          the Serial and Digest Type field values, and (2) ensures that 
+          the Serial, Reserved, and Digest Type field values, and (2) ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
         </t>
