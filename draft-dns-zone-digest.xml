@@ -262,8 +262,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
 
         <t>
-          Why not simply rely on DNSSEC, provides certain data security guarantees?
-          Certainly for zones that are signed, a recipient can
+          Why not simply rely on DNSSEC, which provides certain data security guarantees?
+          Certainly for zones that are signed, a recipient could
           validate all of the signed RRsets.  Additionally, denial-of-existence
           records can prove that RRsets have not been added or
           removed.  However, not all RRsets
