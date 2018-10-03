@@ -214,18 +214,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <section title="Motivation">
         <t>
-          The motivation and design of this protocol enhancement is tied
-          to the DNS root zone <xref target="InterNIC"/>.  The root zone
-          is perhaps the most widely distributed DNS zone on the Internet,
-          served by 930 separate instances <xref target="RootServers"/>
-          at the time of this writing.  Additionally, many organizations
-          configure their own name servers to serve the root zone locally.
-          Reasons for doing so include privacy and reduced access time.
-          <xref target="RFC7706"/> describes one, but not the only, way
-          to do this.  As the root zone spreads beyond its traditional
-          deployment boundaries, the need for verification of the
-          completeness of the zone contents becomes increasingly
-          important.
+          The motivation for this protocol enhancement is the desire for
+          the ability to verify the authenticity of a stand-alone zone file,
+          regardless of how it is transmitted.  A consumer of zone file data
+          should be able to verify that the data is as-published by the
+          zone operator.
         </t>
         <t>
           One approach to preventing data tampering and corruption is
@@ -269,17 +262,19 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
 
         <t>
-          DNSSEC provides certain data security guarantees.
-          For zones that are signed, a recipient can
-          validate all of the signed RRsets.  Additionally, the denial-of-existence
+          Why not simply rely on DNSSEC, provides certain data security guarantees?
+          Certainly for zones that are signed, a recipient can
+          validate all of the signed RRsets.  Additionally, denial-of-existence
           records can prove that RRsets have not been added or
           removed.  However, not all RRsets
-          in a zone are signed.  The design of DNSSEC stipulates
-          that delegations (non-apex NS records) are not signed,
+          in a zone are signed.  The design of DNSSEC stipulates that delegations (non-apex NS records) are not signed,
           and neither are any glue records.  Thus, changes to delegation
           and glue records cannot be detected by DNSSEC alone. Furthermore, zones
           that employ NSEC3 with opt-out are susceptible to the
           removal or addition of names between the signed nodes.
+          Whereas DNSSEC is primarily designed to protect consumers
+          of DNS response messages, this protocol is designed to
+          protect consumers of zone files.
         </t>
         <t>
           There are existing tools and protocols that provide data
@@ -302,8 +297,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           of the first generation DNSSEC Security Extensions.  It
           describes a zone transfer signature, aka AXFR SIG, which
           is similar to the technique proposed by this document.
-          That is, it proposes ordering all RRsets in a zone,
-          hashing their signatures, and then signing the zone hash.
+          That is, it proposes ordering all (signed) RRsets in a zone,
+          hashing their contents, and then signing the zone hash.
           The AXFR SIG is described only for use during zone
           transfers.  It did not postulate the need to validate
           zone data distributed outside of the DNS.  Furthermore,
@@ -311,15 +306,39 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           SIG, while at the same time introducing an IXFR SIG.
         </t>
       </section>
+      <section title="Use Cases">
+        <section title="Root Zone">
+          <t>
+            The root zone <xref target="InterNIC"/>
+            is perhaps the most widely distributed DNS zone on the Internet,
+            served by 930 separate instances <xref target="RootServers"/>
+            at the time of this writing.  Additionally, many organizations
+            configure their own name servers to serve the root zone locally.
+            Reasons for doing so include privacy and reduced access time.
+            <xref target="RFC7706"/> describes one, but not the only, way
+            to do this.  As the root zone spreads beyond its traditional
+            deployment boundaries, the need for verification of the
+            completeness of the zone contents becomes increasingly
+            important.
+          </t>
+        </section>
+        <section title="Third Party DNS Providers">
+        </section>
+        <section title="Response Policy Zones">
+        </section>
+        <section title="Centralized Zone Data Service">
+        </section>
+      </section>
 
       <section title="Design Overview">
-        <!-- XXX apologies for the current informal nature of this text.  trying to meet the deadline -->
         <t>
           This document introduces a new Resource Record type designed
           to convey a message digest of the content of a zone file.
           The digest is calculated at the time of zone publication.
           Ideally the zone is signed with DNSSEC to guarantee that any
-          modifications of the digest can be detected.
+          modifications of the digest can be detected.  The procedures for
+          digest calculation and DNSSEC signing are similar (i.e., both
+          require the same ordering of RRs) and can be done in parallel.
         </t>
         <t>
           The zone digest is designed to be used on zones that are
@@ -327,29 +346,26 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           specified, the digest is re-calculated over the entire zone
           content each time.  This specification does not provide
           an efficient mechanism for incremental updates of zone
-          data.  The authors believe that the incremental updates
-          represent significant complexity which could be a barrier
-          to implementation at this time (see DNS Camel).  Nothing in
-          this specification prevents future work to support incremental
-          zone digest algorithms (e.g. using Merkle trees and a different
-          RR type).
+          data.  It does, however, reserve a field in the &RRNAME; record
+          for future work to support incremental
+          zone digest algorithms (e.g. using Merkle trees).
         </t>
-        <t>
+        <!-- t>
           The cryptographic algorithms available for zone digest are
           exactly the same as for DS records.  This avoids the need
           for a separate digest algorithm registry.  Any updates to the
           DS algorithms automatically updates the algorithm status for
           zone digests.
-        </t>
+        </t -->
         <t>
-          It is expected that verification of a zone digest will be
+          It is expected that verification of a zone digest would be
           implemented in name server software.  That is, a name server
           can verify the zone data it was given and refuse to serve a
           zone which fails verification.  For signed zones, the name
-          server would need a trust anchor for DNSSEC validation.
+          server needs a trust anchor to perform DNSSEC validation.
           For signed non-root zones, the name server may need to send
           queries to validate a chain-of-trust.  Digest verification
-          may also be performed externally.
+          could also be performed externally.
         </t>
       </section>
 
