@@ -966,7 +966,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
      <reference anchor="ZoneDigestHackathon" target="https://github.com/shane-kerr/ZoneDigestHackathon">
         <front>
-          <title>Prototype implementation of ZONEMD for the IETF 102 hackathon in Python</title>
+          <title>Prototype implementation of &RRNAME; for the IETF 102 hackathon in Python</title>
           <author initials="S." surname="Kerr" fullname="Shane Kerr">
           </author>
           <date year="2018" month="July" day="14"/>
