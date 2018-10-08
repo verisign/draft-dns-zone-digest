@@ -142,7 +142,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
     <abstract>
       <t>
-        This document describes a protocol and new DNS Resource Record
+        This document describes an experimental protocol and new DNS Resource Record
         that can be used to provide an message digest over DNS zone data.
         The &RRNAME; Resource Record conveys the message digest data in
         the zone itself.
@@ -751,6 +751,33 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
         </list>
       </t>
+    </section>
+
+    <section title="Scope of Experimentation">
+      <t>
+        This memo is published as an Experimental RFC.  The purpose
+        of the experimental period is to provide the community time
+        to analyze and evaluate to the methods defined in this
+        document, particularly with regard to the wide variety of
+        DNS zones in use on the Internet.
+      </t>
+      <t>
+        Additinally, the &RRNAME; record defined in this document
+        includes a Reserved field.  The authors have a particular
+        future use in mind for this field, namely to support efficient
+        digests in large, dynamic zones.  We intend to conduct
+        future experiements using hash trees of varying depth.  The
+        choice of hash tree depth can be encoded in this reserved
+        field.
+      </t>
+      <t>
+        The duration of the experiment is expected to be no less
+        than two years from the publication of this document.  If
+        the experiment is successful, it is expected that the
+        findings of the experiment will result in an updated document
+        for Standards Track approval.
+      </t>
+
     </section>
 
     <section title="IANA Considerations" anchor="iana">
