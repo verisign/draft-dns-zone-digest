@@ -762,11 +762,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         DNS zones in use on the Internet.
       </t>
       <t>
-        Additinally, the &RRNAME; record defined in this document
+        Additionally, the &RRNAME; record defined in this document
         includes a Reserved field.  The authors have a particular
         future use in mind for this field, namely to support efficient
         digests in large, dynamic zones.  We intend to conduct
-        future experiements using hash trees of varying depth.  The
+        future experiments using hash trees of varying depth.  The
         choice of hash tree depth can be encoded in this reserved
         field.
       </t>
