@@ -146,7 +146,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         that can be used to provide an message digest over DNS zone data.
         The &RRNAME; Resource Record conveys the message digest data in
         the zone itself.
-        When a zone publisher includes an &RRNAME; record, receipients
+        When a zone publisher includes an &RRNAME; record, recipients
         can verify the zone contents for accuracy and completeness.
         This provides assurance that received zone data matches
         published data, regardless of how the zone data has been
@@ -620,7 +620,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t>
             FOR DISCUSSION: Ambiguities about records that are in/out of zone.  For example, see Jinmei
-            message to dnsop 2018-06-01 and followups.  BIND will load and axfr data "occluded" by DNAME/NS.
+            message to dnsop 2018-06-01 and followups.  BIND will load and AXFR data "occluded" by DNAME/NS.
           </t>
         </section>
       </section>
@@ -722,7 +722,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <section title="&RRNAME; Digest Type">
         <t>
           The &RRNAME; Digest Type field has the same values as the DS RR Digest Type field, but
-          with indpendent implementation status.
+          with independent implementation status.
           Therefore, this document expects IANA will create a new
           "&RRNAME; Digest Types" registry.
         </t>
@@ -867,7 +867,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         the exclusion rules.</t>
         <t>Added for discussion out-of-zone and occluded records.</t>
         <t>Clarified that update of &RRNAME; signature must not cause a serial number change.</t>
-        <t>Added persons to acknowledgements.</t>
+        <t>Added persons to acknowledgments.</t>
       </list></t>
       <t>From -02 to -03:
       <list style="symbols">
