@@ -39,7 +39,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-wessels-dns-zone-digest-03" ipr="trust200902">
+<rfc category="exp" docName="draft-wessels-dns-zone-digest-04" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -950,6 +950,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Added Reserved field for future work supporting dynamic updates.</t>
         <t>Be more rigorous about having just ONE &RRNAME; record in the zone.</t>
         <t>Expanded use cases.</t>
+      </list></t>
+      <t>From -03 to -04:
+      <list style="symbols">
       </list></t>
     </section>
 
