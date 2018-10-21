@@ -548,11 +548,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The following example shows a &RRNAME; RR.
         </t>
         <figure><artwork>
-example.com. 86400 IN &RRNAME; ( 2018031500 4 0 FEBE3D4CE2EC2FFA4BA9
-                                            9D46CD69D6D29711E552
-                                            17057BEE7EB1A7B641A4
-                                            7BA7FED2DD5B97AE499F
-                                            AFA4F22C6BD647DE )
+example.com. 86400 IN &RRNAME; 2018031500 4 0 (
+    FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE
+    7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )
         </artwork></figure>
       </section>
 
