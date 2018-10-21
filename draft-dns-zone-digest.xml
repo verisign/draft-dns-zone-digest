@@ -963,6 +963,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -03 to -04:
       <list style="symbols">
        <t>Added an appendix with example zones and digests.</t>
+       <t>Clarified that only apex &RRNAME; RRs shall be processed.</t>
       </list></t>
     </section>
 
