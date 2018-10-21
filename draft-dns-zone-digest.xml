@@ -603,12 +603,13 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
       <section title="Add &RRNAME; Placeholder">
         <t>
           In preparation for calculating the zone digest, any existing &RRNAME; record
-          MUST first be deleted from the zone.
+          at the zone apex
+          MUST first be deleted.
         </t>
         <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
-          zone.  This serves two purposes: (1) it allows the digest to cover
+          zone apex.  This serves two purposes: (1) it allows the digest to cover
           the Serial, Reserved, and Digest Type field values, and (2) ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
@@ -703,7 +704,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t anchor="verify-check-existence">
             For zones that are provably signed, the existence of
-            the &RRNAME; record MUST be verified.  If the &RRNAME;
+            the apex &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
             cannot be done.  If the &RRNAME; record does provably
             exist, but is not found in the zone, digest verification
@@ -717,7 +718,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the zone contains more than one &RRNAME; RR, digest verification
+            If the zone contains more than one apex &RRNAME; RR, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
