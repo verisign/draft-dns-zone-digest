@@ -660,8 +660,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             </list>
           </t>
           <t>
-            FOR DISCUSSION: Ambiguities about records that are in/out of zone.  For example, see Jinmei
-            message to dnsop 2018-06-01 and followups.  BIND will load and AXFR data "occluded" by DNAME/NS.
+            FOR DISCUSSION: How should the protocol handle occluded
+            data?  A DNAME/NS record can occlude existing data,
+            technically making it out-of-zone.  However, BIND (and
+            others) will load and AXFR such occluded data.
           </t>
         </section>
       </section>
