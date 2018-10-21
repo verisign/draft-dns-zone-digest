@@ -771,6 +771,14 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         field.
       </t>
       <t>
+        FOR DISCUSSION: The authors are willing to remove the
+        Reserved field from this specification if the working group
+        would prefer it.  It would mean, however, that a future
+        version of this protocol designed to efficiently support
+        large, dynamic zones would most likely require a new RR
+        type.
+      </t>
+      <t>
         The duration of the experiment is expected to be no less
         than two years from the publication of this document.  If
         the experiment is successful, it is expected that the
