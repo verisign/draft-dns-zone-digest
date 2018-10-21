@@ -607,6 +607,9 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
           MUST first be deleted.
         </t>
         <t>
+          FOR DISCUSSION: Should non-apex &RRNAME; records be allowed in a zone?  Or forbidden?
+        </t>
+        <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
           zone apex.  This serves two purposes: (1) it allows the digest to cover
