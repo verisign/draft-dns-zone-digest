@@ -1090,9 +1090,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         verify an implementation of the zone digest protocol.
       </t>
 
-      <section title="Simple Example">
+      <section title="Simple EXAMPLE Zone">
         <t>
-          Here, the example zone contains an SOA record, NS and glue records, and a &RRNAME; record for digest type 2 (SHA256).
+          Here, the EXAMPLE zone contains an SOA record, NS and glue records, and a &RRNAME; record for digest type 2 (SHA256).
         </t>
         <figure><artwork align="left"><![CDATA[
 example.        86400   IN      SOA     ns1 admin 2018031900 (
