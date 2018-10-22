@@ -1,0 +1,10 @@
+example.   86400   SOA     ns.example. admin.example. (
+  2018031900 1800 900 604800 86400 )
+           86400   A       127.0.0.1
+           86400   NS      ns.example.
+ns         86400   A       127.0.0.1
+d          3600    NS      d.example.com.
+a.d        3600    A       127.0.0.1
+           86400   ZONEMD  2018031900 2 0 (
+    7255f0fe5850b1cf508f8a0522feca8e1ad56dffb1a242
+    2458823f231e18c621 )
