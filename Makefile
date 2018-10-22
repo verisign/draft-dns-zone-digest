@@ -1,5 +1,5 @@
 DOC=draft-dns-zone-digest
-VER=04
+VER=05
 
 all: ${DOC}-${VER}.txt
 	
