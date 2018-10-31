@@ -154,7 +154,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <t>
         &RRNAME; is not designed to replace DNSSEC.
-        Whereas DNSSEC protects individual RRsets (DNS data with
+        Whereas DNSSEC protects individual RRSets (DNS data with
         fine granularity), &RRNAME; protects protects a zone's data
         as a whole, whether consumed by authoritative name
         servers, recursive name servers, or any other applications.
@@ -264,9 +264,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <t>
           Why not simply rely on DNSSEC, which provides certain data security guarantees?
           Certainly for zones that are signed, a recipient could
-          validate all of the signed RRsets.  Additionally, denial-of-existence
-          records can prove that RRsets have not been added or
-          removed.  However, not all RRsets
+          validate all of the signed RRSets.  Additionally, denial-of-existence
+          records can prove that RRSets have not been added or
+          removed.  However, not all RRSets
           in a zone are signed.  The design of DNSSEC stipulates that delegations (non-apex NS records) are not signed,
           and neither are any glue records.  Thus, changes to delegation
           and glue records cannot be detected by DNSSEC alone. Furthermore, zones
@@ -297,7 +297,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           of the first generation DNSSEC Security Extensions.  It
           describes a zone transfer signature, aka AXFR SIG, which
           is similar to the technique proposed by this document.
-          That is, it proposes ordering all (signed) RRsets in a zone,
+          That is, it proposes ordering all (signed) RRSets in a zone,
           hashing their contents, and then signing the zone hash.
           The AXFR SIG is described only for use during zone
           transfers.  It did not postulate the need to validate
@@ -568,22 +568,22 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
           Calculation of the zone digest REQUIRES the RRs in a zone
           to be processed in a consistent format and ordering.  Correct ordering
           of the zone depends on (1) ordering of owner names in the zone, (2)
-          ordering of RRsets with the same owner name, and (3) ordering of
-          RRs within an RRset.
+          ordering of RRSets with the same owner name, and (3) ordering of
+          RRs within an RRSet.
         </t>
         <t>
           This specification adopts DNSSEC's canonical ordering for names
           (Section 6.1 of <xref target="RFC4034"/>),
-          and canonical ordering for RRs within an RRset
+          and canonical ordering for RRs within an RRSet
           (Section 6.3 of <xref target="RFC4034"/>).
           It also adopts DNSSEC's canonical RR form
           (Section 6.2 of <xref target="RFC4034"/>).
-          However, since DNSSEC does not define a canonical ordering for RRsets
+          However, since DNSSEC does not define a canonical ordering for RRSets
           having the same owner name, that ordering is defined here.
         </t>
-        <section title="Order of RRsets Having the Same Owner Name">
+        <section title="Order of RRSets Having the Same Owner Name">
           <t>
-            For the purposes of calculating the zone digest, RRsets having
+            For the purposes of calculating the zone digest, RRSets having
             the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
           </t>
         </section>
@@ -598,10 +598,10 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
           <t>
             Additionally, per established practices, the SOA record
             is generally the first record in a zone.  However,
-            according to the requirement to sort RRsets with the
+            according to the requirement to sort RRSets with the
             same owner name by type, the SOA RR (type value 6) will not
             be first in the digest calculation.  The zone's 
-            NS RRset (type value 2) at the apex MUST be processed before
+            NS RRSet (type value 2) at the apex MUST be processed before
             the SOA RR.
           </t>
         </section>
