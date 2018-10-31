@@ -334,6 +334,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           DS algorithms automatically updates the algorithm status for
           zone digests.
         </t -->
+        <!-- XXX Joe Abley: remove following paragraph -->
         <t>
           It is expected that verification of a zone digest would be
           implemented in name server software.  That is, a name server
@@ -438,8 +439,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         protocol and eliminates confusion around downgrade attacks, at
         the expense of algorithm agility.
       </t>
+      <!-- XXX Joe Abley: multiple digests could be useful -->
 
       <section title="&RRNAME; RDATA Wire Format">
+        <!-- XXX Joe Abley: specify short names for the fields -->
         <t>The &RRNAME; RDATA wire format is encoded as follows:</t>
         <figure><artwork align="left"><![CDATA[
                      1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
@@ -744,6 +747,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             due to an unsupported algorithm.
           </t>
           <t>
+            The Reserved field MUST be checked.  If the Reserved field
+            value is not zero, verification MUST NOT be considered successful.
+          </t>
+          <t>
             The received Digest Type and Digest values are copied to
             a temporary location.
           </t>
@@ -811,6 +818,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="IANA Considerations" anchor="iana">
       <section title="&RRNAME; RRtype">
+        <!-- XXX Joe Abley: specify precisely what IANA should insert into RRtypes table -->
         <t>
           This document uses a new DNS RR type, &RRNAME;, whose
           value TBD has been allocated by IANA from the "Resource
@@ -819,6 +827,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </t>
       </section>
       <section title="&RRNAME; Digest Type">
+        <!-- XXX Joe Abley: more needed here if IANA is to create new registry -->
         <t>
           The &RRNAME; Digest Type field has the same values as the DS RR Digest Type field, but
           with independent implementation status.
