@@ -1120,6 +1120,33 @@ ns2           3600    IN  AAAA    ::1
 ]]></artwork></figure>
       </section>
 
+      <section title="Complex EXAMPLE Zone">
+        <t>
+          Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR, and one out-of-zone RR.
+        </t>
+        <figure><artwork align="left"><![CDATA[
+example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                  1800 900 604800 86400 )
+              86400   IN  NS      ns1
+              86400   IN  NS      ns2
+              86400   IN  ZONEMD  2018031900 1 0 (
+                                  686a6d74d5638612
+                                  64ea4e6cc12c22d1
+                                  7ebc529791d393bd
+                                  e164a45390f714e9
+                                  9ede0d05a5644573
+                                  da4bbcc83744acf2 )
+ns1           3600    IN  A       127.0.0.1
+ns2           3600    IN  AAAA    ::1
+occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
+sub           7200    IN  NS      ns1
+duplicate     300     IN  TXT     "I must be digested just once"
+duplicate     300     IN  TXT     "I must be digested just once"
+foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
+
+]]></artwork></figure>
+      </section>
+
       <section title="The uri.arpa Zone">
         <t>
           The URI.ARPA zone retreived 2018-10-21.
