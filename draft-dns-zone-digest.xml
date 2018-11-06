@@ -794,13 +794,16 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="IANA Considerations" anchor="iana">
       <section title="&RRNAME; RRtype">
-        <!-- XXX Joe Abley: specify precisely what IANA should insert into RRtypes table -->
         <t>
-          This document uses a new DNS RR type, &RRNAME;, whose
+          This document defines a new DNS RR type, &RRNAME;, whose
           value TBD has been allocated by IANA from the "Resource
           Record (RR) TYPEs" subregistry of the "Domain Name System
-          (DNS) Parameters" registry.
+          (DNS) Parameters" registry:
         </t>
+        <t>Type: &RRNAME;</t>
+        <t>Value: TBD</t>
+        <t>Meaning: Message Digest Over Zone Data</t>
+        <t>Reference: This document</t>
       </section>
       <section title="&RRNAME; Digest Type">
         <!-- XXX Joe Abley: more needed here if IANA is to create new registry -->
