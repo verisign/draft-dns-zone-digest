@@ -754,7 +754,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         future experiments using Merkle trees of varying depth.  The
         choice of tree depth can be encoded in this reserved
         field.  We expect values for tree depth to range from 0 to
-        10, requring at most four bits of this field.  This leaves
+        10, requiring at most four bits of this field.  This leaves
         another four bits available for other future uses, if
         absolutely necessary.
       </t>
@@ -976,7 +976,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
        <t>Clarified that all duplicate RRs (not just SOA) must be suppressed in digest calculation.</t>
        <t>Clarified that the Reserved field must be set to zero and checked for zero in verification.</t>
        <t>Clarified that occluded data must be included.</t>
-       <t>Clarified procedure for verification, using temporary location for received digiest.</t>
+       <t>Clarified procedure for verification, using temporary location for received digest.</t>
        <t>Explained why Reserved field is 8-bits.</t>
        <t>IANA Considerations section now more specific.</t>
        <t></t>
