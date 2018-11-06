@@ -11,6 +11,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC2119 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC2136 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
 <!ENTITY RFC2629 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC2181 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2181.xml">
 <!ENTITY RFC2845 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
 <!ENTITY RFC2065 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2065.xml">
 <!ENTITY RFC2535 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2535.xml">
@@ -590,22 +591,14 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
             the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
           </t>
         </section>
-        <section title="Special Considerations for SOA RRs">
+        <section title="Duplicate RRs">
           <t>
-            When AXFR is used to transfer zone data, the first and last
-            records are always the SOA RR (<xref target="RFC5936"/>
-            Section 2.2).  Because of this, zones stored on disk sometimes
-            contain two SOA RRs.  When calculating the zone digest, the first
-            SOA RR MUST be included and any subsequent SOA RRs MUST NOT be included.
-          </t>
-          <t>
-            Additionally, per established practices, the SOA record
-            is generally the first record in a zone.  However,
-            according to the requirement to sort RRSets with the
-            same owner name by type, the SOA RR (type value 6) will not
-            be first in the digest calculation.  The zone's 
-            NS RRSet (type value 2) at the apex MUST be processed before
-            the SOA RR.
+            As stated in Section 5 of <xref target="RFC2181"/>, it
+            is meaningless for a zone to have multiple RRs with
+            equal owner name, class, type, and RDATA.  In the
+            interest of consistency and interoperability, such
+            duplicate RRs MUST NOT be included in the calculation
+            of a zone digest.
           </t>
         </section>
       </section>
@@ -668,7 +661,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             When calculating the digest, the following inclusion/exclusion rules apply:
             <list style="symbols">
             <t>All records in the zone including glue records MUST be included.</t>
-            <t>More than one SOA MUST NOT be included.</t>
+            <t>Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included.</t>
             <t>The placeholder &RRNAME; RR MUST be included.</t>
             <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
             <t>The RRSIG covering &RRNAME; MUST NOT be included.</t>
@@ -1003,6 +996,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC2119;
     &RFC1034;
     &RFC1035;
+    &RFC2181;
     &RFC4034;
     &RFC3658;
     &RFC4509;
