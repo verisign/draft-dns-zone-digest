@@ -46,6 +46,6 @@ l.root-servers.net.	3600000	IN	A	199.7.83.42
 m.root-servers.net.	3600000	IN	AAAA	2001:dc3::35
 m.root-servers.net.	3600000	IN	A	202.12.27.33
 root-servers.net.	3600000	IN	SOA	a.root-servers.net. nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000
-root-servers.net.	3600000	IN	ZONEMD	2018091100 4 0 (
-    327b45e1f70a95eb83e1b9aaaa0642b9e1d0f007db5ce45858cd336a79
-    78a0239f4517edfd11445f2b9f70900816fdfd )
+root-servers.net.	3600000	IN	ZONEMD	2018091100 1 0 (
+    aadf7a017bccd8cefe6040494800249fd5edc3d49e2e8ce8db7522f47f
+    97f168db794bf5f679fbe0c8433fb66f7a0c26 )
