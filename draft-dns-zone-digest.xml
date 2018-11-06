@@ -1147,7 +1147,7 @@ foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
 ]]></artwork></figure>
       </section>
 
-      <section title="The uri.arpa Zone">
+      <section title="The URI.ARPA Zone">
         <t>
           The URI.ARPA zone retreived 2018-10-21.
         </t>
