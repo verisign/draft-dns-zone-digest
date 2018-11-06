@@ -476,30 +476,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
         <section title="The Digest Type Field">
           <t>
-            The Digest Type field is an 8-bit unsigned integer, with
-            meaning equivalent to the Digest Type of the DS resource record,
-            as defined in section 5.1.3 of <xref target="RFC4034"/> and
-            values found in the IANA protocol registry for DS digest types
-            <xref target="iana-ds-digest-types"/>.
+            The Digest Type field is an 8-bit unsigned integer
+            that identifies the algorithm used to construct the digest.  
           </t>
           <t>
-            The status of &RRNAME; digest types (e.g., mandatory,
-            optional, deprecated), however, are independent of
-            those for DS digest types.
+            At the time of this writing, SHA384, with value 1, is the only
+            Digest Type defined for &RRNAME; records.  The Digest Type registry
+            is further described in <xref target="iana"/>.
           </t>
-          <t>
-            At the time of this writing the following digest types are defined:
-          </t>
-            <texttable anchor="digest-type-table" title="&RRNAME; Digest Types">
-            <ttcol align="left">Value</ttcol>
-            <ttcol align="left">Description</ttcol>
-            <ttcol align="left">Status</ttcol>
-            <ttcol align="left">Reference</ttcol>
-            <c>1</c>
-            <c>SHA384</c>
-            <c>Mandatory</c>
-            <c><xref target="RFC6605"/></c>
-            </texttable>
         </section>
 
         <section title="The Reserved Field">
@@ -806,13 +790,21 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Reference: This document</t>
       </section>
       <section title="&RRNAME; Digest Type">
-        <!-- XXX Joe Abley: more needed here if IANA is to create new registry -->
         <t>
-          The &RRNAME; Digest Type field has the same values as the DS RR Digest Type field, but
-          with independent implementation status.
-          Therefore, this document expects IANA will create a new
-          "&RRNAME; Digest Types" registry.
+          This document asks IANA to create a new
+          "&RRNAME; Digest Types" registry
+          with initial contents as follows:
         </t>
+        <texttable anchor="digest-type-table" title="&RRNAME; Digest Types">
+        <ttcol align="left">Value</ttcol>
+        <ttcol align="left">Description</ttcol>
+        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Reference</ttcol>
+        <c>1</c>
+        <c>SHA384</c>
+        <c>Mandatory</c>
+        <c><xref target="RFC6605"/></c>
+        </texttable>
       </section>
     </section>
 
@@ -989,16 +981,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <!-- &RFC5933; -->
     &RFC6605;
     &RFC8174;
-
-     <reference anchor="iana-ds-digest-types" target="https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml">
-        <front>
-          <title>Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-          <date year="2012" month="April" day="3"/>
-        </front>
-     </reference>
 
     </references>
 
