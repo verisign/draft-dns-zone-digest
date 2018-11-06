@@ -431,7 +431,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
         The Type value for the &RRNAME; RR is TBD.
         The &RRNAME; RR is class independent.
-        The RDATA of the resource record consists of three fields: Serial, Digest Type, and Digest.
+        The RDATA of the resource record consists of four fields: Serial, Digest Type, Reserved, and Digest.
       </t>
       <t>
         FOR DISCUSSION: This document is currently written as though
@@ -528,11 +528,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The Serial field MUST be represented as an unsigned decimal integer.
         </t>
         <t>
-          The Reserved field MUST be represented as an unsigned decimal integer set to zero.
-        </t>
-        <t>
           The Digest Type field MUST be represented as an unsigned decimal
           integer.
+        </t>
+        <t>
+          The Reserved field MUST be represented as an unsigned decimal integer set to zero.
         </t>
         <t>
           The Digest MUST be represented as a sequence of case-insensitive
@@ -603,7 +603,7 @@ example.com. 86400 IN &RRNAME; 2018031500 4 0 (
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
           zone apex.  This serves two purposes: (1) it allows the digest to cover
-          the Serial, Reserved, and Digest Type field values, and (2) ensures that 
+          the Serial, Digest Type, and Reserved field values, and (2) ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
         </t>
