@@ -1104,19 +1104,19 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           Here, the EXAMPLE zone contains an SOA record, NS and glue records, and a &RRNAME; record.
         </t>
         <figure><artwork align="left"><![CDATA[
-example.        86400   IN      SOA     ns1 admin 2018031900 (
-                                        1800 900 604800 86400 )
-                86400   IN      NS      ns1
-                86400   IN      NS      ns2
-                86400   IN      ZONEMD  2018031900 1 0 (
-                                        f32765ce15c50477
-                                        42a08be15d9a0efb
-                                        749417eaadcfa28b
-                                        1bf751b6bc49f9be
-                                        a615c4a386cfd6a5
-                                        d85e2d2182691249 )
-ns1     3600    IN      A       127.0.0.1
-ns2     3600    IN      AAAA    ::1
+example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                  1800 900 604800 86400 )
+              86400   IN  NS      ns1
+              86400   IN  NS      ns2
+              86400   IN  ZONEMD  2018031900 1 0 (
+                                  f32765ce15c50477
+                                  42a08be15d9a0efb
+                                  749417eaadcfa28b
+                                  1bf751b6bc49f9be
+                                  a615c4a386cfd6a5
+                                  d85e2d2182691249 )
+ns1           3600    IN  A       127.0.0.1
+ns2           3600    IN  AAAA    ::1
 ]]></artwork></figure>
       </section>
 
