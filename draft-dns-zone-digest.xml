@@ -496,20 +496,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             <ttcol align="left">Status</ttcol>
             <ttcol align="left">Reference</ttcol>
             <c>1</c>
-            <c>SHA1</c>
-            <c>Deprecated</c>
-            <c><xref target="RFC3658"/></c>
-            <c>2</c>
-            <c>SHA256</c>
-            <c>Mandatory</c>
-            <c><xref target="RFC4509"/></c>
-            <c>3</c>
-            <c>GOST R 34.11-94</c>
-            <c>Deprecated</c>
-            <c><xref target="RFC5933"/></c>
-            <c>4</c>
             <c>SHA384</c>
-            <c>Optional</c>
+            <c>Mandatory</c>
             <c><xref target="RFC6605"/></c>
             </texttable>
         </section>
@@ -993,9 +981,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC1035;
     &RFC2181;
     &RFC4034;
-    &RFC3658;
-    &RFC4509;
-    &RFC5933;
+    <!-- &RFC3658; -->
+    <!-- &RFC4509; -->
+    <!-- &RFC5933; -->
     &RFC6605;
     &RFC8174;
 
@@ -1112,18 +1100,20 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
       <section title="Simple EXAMPLE Zone">
         <t>
-          Here, the EXAMPLE zone contains an SOA record, NS and glue records, and a &RRNAME; record for digest type 2 (SHA256).
+          Here, the EXAMPLE zone contains an SOA record, NS and glue records, and a &RRNAME; record.
         </t>
         <figure><artwork align="left"><![CDATA[
 example.        86400   IN      SOA     ns1 admin 2018031900 (
                                         1800 900 604800 86400 )
                 86400   IN      NS      ns1
                 86400   IN      NS      ns2
-                86400   IN      ZONEMD  2018031900 2 0 (
-                                        2d1dc6806312e79b
-                                        a86e64bad290e1c1
-                                        61f4ee8cb9d490e9
-                                        5a00d1e686b12826 )
+                86400   IN      ZONEMD  2018031900 1 0 (
+                                        f32765ce15c50477
+                                        42a08be15d9a0efb
+                                        749417eaadcfa28b
+                                        1bf751b6bc49f9be
+                                        a615c4a386cfd6a5
+                                        d85e2d2182691249 )
 ns1     3600    IN      A       127.0.0.1
 ns2     3600    IN      AAAA    ::1
 ]]></artwork></figure>
@@ -1268,13 +1258,13 @@ uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
 ;; SERVER: 192.0.32.132#53(192.0.32.132)
 ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
 ;; XFR size: 34 records (messages 1, bytes 3941)
-uri.arpa.       3600    IN      ZONEMD  2018100702 2 0 (
-    a921ef5658f31bc6ac3e72a000f8d60a1a933153cf1df8be8153925
-    60c665b14 )
+uri.arpa.       3600    IN      ZONEMD  2018100702 1 0 (
+    80af7afd9540ff2c4c559f0d2b83393386304e093e0e66787378b2
+    a578297b49b4dccb422bce2c300bb92b354575283a )
 ]]></artwork></figure>
       </section>
 
-      <section title="The ROOT-SERVERS.NET Zone with SHA384">
+      <section title="The ROOT-SERVERS.NET Zone">
         <t>
           The ROOT-SERVERS.NET zone retreived 2018-10-21.
         </t>
@@ -1324,9 +1314,9 @@ m.root-servers.net.   3600000 IN  AAAA    2001:dc3::35
 m.root-servers.net.   3600000 IN  A       202.12.27.33
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
     nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
-root-servers.net.     3600000 IN  ZONEMD  2018091100 4 0 (
-    327b45e1f70a95eb83e1b9aaaa0642b9e1d0f007db5ce45858cd336a79
-    78a0239f4517edfd11445f2b9f70900816fdfd )
+root-servers.net.     3600000 IN  ZONEMD  2018091100 1 0 (
+    aadf7a017bccd8cefe6040494800249fd5edc3d49e2e8ce8db7522f47f
+    97f168db794bf5f679fbe0c8433fb66f7a0c26 )
 ]]></artwork></figure>
       </section>
     </section>
