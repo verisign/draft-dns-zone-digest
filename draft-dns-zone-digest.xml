@@ -660,7 +660,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <t>
             When calculating the digest, the following inclusion/exclusion rules apply:
             <list style="symbols">
-            <t>All records in the zone including glue records MUST be included.</t>
+            <t>All records in the zone, including glue records, MUST be included.</t>
             <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
             <t>Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included.</t>
             <t>The placeholder &RRNAME; RR MUST be included.</t>
