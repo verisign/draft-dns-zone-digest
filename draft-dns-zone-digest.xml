@@ -965,6 +965,22 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
        <t>Added an appendix with example zones and digests.</t>
        <t>Clarified that only apex &RRNAME; RRs shall be processed.</t>
       </list></t>
+      <t>From -04 to -05:
+      <list style="symbols">
+       <t>Made SHA384 the only supported ZONEMD digest type.</t>
+       <t>Disassociated ZONEMD digest types from DS digest types.</t>
+       <t>Updates to Introduction based on list feedback.</t>
+       <t>Changed "zone file" to "zone" everywhere.</t>
+       <t>Restored text about why ZONEMD has a Serial field.</t>
+       <t>Clarified ordering of RRSets having same owner to be numerically ascending.</t>
+       <t>Clarified that all duplicate RRs (not just SOA) must be suppressed in digest calculation.</t>
+       <t>Clarified that the Reserved field must be set to zero and checked for zero in verification.</t>
+       <t>Clarified that occluded data must be included.</t>
+       <t>Clarified procedure for verification, using temporary location for received digiest.</t>
+       <t>Explained why Reserved field is 8-bits.</t>
+       <t>IANA Considerations section now more specific.</t>
+       <t></t>
+      </list></t>
     </section>
 
   </middle>
