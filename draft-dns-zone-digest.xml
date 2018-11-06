@@ -979,6 +979,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
        <t>Clarified procedure for verification, using temporary location for received digest.</t>
        <t>Explained why Reserved field is 8-bits.</t>
        <t>IANA Considerations section now more specific.</t>
+       <t>Added complex zone to examples.</t>
        <t></t>
       </list></t>
     </section>
