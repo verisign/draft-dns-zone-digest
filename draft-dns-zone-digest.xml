@@ -429,7 +429,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
       <t>
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
-        The Type value for the &RRNAME; RR is TBD.
+        The Type value for the &RRNAME; RR is 63.
         The &RRNAME; RR is class independent.
         The RDATA of the resource record consists of four fields: Serial, Digest Type, Reserved, and Digest.
       </t>
@@ -780,12 +780,12 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <section title="&RRNAME; RRtype">
         <t>
           This document defines a new DNS RR type, &RRNAME;, whose
-          value TBD has been allocated by IANA from the "Resource
+          value 63 has been allocated by IANA from the "Resource
           Record (RR) TYPEs" subregistry of the "Domain Name System
           (DNS) Parameters" registry:
         </t>
         <t>Type: &RRNAME;</t>
-        <t>Value: TBD</t>
+        <t>Value: 63</t>
         <t>Meaning: Message Digest Over Zone Data</t>
         <t>Reference: This document</t>
       </section>
