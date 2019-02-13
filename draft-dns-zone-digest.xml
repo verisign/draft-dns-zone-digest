@@ -982,6 +982,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
        <t>Added complex zone to examples.</t>
        <t></t>
       </list></t>
+      <t>From -05 to -06:
+      <list style="symbols">
+       <t>RR type code 63 was assigned to &RRNAME; by IANA.</t>
+      </list></t>
     </section>
 
   </middle>
