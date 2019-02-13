@@ -5,12 +5,12 @@
 Internet Engineering Task Force                               D. Wessels
 Internet-Draft                                                 P. Barber
 Intended status: Experimental                                M. Weinberg
-Expires: May 11, 2019                                           Verisign
+Expires: August 17, 2019                                        Verisign
                                                                W. Kumari
                                                                   Google
                                                              W. Hardaker
                                                                  USC/ISI
-                                                        November 7, 2018
+                                                       February 13, 2019
 
 
                       Message Digest for DNS Zones
@@ -53,19 +53,19 @@ Status of This Memo
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 1]
+Wessels, et al.          Expires August 17, 2019                [Page 1]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 11, 2019.
+   This Internet-Draft will expire on August 17, 2019.
 
 Copyright Notice
 
-   Copyright (c) 2018 IETF Trust and the persons identified as the
+   Copyright (c) 2019 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 2]
+Wessels, et al.          Expires August 17, 2019                [Page 2]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
      3.5.  Update ZONEMD RR  . . . . . . . . . . . . . . . . . . . .  11
@@ -165,9 +165,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 3]
+Wessels, et al.          Expires August 17, 2019                [Page 3]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    1.  whether or not to expect DNSSEC records in the zone,
@@ -221,9 +221,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 4]
+Wessels, et al.          Expires August 17, 2019                [Page 4]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    been modified.  For these reasons, it is preferable to secure the
@@ -277,9 +277,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 5]
+Wessels, et al.          Expires August 17, 2019                [Page 5]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    signing are similar (i.e., both require the same ordering of RRs) and
@@ -333,9 +333,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 6]
+Wessels, et al.          Expires August 17, 2019                [Page 6]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 1.3.3.  Response Policy Zones
@@ -389,9 +389,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 7]
+Wessels, et al.          Expires August 17, 2019                [Page 7]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 2.1.  ZONEMD RDATA Wire Format
@@ -445,9 +445,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 8]
+Wessels, et al.          Expires August 17, 2019                [Page 8]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 2.2.  ZONEMD Presentation Format
@@ -501,9 +501,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                  [Page 9]
+Wessels, et al.          Expires August 17, 2019                [Page 9]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 3.1.2.  Duplicate RRs
@@ -557,9 +557,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 10]
+Wessels, et al.          Expires August 17, 2019               [Page 10]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    digest = digest_algorithm( RR(1) | RR(2) | RR(3) | ... )
@@ -613,9 +613,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 11]
+Wessels, et al.          Expires August 17, 2019               [Page 11]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
         validating) DS RRs in the parent zone.  For zones that are
@@ -669,9 +669,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 12]
+Wessels, et al.          Expires August 17, 2019               [Page 12]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 5.  Scope of Experimentation
@@ -725,9 +725,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 13]
+Wessels, et al.          Expires August 17, 2019               [Page 13]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 6.2.  ZONEMD Digest Type
@@ -781,9 +781,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 14]
+Wessels, et al.          Expires August 17, 2019               [Page 14]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 8.  Privacy Considerations
@@ -837,9 +837,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 15]
+Wessels, et al.          Expires August 17, 2019               [Page 15]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    o  Output the ZONEMD record in its defined presentation format.
@@ -893,9 +893,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 16]
+Wessels, et al.          Expires August 17, 2019               [Page 16]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    From -02 to -03:
@@ -949,9 +949,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 17]
+Wessels, et al.          Expires August 17, 2019               [Page 17]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    o  Clarified that the Reserved field must be set to zero and checked
@@ -1005,9 +1005,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 18]
+Wessels, et al.          Expires August 17, 2019               [Page 18]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    [RFC6605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital
@@ -1061,9 +1061,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 19]
+Wessels, et al.          Expires August 17, 2019               [Page 19]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    [RFC2845]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
@@ -1117,9 +1117,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 20]
+Wessels, et al.          Expires August 17, 2019               [Page 20]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    [ZoneDigestHackathon]
@@ -1173,9 +1173,9 @@ A.2.  Complex EXAMPLE Zone
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 21]
+Wessels, et al.          Expires August 17, 2019               [Page 21]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
@@ -1229,9 +1229,9 @@ A.3.  The URI.ARPA Zone
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 22]
+Wessels, et al.          Expires August 17, 2019               [Page 22]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
        chHgtwj70mXU72GefVgo8TxrFYzxuEFP5ZTP92t97FVWVVyyFd86sbbR
@@ -1285,9 +1285,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 23]
+Wessels, et al.          Expires August 17, 2019               [Page 23]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    ftp.uri.arpa.     3600    IN      RRSIG   NSEC 8 3 3600 (
@@ -1341,9 +1341,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 24]
+Wessels, et al.          Expires August 17, 2019               [Page 24]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
        20181029071816 20181007205525 47155 uri.arpa.
@@ -1397,9 +1397,9 @@ A.4.  The ROOT-SERVERS.NET Zone
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 25]
+Wessels, et al.          Expires August 17, 2019               [Page 25]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
    root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
@@ -1453,9 +1453,9 @@ Internet-Draft               DNS Zone Digest               November 2018
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 26]
+Wessels, et al.          Expires August 17, 2019               [Page 26]
 
-Internet-Draft               DNS Zone Digest               November 2018
+Internet-Draft               DNS Zone Digest               February 2019
 
 
 Authors' Addresses
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Wessels, et al.           Expires May 11, 2019                 [Page 27]
+Wessels, et al.          Expires August 17, 2019               [Page 27]
