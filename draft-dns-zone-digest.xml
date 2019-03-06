@@ -40,7 +40,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-wessels-dns-zone-digest-06" ipr="trust200902">
+<rfc category="exp" docName="draft-wessels-dns-zone-digest-07" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -985,6 +985,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -05 to -06:
       <list style="symbols">
        <t>RR type code 63 was assigned to &RRNAME; by IANA.</t>
+      </list></t>
+      <t>From -06 to -07:
+      <list style="symbols">
+       <t></t>
       </list></t>
     </section>
 
