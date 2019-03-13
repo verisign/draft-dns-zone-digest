@@ -29,6 +29,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
 <!ENTITY RFC6605 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
+<!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
@@ -481,8 +482,13 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
           <t>
             At the time of this writing, SHA384, with value 1, is the only
+            standardized
             Digest Type defined for &RRNAME; records.  The Digest Type registry
             is further described in <xref target="iana"/>.
+          </t>
+          <t>
+            Digest Type values 240-254 are allocated for Private Use as
+            described in <xref target="RFC8126"/>.
           </t>
         </section>
 
@@ -804,6 +810,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c>SHA384</c>
         <c>Mandatory</c>
         <c><xref target="RFC6605"/></c>
+        <c>240-254</c>
+        <c>Private Use</c>
+        <c></c>
+        <c><xref target="RFC8126"/></c>
         </texttable>
       </section>
     </section>
@@ -988,7 +998,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -06 to -07:
       <list style="symbols">
-       <t></t>
+       <t>Fixed mistakes in &RRNAME; examples.</t>
+       <t>Added private use Digest Type values 240-254.</t>
       </list></t>
     </section>
 
@@ -1022,6 +1033,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC7706;
     &RFC7719;
     &RFC7858;
+    &RFC8126;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
         <front>
