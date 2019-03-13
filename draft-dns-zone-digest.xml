@@ -1139,12 +1139,12 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 0 (
-                                  686a6d74d5638612
-                                  64ea4e6cc12c22d1
-                                  7ebc529791d393bd
-                                  e164a45390f714e9
-                                  9ede0d05a5644573
-                                  da4bbcc83744acf2 )
+                                  aa86a7c125dc515d
+                                  39de774946421f71
+                                  2d706a4b8c88a82e
+                                  724cbbc62bb3b0ac
+                                  435d6693b28e1c2a
+                                  11e90e496b9c333e )
 ns1           3600    IN  A       127.0.0.1
 ns2           3600    IN  AAAA    ::1
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
