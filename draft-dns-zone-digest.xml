@@ -1152,7 +1152,6 @@ sub           7200    IN  NS      ns1
 duplicate     300     IN  TXT     "I must be digested just once"
 duplicate     300     IN  TXT     "I must be digested just once"
 foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
-
 ]]></artwork></figure>
       </section>
 
