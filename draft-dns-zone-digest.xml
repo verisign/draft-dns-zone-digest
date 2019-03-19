@@ -502,7 +502,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the message digest.  <xref target="calculating"/>
+            containing the message digest.  The Digest field MUST NOT be empty.
+            <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
             verify the contents of a zone.
@@ -1000,6 +1001,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <list style="symbols">
        <t>Fixed mistakes in &RRNAME; examples.</t>
        <t>Added private use Digest Type values 240-254.</t>
+       <t>Clarified that Digest field must not be empty.</t>
       </list></t>
     </section>
 
