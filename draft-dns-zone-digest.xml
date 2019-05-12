@@ -443,6 +443,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <!-- XXX Joe Abley: multiple digests could be useful -->
 
+      <section title="&RRNAME; Location">
+        <t>
+          &RRNAME; RRs MUST be located at the zone apex.
+          An implementation of this specification MUST ignore any non-apex &RRNAME; RRs.
+          A name server MAY refuse to load a zone that contains non-apex &RRNAME; RRs.
+        </t>
+      </section>
+
       <section title="&RRNAME; RDATA Wire Format">
         <!-- XXX Joe Abley: specify short names for the fields -->
         <t>The &RRNAME; RDATA wire format is encoded as follows:</t>
@@ -588,9 +596,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           MUST first be deleted.
         </t>
         <t>
-          FOR DISCUSSION: Should non-apex &RRNAME; records be allowed in a zone?  Or forbidden?
-        </t>
-        <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
           zone apex.  This serves two purposes: (1) it allows the digest to cover
@@ -644,7 +649,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <t>Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included.</t>
             <t>The placeholder &RRNAME; RR MUST be included.</t>
             <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
-            <t>The RRSIG covering &RRNAME; MUST NOT be included.</t>
+            <t>The RRSIG covering &RRNAME; MUST NOT be included
+              because the RRSIG will be updated after all digests have been calculated.</t>
             </list>
           </t>
         </section>
@@ -685,7 +691,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t anchor="verify-check-existence">
             For zones that are provably signed, the existence of
-            the apex &RRNAME; record MUST be verified.  If the &RRNAME;
+            the &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
             cannot be done.  If the &RRNAME; record does provably
             exist, but is not found in the zone, digest verification
@@ -699,7 +705,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the zone contains more than one apex &RRNAME; RR, digest verification
+            If the zone contains more than one &RRNAME; RR, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
@@ -1005,7 +1011,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -07 to draft-ietf-dnsop-dns-zone-digest-00:
       <list style="symbols">
-	<t>Adopted by dnsop</t>
+        <t>Adopted by dnsop.</t>
+        <t>Describe how non-apex &RRNAME; RRs are to be handled.</t>
       </list></t>
     </section>
 
