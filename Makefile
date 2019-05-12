@@ -1,12 +1,13 @@
-DOC=draft-dns-zone-digest
+SRC=draft-dns-zone-digest
+DST=draft-ietf-dnsop-dns-zone-digest
 VER=07
 
-all: ${DOC}-${VER}.txt
+all: ${DST}-${VER}.txt
 	
-${DOC}-${VER}.txt: ${DOC}.xml
-	xml2rfc ${DOC}.xml -o $@
+${DST}-${VER}.txt: ${SRC}.xml
+	xml2rfc ${SRC}.xml -o $@
 
 .PHONY: clean
 	
 clean:
-	rm -f ${DOC}-${VER}.txt
+	rm -f ${DST}-${VER}.txt

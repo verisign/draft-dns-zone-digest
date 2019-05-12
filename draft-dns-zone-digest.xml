@@ -41,7 +41,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-wessels-dns-zone-digest-07" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-00" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -130,7 +130,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </address>
     </author>
 
-    <date day="13" month="February" year="2019"/>
+    <date day="12" month="May" year="2019"/>
 
     <area>General</area>
 
@@ -1002,6 +1002,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
        <t>Fixed mistakes in &RRNAME; examples.</t>
        <t>Added private use Digest Type values 240-254.</t>
        <t>Clarified that Digest field must not be empty.</t>
+      </list></t>
+      <t>From -07 to draft-ietf-dnsop-dns-zone-digest-00:
+      <list style="symbols">
+	<t>Adopted by dnsop</t>
       </list></t>
     </section>
 
