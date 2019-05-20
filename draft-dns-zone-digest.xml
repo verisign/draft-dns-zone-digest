@@ -445,9 +445,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
       <section title="&RRNAME; Location">
         <t>
-          &RRNAME; RRs MUST be located at the zone apex.
-          An implementation of this specification MUST ignore any non-apex &RRNAME; RRs.
-          A name server MAY refuse to load a zone that contains non-apex &RRNAME; RRs.
+          This specification utilizes &RRNAME; RRs located at the
+          zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
+          have no meaning in this specification.
         </t>
       </section>
 
@@ -691,7 +691,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t anchor="verify-check-existence">
             For zones that are provably signed, the existence of
-            the &RRNAME; record MUST be verified.  If the &RRNAME;
+            the apex &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
             cannot be done.  If the &RRNAME; record does provably
             exist, but is not found in the zone, digest verification
@@ -705,7 +705,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the zone contains more than one &RRNAME; RR, digest verification
+            If the zone contains more than one apex &RRNAME; RR, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
@@ -1012,7 +1012,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -07 to draft-ietf-dnsop-dns-zone-digest-00:
       <list style="symbols">
         <t>Adopted by dnsop.</t>
-        <t>Describe how non-apex &RRNAME; RRs are to be handled.</t>
+        <t>Clarified further that non-apex &RRNAME; RRs have no meaning.</t>
       </list></t>
     </section>
 
