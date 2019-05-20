@@ -686,11 +686,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             whether or not to expect DNSSEC records in the zone.
             This can be done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
-            parent zone.  For zones that are provably unsigned,
+            parent zone.  For zones that are provably insecure,
             digest validation continues at step <xref target="verify-check-digest-count" format="counter"/> below.
           </t>
           <t anchor="verify-check-existence">
-            For zones that are provably signed, the existence of
+            For zones that are provably secure, the existence of
             the apex &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
             cannot be done.  If the &RRNAME; record does provably
@@ -698,7 +698,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             MUST NOT be considered successful.
           </t>
           <t>
-            For zones that are provably signed, the SOA RR and
+            For zones that are provably secure, the SOA RR and
             &RRNAME; RR MUST have valid signatures, chaining
             up to a trust anchor.  If DNSSEC validation of the SOA
             or &RRNAME; records fails, digest verification MUST NOT
