@@ -1147,7 +1147,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
     <section title="Example Zones With Digests">
       <t>
-        This appendex contains example zones with accurate &RRNAME; records.  These can be used to
+        This appendix contains example zones with accurate &RRNAME; records.  These can be used to
         verify an implementation of the zone digest protocol.
       </t>
 
@@ -1207,7 +1207,7 @@ non-apex      900     IN  ZONEMD  2018031900 1 0 (
 
       <section title="The URI.ARPA Zone">
         <t>
-          The URI.ARPA zone retreived 2018-10-21.
+          The URI.ARPA zone retrieved 2018-10-21.
         </t>
         <figure><artwork align="left"><![CDATA[
 ; <<>> DiG 9.9.4 <<>> @lax.xfr.dns.icann.org uri.arpa axfr
