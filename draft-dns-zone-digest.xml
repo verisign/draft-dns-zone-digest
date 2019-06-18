@@ -29,6 +29,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
 <!ENTITY RFC6605 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
+<!ENTITY RFC7696 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
 <!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RRNAME "ZONEMD">
@@ -435,21 +436,18 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         The RDATA of the resource record consists of four fields: Serial, Digest Type, Reserved, and Digest.
       </t>
       <t>
-        FOR DISCUSSION: This document is currently written as though
-        a zone MUST NOT contain more than one &RRNAME; RR.
-        Having exactly one &RRNAME; record per zone simplifies this
-        protocol and eliminates confusion around downgrade attacks, at
-        the expense of algorithm agility.
+        This specification utilizes &RRNAME; RRs located at the
+        zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
+        have no meaning in this specification.
       </t>
-      <!-- XXX Joe Abley: multiple digests could be useful -->
-
-      <section title="&RRNAME; Location">
-        <t>
-          This specification utilizes &RRNAME; RRs located at the
-          zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
-          have no meaning in this specification.
-        </t>
-      </section>
+      <t>
+       A zone MAY contain multiple &RRNAME; RRs to support algorithm
+       agility <xref target="RFC7696"/> and rollovers.
+       Each &RRNAME; RR MUST specify a unique Digest Type.
+       It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
+       the zone publisher is in the process of transitioning to a new
+       Digest Type.
+      </t>
 
       <section title="&RRNAME; RDATA Wire Format">
         <!-- XXX Joe Abley: specify short names for the fields -->
@@ -591,7 +589,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
       </section>
       <section title="Add &RRNAME; Placeholder" anchor="placeholder">
         <t>
-          In preparation for calculating the zone digest, any existing &RRNAME; record
+          In preparation for calculating the zone digest, any existing &RRNAME; records
           at the zone apex
           MUST first be deleted.
         </t>
@@ -615,12 +613,17 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           field MUST be set to all zeroes and of length appropriate
           for the chosen digest algorithm.
         </t>
+        <t>
+          If multiple digests are to be published in the zone, e.g.,
+          during an algorithm rollover, there MUST be one placeholder
+          record for each Digest Type.
+        </t>
       </section>
       <section title="Optionally Sign the Zone">
         <t>
-          Following addition of the placeholder record, the zone MAY be signed with DNSSEC.
+          Following addition of placeholder records, the zone MAY be signed with DNSSEC.
           Note that when the digest calculation is complete, and the &RRNAME; record is updated,
-          the signature(s) for that record MUST be recalculated and
+          the signature(s) for the &RRNAME; RRSet MUST be recalculated and
           updated as well.
           Therefore, the signer is not required to calculate a signature over the placeholder record at
           this step in the process, but it is harmless to do so.
@@ -647,7 +650,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <t>All records in the zone, including glue records, MUST be included.</t>
             <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
             <t>Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included.</t>
-            <t>The placeholder &RRNAME; RR MUST be included.</t>
+            <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
             <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
             <t>The RRSIG covering &RRNAME; MUST NOT be included
               because the RRSIG will be updated after all digests have been calculated.</t>
@@ -661,7 +664,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </t>
         <t>
           If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-          record MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
+          RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
         <t>
@@ -698,8 +701,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             MUST NOT be considered successful.
           </t>
           <t>
-            For zones that are provably secure, the SOA RR and
-            &RRNAME; RR MUST have valid signatures, chaining
+            For zones that are provably secure, the SOA and
+            &RRNAME; RRSets MUST have valid signatures, chaining
             up to a trust anchor.  If DNSSEC validation of the SOA
             or &RRNAME; records fails, digest verification MUST NOT
             be considered successful.
@@ -749,13 +752,31 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
         </list>
       </t>
+      <section title="Verifying Multiple Digests" anchor="verifying-multiple">
+      <t>
+          If multiple digests are present in the zone, e.g.,
+          during an algorithm rollover, at least one of the recipient's
+          supported Digest Type algorithms MUST verify the zone.
+      </t>
+      <t>
+          It is RECOMMENDED that implementations maintain a (possibly
+          configurable) list of supported Digest Type algorithms ranked
+          from most to least preferred.  It is further RECOMMENDED that
+          recipients use only their most preferred algorithm that is present in the zone
+          for digest verification.
+      </t>
+      <t>
+          As a matter of local policy, the recipient MAY require that
+          all supported and present Digest Type algorithms verify the zone.
+      </t>
+      </section>
     </section>
 
     <section title="Scope of Experimentation">
       <t>
         This memo is published as an Experimental RFC.  The purpose
         of the experimental period is to provide the community time
-        to analyze and evaluate to the methods defined in this
+        to analyze and evaluate the methods defined in this
         document, particularly with regard to the wide variety of
         DNS zones in use on the Internet.
       </t>
@@ -1014,6 +1035,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <list style="symbols">
         <t>Adopted by dnsop.</t>
         <t>Clarified further that non-apex &RRNAME; RRs have no meaning.</t>
+        <t>Changed "provably [un]signed" to "provably [in]secure".</t>
+        <t>Allow multiple &RRNAME; RRs to support algorithm agility/rollovers.</t>
+        <t>Describe verification when there are multiple &RRNAME; RRs.</t>
       </list></t>
     </section>
 
@@ -1047,6 +1071,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC7706;
     &RFC7719;
     &RFC7858;
+    &RFC7696;
     &RFC8126;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
