@@ -1205,6 +1205,52 @@ non-apex      900     IN  ZONEMD  2018031900 1 0 (
 ]]></artwork></figure>
       </section>
 
+      <section title="EXAMPLE Zone with multiple digests">
+        <t>
+          Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
+          only one Digest Type is defined at this time (SHA384), this
+          example utilizes additional &RRNAME; records with Digest Type
+          values in the private range (240-254).  These additional
+          private-range digests are not verifiable, but note that their
+          other fields (Serial, Reserved, Digest Type) are included in
+          the calculation of all &RRNAME; digests.
+        </t>
+        <figure><artwork align="left"><![CDATA[
+example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                  1800 900 604800 86400 )
+example.      86400   IN  NS      ns1.example.
+example.      86400   IN  NS      ns2.example.
+example.      86400   IN  ZONEMD  2018031900 1 0 (
+                                  c0218e8eeb4f0275
+                                  d54c0e5ce7791f4d
+                                  23742b4756708d50
+                                  d7121a11d434baa8
+                                  f869ebbb071a4bbb
+                                  0457c87870bc8cdd )
+example.      86400   IN  ZONEMD  2018031900 240 0 (
+                                  e2d523f654b9422a
+                                  96c5a8f44607bbee )
+example.      86400   IN  ZONEMD  2018031900 241 0 (
+                                  5732dd91240611f8
+                                  314adb6b4769bdd2 )
+example.      86400   IN  ZONEMD  2018031900 242 0 (
+                                  7c32e06779315c7d
+                                  81ba8c72f5cf9116
+                                  496b6395 )
+example.      86400   IN  ZONEMD  2018031900 243 0 (
+                                  183770af4a629f80
+                                  2e674e305b8d0d11
+                                  3dfe0837 )
+example.      86400   IN  ZONEMD  2018031900 244 0 (
+                                  e1846540e33a9e41
+                                  89792d18d5d131f6
+                                  05fc283e )
+ns1.example.  3600    IN  A       127.0.0.1
+ns2.example.  86400   IN  TXT     "This example has multiple digests"
+ns2.example.  3600    IN  AAAA    ::1
+]]></artwork></figure>
+      </section>
+
       <section title="The URI.ARPA Zone">
         <t>
           The URI.ARPA zone retrieved 2018-10-21.
