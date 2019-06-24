@@ -5,12 +5,12 @@
 Internet Engineering Task Force                               D. Wessels
 Internet-Draft                                                 P. Barber
 Intended status: Experimental                                M. Weinberg
-Expires: December 20, 2019                                      Verisign
+Expires: December 26, 2019                                      Verisign
                                                                W. Kumari
                                                                   Google
                                                              W. Hardaker
                                                                  USC/ISI
-                                                           June 18, 2019
+                                                           June 24, 2019
 
 
                       Message Digest for DNS Zones
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 1]
+Wessels, et al.         Expires December 26, 2019               [Page 1]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -61,7 +61,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 20, 2019.
+   This Internet-Draft will expire on December 26, 2019.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 2]
+Wessels, et al.         Expires December 26, 2019               [Page 2]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -165,7 +165,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 3]
+Wessels, et al.         Expires December 26, 2019               [Page 3]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -221,7 +221,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 4]
+Wessels, et al.         Expires December 26, 2019               [Page 4]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -277,7 +277,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 5]
+Wessels, et al.         Expires December 26, 2019               [Page 5]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -333,7 +333,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 6]
+Wessels, et al.         Expires December 26, 2019               [Page 6]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -389,7 +389,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 7]
+Wessels, et al.         Expires December 26, 2019               [Page 7]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -445,7 +445,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 8]
+Wessels, et al.         Expires December 26, 2019               [Page 8]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -501,7 +501,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019               [Page 9]
+Wessels, et al.         Expires December 26, 2019               [Page 9]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -557,7 +557,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 10]
+Wessels, et al.         Expires December 26, 2019              [Page 10]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -613,7 +613,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 11]
+Wessels, et al.         Expires December 26, 2019              [Page 11]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -669,7 +669,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 12]
+Wessels, et al.         Expires December 26, 2019              [Page 12]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -725,7 +725,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 13]
+Wessels, et al.         Expires December 26, 2019              [Page 13]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -781,7 +781,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 14]
+Wessels, et al.         Expires December 26, 2019              [Page 14]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -837,7 +837,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 15]
+Wessels, et al.         Expires December 26, 2019              [Page 15]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -893,7 +893,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 16]
+Wessels, et al.         Expires December 26, 2019              [Page 16]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -949,7 +949,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 17]
+Wessels, et al.         Expires December 26, 2019              [Page 17]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 18]
+Wessels, et al.         Expires December 26, 2019              [Page 18]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 19]
+Wessels, et al.         Expires December 26, 2019              [Page 19]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1117,7 +1117,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 20]
+Wessels, et al.         Expires December 26, 2019              [Page 20]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1173,7 +1173,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 21]
+Wessels, et al.         Expires December 26, 2019              [Page 21]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1229,7 +1229,7 @@ A.2.  Complex EXAMPLE Zone
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 22]
+Wessels, et al.         Expires December 26, 2019              [Page 22]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1285,7 +1285,7 @@ A.3.  EXAMPLE Zone with multiple digests
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 23]
+Wessels, et al.         Expires December 26, 2019              [Page 23]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1341,7 +1341,7 @@ A.4.  The URI.ARPA Zone
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 24]
+Wessels, et al.         Expires December 26, 2019              [Page 24]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1397,7 +1397,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 25]
+Wessels, et al.         Expires December 26, 2019              [Page 25]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1453,7 +1453,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 26]
+Wessels, et al.         Expires December 26, 2019              [Page 26]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1509,7 +1509,7 @@ A.5.  The ROOT-SERVERS.NET Zone
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 27]
+Wessels, et al.         Expires December 26, 2019              [Page 27]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1565,7 +1565,7 @@ Internet-Draft               DNS Zone Digest                   June 2019
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 28]
+Wessels, et al.         Expires December 26, 2019              [Page 28]
 
 Internet-Draft               DNS Zone Digest                   June 2019
 
@@ -1621,4 +1621,4 @@ Authors' Addresses
 
 
 
-Wessels, et al.         Expires December 20, 2019              [Page 29]
+Wessels, et al.         Expires December 26, 2019              [Page 29]
