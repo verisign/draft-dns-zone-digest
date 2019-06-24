@@ -42,7 +42,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-00" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-01" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -1030,6 +1030,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Changed "provably [un]signed" to "provably [in]secure".</t>
         <t>Allow multiple &RRNAME; RRs to support algorithm agility/rollovers.</t>
         <t>Describe verification when there are multiple &RRNAME; RRs.</t>
+      </list></t>
+      <t>From -00 to -01:
+      <list style="symbols">
+        <t></t>
       </list></t>
     </section>
 
