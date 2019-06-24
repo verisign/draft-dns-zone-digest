@@ -1,6 +1,6 @@
 SRC=draft-dns-zone-digest
 DST=draft-ietf-dnsop-dns-zone-digest
-VER=01
+VER=00
 
 all: ${DST}-${VER}.txt
 	
