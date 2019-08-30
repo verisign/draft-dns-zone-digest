@@ -755,20 +755,20 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <section title="Verifying Multiple Digests" anchor="verifying-multiple">
       <t>
           If multiple digests are present in the zone, e.g.,
-          during an algorithm rollover, at least one of the recipient's
-          supported Digest Type algorithms MUST verify the zone.
+          during an algorithm rollover, a match using any one of the recipient's
+          supported Digest Type algorithms is sufficient to verify the zone.
       </t>
-      <t>
+      <!-- t>
           It is RECOMMENDED that implementations maintain a (possibly
           configurable) list of supported Digest Type algorithms ranked
           from most to least preferred.  It is further RECOMMENDED that
           recipients use only their most preferred algorithm that is present in the zone
           for digest verification.
-      </t>
-      <t>
+      </t -->
+      <!-- t>
           As a matter of local policy, the recipient MAY require that
           all supported and present Digest Type algorithms verify the zone.
-      </t>
+      </t -->
       </section>
     </section>
 
@@ -1033,7 +1033,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -00 to -01:
       <list style="symbols">
-        <t></t>
+        <t>Simplified requirements around verifying multiple digests.  Any one match is sufficient.</t>
       </list></t>
     </section>
 
