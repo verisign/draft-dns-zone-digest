@@ -932,9 +932,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </list>
           This implementation does not:
           <list style="symbols">
-          <t>Perform DNSSEC validation of the &RRNAME; record.</t>
-          <t>Support the Gost digest algorithm.</t>
-          <t>Output the &RRNAME; record in its defined presentation format.</t>
+          <t>Perform DNSSEC validation of the &RRNAME; record during verification.</t>
           </list>
         </t>
       </section>
@@ -946,7 +944,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <t>Read an input zone and a output zone with &RRNAME; record.</t>
           <t>Verify the zone digest from an input zone.</t>
           <t>Output the &RRNAME; record in its defined presentation format.</t>
-          <t>Generate Gost digests.</t>
           </list>
           This implementation does not:
           <list style="symbols">
@@ -1034,6 +1031,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -00 to -01:
       <list style="symbols">
         <t>Simplified requirements around verifying multiple digests.  Any one match is sufficient.</t>
+        <t>Updated implementation notes.</t>
+        <t>Both implementations produce expected results on examples given in this document.</t>
       </list></t>
     </section>
 
