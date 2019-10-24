@@ -42,7 +42,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-01" ipr="trust200902">
+<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-02" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -433,7 +433,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
         The Type value for the &RRNAME; RR is 63.
         The &RRNAME; RR is class independent.
-        The RDATA of the resource record consists of four fields: Serial, Digest Type, Reserved, and Digest.
+        The RDATA of the resource record consists of four fields: Serial, Digest Type, Parameter, and Digest.
       </t>
       <t>
         This specification utilizes &RRNAME; RRs located at the
@@ -443,7 +443,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
-       Each &RRNAME; RR MUST specify a unique Digest Type.
+       Each &RRNAME; RR MUST specify a unique Digest Type and Parameter tuple.
        It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
        Digest Type.
@@ -458,7 +458,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                             Serial                            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  Digest Type  |   Reserved    |                               |
+|  Digest Type  |   Parameter   |                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
 |                             Digest                            |
 /                                                               /
@@ -487,7 +487,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             that identifies the algorithm used to construct the digest.  
           </t>
           <t>
-            At the time of this writing, SHA384, with value 1, is the only
+            At the time of this writing, SHA384-STABLE, with value 1, is the only
             standardized
             Digest Type defined for &RRNAME; records.  The Digest Type registry
             is further described in <xref target="iana"/>.
@@ -498,10 +498,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
         </section>
 
-        <section title="The Reserved Field">
+        <section title="The Parameter Field">
           <t>
-            The Reserved field is an 8-bit unsigned integer, which is always set to zero.  This
-            field is reserved for future work to support efficient incremental updates.
+            The Parameter field is an 8-bit unsigned integer whose
+            meaning depends on the Digest Type in use.  For SHA384-STABLE,
+            the Parameter field plays no role in digest calculation or verification.
           </t>
         </section>
 
@@ -529,7 +530,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           integer.
         </t>
         <t>
-          The Reserved field MUST be represented as an unsigned decimal integer set to zero.
+          The Parameter field MUST be represented as an unsigned decimal integer.
         </t>
         <t>
           The Digest MUST be represented as a sequence of case-insensitive
@@ -554,9 +555,9 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
     <section title="Calculating the Digest" anchor="calculating">
       <section title="Canonical Format and Ordering">
         <t>
-          Calculation of the zone digest REQUIRES the RRs in a zone
+          Calculation of the zone digest REQUIRES RRs
           to be processed in a consistent format and ordering.  Correct ordering
-          of the zone depends on (1) ordering of owner names in the zone, (2)
+          depends on (1) ordering of owner names, (2)
           ordering of RRSets with the same owner name, and (3) ordering of
           RRs within an RRSet.
         </t>
@@ -597,7 +598,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, a placeholder &RRNAME; record MUST be added to the
           zone apex.  This serves two purposes: (1) it allows the digest to cover
-          the Serial, Digest Type, and Reserved field values, and (2) ensures that 
+          the Serial, Digest Type, and Parameter field values, and (2) ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
         </t>
@@ -608,10 +609,16 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           In the placeholder record, the Serial field MUST be
           set to the current SOA Serial.  The Digest Type field MUST be set
           to the value for the chosen digest algorithm.
-          The Reserved field MUST be set to zero.
+          The Parameter field is set to a value that depends on the Digest Type.
           The Digest
           field MUST be set to all zeroes and of length appropriate
           for the chosen digest algorithm.
+        </t>
+        <t>
+          FOR DISCUSSION: if we need to support variable length digests,
+          whose length would not be known at the time when placeholders
+          are created, then we should instead simply skip over the Digest
+          field when computing the digest.
         </t>
         <t>
           If multiple digests are to be published in the zone, e.g.,
@@ -631,18 +638,33 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
       </section>
       <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
-          The zone digest is calculated by concatenating the canonical on-the-wire
-          form (without name compression) of all RRs in the zone, in the order described
-          above, subject to the inclusion/exclusion rules described
-          below, and then applying the digest algorithm:
+          The digest calculation details vary depending upon the Digest Type.
+          This document describes digest calculation for SHA384-STABLE only.
+          Digest calculation for additional types may be defined in future updates
+          to this document.
         </t>
-        <figure><artwork>
-digest = digest_algorithm( RR(1) | RR(2) | RR(3) | ... )
-
-where "|" denotes concatenation, and
-
-RR(i) = owner | type | class | TTL | RDATA length | RDATA
-        </artwork></figure>
+        <section title="SHA384-STABLE Calculation">
+          <t>
+            The Parameter field is not used in the digest calculation
+            for SHA384-STABLE.  It is RECOMMENDED that implementations
+            set the placeholder Parameter to a randomly chosen value,
+            so that other implementations do not always expect it to
+            be zero.
+          </t>
+          <t>
+            The zone digest is calculated by concatenating the canonical on-the-wire
+            form (without name compression) of all RRs in the zone, in the order described
+            above, subject to the inclusion/exclusion rules described
+            below, and then applying the SHA384 digest algorithm <xref target="RFC6605"/>:
+          </t>
+          <figure><artwork>
+  digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+  
+  where "|" denotes concatenation, and
+  
+  RR(i) = owner | type | class | TTL | RDATA length | RDATA
+          </artwork></figure>
+        </section>
         <section title="Inclusion/Exclusion Rules">
           <t>
             When calculating the digest, the following inclusion/exclusion rules apply:
@@ -660,7 +682,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
       <section title="Update &RRNAME; RR">
         <t>
-          Once the zone digest has been calculated, its value is then copied to the Digest field of the &RRNAME; record.
+          Once a zone digest has been calculated, its value is then copied to the Digest field of the placeholder &RRNAME; record.  Repeat for each digest if multiple digests are to be published.
         </t>
         <t>
           If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
@@ -708,7 +730,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the zone contains more than one apex &RRNAME; RR, digest verification
+            If the &RRNAME; RRSet contains more than one RR with the same Digest Type and Paremter, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
@@ -721,10 +743,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             verifier does not support the given digest type, it
             SHOULD report that the zone digest could not be verified
             due to an unsupported algorithm.
-          </t>
-          <t>
-            The Reserved field MUST be checked.  If the Reserved field
-            value is not zero, verification MUST NOT be considered successful.
           </t>
           <t>
             The received Digest Type and Digest values are copied to
@@ -782,7 +800,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </t>
       <t>
         Additionally, the &RRNAME; record defined in this document
-        includes a Reserved field in the form of an 8-bit integer.  The authors have a particular
+        includes a Parameter field in the form of an 8-bit integer.  The authors have a particular
         future use in mind for this field, namely to support efficient
         digests in large, dynamic zones.  We intend to conduct
         future experiments using Merkle trees of varying depth.  The
@@ -824,16 +842,22 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <texttable anchor="digest-type-table" title="&RRNAME; Digest Types">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
+        <ttcol align="left">Mnemonic</ttcol>
         <ttcol align="left">Status</ttcol>
         <ttcol align="left">Reference</ttcol>
+
         <c>1</c>
-        <c>SHA384</c>
+        <c>SHA384 for stable zones</c>
+        <c>SHA384-STABLE</c>
         <c>Mandatory</c>
-        <c><xref target="RFC6605"/></c>
+        <c>This document</c>
+
         <c>240-254</c>
         <c>Private Use</c>
-        <c></c>
+        <c>-</c>
+        <c>-</c>
         <c><xref target="RFC8126"/></c>
+
         </texttable>
       </section>
     </section>
@@ -895,6 +919,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 	thank
 	Joe Abley,
         Mark Andrews,
+        Ralph Dolmans,
+        Richard Gibson,
 	Olafur Gudmundsson,
 	Paul Hoffman,
 	Evan Hunt,
@@ -909,8 +935,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 	Mukund Sivaraman,
 	Petr Spacek,
 	Ondrej Sury,
+        Willem Toorop,
 	Florian Weimer,
 	Tim Wicinksi,
+        Wouter Wijngarrds,
 	Paul Wouters,
         and other members of
         the dnsop working group
@@ -1033,6 +1061,14 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Simplified requirements around verifying multiple digests.  Any one match is sufficient.</t>
         <t>Updated implementation notes.</t>
         <t>Both implementations produce expected results on examples given in this document.</t>
+      </list></t>
+      <t>From -01 to -02:
+      <list style="symbols">
+        <t>Changed the name of the Reserved field to Parameter.</t>
+        <t>Changed the name of Digest Type 1 from SHA384 to SHA384-STABLE.</t>
+        <t>The meaning of the Parameter field now depends on Digest Type.</t>
+        <t>No longer require Parameter field to be zero in verification.</t>
+        <t>Updated a rule from earlier versions that said multiple &RRNAME; RRs were not allowed.</t>
       </list></t>
     </section>
 
@@ -1211,11 +1247,11 @@ non-apex      900     IN  ZONEMD  2018031900 1 0 (
       <section title="EXAMPLE Zone with multiple digests">
         <t>
           Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Digest Type is defined at this time (SHA384), this
+          only one Digest Type is defined at this time (SHA384-STABLE), this
           example utilizes additional &RRNAME; records with Digest Type
           values in the private range (240-254).  These additional
           private-range digests are not verifiable, but note that their
-          other fields (Serial, Reserved, Digest Type) are included in
+          other fields (Serial, Parameter, Digest Type) are included in
           the calculation of all &RRNAME; digests.
         </t>
         <figure><artwork align="left"><![CDATA[
