@@ -645,11 +645,9 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         </t>
         <section title="SHA384-STABLE Calculation">
           <t>
-            The Parameter field is not used in the digest calculation
-            for SHA384-STABLE.  It is RECOMMENDED that implementations
-            set the placeholder Parameter to a randomly chosen value,
-            so that other implementations do not always expect it to
-            be zero.
+            The Parameter field is not used in the calculation of
+            SHA384-STABLE message digets.
+            The Parameter field SHOULD be set to zero in SHA384-STABLE placeholder records.
           </t>
           <t>
             The zone digest is calculated by concatenating the canonical on-the-wire
