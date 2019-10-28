@@ -609,7 +609,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           In the placeholder record, the Serial field MUST be
           set to the current SOA Serial.  The Digest Type field MUST be set
           to the value for the chosen digest algorithm.
-          The Parameter field is set to a value that depends on the Digest Type.
+          The Parameter field is set to a value whose meaning depends on the Digest Type.
           The Digest
           field MUST be set to all zeroes and of length appropriate
           for the chosen digest algorithm.
