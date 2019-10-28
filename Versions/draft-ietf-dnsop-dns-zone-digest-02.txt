@@ -581,11 +581,11 @@ Internet-Draft               DNS Zone Digest                October 2019
    described below, and then applying the SHA384 digest algorithm
    [RFC6605]:
 
-     digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+   digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
 
-     where "|" denotes concatenation, and
+   where "|" denotes concatenation, and
 
-     RR(i) = owner | type | class | TTL | RDATA length | RDATA
+   RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
 3.4.2.  Inclusion/Exclusion Rules
 

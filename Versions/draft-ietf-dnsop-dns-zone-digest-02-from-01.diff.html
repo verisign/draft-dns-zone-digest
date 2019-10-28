@@ -394,15 +394,13 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   [RFC6605]:</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr id="diff0024"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">digest = digest_algorithm</span>( RR(1) | RR(2) | RR(3) | ... )</td><td> </td><td class="rblock">   <span class="insert">  digest = SHA384</span>( RR(1) | RR(2) | RR(3) | ... )</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   digest = <span class="delete">digest_algorithm</span>( RR(1) | RR(2) | RR(3) | ... )</td><td> </td><td class="rblock">   digest = <span class="insert">SHA384</span>( RR(1) | RR(2) | RR(3) | ... )</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   where "|" denotes concatenation, and</td><td> </td><td class="right">   where "|" denotes concatenation, and</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   RR(i) = owner | type | class | TTL | RDATA length | RDATA</td><td> </td><td class="right">   RR(i) = owner | type | class | TTL | RDATA length | RDATA</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr id="diff0025"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   where "|" denotes concatenation, and</td><td> </td><td class="rblock">   <span class="insert">  </span>where "|" denotes concatenation, and</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0026"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   RR(i) = owner | type | class | TTL | RDATA length | RDATA</td><td> </td><td class="rblock">   <span class="insert">  </span>RR(i) = owner | type | class | TTL | RDATA length | RDATA</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0027"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">3.4.<span class="delete">1</span>.  Inclusion/Exclusion Rules</td><td> </td><td class="rblock">3.4.<span class="insert">2</span>.  Inclusion/Exclusion Rules</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   When calculating the digest, the following inclusion/exclusion rules</td><td> </td><td class="right">   When calculating the digest, the following inclusion/exclusion rules</td><td class="lineno"></td></tr>
@@ -424,7 +422,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">3.5.  Update ZONEMD RR</td><td> </td><td class="right">3.5.  Update ZONEMD RR</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0028"><td></td></tr>
+      <tr id="diff0026"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Once <span class="delete">the</span> zone digest has been calculated, its value is then copied to</td><td> </td><td class="rblock">   Once <span class="insert">a</span> zone digest has been calculated, its value is then copied to</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   the Digest field of the <span class="delete">ZONEMD record.</span></td><td> </td><td class="rblock">   the Digest field of the <span class="insert">placeholder ZONEMD record.  Repeat for each</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   digest if multiple digests are to be published.</span></td><td class="lineno"></td></tr>
@@ -450,7 +448,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">        DNSSEC validation of the SOA or ZONEMD records fails, digest</td><td> </td><td class="right">        DNSSEC validation of the SOA or ZONEMD records fails, digest</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        verification MUST NOT be considered successful.</td><td> </td><td class="right">        verification MUST NOT be considered successful.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0029"><td></td></tr>
+      <tr id="diff0027"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   4.   If the <span class="delete">zone contains more than one apex ZONEMD RR, digest</span></td><td> </td><td class="rblock">   4.   If the <span class="insert">ZONEMD RRSet contains more than one RR with the same</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">        <span class="delete">verification MUST NOT be considered successful.</span></td><td> </td><td class="rblock">        <span class="insert">Digest Type and Paremter, digest verification MUST NOT be</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        considered successful.</span></td><td class="lineno"></td></tr>
@@ -464,28 +462,28 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">        the zone digest could not be verified due to an unsupported</td><td> </td><td class="right">        the zone digest could not be verified due to an unsupported</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        algorithm.</td><td> </td><td class="right">        algorithm.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0030"><td></td></tr>
+      <tr id="diff0028"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   7.   The <span class="delete">Reserved field MUST be checked.  If the Reserved field value</span></td><td> </td><td class="rblock">   7.   The <span class="insert">received Digest Type and Digest values are copied to a</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">        is not zero, verification MUST NOT be considered successful.</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                                                         </span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   8.   The received Digest Type and Digest values are copied to a</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        temporary location.</td><td> </td><td class="right">        temporary location.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0031"><td></td></tr>
+      <tr id="diff0029"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">9</span>.   The ZONEMD RR's RDATA is reset to the placeholder values</td><td> </td><td class="rblock">   <span class="insert">8</span>.   The ZONEMD RR's RDATA is reset to the placeholder values</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        described in Section 3.2.</td><td> </td><td class="right">        described in Section 3.2.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0032"><td></td></tr>
+      <tr id="diff0030"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">10.</span>  The zone digest is computed over the zone data as described in</td><td> </td><td class="rblock">   <span class="insert">9. </span>  The zone digest is computed over the zone data as described in</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        Section 3.4.</td><td> </td><td class="right">        Section 3.4.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0033"><td></td></tr>
+      <tr id="diff0031"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   1<span class="delete">1</span>.  The calculated digest is compared to the received digest stored</td><td> </td><td class="rblock">   1<span class="insert">0</span>.  The calculated digest is compared to the received digest stored</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        in the temporary location.  If the two digest values match,</td><td> </td><td class="right">        in the temporary location.  If the two digest values match,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        verification is considered successful.  Otherwise, verification</td><td> </td><td class="right">        verification is considered successful.  Otherwise, verification</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        MUST NOT be considered successful.</td><td> </td><td class="right">        MUST NOT be considered successful.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0034"><td></td></tr>
+      <tr id="diff0032"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   1<span class="delete">2</span>.  The ZONEMD RR's RDATA is reset to the received Digest Type and</td><td> </td><td class="rblock">   1<span class="insert">1</span>.  The ZONEMD RR's RDATA is reset to the received Digest Type and</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        Digest stored in the temporary location.  Thus, any downstream</td><td> </td><td class="right">        Digest stored in the temporary location.  Thus, any downstream</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">        clients can similarly verify the zone.</td><td> </td><td class="right">        clients can similarly verify the zone.</td><td class="lineno"></td></tr>
@@ -504,7 +502,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   regard to the wide variety of DNS zones in use on the Internet.</td><td> </td><td class="right">   regard to the wide variety of DNS zones in use on the Internet.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Additionally, the ZONEMD record defined in this document includes a</td><td> </td><td class="right">   Additionally, the ZONEMD record defined in this document includes a</td><td class="lineno"></td></tr>
-      <tr id="diff0035"><td></td></tr>
+      <tr id="diff0033"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Reserved</span> field in the form of an 8-bit integer.  The authors have a</td><td> </td><td class="rblock">   <span class="insert">Parameter</span> field in the form of an 8-bit integer.  The authors have a</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   particular future use in mind for this field, namely to support</td><td> </td><td class="right">   particular future use in mind for this field, namely to support</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   efficient digests in large, dynamic zones.  We intend to conduct</td><td> </td><td class="right">   efficient digests in large, dynamic zones.  We intend to conduct</td><td class="lineno"></td></tr>
@@ -528,7 +526,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Value: 63</td><td> </td><td class="right">   Value: 63</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Meaning: Message Digest Over Zone Data</td><td> </td><td class="right">   Meaning: Message Digest Over Zone Data</td><td class="lineno"></td></tr>
-      <tr id="diff0036"><td></td></tr>
+      <tr id="diff0034"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Reference: This document</td><td> </td><td class="right">   Reference: This document</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -537,7 +535,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   This document asks IANA to create a new "ZONEMD Digest Types"</td><td> </td><td class="right">   This document asks IANA to create a new "ZONEMD Digest Types"</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   registry with initial contents as follows:</td><td> </td><td class="right">   registry with initial contents as follows:</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0037"><td></td></tr>
+      <tr id="diff0035"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">          +---------+</span>-------------+-----------+-----------+</td><td> </td><td class="rblock">   <span class="insert">+---------+-----------------+--</span>-------------+-----------+-----------+</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">          | Value   | Description</span> | Status    | Reference |</td><td> </td><td class="rblock">   <span class="insert">| Value   | Description     | Mnemonic     </span> | Status    | Reference |</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">          +---------+</span>-------------+-----------+-----------+</td><td> </td><td class="rblock">   <span class="insert">+---------+-----------------+--</span>-------------+-----------+-----------+</td><td class="lineno"></td></tr>
@@ -567,7 +565,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The authors wish to thank David Blacka, Scott Hollenbeck, and Rick</td><td> </td><td class="right">   The authors wish to thank David Blacka, Scott Hollenbeck, and Rick</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Wilhelm for providing feedback on early drafts of this document.</td><td> </td><td class="right">   Wilhelm for providing feedback on early drafts of this document.</td><td class="lineno"></td></tr>
-      <tr id="diff0038"><td></td></tr>
+      <tr id="diff0036"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Additionally, they thank Joe Abley, Mark Andrews, <span class="delete">Olafur Gudmundsson</span>,</td><td> </td><td class="rblock">   Additionally, they thank Joe Abley, Mark Andrews, <span class="insert">Ralph Dolmans</span>,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Paul Hoffman, Evan Hunt, Shumon Huque, Tatuya Jinmei, Burt Kaliski,</span></td><td> </td><td class="rblock">   <span class="insert">Richard Gibson, Olafur Gudmundsson, Paul Hoffman, Evan Hunt, Shumon</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Shane Kerr, Matt Larson, John Levine, Ed Lewis, Matt Pounsett, Mukund</span></td><td> </td><td class="rblock">   <span class="insert">Huque, Tatuya Jinmei, Burt Kaliski, Shane Kerr, Matt Larson, John</span></td><td class="lineno"></td></tr>
@@ -597,7 +595,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   o  Both implementations produce expected results on examples given in</td><td> </td><td class="right">   o  Both implementations produce expected results on examples given in</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">      this document.</td><td> </td><td class="right">      this document.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0039"><td></td></tr>
+      <tr id="diff0037"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   From -01 to -02:</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Changed the name of the Reserved field to Parameter.</span></td><td class="lineno"></td></tr>
@@ -633,11 +631,11 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">A.3.  EXAMPLE Zone with multiple digests</td><td> </td><td class="right">A.3.  EXAMPLE Zone with multiple digests</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Here, the EXAMPLE zone contains multiple ZONEMD records.  Since only</td><td> </td><td class="right">   Here, the EXAMPLE zone contains multiple ZONEMD records.  Since only</td><td class="lineno"></td></tr>
-      <tr id="diff0040"><td></td></tr>
+      <tr id="diff0038"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   one Digest Type is defined at this time (SHA384), this example</td><td> </td><td class="rblock">   one Digest Type is defined at this time (SHA384<span class="insert">-STABLE</span>), this example</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   utilizes additional ZONEMD records with Digest Type values in the</td><td> </td><td class="right">   utilizes additional ZONEMD records with Digest Type values in the</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   private range (240-254).  These additional private-range digests are</td><td> </td><td class="right">   private range (240-254).  These additional private-range digests are</td><td class="lineno"></td></tr>
-      <tr id="diff0041"><td></td></tr>
+      <tr id="diff0039"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   not verifiable, but note that their other fields (Serial, <span class="delete">Reserved</span>,</td><td> </td><td class="rblock">   not verifiable, but note that their other fields (Serial, <span class="insert">Parameter</span>,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Digest Type) are included in the calculation of all ZONEMD digests.</td><td> </td><td class="right">   Digest Type) are included in the calculation of all ZONEMD digests.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -651,8 +649,8 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">                                     23742b4756708d50</td><td> </td><td class="right">                                     23742b4756708d50</td><td class="lineno"></td></tr>
 
      <tr><td></td><td class="left"></td><td> </td><td class="right"></td><td></td></tr>
-     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 41 change blocks.&nbsp;</th></tr>
-     <tr class="stats"><td></td><th><i>68 lines changed or deleted</i></th><th><i> </i></th><th><i>95 lines changed or added</i></th><td></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 39 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><td></td><th><i>66 lines changed or deleted</i></th><th><i> </i></th><th><i>93 lines changed or added</i></th><td></td></tr>
      <tr><td colspan="5" align="center" class="small"><br/>This html diff was produced by rfcdiff 1.46. The latest version is available from <a href="http://www.tools.ietf.org/tools/rfcdiff/" >http://tools.ietf.org/tools/rfcdiff/</a> </td></tr>
    </table>
    </body>

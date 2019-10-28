@@ -656,11 +656,11 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
             below, and then applying the SHA384 digest algorithm <xref target="RFC6605"/>:
           </t>
           <figure><artwork>
-  digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
   
-  where "|" denotes concatenation, and
+where "|" denotes concatenation, and
   
-  RR(i) = owner | type | class | TTL | RDATA length | RDATA
+RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </artwork></figure>
         </section>
         <section title="Inclusion/Exclusion Rules">
