@@ -146,8 +146,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <abstract>
       <t>
         This document describes an experimental protocol and new DNS Resource Record
-        that can be used to provide a message digest over DNS zone data.
-        The &RRNAME; Resource Record conveys the message digest data in
+        that can be used to provide a cryptograpic message digest over DNS zone data.
+        The &RRNAME; Resource Record conveys the digest data in
         the zone itself.
         When a zone publisher includes an &RRNAME; record, recipients
         can verify the zone contents for accuracy and completeness.
@@ -194,7 +194,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         cryptographic message digest of the data in a zone.
         It allows a receiver of the zone to verify the zone's
         authenticity, especially when used in combination with DNSSEC.
-        This technique makes the message
+        This technique makes the
         digest a part of the zone itself, allowing
         verification the zone as a whole, no matter how it is
         transmitted.
@@ -471,7 +471,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             The Serial field is a 32-bit unsigned integer in network
             order. It is equal to the serial number from the zone's
             SOA record (<xref target="RFC1035"/> section 3.3.13) for
-            which the message digest was generated.
+            which the zone digest was generated.
           </t>
           <t>
             The zone's serial number is included here in order to
@@ -646,7 +646,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         <section title="SHA384-STABLE Calculation">
           <t>
             The Parameter field is not used in the calculation of
-            SHA384-STABLE message digets.
+            SHA384-STABLE zone digets.
             The Parameter field SHOULD be set to zero in SHA384-STABLE placeholder records.
           </t>
           <t>
@@ -697,9 +697,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
     </section>
 
-    <section title="Verifying Zone Message Digest" anchor="verifying">
+    <section title="Verifying Zone Digest" anchor="verifying">
       <t>
-        The recipient of a zone that has a message digest record can verify the zone
+        The recipient of a zone that has a &RRNAME; RR can verify the zone
         by calculating the digest as follows:
       </t>
       <t>
