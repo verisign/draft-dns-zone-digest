@@ -487,7 +487,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             that identifies the algorithm used to construct the digest.  
           </t>
           <t>
-            At the time of this writing, SHA384-STABLE, with value 1, is the only
+            At the time of this writing, SHA384-SIMPLE, with value 1, is the only
             standardized
             Digest Type defined for &RRNAME; records.  The Digest Type registry
             is further described in <xref target="iana"/>.
@@ -501,7 +501,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Parameter Field">
           <t>
             The Parameter field is an 8-bit unsigned integer whose
-            meaning depends on the Digest Type in use.  For SHA384-STABLE,
+            meaning depends on the Digest Type in use.  For SHA384-SIMPLE,
             the Parameter field plays no role in digest calculation or verification.
           </t>
         </section>
@@ -639,15 +639,23 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
       <section title="Calculate the Digest" anchor="calculating-calculating">
         <t>
           The digest calculation details vary depending upon the Digest Type.
-          This document describes digest calculation for SHA384-STABLE only.
+          This document describes digest calculation for SHA384-SIMPLE only.
           Digest calculation for additional types may be defined in future updates
           to this document.
         </t>
-        <section title="SHA384-STABLE Calculation">
+        <section title="SHA384-SIMPLE Calculation">
+          <t>
+            For SHA384-SIMPLE, the digest is caulated over the zone as
+            a whole.  This means that a change to a single RR in the zone
+            requires iterating over all RRs in the zone to recalculate
+            the digest.  SHA384-SIMPLE is good for zones that are small
+            and/or stable, but probably not good for zones that are
+            large and/or dynamic.
+          </t>
           <t>
             The Parameter field is not used in the calculation of
-            SHA384-STABLE message digets.
-            The Parameter field SHOULD be set to zero in SHA384-STABLE placeholder records.
+            SHA384-SIMPLE message digets.
+            The Parameter field SHOULD be set to zero in SHA384-SIMPLE placeholder records.
           </t>
           <t>
             The zone digest is calculated by concatenating the canonical on-the-wire
@@ -845,8 +853,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <ttcol align="left">Reference</ttcol>
 
         <c>1</c>
-        <c>SHA384 for stable zones</c>
-        <c>SHA384-STABLE</c>
+        <c>SHA384 simple zone digest</c>
+        <c>SHA384-SIMPLE</c>
         <c>Mandatory</c>
         <c>This document</c>
 
@@ -1068,6 +1076,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>No longer require Parameter field to be zero in verification.</t>
         <t>Updated a rule from earlier versions that said multiple &RRNAME; RRs were not allowed.</t>
       </list></t>
+      <t>From -02 to -03:
+      <list style="symbols">
+        <t>Changed the name of Digest Type 1 from SHA384-STABLE to SHA384-SIMPLE.</t>
+      </list></t>
     </section>
 
   </middle>
@@ -1245,7 +1257,7 @@ non-apex      900     IN  ZONEMD  2018031900 1 0 (
       <section title="EXAMPLE Zone with multiple digests">
         <t>
           Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Digest Type is defined at this time (SHA384-STABLE), this
+          only one Digest Type is defined at this time (SHA384-SIMPLE), this
           example utilizes additional &RRNAME; records with Digest Type
           values in the private range (240-254).  These additional
           private-range digests are not verifiable, but note that their
