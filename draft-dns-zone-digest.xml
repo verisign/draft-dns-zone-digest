@@ -42,7 +42,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="exp" docName="draft-ietf-dnsop-dns-zone-digest-02" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-02" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -145,7 +145,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
     <abstract>
       <t>
-        This document describes an experimental protocol and new DNS Resource Record
+        This document describes a protocol and new DNS Resource Record
         that can be used to provide a message digest over DNS zone data.
         The &RRNAME; Resource Record conveys the message digest data in
         the zone itself.
@@ -167,7 +167,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         in large, dynamic zones due to the time and resources
         required for digest calculation.
         The &RRNAME; record described in this document includes
-        fields reserved for future work to support large, dynamic
+        a field intended to enable future work to support large, dynamic
         zones.
       </t>
     </abstract>
@@ -326,8 +326,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           specified, the digest is re-calculated over the entire zone
           content each time.  This specification does not provide
           an efficient mechanism for incremental updates of zone
-          data.  It does, however, reserve a field in the &RRNAME; record
-          for future work to support incremental
+          data.  It does, however, include a field in the &RRNAME; record
+          intended for future work to support incremental
           zone digest algorithms (e.g. using Merkle trees).
         </t>
         <!-- t>
@@ -796,7 +796,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
     </section>
 
-    <section title="Scope of Experimentation">
+    <!-- section title="Scope of Experimentation">
       <t>
         This memo is published as an Experimental RFC.  The purpose
         of the experimental period is to provide the community time
@@ -824,7 +824,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         for Standards Track approval.
       </t>
 
-    </section>
+    </section -->
 
     <section title="IANA Considerations" anchor="iana">
       <section title="&RRNAME; RRtype">
@@ -1079,6 +1079,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -02 to -03:
       <list style="symbols">
         <t>Changed the name of Digest Type 1 from SHA384-STABLE to SHA384-SIMPLE.</t>
+        <t>Changed document status from Experimental to Standards Track.</t>
       </list></t>
     </section>
 
