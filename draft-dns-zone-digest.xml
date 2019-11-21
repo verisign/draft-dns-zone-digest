@@ -645,7 +645,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         </t>
         <section title="SHA384-SIMPLE Calculation">
           <t>
-            For SHA384-SIMPLE, the digest is caulated over the zone as
+            For SHA384-SIMPLE, the digest is calculated over the zone as
             a whole.  This means that a change to a single RR in the zone
             requires iterating over all RRs in the zone to recalculate
             the digest.  SHA384-SIMPLE is good for zones that are small
@@ -736,7 +736,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the &RRNAME; RRSet contains more than one RR with the same Digest Type and Paremter, digest verification
+            If the &RRNAME; RRSet contains more than one RR with the same Digest Type and Parameter, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
