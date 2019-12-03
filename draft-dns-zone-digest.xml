@@ -928,6 +928,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         Ralph Dolmans,
         Richard Gibson,
 	Olafur Gudmundsson,
+        Bob Harold,
 	Paul Hoffman,
 	Evan Hunt,
 	Shumon Huque,
