@@ -1080,6 +1080,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <list style="symbols">
         <t>Changed the name of Digest Type 1 from SHA384-STABLE to SHA384-SIMPLE.</t>
         <t>Changed document status from Experimental to Standards Track.</t>
+        <t>Removed Scope of Experimentation section.</t>
       </list></t>
     </section>
 
