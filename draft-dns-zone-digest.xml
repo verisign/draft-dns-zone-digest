@@ -976,7 +976,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           <xref target="ZoneDigestHackathon"/>.  This implementation is in Python and is able to
           perform the following functions:
           <list style="symbols">
-          <t>Read an input zone and a output zone with &RRNAME; record.</t>
+          <t>Read an input zone and output a zone with &RRNAME; record.</t>
           <t>Verify the zone digest from an input zone.</t>
           <t>Output the &RRNAME; record in its defined presentation format.</t>
           </list>
