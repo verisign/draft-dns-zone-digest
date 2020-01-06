@@ -42,7 +42,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-03" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-04" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -1082,6 +1082,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Changed the name of Digest Type 1 from SHA384-STABLE to SHA384-SIMPLE.</t>
         <t>Changed document status from Experimental to Standards Track.</t>
         <t>Removed Scope of Experimentation section.</t>
+      </list></t>
+      <t>From -03 to -04:
+      <list style="symbols">
+        <t></t>
       </list></t>
     </section>
 

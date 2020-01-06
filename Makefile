@@ -1,6 +1,6 @@
 SRC=draft-dns-zone-digest
 DST=draft-ietf-dnsop-dns-zone-digest
-VER=03
+VER=$(shell cat ${SRC}.xml | grep '^.rfc category' | awk '{print $$3}' | awk -F= '{print $$2}' | sed -e s'/"//g' | awk -F- '{print $$NF}')
 
 all: ${DST}-${VER}.txt
 	
