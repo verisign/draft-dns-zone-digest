@@ -1154,7 +1154,12 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </list></t>
       <t>From -03 to -04:
       <list style="symbols">
+        <t>Addressing WGLC feedback.</t>
         <t>When discussing multiple &RRNAME; RRs, allow for Parameter, as well as Digest Type, transition.</t>
+        <t>Added Performance Considerations section with some benchmarks.</t>
+        <t>Further clarifications about non-apex &RRNAME; RRs.</t>
+        <t>Clarified inclusion rule for duplicate RRs.</t>
+        <t>Removed some inappropiately used RFC 2119 key words.</t>
       </list></t>
     </section>
 
