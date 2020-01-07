@@ -682,7 +682,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             <list style="symbols">
             <t>All records in the zone, including glue records, MUST be included.</t>
             <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
-            <t>Include only one instance of duplicate RRs with equal owner, class, type, and RDATA.</t>
+            <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included.</t>
             <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
             <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
             <t>The RRSIG covering &RRNAME; MUST NOT be included
