@@ -442,8 +442,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
        Each &RRNAME; RR MUST specify a unique Digest Type and Parameter tuple.
-       It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
-       <!-- XXX MSJ: lower case "recommended" here please -->
+       It is recommended that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
        Digest Type or Parameter.
       </t>
