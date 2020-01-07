@@ -923,6 +923,55 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </section>
     </section>
 
+    <section title="Performance Considerations" anchor="performance">
+      <t>
+        This section is provided to make zone publishers aware of the
+        performance requirements and implications of including &RRNAME;
+        RRs in a zone.
+      </t>
+      <section title="SHA384-SIMPLE">
+        <t>
+          As mentioned previously, SHA384-SIMPLE may not be
+          appropriate for use in zones that are either large or
+          highly dynamic.
+          Zone publishers should carefully consider the use of &RRNAME;
+          in such zones, since it might cause consumers of zone data
+          (e.g., secondary name servers) to expend resources on digest
+          calculation.
+          Furthermore, for such use cases, it is recommended that &RRNAME;
+          only be used when digest calculation time is significnatly
+          less than propagation times and update intervals.
+        </t>
+        <t>
+          The authors' implementation (<xref
+          target="authors-implementation"/>) includes an option to record
+          and report CPU usage of its operation.
+          The software was used to generate digets for more than 800
+          TLD zones available from <xref target="CZDS"/>.
+          The table below summarizes the the results for SHA384-SIMPLE,
+          grouped by zone size.
+          The Rate column is the mean amount of time per RR to calculate the digest,
+          running on commidity hardware at the time of this writing.
+        </t>
+        <texttable>
+          <ttcol align="right">Zone Size (RRs)</ttcol>
+          <ttcol align="right">Rate (msec/RR)</ttcol>
+          <c>10 - 99</c>  <c>0.00683</c>
+          <c>100 - 999</c>  <c>0.00551</c>
+          <c>1000 - 9999</c>  <c>0.00505</c>
+          <c>10000 - 99999</c>  <c>0.00602</c>
+          <c>100000 - 999999</c>  <c>0.00845</c>
+          <c>1000000 - 9999999</c>  <c>0.0108</c>
+          <c>10000000 - 99999999</c>  <c>0.0148</c>
+        </texttable>
+        <t>
+          For example, based on the above table, it takes approximately
+          0.13 seconds to calculate a SHA384-SIMPLE digest for a zone with
+          22,000 RRs, and about 2.5 seconds for a zone with 300,000 RRs.
+        </t>
+      </section>
+    </section>
+
     <section title="Privacy Considerations" anchor="privacy">
       <t>This specification has no impacts on user privacy.</t>
     </section>
@@ -963,7 +1012,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </section>
 
     <section anchor="Implementation" title="Implementation Status">
-      <section title="Authors' Implementation">
+      <section title="Authors' Implementation" anchor="authors-implementation">
         <t>
           The authors have an open source implementation in
           C, using the ldns library <xref target="ldns-zone-digest"/>.  This implementation is able to
