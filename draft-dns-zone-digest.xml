@@ -437,11 +437,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         The &RRNAME; RR is class independent.
         The RDATA of the resource record consists of four fields: Serial, Digest Type, Parameter, and Digest.
       </t>
-      <t>
-        This specification utilizes &RRNAME; RRs located at the
-        zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
-        have no meaning in this specification.
-      </t>
+
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
@@ -451,6 +447,21 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
        the zone publisher is in the process of transitioning to a new
        Digest Type or Parameter.
       </t>
+
+      <section title="Non-apex &RRNAME; Records">
+        <t>
+          This specification utilizes &RRNAME; RRs located at the
+          zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
+          have no meaning in this specification.
+          Non-apex &RRNAME; RRs MUST NOT be used for verification.
+          Non-apex &RRNAME; RRsets are treated like any other RRset
+          (which is to say they are included) during digest calculation.
+        </t>
+        <t>
+          Unless explicitly stated otherwise, "&RRNAME;" always refers
+          to apex records throughout this document.
+        </t>
+      </section>
 
       <section title="&RRNAME; RDATA Wire Format">
         <!-- XXX Joe Abley: specify short names for the fields -->
