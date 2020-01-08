@@ -606,38 +606,37 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         <t>
           In preparation for calculating the zone digest, any existing &RRNAME; records
           at the zone apex
-          MUST first be deleted.
+          are first deleted.
         </t>
         <t>
           Prior to calculation of the digest, and prior to signing with
-          DNSSEC, a placeholder &RRNAME; record MUST be added to the
+          DNSSEC, a placeholder &RRNAME; record is added to the
           zone apex.  This serves two purposes: (1) it allows the digest to cover
           the Serial, Digest Type, and Parameter field values, and (2) ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
         </t>
         <t>
-          It is RECOMMENDED that the TTL of the &RRNAME; record match the TTL of the SOA.
+          It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
         </t>
         <t>
-          In the placeholder record, the Serial field MUST be
-          set to the current SOA Serial.  The Digest Type field MUST be set
+          In the placeholder record, the Serial field is
+          set to the current SOA Serial.  The Digest Type field is set
           to the value for the chosen digest algorithm.
           The Parameter field is set to a value whose meaning depends on the Digest Type.
           The Digest
-          field MUST be set to all zeroes and of length appropriate
+          field is set to all zeroes and of length appropriate
           for the chosen digest algorithm.
         </t>
         <t>
           If multiple digests are to be published in the zone, e.g.,
-          during an algorithm rollover, there MUST be one placeholder
-          record for each Digest Type.
+          during an algorithm rollover, a placeholder
+          record is added for each Digest Type and Parameter.
         </t>
       </section>
       <section title="Optionally Sign the Zone">
-      <!-- XXX MSJ: probably lowercase may for DNSSEC -->
         <t>
-          Following addition of placeholder records, the zone MAY be signed with DNSSEC.
+          Following addition of placeholder records, the zone may be signed with DNSSEC.
           Note that when the digest calculation is complete, and the &RRNAME; record is updated,
           the signature(s) for the &RRNAME; RRSet MUST be recalculated and
           updated as well.
@@ -1152,7 +1151,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Added Performance Considerations section with some benchmarks.</t>
         <t>Further clarifications about non-apex &RRNAME; RRs.</t>
         <t>Clarified inclusion rule for duplicate RRs.</t>
-        <t>Removed some inappropiately used RFC 2119 key words.</t>
+        <t>Removed or lowercased some inappropiately used RFC 2119 key words.</t>
       </list></t>
     </section>
 
