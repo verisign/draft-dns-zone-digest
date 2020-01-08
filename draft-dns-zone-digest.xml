@@ -330,13 +330,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           intended for future work to support incremental
           zone digest algorithms (e.g. using Merkle trees).
         </t>
-        <!-- t>
-          The cryptographic algorithms available for zone digest are
-          exactly the same as for DS records.  This avoids the need
-          for a separate digest algorithm registry.  Any updates to the
-          DS algorithms automatically updates the algorithm status for
-          zone digests.
-        </t -->
         <!-- XXX Joe Abley: remove following paragraph -->
         <t>
           It is expected that verification of a zone digest would be
