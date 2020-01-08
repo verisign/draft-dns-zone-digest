@@ -429,7 +429,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     </section>
 
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
-    <!-- XXX MSJ: Section 2 uses SHOULD or MUST related to data content rather
     than protocol.  -->
       <t>
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
@@ -441,7 +440,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
-       Each &RRNAME; RR MUST specify a unique Digest Type and Parameter tuple.
+       Each &RRNAME; RR must specify a unique Digest Type and Parameter tuple.
        It is recommended that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
        Digest Type or Parameter.
@@ -523,7 +522,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the message digest.  The Digest field MUST NOT be empty.
+            containing the message digest.  The Digest field must not be empty.
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
@@ -537,17 +536,17 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The presentation format of the RDATA portion is as follows:
         </t>
         <t>
-          The Serial field MUST be represented as an unsigned decimal integer.
+          The Serial field is represented as an unsigned decimal integer.
         </t>
         <t>
-          The Digest Type field MUST be represented as an unsigned decimal
+          The Digest Type field is represented as an unsigned decimal
           integer.
         </t>
         <t>
-          The Parameter field MUST be represented as an unsigned decimal integer.
+          The Parameter field is represented as an unsigned decimal integer.
         </t>
         <t>
-          The Digest MUST be represented as a sequence of case-insensitive
+          The Digest is represented as a sequence of case-insensitive
           hexadecimal digits.  Whitespace is allowed within the hexadecimal
           text.
         </t>
