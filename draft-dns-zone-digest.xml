@@ -628,12 +628,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           field MUST be set to all zeroes and of length appropriate
           for the chosen digest algorithm.
         </t>
-        <!-- t>
-          FOR DISCUSSION: if we need to support variable length digests,
-          whose length would not be known at the time when placeholders
-          are created, then we should instead simply skip over the Digest
-          field when computing the digest.
-        </t -->
         <t>
           If multiple digests are to be published in the zone, e.g.,
           during an algorithm rollover, there MUST be one placeholder
