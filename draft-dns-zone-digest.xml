@@ -785,17 +785,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           during an algorithm rollover, a match using any one of the recipient's
           supported Digest Type algorithms is sufficient to verify the zone.
       </t>
-      <!-- t>
-          It is RECOMMENDED that implementations maintain a (possibly
-          configurable) list of supported Digest Type algorithms ranked
-          from most to least preferred.  It is further RECOMMENDED that
-          recipients use only their most preferred algorithm that is present in the zone
-          for digest verification.
-      </t -->
-      <!-- t>
-          As a matter of local policy, the recipient MAY require that
-          all supported and present Digest Type algorithms verify the zone.
-      </t -->
       </section>
     </section>
 
