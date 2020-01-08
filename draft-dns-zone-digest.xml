@@ -445,7 +445,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
           have no meaning in this specification.
           Non-apex &RRNAME; RRs MUST NOT be used for verification.
-          Non-apex &RRNAME; RRsets are treated like any other RRset
+          Non-apex &RRNAME; RRSets are treated like any other Rrset
           (which is to say they are included) during digest calculation.
         </t>
         <t>
