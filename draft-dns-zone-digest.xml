@@ -515,7 +515,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             The Parameter field is an 8-bit unsigned integer whose
             meaning depends on the Digest Type in use.  For SHA384-SIMPLE,
-            the Parameter field plays no role in digest calculation or verification.
+            the Parameter field plays no role in digest calculation or verification
+            and is always set to zero.
           </t>
         </section>
 
@@ -670,7 +671,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           <t>
             The Parameter field is not used in the calculation of
             SHA384-SIMPLE zone digests.
-            The Parameter field SHOULD be set to zero in SHA384-SIMPLE placeholder records.
+            The Parameter field MUST be set to zero in SHA384-SIMPLE placeholder records.
           </t>
           <t>
             The zone digest is calculated by concatenating the canonical on-the-wire
