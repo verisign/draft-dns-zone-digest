@@ -422,7 +422,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     </section>
 
     <section title="The &RRNAME; Resource Record" anchor="rrtype">
-    than protocol.  -->
       <t>
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
         The Type value for the &RRNAME; RR is 63.
