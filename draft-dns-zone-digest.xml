@@ -166,8 +166,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         As specified at this time, &RRNAME; is not designed for use
         in large, dynamic zones due to the time and resources
         required for digest calculation.
-        The &RRNAME; record described in this document includes
-        a field intended to enable future work to support large, dynamic
+        The &RRNAME; record described in this document
+        is designed so that new digest types may be developed in the future to support large, dynamic
         zones.
       </t>
     </abstract>
@@ -488,7 +488,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Digest Type Field">
           <t>
             The Digest Type field is an 8-bit unsigned integer
-            that identifies the algorithm used to construct the digest.  
+            that identifies both the cryptographic hash algorithm used to construct the digest,
+            and the methods by which data is presented as input to the hashing function.
           </t>
           <t>
             At the time of this writing, SHA384-SIMPLE, with value 1, is the only
@@ -1133,6 +1134,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Further clarifications about non-apex &RRNAME; RRs.</t>
         <t>Clarified inclusion rule for duplicate RRs.</t>
         <t>Removed or lowercased some inappropiately used RFC 2119 key words.</t>
+        <t>Clarified that digest type also encodes traversal method and that &RRNAME; has been designed to be at least somewhat future-proof.</t>
       </list></t>
     </section>
 
