@@ -755,12 +755,12 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             due to an unsupported algorithm.
           </t>
           <t>
-            The received Digest Type and Digest values are copied to
-            a temporary location.
+            The received Digest value is copied to
+            a temporary location.  Repeat for each &RRNAME; RR present.
           </t>
-          <t>
-            The &RRNAME; RR's RDATA is reset to the placeholder values
-            described in <xref target="placeholder"/>.
+          <t anchor="verify-zeroize-digest">
+            The &RRNAME; RR's Digest field MUST be set to all zeroes.
+            Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported digest types.
           </t>
           <t>
             The zone digest is computed over the zone data as
@@ -774,8 +774,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             considered successful.
           </t>
           <t>
-            The &RRNAME; RR's RDATA is reset to the received Digest Type
-            and Digest stored in the temporary location.
+            The &RRNAME; RR's RDATA is reset to the received
+            Digest stored in the temporary location.
             Thus, any downstream clients can similarly verify the zone.
           </t>
         </list>
@@ -785,6 +785,12 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           If multiple digests are present in the zone, e.g.,
           during an algorithm rollover, a match using any one of the recipient's
           supported Digest Type algorithms is sufficient to verify the zone.
+      </t>
+      <t>
+          Note that when multiple &RRNAME; RRs are present in the zone, 
+          the Digest field of each MUST be zeroed in step <xref
+          target="verify-zeroize-digest" format="counter"/> above, even for
+          unsupported digest types.  
       </t>
       </section>
     </section>
@@ -1136,6 +1142,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Clarified inclusion rule for duplicate RRs.</t>
         <t>Removed or lowercased some inappropiately used RFC 2119 key words.</t>
         <t>Clarified that digest type also encodes traversal method and that &RRNAME; has been designed to be at least somewhat future-proof.</t>
+        <t>Clarified that all &RRNAME; RRs, even for unsupported digest types, must be zeroized during digest calculation.</t>
       </list></t>
     </section>
 
