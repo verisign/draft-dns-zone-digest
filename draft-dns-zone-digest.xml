@@ -585,7 +585,8 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         </section>
         <section title="Duplicate RRs">
           <t>
-            As stated in Section 5 of <xref target="RFC2181"/>, it
+            As stated in Section 5 of <xref target="RFC2181"/>
+            and Section 6.3 of <xref target="RFC4034"/>, it
             is meaningless for a zone to have multiple RRs with
             equal owner name, class, type, and RDATA.  In the
             interest of consistency and interoperability, such
