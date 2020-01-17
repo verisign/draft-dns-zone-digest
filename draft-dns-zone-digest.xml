@@ -596,7 +596,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
         </section>
       </section>
       <section title="Add &RRNAME; Placeholder" anchor="placeholder">
-      <!-- XXX MSJ: another set of data set MUSTs -->
         <t>
           In preparation for calculating the zone digest, any existing &RRNAME; records
           at the zone apex
