@@ -696,13 +696,25 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
-        <!-- XXX MSJ: please clarify below -->
-        <t>
+        <!--
+        XXX MSJ: below needs work.  "Generally, what you want to say is
+        that if you have ZONEMD RRs, that they have to be published at
+        the same time as the matching SOA."
+        -->
+        <!-- t>
           Some implementations of incremental DNSSEC signing might
           update the zone's serial number for each resigning.
           However, to preserve the calculated digest, generation
           of the &RRNAME; signature at this time MUST NOT also
           result in a change of the SOA serial number.
+        </t -->
+        <t>
+          Some DNSSEC implementations (especially "online signing") might
+          be designed such that the SOA serial number is updated whenever
+          a new signature is made.  To preserve the calculated digest,
+          generation of an &RRNAME; signature must not also result in
+          a change to the SOA serial number.  The &RRNAME; RR and the
+          matching SOA MUST be published at the same time.
         </t>
       </section>
     </section>
