@@ -715,7 +715,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>
         <list style="numbers">
           <t anchor="verify-check-dnssec">
-            The verifier first determines
+            The verifier MUST first determine
             whether or not to expect DNSSEC records in the zone.
             This can be done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
