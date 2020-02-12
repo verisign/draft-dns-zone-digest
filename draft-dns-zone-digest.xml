@@ -616,9 +616,10 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
             this step in the process, but it is harmless to do so.
           </t>
         </section>
-        <section title="Scheme-Specific Processing">
+        <section title="Collate and Iterate Over Zone Data" anchor="collate-iterate">
           <t>
-            Next, scheme-specific processing takes place.  <xref targert="scheme-simple"/>
+            Next, digest calculation occurs by collating and iterating over the zone data in
+            a scheme-specific way.  <xref target="scheme-simple"/>
             describes digest calculation for the SIMPLE collation scheme.
           </t>
         </section>
@@ -792,7 +793,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t>
             The zone digest is computed over the zone data as
-            described in <xref target="calculating-calculating"/>.
+            described in <xref target="collate-iterate"/>.
           </t>
           <t>
             The calculated digest is compared to the received digest
