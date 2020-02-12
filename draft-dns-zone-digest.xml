@@ -167,7 +167,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         in large, dynamic zones due to the time and resources
         required for digest calculation.
         The &RRNAME; record described in this document
-        is designed so that new digest types may be developed in the future to support large, dynamic
+        is designed so that new digest schemes may be developed in the future to support large, dynamic
         zones.
       </t>
     </abstract>
@@ -326,9 +326,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           specified, the digest is re-calculated over the entire zone
           content each time.  This specification does not provide
           an efficient mechanism for incremental updates of zone
-          data.  It does, however, include a field in the &RRNAME; record
-          intended for future work to support incremental
-          zone digest algorithms (e.g. using Merkle trees).
+          data.  It is, however, extensible so that
+          future schemes to support incremental
+          zone digest algorithms (e.g. using Merkle trees) can be accomodated.
         </t>
         <!-- XXX Joe Abley: remove following paragraph -->
         <t>
@@ -426,16 +426,16 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This section describes the &RRNAME; Resource Record, including its fields, wire format, and presentation format.
         The Type value for the &RRNAME; RR is 63.
         The &RRNAME; RR is class independent.
-        The RDATA of the resource record consists of four fields: Serial, Digest Type, Parameter, and Digest.
+        The RDATA of the resource record consists of four fields: Serial, Scheme, Hash Algorithm, and Digest.
       </t>
 
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
-       Each &RRNAME; RR must specify a unique Digest Type and Parameter tuple.
+       Each &RRNAME; RR must specify a unique Scheme and Hash Algorithm tuple.
        It is recommended that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
-       Digest Type or Parameter.
+       Scheme or Hash Algorithm.
       </t>
 
       <section title="Non-apex &RRNAME; Records">
@@ -444,7 +444,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
           have no meaning in this specification.
           Non-apex &RRNAME; RRs MUST NOT be used for verification.
-          Non-apex &RRNAME; RRSets are treated like any other Rrset
+          Non-apex &RRNAME; RRSets are treated like any other RRSet
           (which is to say they are included) during digest calculation.
         </t>
         <t>
@@ -462,7 +462,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 |                             Serial                            |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-|  Digest Type  |   Parameter   |                               |
+|    Scheme     |Hash Algorithm |                               |
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
 |                             Digest                            |
 /                                                               /
@@ -485,37 +485,45 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
         </section>
 
-        <section title="The Digest Type Field">
+        <section title="The Scheme Field">
           <t>
-            The Digest Type field is an 8-bit unsigned integer
-            that identifies both the cryptographic hash algorithm used to construct the digest,
-            and the methods by which data is presented as input to the hashing function.
+            The Scheme field is an 8-bit unsigned integer that identifies
+            the methods by which data is collated and presented
+            as input to the hashing function.
           </t>
           <t>
-            At the time of this writing, SHA384-SIMPLE, with value 1, is the only
-            standardized
-            Digest Type defined for &RRNAME; records.  The Digest Type registry
+            At the time of this writing, SIMPLE, with value 1, is the only
+            standardized Scheme defined for &RRNAME; records.  The Scheme registry
             is further described in <xref target="iana"/>.
           </t>
           <t>
-            Digest Type values 240-254 are allocated for Private Use as
+            Scheme values 240-254 are allocated for Private Use as
             described in <xref target="RFC8126"/>.
           </t>
         </section>
 
-        <section title="The Parameter Field">
+        <section title="The Hash Algorithm Field">
           <t>
-            The Parameter field is an 8-bit unsigned integer whose
-            meaning depends on the Digest Type in use.  For SHA384-SIMPLE,
-            the Parameter field plays no role in digest calculation or verification
-            and is always set to zero.
+            The Hash Algorithm field is an 8-bit unsigned integer
+            that identifies the cryptographic hash algorithm
+            used to construct the digest.
+          </t>
+          <t>
+            At the time of this writing, SHA384-SIMPLE, with value 1, is the only
+            standardized
+            Hash Algorithm defined for &RRNAME; records.  The Hash Algorithm registry
+            is further described in <xref target="iana"/>.
+          </t>
+          <t>
+            Hash Algorithm values 240-254 are allocated for Private Use as
+            described in <xref target="RFC8126"/>.
           </t>
         </section>
 
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the message digest.  The Digest field must not be empty.
+            containing the digest value.  The Digest field must not be empty.
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
@@ -532,11 +540,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The Serial field is represented as an unsigned decimal integer.
         </t>
         <t>
-          The Digest Type field is represented as an unsigned decimal
-          integer.
+          The Scheme field is represented as an unsigned decimal integer.
         </t>
         <t>
-          The Parameter field is represented as an unsigned decimal integer.
+          The Hash Algorithm field is represented as an unsigned decimal
+          integer.
         </t>
         <t>
           The Digest is represented as a sequence of case-insensitive
@@ -559,113 +567,152 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
     </section>
 
     <section title="Calculating the Digest" anchor="calculating">
-      <section title="Canonical Format and Ordering">
+      <section title="General">
         <t>
-          Calculation of the zone digest REQUIRES RRs
-          to be processed in a consistent format and ordering.  Correct ordering
-          depends on (1) ordering of owner names, (2)
-          ordering of RRSets with the same owner name, and (3) ordering of
-          RRs within an RRSet.
+          This section describes aspects of zone digest calculation that
+          apply generally, regardless of the chosen Scheme.
         </t>
-        <t>
-          This specification adopts DNSSEC's canonical ordering for names
-          (Section 6.1 of <xref target="RFC4034"/>),
-          and canonical ordering for RRs within an RRSet
-          (Section 6.3 of <xref target="RFC4034"/>).
-          It also adopts DNSSEC's canonical RR form
-          (Section 6.2 of <xref target="RFC4034"/>).
-          However, since DNSSEC does not define a canonical ordering for RRSets
-          having the same owner name, that ordering is defined here.
-        </t>
-        <section title="Order of RRSets Having the Same Owner Name">
+
+        <section title="Add &RRNAME; Placeholder" anchor="placeholder">
           <t>
-            For the purposes of calculating the zone digest, RRSets having
-            the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
+            In preparation for calculating the zone digest, any existing &RRNAME; records
+            at the zone apex
+            are first deleted.
+          </t>
+          <t>
+            Prior to calculation of the digest, and prior to signing with
+            DNSSEC, a placeholder &RRNAME; record is added to the
+            zone apex.  This serves two purposes: (1) it allows the digest to cover
+            the Serial, Scheme, and Hash Algorithm fields, and (2) ensures that 
+            appropriate denial-of-existence (NSEC, NSEC3) records are created
+            if the zone is signed with DNSSEC.
+          </t>
+          <t>
+            It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
+          </t>
+          <t>
+            In the placeholder record, the Serial field is
+            set to the current SOA Serial.
+            The Scheme field is set to the value for the chosen collation scheme.
+            The Hash Algorithm field is set
+            to the value for the chosen hash algorithm.
+            The Digest
+            field is set to all zeroes and of length appropriate
+            for the chosen hash algorithm.
+          </t>
+          <t>
+            If multiple digests are to be published in the zone, e.g.,
+            during an algorithm rollover, a placeholder
+            record is added for each Scheme and Hash Algorithm.
           </t>
         </section>
-        <section title="Duplicate RRs">
+        <section title="Optionally Sign the Zone">
           <t>
-            As stated in Section 5 of <xref target="RFC2181"/>
-            and Section 6.3 of <xref target="RFC4034"/>, it
-            is meaningless for a zone to have multiple RRs with
-            equal owner name, class, type, and RDATA.  In the
-            interest of consistency and interoperability, such
-            duplicate RRs MUST NOT be included in the calculation
-            of a zone digest.
+            Following addition of placeholder records, the zone may be signed with DNSSEC.
+            Note that when the digest calculation is complete, and the &RRNAME; record is updated,
+            the signature(s) for the &RRNAME; RRSet MUST be recalculated and
+            updated as well.
+            Therefore, the signer is not required to calculate a signature over the placeholder record at
+            this step in the process, but it is harmless to do so.
+          </t>
+        </section>
+        <section title="Scheme-Specific Processing">
+          <t>
+            Next, scheme-specific processing takes place.  <xref targert="scheme-simple"/>
+            describes digest calculation for the SIMPLE collation scheme.
+          </t>
+        </section>
+        <section title="Update &RRNAME; RR">
+          <t>
+	    Once a zone digest has been calculated, its value is
+	    then copied to the Digest field of the placeholder
+	    &RRNAME; record.  Repeat for each digest if multiple
+	    digests are to be published.
+          </t>
+          <t>
+            If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
+            RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
+            the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
+          </t>
+          <!--
+          XXX MSJ: below needs work.  "Generally, what you want to say is
+          that if you have ZONEMD RRs, that they have to be published at
+          the same time as the matching SOA."
+          -->
+          <!-- t>
+            Some implementations of incremental DNSSEC signing might
+            update the zone's serial number for each resigning.
+            However, to preserve the calculated digest, generation
+            of the &RRNAME; signature at this time MUST NOT also
+            result in a change of the SOA serial number.
+          </t -->
+          <t>
+            Some DNSSEC implementations (especially "online signing") might
+            be designed such that the SOA serial number is updated whenever
+            a new signature is made.  To preserve the calculated digest,
+            generation of an &RRNAME; signature must not also result in
+            a change to the SOA serial number.  The &RRNAME; RR and the
+            matching SOA MUST be published at the same time.
           </t>
         </section>
       </section>
-      <section title="Add &RRNAME; Placeholder" anchor="placeholder">
+
+      <section title="SIMPLE Scheme Calculation" anchor="scheme-simple">
         <t>
-          In preparation for calculating the zone digest, any existing &RRNAME; records
-          at the zone apex
-          are first deleted.
+          For the SIMPLE scheme, the digest is calculated over the zone as
+          a whole.  This means that a change to a single RR in the zone
+          requires iterating over all RRs in the zone to recalculate
+          the digest.  SIMPLE is good for zones that are small
+          and/or stable, but probably not good for zones that are
+          large and/or dynamic.
         </t>
-        <t>
-          Prior to calculation of the digest, and prior to signing with
-          DNSSEC, a placeholder &RRNAME; record is added to the
-          zone apex.  This serves two purposes: (1) it allows the digest to cover
-          the Serial, Digest Type, and Parameter field values, and (2) ensures that 
-          appropriate denial-of-existence (NSEC, NSEC3) records are created
-          if the zone is signed with DNSSEC.
-        </t>
-        <t>
-          It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
-        </t>
-        <t>
-          In the placeholder record, the Serial field is
-          set to the current SOA Serial.  The Digest Type field is set
-          to the value for the chosen digest algorithm.
-          The Parameter field is set to a value whose meaning depends on the Digest Type.
-          The Digest
-          field is set to all zeroes and of length appropriate
-          for the chosen digest algorithm.
-        </t>
-        <t>
-          If multiple digests are to be published in the zone, e.g.,
-          during an algorithm rollover, a placeholder
-          record is added for each Digest Type and Parameter.
-        </t>
-      </section>
-      <section title="Optionally Sign the Zone">
-        <t>
-          Following addition of placeholder records, the zone may be signed with DNSSEC.
-          Note that when the digest calculation is complete, and the &RRNAME; record is updated,
-          the signature(s) for the &RRNAME; RRSet MUST be recalculated and
-          updated as well.
-          Therefore, the signer is not required to calculate a signature over the placeholder record at
-          this step in the process, but it is harmless to do so.
-        </t>
-      </section>
-      <section title="Calculate the Digest" anchor="calculating-calculating">
-        <t>
-          The digest calculation details vary depending upon the Digest Type.
-          This document describes digest calculation for SHA384-SIMPLE only.
-          Digest calculation for additional types may be defined in future updates
-          to this document.
-        </t>
-        <section title="SHA384-SIMPLE Calculation">
+
+        <section title="Canonical Format and Ordering">
           <t>
-            For SHA384-SIMPLE, the digest is calculated over the zone as
-            a whole.  This means that a change to a single RR in the zone
-            requires iterating over all RRs in the zone to recalculate
-            the digest.  SHA384-SIMPLE is good for zones that are small
-            and/or stable, but probably not good for zones that are
-            large and/or dynamic.
+            Calculation of the zone digest REQUIRES RRs
+            to be processed in a consistent format and ordering.  Correct ordering
+            depends on (1) ordering of owner names, (2)
+            ordering of RRSets with the same owner name, and (3) ordering of
+            RRs within an RRSet.
           </t>
           <t>
-            The Parameter field is not used in the calculation of
-            SHA384-SIMPLE zone digests.
-            The Parameter field MUST be set to zero in SHA384-SIMPLE placeholder records.
+            This specification adopts DNSSEC's canonical ordering for names
+            (Section 6.1 of <xref target="RFC4034"/>),
+            and canonical ordering for RRs within an RRSet
+            (Section 6.3 of <xref target="RFC4034"/>).
+            It also adopts DNSSEC's canonical RR form
+            (Section 6.2 of <xref target="RFC4034"/>).
+            However, since DNSSEC does not define a canonical ordering for RRSets
+            having the same owner name, that ordering is defined here.
           </t>
+          <section title="Order of RRSets Having the Same Owner Name">
+            <t>
+              For the purposes of calculating the zone digest, RRSets having
+              the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
+            </t>
+          </section>
+          <section title="Duplicate RRs">
+            <t>
+              As stated in Section 5 of <xref target="RFC2181"/>
+              and Section 6.3 of <xref target="RFC4034"/>, it
+              is meaningless for a zone to have multiple RRs with
+              equal owner name, class, type, and RDATA.  In the
+              interest of consistency and interoperability, such
+              duplicate RRs MUST NOT be included in the calculation
+              of a zone digest.
+            </t>
+          </section>
+        </section>
+
+        <section title="Digest Calculation">
           <t>
-            The zone digest is calculated by concatenating the canonical on-the-wire
+            The SIMPLE zone digest is calculated by concatenating the canonical on-the-wire
             form (without name compression) of all RRs in the zone, in the order described
             above, subject to the inclusion/exclusion rules described
-            below, and then applying the SHA384 digest algorithm <xref target="RFC6605"/>:
+            below, and then applying the chosen hash algorithm:
           </t>
           <figure><artwork>
-digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+digest = hash( RR(1) | RR(2) | RR(3) | ... )
   
 where "|" denotes concatenation, and
   
@@ -686,36 +733,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             </list>
           </t>
         </section>
-      </section>
-      <section title="Update &RRNAME; RR">
-        <t>
-          Once a zone digest has been calculated, its value is then copied to the Digest field of the placeholder &RRNAME; record.  Repeat for each digest if multiple digests are to be published.
-        </t>
-        <t>
-          If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-          RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
-          the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
-        </t>
-        <!--
-        XXX MSJ: below needs work.  "Generally, what you want to say is
-        that if you have ZONEMD RRs, that they have to be published at
-        the same time as the matching SOA."
-        -->
-        <!-- t>
-          Some implementations of incremental DNSSEC signing might
-          update the zone's serial number for each resigning.
-          However, to preserve the calculated digest, generation
-          of the &RRNAME; signature at this time MUST NOT also
-          result in a change of the SOA serial number.
-        </t -->
-        <t>
-          Some DNSSEC implementations (especially "online signing") might
-          be designed such that the SOA serial number is updated whenever
-          a new signature is made.  To preserve the calculated digest,
-          generation of an &RRNAME; signature must not also result in
-          a change to the SOA serial number.  The &RRNAME; RR and the
-          matching SOA MUST be published at the same time.
-        </t>
       </section>
     </section>
 
@@ -751,7 +768,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            If the &RRNAME; RRSet contains more than one RR with the same Digest Type and Parameter, digest verification
+            If the &RRNAME; RRSet contains more than one RR with the same Scheme and Hash Algorithm, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-serials">
@@ -760,7 +777,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
             verification MUST NOT be considered successful.
           </t>
           <t>
-            The &RRNAME; Digest Type field MUST be checked.  If the
+            The &RRNAME; Hash Algorithm field MUST be checked.  If the
             verifier does not support the given digest type, it
             SHOULD report that the zone digest could not be verified
             due to an unsupported algorithm.
@@ -795,7 +812,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>
           If multiple digests are present in the zone, e.g.,
           during an algorithm rollover, a match using any one of the recipient's
-          supported Digest Type algorithms is sufficient to verify the zone.
+          supported Hash Algorithm algorithms is sufficient to verify the zone.
       </t>
       <t>
           Note that when multiple &RRNAME; RRs are present in the zone, 
@@ -849,22 +866,29 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Meaning: Message Digest Over Zone Data</t>
         <t>Reference: This document</t>
       </section>
-      <section title="&RRNAME; Digest Type">
+
+      <section title="&RRNAME; Scheme">
         <t>
           This document asks IANA to create a new
-          "&RRNAME; Digest Types" registry
+          "&RRNAME; Scheme" registry
           with initial contents as follows:
         </t>
-        <texttable anchor="digest-type-table" title="&RRNAME; Digest Types">
+        <texttable anchor="scheme-table" title="&RRNAME; Scheme Registry">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
         <ttcol align="left">Status</ttcol>
         <ttcol align="left">Reference</ttcol>
 
+        <c>0</c>
+        <c>Reserved</c>
+        <c>-</c>
+        <c>-</c>
+        <c>This Document</c>
+
         <c>1</c>
-        <c>SHA384 simple zone digest</c>
-        <c>SHA384-SIMPLE</c>
+        <c>Simple &RRNAME; collation</c>
+        <c>SIMPLE</c>
         <c>Mandatory</c>
         <c>This document</c>
 
@@ -876,6 +900,41 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
         </texttable>
       </section>
+
+      <section title="&RRNAME; Hash Algorithm">
+        <t>
+          This document asks IANA to create a new
+          "&RRNAME; Hash Algorithm" registry
+          with initial contents as follows:
+        </t>
+        <texttable anchor="digest-type-table" title="&RRNAME; Hash Algorithm Registry">
+        <ttcol align="left">Value</ttcol>
+        <ttcol align="left">Description</ttcol>
+        <ttcol align="left">Mnemonic</ttcol>
+        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Reference</ttcol>
+
+        <c>0</c>
+        <c>Reserved</c>
+        <c>-</c>
+        <c>-</c>
+        <c>This Document</c>
+
+        <c>1</c>
+        <c>The SHA384 hash algorithm</c>
+        <c>SHA384</c>
+        <c>Mandatory</c>
+        <c><xref target="RFC6605"/></c>
+
+        <c>240-254</c>
+        <c>Private Use</c>
+        <c>-</c>
+        <c>-</c>
+        <c><xref target="RFC8126"/></c>
+
+        </texttable>
+      </section>
+
     </section>
 
     <section title="Security Considerations" anchor="security">
@@ -904,7 +963,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           and signature validation in step <xref target="verify-dnssec-validate" format="counter"/>.
         </t>
         <t>
-          The attacker might alter the Digest Type or Digest fields
+          The attacker might alter the Hash Algorithm or Digest fields
           of the &RRNAME; record.  Such modifications are detectable
           only with DNSSEC validation.
         </t>
@@ -1332,11 +1391,11 @@ non-apex      900     IN  ZONEMD  2018031900 1 0 (
       <section title="EXAMPLE Zone with multiple digests">
         <t>
           Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Digest Type is defined at this time (SHA384-SIMPLE), this
-          example utilizes additional &RRNAME; records with Digest Type
+          only one Hash Algorithm is defined at this time (SHA384), this
+          example utilizes additional &RRNAME; records with Hash Algorithm
           values in the private range (240-254).  These additional
           private-range digests are not verifiable, but note that their
-          other fields (Serial, Parameter, Digest Type) are included in
+          other fields (Serial, Scheme, Hash Algorithm) are included in
           the calculation of all &RRNAME; digests.
         </t>
         <figure><artwork align="left"><![CDATA[
