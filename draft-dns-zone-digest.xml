@@ -667,6 +667,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
       <section title="Scheme-Specific Processing" anchor="collate-iterate">
         <t>
           At this time, only the SIMPLE collation scheme is defined.
+          Additional schemes may be defined in future updates to this document.
         </t>
 
         <section title="The SIMPLE Scheme" anchor="scheme-simple">
