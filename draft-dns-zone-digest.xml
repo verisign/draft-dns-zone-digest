@@ -509,7 +509,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             used to construct the digest.
           </t>
           <t>
-            At the time of this writing, SHA384-SIMPLE, with value 1, is the only
+            At the time of this writing, SHA384, with value 1, is the only
             standardized
             Hash Algorithm defined for &RRNAME; records.  The Hash Algorithm registry
             is further described in <xref target="iana"/>.
@@ -992,9 +992,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         performance requirements and implications of including &RRNAME;
         RRs in a zone.
       </t>
-      <section title="SHA384-SIMPLE">
+      <section title="SIMPLE SHA384">
         <t>
-          As mentioned previously, SHA384-SIMPLE may not be
+          As mentioned previously, SIMPLE SHA384 may not be
           appropriate for use in zones that are either large or
           highly dynamic.
           Zone publishers should carefully consider the use of &RRNAME;
@@ -1011,7 +1011,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           and report CPU usage of its operation.
           The software was used to generate digets for more than 800
           TLD zones available from <xref target="CZDS"/>.
-          The table below summarizes the the results for SHA384-SIMPLE,
+          The table below summarizes the the results for SIMPLE SHA384,
           grouped by zone size.
           The Rate column is the mean amount of time per RR to calculate the digest,
           running on commidity hardware at the time of this writing.
@@ -1029,7 +1029,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </texttable>
         <t>
           For example, based on the above table, it takes approximately
-          0.13 seconds to calculate a SHA384-SIMPLE digest for a zone with
+          0.13 seconds to calculate a SIMPLE SHA384 digest for a zone with
           22,000 RRs, and about 2.5 seconds for a zone with 300,000 RRs.
         </t>
       </section>
