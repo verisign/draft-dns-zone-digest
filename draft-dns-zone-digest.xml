@@ -567,174 +567,167 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
     </section>
 
     <section title="Calculating the Digest" anchor="calculating">
-      <section title="General">
+      <section title="Add &RRNAME; Placeholder" anchor="placeholder">
         <t>
-          This section describes aspects of zone digest calculation that
-          apply generally, regardless of the chosen Scheme.
+          In preparation for calculating the zone digest, any existing &RRNAME; records
+          at the zone apex
+          are first deleted.
+        </t>
+        <t>
+          Prior to calculation of the digest, and prior to signing with
+          DNSSEC, a placeholder &RRNAME; record is added to the
+          zone apex.  This serves two purposes: (1) it allows the digest to cover
+          the Serial, Scheme, and Hash Algorithm fields, and (2) ensures that 
+          appropriate denial-of-existence (NSEC, NSEC3) records are created
+          if the zone is signed with DNSSEC.
+        </t>
+        <t>
+          It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
+        </t>
+        <t>
+          In the placeholder record, the Serial field is
+          set to the current SOA Serial.
+          The Scheme field is set to the value for the chosen collation scheme.
+          The Hash Algorithm field is set
+          to the value for the chosen hash algorithm.
+          The Digest
+          field is set to all zeroes and of length appropriate
+          for the chosen hash algorithm.
+        </t>
+        <t>
+          If multiple digests are to be published in the zone, e.g.,
+          during an algorithm rollover, a placeholder
+          record is added for each Scheme and Hash Algorithm.
+        </t>
+      </section>
+      <section title="Optionally Sign the Zone">
+        <t>
+          Following addition of placeholder records, the zone may be signed with DNSSEC.
+          Note that when the digest calculation is complete, and the &RRNAME; record is updated,
+          the signature(s) for the &RRNAME; RRSet MUST be recalculated and
+          updated as well.
+          Therefore, the signer is not required to calculate a signature over the placeholder record at
+          this step in the process, but it is harmless to do so.
+        </t>
+      </section>
+
+      <section title="Canonical Format and Ordering" anchor="canonical-ordering">
+        <t>
+          Calculation of a zone digest REQUIRES RRs
+          to be processed in a consistent format and ordering.  Correct ordering
+          depends on (1) ordering of owner names, (2)
+          ordering of RRSets with the same owner name, and (3) ordering of
+          RRs within an RRSet.
+        </t>
+        <t>
+          This specification adopts DNSSEC's canonical ordering for names
+          (Section 6.1 of <xref target="RFC4034"/>),
+          and canonical ordering for RRs within an RRSet
+          (Section 6.3 of <xref target="RFC4034"/>).
+          It also adopts DNSSEC's canonical RR form
+          (Section 6.2 of <xref target="RFC4034"/>).
+          However, since DNSSEC does not define a canonical ordering for RRSets
+          having the same owner name, that ordering is defined here.
+        </t>
+        <section title="Order of RRSets Having the Same Owner Name">
+          <t>
+            For the purposes of calculating the zone digest, RRSets having
+            the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
+          </t>
+        </section>
+      </section>
+
+      <!-- section title="Handling Duplicate RRs">
+        <t>
+          As stated in Section 5 of <xref target="RFC2181"/>
+          and Section 6.3 of <xref target="RFC4034"/>, it
+          is meaningless for a zone to have multiple RRs with
+          equal owner name, class, type, and RDATA.  In the
+          interest of consistency and interoperability,
+          only one instance of duplicate RRs with equal owner,
+          class, type and RDATA is included in a zone digest.
+        </t>
+      </section -->
+
+      <section title="Inclusion/Exclusion Rules" anchor="inclusion-exclusion">
+        <t>
+          When iterating over records in the zone, the following inclusion/exclusion rules apply:
+          <list style="symbols">
+          <t>All records in the zone, including glue records, MUST be included.</t>
+          <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
+          <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included.</t>
+          <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
+          <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
+          <t>The RRSIG covering &RRNAME; MUST NOT be included
+            because the RRSIG will be updated after all digests have been calculated.</t>
+          </list>
+        </t>
+      </section>
+
+      <section title="Scheme-Specific Processing" anchor="collate-iterate">
+        <t>
+          At this time, only the SIMPLE collation scheme is defined.
         </t>
 
-        <section title="Add &RRNAME; Placeholder" anchor="placeholder">
+        <section title="The SIMPLE Scheme" anchor="scheme-simple">
           <t>
-            In preparation for calculating the zone digest, any existing &RRNAME; records
-            at the zone apex
-            are first deleted.
-          </t>
-          <t>
-            Prior to calculation of the digest, and prior to signing with
-            DNSSEC, a placeholder &RRNAME; record is added to the
-            zone apex.  This serves two purposes: (1) it allows the digest to cover
-            the Serial, Scheme, and Hash Algorithm fields, and (2) ensures that 
-            appropriate denial-of-existence (NSEC, NSEC3) records are created
-            if the zone is signed with DNSSEC.
-          </t>
-          <t>
-            It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
-          </t>
-          <t>
-            In the placeholder record, the Serial field is
-            set to the current SOA Serial.
-            The Scheme field is set to the value for the chosen collation scheme.
-            The Hash Algorithm field is set
-            to the value for the chosen hash algorithm.
-            The Digest
-            field is set to all zeroes and of length appropriate
-            for the chosen hash algorithm.
-          </t>
-          <t>
-            If multiple digests are to be published in the zone, e.g.,
-            during an algorithm rollover, a placeholder
-            record is added for each Scheme and Hash Algorithm.
-          </t>
-        </section>
-        <section title="Optionally Sign the Zone">
-          <t>
-            Following addition of placeholder records, the zone may be signed with DNSSEC.
-            Note that when the digest calculation is complete, and the &RRNAME; record is updated,
-            the signature(s) for the &RRNAME; RRSet MUST be recalculated and
-            updated as well.
-            Therefore, the signer is not required to calculate a signature over the placeholder record at
-            this step in the process, but it is harmless to do so.
-          </t>
-        </section>
-
-        <section title="Canonical Format and Ordering" anchor="canonical-ordering">
-          <t>
-            Calculation of a zone digest REQUIRES RRs
-            to be processed in a consistent format and ordering.  Correct ordering
-            depends on (1) ordering of owner names, (2)
-            ordering of RRSets with the same owner name, and (3) ordering of
-            RRs within an RRSet.
-          </t>
-          <t>
-            This specification adopts DNSSEC's canonical ordering for names
-            (Section 6.1 of <xref target="RFC4034"/>),
-            and canonical ordering for RRs within an RRSet
-            (Section 6.3 of <xref target="RFC4034"/>).
-            It also adopts DNSSEC's canonical RR form
-            (Section 6.2 of <xref target="RFC4034"/>).
-            However, since DNSSEC does not define a canonical ordering for RRSets
-            having the same owner name, that ordering is defined here.
-          </t>
-          <section title="Order of RRSets Having the Same Owner Name">
-            <t>
-              For the purposes of calculating the zone digest, RRSets having
-              the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
-            </t>
-          </section>
-        </section>
-
-        <!-- section title="Handling Duplicate RRs">
-          <t>
-            As stated in Section 5 of <xref target="RFC2181"/>
-            and Section 6.3 of <xref target="RFC4034"/>, it
-            is meaningless for a zone to have multiple RRs with
-            equal owner name, class, type, and RDATA.  In the
-            interest of consistency and interoperability,
-	    only one instance of duplicate RRs with equal owner,
-	    class, type and RDATA is included in a zone digest.
-          </t>
-        </section -->
-
-        <section title="Inclusion/Exclusion Rules" anchor="inclusion-exclusion">
-          <t>
-            When iterating over records in the zone, the following inclusion/exclusion rules apply:
-            <list style="symbols">
-            <t>All records in the zone, including glue records, MUST be included.</t>
-            <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
-            <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included.</t>
-            <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
-            <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
-            <t>The RRSIG covering &RRNAME; MUST NOT be included
-              because the RRSIG will be updated after all digests have been calculated.</t>
-            </list>
-          </t>
-        </section>
-
-        <section title="Scheme-Specific Processing" anchor="collate-iterate">
-          <t>
-            At this time, only the SIMPLE collation scheme is defined.
+            For the SIMPLE scheme, the digest is calculated over the zone as
+            a whole.  This means that a change to a single RR in the zone
+            requires iterating over all RRs in the zone to recalculate
+            the digest.  SIMPLE is good for zones that are small
+            and/or stable, but probably not good for zones that are
+            large and/or dynamic.
           </t>
 
-          <section title="The SIMPLE Scheme" anchor="scheme-simple">
-            <t>
-              For the SIMPLE scheme, the digest is calculated over the zone as
-              a whole.  This means that a change to a single RR in the zone
-              requires iterating over all RRs in the zone to recalculate
-              the digest.  SIMPLE is good for zones that are small
-              and/or stable, but probably not good for zones that are
-              large and/or dynamic.
-            </t>
-
-            <t>
-              A zone digest using the SIMPLE scheme is calculated by concatenating the canonical on-the-wire
-              form (without name compression) of all RRs in the zone, in the order described
-              in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
-              in <xref target="inclusion-exclusion"/>, and then applying the chosen hash algorithm:
-            </t>
-            <figure><artwork>
+          <t>
+            A zone digest using the SIMPLE scheme is calculated by concatenating the canonical on-the-wire
+            form (without name compression) of all RRs in the zone, in the order described
+            in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
+            in <xref target="inclusion-exclusion"/>, and then applying the chosen hash algorithm:
+          </t>
+          <figure><artwork>
 digest = hash( RR(1) | RR(2) | RR(3) | ... )
   
 where "|" denotes concatenation, and
   
 RR(i) = owner | type | class | TTL | RDATA length | RDATA
-            </artwork></figure>
+          </artwork></figure>
 
-          </section>
         </section>
+      </section>
 
-        <section title="Update &RRNAME; RR">
-          <t>
-	    Once a zone digest has been calculated, its value is
-	    then copied to the Digest field of the placeholder
-	    &RRNAME; record.  Repeat for each digest if multiple
-	    digests are to be published.
-          </t>
-          <t>
-            If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
-            RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
-            the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
-          </t>
-          <!--
-          XXX MSJ: below needs work.  "Generally, what you want to say is
-          that if you have ZONEMD RRs, that they have to be published at
-          the same time as the matching SOA."
-          -->
-          <!-- t>
-            Some implementations of incremental DNSSEC signing might
-            update the zone's serial number for each resigning.
-            However, to preserve the calculated digest, generation
-            of the &RRNAME; signature at this time MUST NOT also
-            result in a change of the SOA serial number.
-          </t -->
-          <t>
-            Some DNSSEC implementations (especially "online signing") might
-            be designed such that the SOA serial number is updated whenever
-            a new signature is made.  To preserve the calculated digest,
-            generation of an &RRNAME; signature must not also result in
-            a change to the SOA serial number.  The &RRNAME; RR and the
-            matching SOA MUST be published at the same time.
-          </t>
-        </section>
+      <section title="Update &RRNAME; RR">
+        <t>
+          Once a zone digest has been calculated, its value is
+          then copied to the Digest field of the placeholder
+          &RRNAME; record.  Repeat for each digest if multiple
+          digests are to be published.
+        </t>
+        <t>
+          If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
+          RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
+          the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
+        </t>
+        <!--
+        XXX MSJ: below needs work.  "Generally, what you want to say is
+        that if you have ZONEMD RRs, that they have to be published at
+        the same time as the matching SOA."
+        -->
+        <!-- t>
+          Some implementations of incremental DNSSEC signing might
+          update the zone's serial number for each resigning.
+          However, to preserve the calculated digest, generation
+          of the &RRNAME; signature at this time MUST NOT also
+          result in a change of the SOA serial number.
+        </t -->
+        <t>
+          Some DNSSEC implementations (especially "online signing") might
+          be designed such that the SOA serial number is updated whenever
+          a new signature is made.  To preserve the calculated digest,
+          generation of an &RRNAME; signature must not also result in
+          a change to the SOA serial number.  The &RRNAME; RR and the
+          matching SOA MUST be published at the same time.
+        </t>
       </section>
 
     </section>
