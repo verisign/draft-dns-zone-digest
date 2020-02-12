@@ -881,7 +881,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c>Reserved</c>
         <c>-</c>
         <c>-</c>
-        <c>This Document</c>
+        <c>This document</c>
 
         <c>1</c>
         <c>Simple &RRNAME; collation</c>
@@ -915,7 +915,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c>Reserved</c>
         <c>-</c>
         <c>-</c>
-        <c>This Document</c>
+        <c>This document</c>
 
         <c>1</c>
         <c>The SHA384 hash algorithm</c>
