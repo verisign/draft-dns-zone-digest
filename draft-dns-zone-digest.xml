@@ -523,7 +523,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the digest value.  The Digest field must not be empty.
+            containing the output of the hash algorithm.  The Digest field must not be empty.
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
