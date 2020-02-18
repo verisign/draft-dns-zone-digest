@@ -980,6 +980,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           amplification effects (i.e., DNSKEY).
         </t>
       </section>
+      <section title="Fragility">
+	<!-- XXX MSJ: describe the downsides of this RR e.g. that it can make a zone more fragile -->
+      </section>
     </section>
 
     <section title="Performance Considerations" anchor="performance">
