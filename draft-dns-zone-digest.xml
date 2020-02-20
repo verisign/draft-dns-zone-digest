@@ -886,7 +886,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </texttable>
       </section>
 
-      <section title="&RRNAME; Hash Algorithm">
+      <section title="&RRNAME; Hash Algorithm" anchor="hash-alg-registry">
         <t>
           This document asks IANA to create a new
           "&RRNAME; Hash Algorithm" registry
@@ -968,8 +968,22 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           amplification effects (i.e., DNSKEY).
         </t>
       </section>
-      <section title="Fragility">
-	<!-- XXX MSJ: describe the downsides of this RR e.g. that it can make a zone more fragile -->
+      <section title="Increased Fragility">
+        <t>
+          Publishers and consumers of zones containing &RRNAME;
+          records should be aware of the tradeoffs surrounding this
+          feature.  While the intention is to secure the zone data,
+          misconfigurations or implementation bugs are generally
+          indistinguisable from intentional tampering, and could lead
+          to service failures when verification is performed automatically.
+        </t>
+        <t>
+          Zone publishers may want to deploy &RRNAME; gradually, perhaps
+          by utilizing one of the private use hash algorithms listed
+          in <xref target="hash-alg-registry"/>.  Similarly, recipients
+          may want to initially configure verification failures only as
+          a warning, and later as an error after gaining experience and
+          confidence with the feature.
       </section>
     </section>
 
