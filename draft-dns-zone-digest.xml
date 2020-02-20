@@ -675,7 +675,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
             For the SIMPLE scheme, the digest is calculated over the zone as
             a whole.  This means that a change to a single RR in the zone
             requires iterating over all RRs in the zone to recalculate
-            the digest.  SIMPLE is good for zones that are small
+            the digest.  SIMPLE is a good choice for zones that are small
             and/or stable, but probably not good for zones that are
             large and/or dynamic.
           </t>
