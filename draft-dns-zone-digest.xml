@@ -655,7 +655,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 0 (
           <list style="symbols">
           <t>All records in the zone, including glue records, MUST be included.</t>
           <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
-          <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included.</t>
+          <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
           <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
           <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
           <t>The RRSIG covering &RRNAME; MUST NOT be included
