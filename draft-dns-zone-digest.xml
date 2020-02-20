@@ -328,7 +328,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           an efficient mechanism for incremental updates of zone
           data.  It is, however, extensible so that
           future schemes to support incremental
-          zone digest algorithms (e.g. using Merkle trees) can be accomodated.
+          zone digest algorithms (e.g. using Merkle trees) can be accommodated.
         </t>
         <!-- XXX Joe Abley: remove following paragraph -->
         <t>
@@ -941,7 +941,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         </t>
         <t>
           The attacker might perform a downgrade attack by removing
-          one or more &RRNAME; records.  Such a removal is detecable only with DNSSEC
+          one or more &RRNAME; records.  Such a removal is detectable only with DNSSEC
           validation and is why <xref target="verifying"/>
           talks about checking denial-of-existence
           proofs in step <xref target="verify-check-existence" format="counter"/>
@@ -989,19 +989,19 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           (e.g., secondary name servers) to expend resources on digest
           calculation.
           Furthermore, for such use cases, it is recommended that &RRNAME;
-          only be used when digest calculation time is significnatly
+          only be used when digest calculation time is significantly
           less than propagation times and update intervals.
         </t>
         <t>
           The authors' implementation (<xref
           target="authors-implementation"/>) includes an option to record
           and report CPU usage of its operation.
-          The software was used to generate digets for more than 800
+          The software was used to generate digests for more than 800
           TLD zones available from <xref target="CZDS"/>.
           The table below summarizes the the results for SIMPLE SHA384,
           grouped by zone size.
           The Rate column is the mean amount of time per RR to calculate the digest,
-          running on commidity hardware at the time of this writing.
+          running on commodity hardware at the time of this writing.
         </t>
         <texttable>
           <ttcol align="right">Zone Size (RRs)</ttcol>
@@ -1198,7 +1198,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Added Performance Considerations section with some benchmarks.</t>
         <t>Further clarifications about non-apex &RRNAME; RRs.</t>
         <t>Clarified inclusion rule for duplicate RRs.</t>
-        <t>Removed or lowercased some inappropiately used RFC 2119 key words.</t>
+        <t>Removed or lowercased some inappropriately used RFC 2119 key words.</t>
         <t>Clarified that digest type also encodes traversal method and that &RRNAME; has been designed to be at least somewhat future-proof.</t>
         <t>Clarified that all &RRNAME; RRs, even for unsupported digest types, must be zeroized during digest calculation.</t>
       </list></t>
