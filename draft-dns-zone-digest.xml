@@ -763,7 +763,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t>
             The &RRNAME; Hash Algorithm field MUST be checked.  If the
-            verifier does not support the given digest type, it
+            verifier does not support the given Hash Algorithm, it
             SHOULD report that the zone digest could not be verified
             due to an unsupported algorithm.
           </t>
@@ -773,7 +773,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           </t>
           <t anchor="verify-zeroize-digest">
             The &RRNAME; RR's Digest field MUST be set to all zeroes.
-            Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported digest types.
+            Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
           </t>
           <t>
             The zone digest is computed over the zone data as
@@ -803,7 +803,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           Note that when multiple &RRNAME; RRs are present in the zone, 
           the Digest field of each MUST be zeroed in step <xref
           target="verify-zeroize-digest" format="counter"/> above, even for
-          unsupported digest types.  
+          unsupported Scheme and Hash Algorithm values.
       </t>
       </section>
     </section>

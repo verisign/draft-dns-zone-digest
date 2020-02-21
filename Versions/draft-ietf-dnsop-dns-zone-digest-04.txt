@@ -697,7 +697,7 @@ Internet-Draft               DNS Zone Digest               February 2020
         considered successful.
 
    6.   The ZONEMD Hash Algorithm field MUST be checked.  If the
-        verifier does not support the given digest type, it SHOULD
+        verifier does not support the given Hash Algorithm, it SHOULD
         report that the zone digest could not be verified due to an
         unsupported algorithm.
 
@@ -706,7 +706,7 @@ Internet-Draft               DNS Zone Digest               February 2020
 
    8.   The ZONEMD RR's Digest field MUST be set to all zeroes.  Repeat
         for each RR present in the apex ZONEMD RRSet, even for
-        unsupported digest types.
+        unsupported Scheme and Hash Algorithm values.
 
    9.   The zone digest is computed over the zone data as described in
         Section 3.5.
@@ -738,7 +738,7 @@ Internet-Draft               DNS Zone Digest               February 2020
 
    Note that when multiple ZONEMD RRs are present in the zone, the
    Digest field of each MUST be zeroed in step 8 above, even for
-   unsupported digest types.
+   unsupported Scheme and Hash Algorithm values.
 
 5.  IANA Considerations
 

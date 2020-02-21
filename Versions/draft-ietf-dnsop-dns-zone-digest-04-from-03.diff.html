@@ -643,7 +643,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr id="diff0056"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   6.   The ZONEMD <span class="delete">Digest Type field MUST be checked.  If the verifier</span></td><td> </td><td class="rblock">   6.   The ZONEMD <span class="insert">Hash Algorithm field MUST be checked.  If the</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">        <span class="delete">does not support the given digest type, it SHOULD report that</span></td><td> </td><td class="rblock">        <span class="insert">verifier does not support the given digest type, it SHOULD</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">        <span class="delete">does not support the given digest type, it SHOULD report that</span></td><td> </td><td class="rblock">        <span class="insert">verifier does not support the given Hash Algorithm, it SHOULD</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">        <span class="delete">the zone digest could not be verified due to an unsupported</span></td><td> </td><td class="rblock">        <span class="insert">report that the zone digest could not be verified due to an</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">        algorithm.</td><td> </td><td class="rblock">        <span class="insert">unsupported </span>algorithm.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -654,7 +654,7 @@ document.onkeydown = function(e) {
       <tr id="diff0058"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   8.   The ZONEMD RR's <span class="delete">RDATA is reset to the placeholder values</span></td><td> </td><td class="rblock">   8.   The ZONEMD RR's <span class="insert">Digest field MUST be set to all zeroes.  Repeat</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">        <span class="delete">described in Section 3.2.</span></td><td> </td><td class="rblock">        <span class="insert">for each RR present in the apex ZONEMD RRSet, even for</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        unsupported digest types.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">        unsupported Scheme and Hash Algorithm values.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   9.   The zone digest is computed over the zone data as described in</td><td> </td><td class="right">   9.   The zone digest is computed over the zone data as described in</td><td class="lineno"></td></tr>
       <tr id="diff0059"><td></td></tr>
@@ -679,7 +679,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Note that when multiple ZONEMD RRs are present in the zone, the</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Digest field of each MUST be zeroed in step 8 above, even for</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   unsupported digest types.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   unsupported Scheme and Hash Algorithm values.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">5.  IANA Considerations</td><td> </td><td class="right">5.  IANA Considerations</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
