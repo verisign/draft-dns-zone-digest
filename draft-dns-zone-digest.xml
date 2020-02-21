@@ -1220,6 +1220,8 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Clarified inclusion rule for duplicate RRs.</t>
         <t>Removed or lowercased some inappropriately used RFC 2119 key words.</t>
         <t>Clarified that all &RRNAME; RRs, even for unsupported hash algorithms, must be zeroized during digest calculation.</t>
+        <t>Added Resilience and Fragility to security considerations.</t>
+        <t>Updated examples since changes in this version result in different hash values.</t>
       </list></t>
     </section>
 
