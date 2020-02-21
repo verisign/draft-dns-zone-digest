@@ -630,7 +630,7 @@ Internet-Draft               DNS Zone Digest               February 2020
    the canonical on-the-wire form (without name compression) of all RRs
    in the zone, in the order described in Section 3.3, subject to the
    inclusion/exclusion rules described in Section 3.4, and then applying
-   the chosen hash algorithm:
+   the SHA-384 algorithm:
 
    digest = hash( RR(1) | RR(2) | RR(3) | ... )
 
@@ -790,7 +790,7 @@ Internet-Draft               DNS Zone Digest               February 2020
    | Value   | Description          | Mnemonic | Status    | Reference |
    +---------+----------------------+----------+-----------+-----------+
    | 0       | Reserved             | RESERVED | N/A       | N/A       |
-   | 1       | The SHA384 hash      | SHA384   | Mandatory | [RFC6605] |
+   | 1       | The SHA-384 hash     | SHA384   | Mandatory | [RFC6234] |
    |         | algorithm            |          |           |           |
    | 240-254 | Private Use          | N/A      | N/A       | [RFC8126] |
    +---------+----------------------+----------+-----------+-----------+
@@ -1234,10 +1234,10 @@ Wessels, et al.          Expires August 24, 2020               [Page 22]
 Internet-Draft               DNS Zone Digest               February 2020
 
 
-   [RFC6605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital
-              Signature Algorithm (DSA) for DNSSEC", RFC 6605,
-              DOI 10.17487/RFC6605, April 2012,
-              <https://www.rfc-editor.org/info/rfc6605>.
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234,
+              DOI 10.17487/RFC6234, May 2011,
+              <https://www.rfc-editor.org/info/rfc6234>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,

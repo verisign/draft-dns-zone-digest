@@ -580,7 +580,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   the canonical on-the-wire form (without name compression) of all RRs</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   in the zone, in the order described in Section 3.3, subject to the</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   inclusion/exclusion rules described in Section 3.4, and then applying</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   the chosen hash algorithm:</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   the SHA-384 algorithm:</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   digest = hash( RR(1) | RR(2) | RR(3) | ... )</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
@@ -725,7 +725,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock">   | Value   | Description     <span class="delete">| Mnemonic     </span> | Status    | Reference |</td><td> </td><td class="rblock">   | Value   | Description     <span class="insert">     | Mnemonic</span> | Status    | Reference |</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   +---------+-----------------<span class="delete">+-----</span>----------+-----------+-----------+</td><td> </td><td class="rblock">   +---------+-----------------<span class="insert">-----+</span>----------+-----------+-----------+</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   | <span class="delete">1       | SHA384 simple   | SHA384-SIMPLE | Mandatory | This</span>      |</td><td> </td><td class="rblock">   | <span class="insert">0       | Reserved             | RESERVED | N/A       | N/A </span>      |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   | <span class="delete">        | zone digest     |               |           | document </span> |</td><td> </td><td class="rblock">   | <span class="insert">1       | The SHA384 hash      | SHA384   | Mandatory | [RFC6605]</span> |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   | <span class="delete">        | zone digest     |               |           | document </span> |</td><td> </td><td class="rblock">   | <span class="insert">1       | The SHA-384 hash     | SHA384   | Mandatory | [RFC6234]</span> |</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   | <span class="delete">240-254 | Private Use     | -             | -         | [RFC8126]</span> |</td><td> </td><td class="rblock">   | <span class="insert">        | algorithm            |          |           |          </span> |</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">+---------+-----------------+---------------+-----------+-----------+</span></td><td> </td><td class="rblock">   <span class="insert">| 240-254 | Private Use          | N/A      | N/A       | [RFC8126] |</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   +---------+----------------------+----------+-----------+-----------+</span></td><td class="lineno"></td></tr>
@@ -965,18 +965,28 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td> </td><td class="right">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 20, line 9<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 23, line 14<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 19, line 49<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 23, line 5<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   [RFC6605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital</td><td> </td><td class="right">   [RFC6605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">              Signature Algorithm (DSA) for DNSSEC", RFC 6605,</td><td> </td><td class="right">              Signature Algorithm (DSA) for DNSSEC", RFC 6605,</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC6605, April 2012,</td><td> </td><td class="right">              DOI 10.17487/RFC6605, April 2012,</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc6605&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc6605&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS</td><td> </td><td class="right">   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,</td><td> </td><td class="right">              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc2181&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc2181&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.</td><td> </td><td class="right">   [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              Rose, "Resource Records for the DNS Security Extensions",</td><td> </td><td class="right">              Rose, "Resource Records for the DNS Security Extensions",</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              RFC 4034, DOI 10.17487/RFC4034, March 2005,</td><td> </td><td class="right">              RFC 4034, DOI 10.17487/RFC4034, March 2005,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc4034&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc4034&gt;.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0079"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   [RFC6<span class="delete">605]  Hoffman, P. and W. Wijngaards, "Elliptic Curve Digital</span></td><td> </td><td class="rblock">   [RFC6<span class="insert">234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              <span class="delete">Signature Algorithm (DSA) for DNSSEC", RFC 6605</span>,</td><td> </td><td class="rblock">              <span class="insert">(SHA and SHA-based HMAC and HKDF)", RFC 6234</span>,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              DOI 10.17487/RFC6<span class="delete">605, April 2012</span>,</td><td> </td><td class="rblock">              DOI 10.17487/RFC6<span class="insert">234, May 2011</span>,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">              &lt;https://www.rfc-editor.org/info/rfc6<span class="delete">605</span>&gt;.</td><td> </td><td class="rblock">              &lt;https://www.rfc-editor.org/info/rfc6<span class="insert">234</span>&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC</td><td> </td><td class="right">   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,</td><td> </td><td class="right">              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.</td><td> </td><td class="right">              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0079"><td></td></tr>
+      <tr id="diff0080"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">1<span class="delete">1</span>.2.  Informative References</td><td> </td><td class="rblock">1<span class="insert">2</span>.2.  Informative References</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [CZDS]     Internet Corporation for Assigned Names and Numbers,</td><td> </td><td class="right">   [CZDS]     Internet Corporation for Assigned Names and Numbers,</td><td class="lineno"></td></tr>
@@ -986,7 +996,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   [dns-over-https]</td><td> </td><td class="right">   [dns-over-https]</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              Hoffman, P. and P. McManus, "DNS Queries over HTTPS</td><td> </td><td class="right">              Hoffman, P. and P. McManus, "DNS Queries over HTTPS</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              (DoH)", draft-ietf-doh-dns-over-https-12 (work in</td><td> </td><td class="right">              (DoH)", draft-ietf-doh-dns-over-https-12 (work in</td><td class="lineno"></td></tr>
-      <tr id="diff0080"><td></td></tr>
+      <tr id="diff0081"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">              progress), June 2018, &lt;https://tools.ietf.org/html/</td><td> </td><td class="rblock">              progress), June 2018, &lt;https://tools.ietf.org/html/<span class="insert">draft-</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">              <span class="delete">draft-</span>ietf-doh-dns-over-https-12&gt;.</td><td> </td><td class="rblock">              ietf-doh-dns-over-https-12&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -1011,7 +1021,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RPZ]      Vixie, P. and V. Schryver, "DNS Response Policy Zones</td><td> </td><td class="right">   [RPZ]      Vixie, P. and V. Schryver, "DNS Response Policy Zones</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              (RPZ)", draft-vixie-dnsop-dns-rpz-00 (work in progress),</td><td> </td><td class="right">              (RPZ)", draft-vixie-dnsop-dns-rpz-00 (work in progress),</td><td class="lineno"></td></tr>
-      <tr id="diff0081"><td></td></tr>
+      <tr id="diff0082"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">              June 2018, &lt;https://tools.ietf.org/html/</td><td> </td><td class="rblock">              June 2018, &lt;https://tools.ietf.org/html/<span class="insert">draft-vixie-dnsop-</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">              d<span class="delete">raft-vixie-dnsop-d</span>ns-rpz-00&gt;.</td><td> </td><td class="rblock">              dns-rpz-00&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -1036,7 +1046,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">                                     1800 900 604800 86400 )</td><td> </td><td class="right">                                     1800 900 604800 86400 )</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                 86400   IN  NS      ns1</td><td> </td><td class="right">                 86400   IN  NS      ns1</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                 86400   IN  NS      ns2</td><td> </td><td class="right">                 86400   IN  NS      ns2</td><td class="lineno"></td></tr>
-      <tr id="diff0082"><td></td></tr>
+      <tr id="diff0083"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                 86400   IN  ZONEMD  2018031900 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">                 86400   IN  ZONEMD  2018031900 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">379ec2587d4fff35</span></td><td> </td><td class="rblock">                                     <span class="insert">b3437dca3d6c9047</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">0062b9385a641476</span></td><td> </td><td class="rblock">                                     <span class="insert">9f43d4bf0c1a805e</span></td><td class="lineno"></td></tr>
@@ -1056,7 +1066,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">                                     1800 900 604800 86400 )</td><td> </td><td class="right">                                     1800 900 604800 86400 )</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                 86400   IN  NS      ns1</td><td> </td><td class="right">                 86400   IN  NS      ns1</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                 86400   IN  NS      ns2</td><td> </td><td class="right">                 86400   IN  NS      ns2</td><td class="lineno"></td></tr>
-      <tr id="diff0083"><td></td></tr>
+      <tr id="diff0084"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                 86400   IN  ZONEMD  2018031900 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">                 86400   IN  ZONEMD  2018031900 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">c36e77eafdb7f3f6</span></td><td> </td><td class="rblock">                                     <span class="insert">9c31e37bd2d97ad4</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">dcfac8bca1121e17</span></td><td> </td><td class="rblock">                                     <span class="insert">9ead67b3a44f267e</span></td><td class="lineno"></td></tr>
@@ -1071,7 +1081,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   duplicate     300     IN  TXT     "I must be digested just once"</td><td> </td><td class="right">   duplicate     300     IN  TXT     "I must be digested just once"</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   duplicate     300     IN  TXT     "I must be digested just once"</td><td> </td><td class="right">   duplicate     300     IN  TXT     "I must be digested just once"</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   foo.test.     555     IN  TXT     "out-of-zone data must be excluded"</td><td> </td><td class="right">   foo.test.     555     IN  TXT     "out-of-zone data must be excluded"</td><td class="lineno"></td></tr>
-      <tr id="diff0084"><td></td></tr>
+      <tr id="diff0085"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   non-apex      900     IN  ZONEMD  2018031900 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">   non-apex      900     IN  ZONEMD  2018031900 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     616c6c6f77656420</td><td> </td><td class="right">                                     616c6c6f77656420</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     6275742069676e6f</td><td> </td><td class="right">                                     6275742069676e6f</td><td class="lineno"></td></tr>
@@ -1083,11 +1093,11 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">A.3.  EXAMPLE Zone with multiple digests</td><td> </td><td class="right">A.3.  EXAMPLE Zone with multiple digests</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Here, the EXAMPLE zone contains multiple ZONEMD records.  Since only</td><td> </td><td class="right">   Here, the EXAMPLE zone contains multiple ZONEMD records.  Since only</td><td class="lineno"></td></tr>
-      <tr id="diff0085"><td></td></tr>
+      <tr id="diff0086"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   one <span class="delete">Digest Type is defined at this time (SHA384-SIMPLE</span>), this example</td><td> </td><td class="rblock">   one <span class="insert">Hash Algorithm is defined at this time (SHA384</span>), this example</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   utilizes additional ZONEMD records with <span class="delete">Digest Type</span> values in the</td><td> </td><td class="rblock">   utilizes additional ZONEMD records with <span class="insert">Hash Algorithm</span> values in the</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   private range (240-254).  These additional private-range digests are</td><td> </td><td class="right">   private range (240-254).  These additional private-range digests are</td><td class="lineno"></td></tr>
-      <tr id="diff0086"><td></td></tr>
+      <tr id="diff0087"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   not verifiable, but note that their other fields (Serial, <span class="delete">Parameter</span>,</td><td> </td><td class="rblock">   not verifiable, but note that their other fields (Serial, <span class="insert">Scheme</span>,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Digest Type) are included in the calculation of all ZONEMD digests.</span></td><td> </td><td class="rblock">   <span class="insert">Hash Algorithm) are included in the calculation of all ZONEMD</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   digests.</span></td><td class="lineno"></td></tr>
@@ -1096,7 +1106,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">                                     1800 900 604800 86400 )</td><td> </td><td class="right">                                     1800 900 604800 86400 )</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   example.      86400   IN  NS      ns1.example.</td><td> </td><td class="right">   example.      86400   IN  NS      ns1.example.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   example.      86400   IN  NS      ns2.example.</td><td> </td><td class="right">   example.      86400   IN  NS      ns2.example.</td><td class="lineno"></td></tr>
-      <tr id="diff0087"><td></td></tr>
+      <tr id="diff0088"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">c0218e8eeb4f0275</span></td><td> </td><td class="rblock">                                     <span class="insert">6a126e222407923d</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                                     <span class="delete">d54c0e5ce7791f4d</span></td><td> </td><td class="rblock">                                     <span class="insert">f70e7aa44d5e813b</span></td><td class="lineno"></td></tr>
@@ -1107,21 +1117,21 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 <span class="delete">240 </span>0 (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 <span class="insert">1 24</span>0 (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     e2d523f654b9422a</td><td> </td><td class="right">                                     e2d523f654b9422a</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     96c5a8f44607bbee )</td><td> </td><td class="right">                                     96c5a8f44607bbee )</td><td class="lineno"></td></tr>
-      <tr id="diff0088"><td></td></tr>
+      <tr id="diff0089"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 <span class="delete">241 0</span> (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 <span class="insert">1 241</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     5732dd91240611f8</td><td> </td><td class="right">                                     5732dd91240611f8</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     314adb6b4769bdd2 )</td><td> </td><td class="right">                                     314adb6b4769bdd2 )</td><td class="lineno"></td></tr>
-      <tr id="diff0089"><td></td></tr>
+      <tr id="diff0090"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 <span class="delete">242 0</span> (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 <span class="insert">1 242</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     7c32e06779315c7d</td><td> </td><td class="right">                                     7c32e06779315c7d</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     81ba8c72f5cf9116</td><td> </td><td class="right">                                     81ba8c72f5cf9116</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     496b6395 )</td><td> </td><td class="right">                                     496b6395 )</td><td class="lineno"></td></tr>
-      <tr id="diff0090"><td></td></tr>
+      <tr id="diff0091"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 <span class="delete">243 0</span> (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 <span class="insert">1 243</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     183770af4a629f80</td><td> </td><td class="right">                                     183770af4a629f80</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     2e674e305b8d0d11</td><td> </td><td class="right">                                     2e674e305b8d0d11</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                     3dfe0837 )</td><td> </td><td class="right">                                     3dfe0837 )</td><td class="lineno"></td></tr>
-      <tr id="diff0091"><td></td></tr>
+      <tr id="diff0092"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   example.      86400   IN  ZONEMD  2018031900 <span class="delete">244 0</span> (</td><td> </td><td class="rblock">   example.      86400   IN  ZONEMD  2018031900 <span class="insert">1 244</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                     e1846540e33a9e41</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                     89792d18d5d131f6</span></td><td class="lineno"></td></tr>
@@ -1136,7 +1146,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">A.4.  The URI.ARPA Zone</td><td> </td><td class="right">A.4.  The URI.ARPA Zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0092"><td></td></tr>
+      <tr id="diff0093"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   The URI.ARPA zone retrieved 2018-10-21.</td><td> </td><td class="rblock">   The URI.ARPA zone retrieved 2018-10-21.<span class="insert">  Note this sample zone has</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   (expired) signatures, but no signature for the ZONEMD RR.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -1161,7 +1171,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   ;; SERVER: 192.0.32.132#53(192.0.32.132)</td><td> </td><td class="right">   ;; SERVER: 192.0.32.132#53(192.0.32.132)</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   ;; WHEN: Sun Oct 21 20:39:28 UTC 2018</td><td> </td><td class="right">   ;; WHEN: Sun Oct 21 20:39:28 UTC 2018</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   ;; XFR size: 34 records (messages 1, bytes 3941)</td><td> </td><td class="right">   ;; XFR size: 34 records (messages 1, bytes 3941)</td><td class="lineno"></td></tr>
-      <tr id="diff0093"><td></td></tr>
+      <tr id="diff0094"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   uri.arpa.       3600    IN      ZONEMD  2018100702 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">   uri.arpa.       3600    IN      ZONEMD  2018100702 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       <span class="delete">e4de6ed36e5d95706756932fae3ecbc6aeb76e16ce486a5553c7e4</span></td><td> </td><td class="rblock">       <span class="insert">cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       <span class="delete">c9974d03323e7cd39ccc5e70e797179633f4007bad</span> )</td><td> </td><td class="rblock">       <span class="insert">09fa27c62448a7100660bbdb4c90667424b734956b</span> )</td><td class="lineno"></td></tr>
@@ -1187,7 +1197,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   m.root-servers.net.   3600000 IN  A       202.12.27.33</td><td> </td><td class="right">   m.root-servers.net.   3600000 IN  A       202.12.27.33</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   root-servers.net.     3600000 IN  SOA     a.root-servers.net. (</td><td> </td><td class="right">   root-servers.net.     3600000 IN  SOA     a.root-servers.net. (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )</td><td> </td><td class="right">       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )</td><td class="lineno"></td></tr>
-      <tr id="diff0094"><td></td></tr>
+      <tr id="diff0095"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   root-servers.net.     3600000 IN  ZONEMD  2018091100 1 <span class="delete">0</span> (</td><td> </td><td class="rblock">   root-servers.net.     3600000 IN  ZONEMD  2018091100 1 <span class="insert">1</span> (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       <span class="delete">0c1839d86088062868c1ed79aed6a301dc7b08b02ba2f67cbc62edd4a0</span></td><td> </td><td class="rblock">       <span class="insert">4fb752b314e4dccb845832b611590b669a80daebb736d4bd22aa76ec06</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       <span class="delete">291f4132b8840da47ddab4401cc9088d04a14a</span> )</td><td> </td><td class="rblock">       <span class="insert">6737c79185c1f7dfd49ec91d9523e6240ea2c4</span> )</td><td class="lineno"></td></tr>
@@ -1203,8 +1213,8 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Email: dwessels@verisign.com</td><td> </td><td class="right">   Email: dwessels@verisign.com</td><td class="lineno"></td></tr>
 
      <tr><td></td><td class="left"></td><td> </td><td class="right"></td><td></td></tr>
-     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 94 change blocks.&nbsp;</th></tr>
-     <tr class="stats"><td></td><th><i>268 lines changed or deleted</i></th><th><i> </i></th><th><i>398 lines changed or added</i></th><td></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 95 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><td></td><th><i>272 lines changed or deleted</i></th><th><i> </i></th><th><i>402 lines changed or added</i></th><td></td></tr>
      <tr><td colspan="5" align="center" class="small"><br/>This html diff was produced by rfcdiff 1.46. The latest version is available from <a href="http://www.tools.ietf.org/tools/rfcdiff/" >http://tools.ietf.org/tools/rfcdiff/</a> </td></tr>
    </table>
    </body>
