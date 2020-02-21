@@ -987,6 +987,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           may want to initially configure verification failures only as
           a warning, and later as an error after gaining experience and
           confidence with the feature.
+        </t>
       </section>
     </section>
 
