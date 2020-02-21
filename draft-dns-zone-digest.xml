@@ -558,7 +558,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The following example shows a &RRNAME; RR.
         </t>
         <figure><artwork>
-example.com. 86400 IN &RRNAME; 2018031500 1 0 (
+example.com. 86400 IN &RRNAME; 2018031500 1 1 (
     FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE
     7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )
         </artwork></figure>
@@ -1332,13 +1332,13 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
                                   1800 900 604800 86400 )
               86400   IN  NS      ns1
               86400   IN  NS      ns2
-              86400   IN  ZONEMD  2018031900 1 0 (
-                                  379ec2587d4fff35
-                                  0062b9385a641476
-                                  6f9c028e8cf09d8a
-                                  7965537a68a2f149
-                                  4e1c151f8cf6be05
-                                  5bef4f27e6a87b13 )
+              86400   IN  ZONEMD  2018031900 1 1 (
+                                  b3437dca3d6c9047
+                                  9f43d4bf0c1a805e
+                                  fbfca88635df014f
+                                  04a1049368a23a77
+                                  577d896f0c58c5c7
+                                  338aabc7aa4314b5 )
 ns1           3600    IN  A       127.0.0.1
 ns2           3600    IN  AAAA    ::1
 ]]></artwork></figure>
@@ -1353,13 +1353,13 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
                                   1800 900 604800 86400 )
               86400   IN  NS      ns1
               86400   IN  NS      ns2
-              86400   IN  ZONEMD  2018031900 1 0 (
-                                  c36e77eafdb7f3f6
-                                  dcfac8bca1121e17
-                                  2a7b57db2c88409a
-                                  5c3d9247ba72b759
-                                  6c735c1a76fc817a
-                                  ad5c834f5a4bce16 )
+              86400   IN  ZONEMD  2018031900 1 1 (
+                                  9c31e37bd2d97ad4
+                                  9ead67b3a44f267e
+                                  a223cc70c1a0988d
+                                  49ac98da1b7ca1ed
+                                  ede57661b6cefc52
+                                  80d10d6b4b0b6cb1 )
 ns1           3600    IN  A       127.0.0.1
 ns2           3600    IN  AAAA    ::1
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
@@ -1367,7 +1367,7 @@ sub           7200    IN  NS      ns1
 duplicate     300     IN  TXT     "I must be digested just once"
 duplicate     300     IN  TXT     "I must be digested just once"
 foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
-non-apex      900     IN  ZONEMD  2018031900 1 0 (
+non-apex      900     IN  ZONEMD  2018031900 1 1 (
                                   616c6c6f77656420
                                   6275742069676e6f
                                   7265642e20616c6c
@@ -1392,28 +1392,32 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
                                   1800 900 604800 86400 )
 example.      86400   IN  NS      ns1.example.
 example.      86400   IN  NS      ns2.example.
-example.      86400   IN  ZONEMD  2018031900 1 0 (
-                                  c0218e8eeb4f0275
-                                  d54c0e5ce7791f4d
-                                  23742b4756708d50
-                                  d7121a11d434baa8
-                                  f869ebbb071a4bbb
-                                  0457c87870bc8cdd )
-example.      86400   IN  ZONEMD  2018031900 240 0 (
+example.      86400   IN  ZONEMD  2018031900 1 1 (
+                                  6a126e222407923d
+                                  f70e7aa44d5e813b
+                                  0b18b469b78d3d50
+                                  84cd3cbf24152eea
+                                  a68c00b6536bba2a
+                                  1f2cab0fd03a8162 )
+example.      86400   IN  ZONEMD  2018031900 1 240 (
                                   e2d523f654b9422a
                                   96c5a8f44607bbee )
-example.      86400   IN  ZONEMD  2018031900 241 0 (
+example.      86400   IN  ZONEMD  2018031900 1 241 (
                                   5732dd91240611f8
                                   314adb6b4769bdd2 )
-example.      86400   IN  ZONEMD  2018031900 242 0 (
+example.      86400   IN  ZONEMD  2018031900 1 242 (
                                   7c32e06779315c7d
                                   81ba8c72f5cf9116
                                   496b6395 )
-example.      86400   IN  ZONEMD  2018031900 243 0 (
+example.      86400   IN  ZONEMD  2018031900 1 243 (
                                   183770af4a629f80
                                   2e674e305b8d0d11
                                   3dfe0837 )
-example.      86400   IN  ZONEMD  2018031900 244 0 (
+example.      86400   IN  ZONEMD  2018031900 1 244 (
+                                  e1846540e33a9e41
+                                  89792d18d5d131f6
+                                  05fc283e )
+example.      86400   IN  ZONEMD  2018031900 240 1 (
                                   e1846540e33a9e41
                                   89792d18d5d131f6
                                   05fc283e )
@@ -1426,6 +1430,8 @@ ns2.example.  3600    IN  AAAA    ::1
       <section title="The URI.ARPA Zone">
         <t>
           The URI.ARPA zone retrieved 2018-10-21.
+          Note this sample zone has (expired) signatures, but
+          no signature for the &RRNAME; RR.
         </t>
         <figure><artwork align="left"><![CDATA[
 ; <<>> DiG 9.9.4 <<>> @lax.xfr.dns.icann.org uri.arpa axfr
@@ -1562,9 +1568,9 @@ uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
 ;; SERVER: 192.0.32.132#53(192.0.32.132)
 ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
 ;; XFR size: 34 records (messages 1, bytes 3941)
-uri.arpa.       3600    IN      ZONEMD  2018100702 1 0 (
-    e4de6ed36e5d95706756932fae3ecbc6aeb76e16ce486a5553c7e4
-    c9974d03323e7cd39ccc5e70e797179633f4007bad )
+uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
+    cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5
+    09fa27c62448a7100660bbdb4c90667424b734956b )
 ]]></artwork></figure>
       </section>
 
@@ -1618,9 +1624,9 @@ m.root-servers.net.   3600000 IN  AAAA    2001:dc3::35
 m.root-servers.net.   3600000 IN  A       202.12.27.33
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
     nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
-root-servers.net.     3600000 IN  ZONEMD  2018091100 1 0 (
-    0c1839d86088062868c1ed79aed6a301dc7b08b02ba2f67cbc62edd4a0
-    291f4132b8840da47ddab4401cc9088d04a14a )
+root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
+    4fb752b314e4dccb845832b611590b669a80daebb736d4bd22aa76ec06
+    6737c79185c1f7dfd49ec91d9523e6240ea2c4 )
 ]]></artwork></figure>
       </section>
     </section>

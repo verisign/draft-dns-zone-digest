@@ -2,12 +2,12 @@ example.        86400   IN      SOA     ns1 admin 2018031900 (
                                         1800 900 604800 86400 )
 		86400   IN      NS      ns1
 		86400   IN      NS      ns2
-		86400	IN	ZONEMD	2018031900 1 0 (
-					379ec2587d4fff35
-					0062b9385a641476
-					6f9c028e8cf09d8a
-					7965537a68a2f149
-					4e1c151f8cf6be05
-					5bef4f27e6a87b13 )
+		86400	IN	ZONEMD	2018031900 1 1 (
+                                        b3437dca3d6c9047
+                                        9f43d4bf0c1a805e
+                                        fbfca88635df014f
+                                        04a1049368a23a77
+                                        577d896f0c58c5c7
+                                        338aabc7aa4314b5 )
 ns1     3600    IN      A       127.0.0.1
 ns2     3600    IN      AAAA    ::1

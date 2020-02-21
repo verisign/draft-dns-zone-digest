@@ -132,6 +132,6 @@ uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
 ;; SERVER: 192.0.32.132#53(192.0.32.132)
 ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
 ;; XFR size: 34 records (messages 1, bytes 3941)
-uri.arpa.       3600    IN      ZONEMD  2018100702 1 0 (
-    e4de6ed36e5d95706756932fae3ecbc6aeb76e16ce486a5553c7e4
-    c9974d03323e7cd39ccc5e70e797179633f4007bad )
+uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
+    cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5
+    09fa27c62448a7100660bbdb4c90667424b734956b )

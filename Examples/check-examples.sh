@@ -9,6 +9,9 @@ $HOME/Edit/ldns-zone-digest/ldns-zone-digest -v example simple-example
 echo CHECKING complex-example
 $HOME/Edit/ldns-zone-digest/ldns-zone-digest -v example complex-example
 
+echo CHECKING multidigest-example
+$HOME/Edit/ldns-zone-digest/ldns-zone-digest -v example multidigest-example
+
 echo CHECKING root-servers.net
 $HOME/Edit/ldns-zone-digest/ldns-zone-digest -v root-servers.net root-servers.net
 

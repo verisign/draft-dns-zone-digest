@@ -2,13 +2,13 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
                                   1800 900 604800 86400 )
               86400   IN  NS      ns1
               86400   IN  NS      ns2
-              86400   IN  ZONEMD  2018031900 1 0 (
-                                  c36e77eafdb7f3f6
-                                  dcfac8bca1121e17
-                                  2a7b57db2c88409a
-                                  5c3d9247ba72b759
-                                  6c735c1a76fc817a
-                                  ad5c834f5a4bce16 )
+              86400   IN  ZONEMD  2018031900 1 1 (
+                                  9c31e37bd2d97ad4
+                                  9ead67b3a44f267e
+                                  a223cc70c1a0988d
+                                  49ac98da1b7ca1ed
+                                  ede57661b6cefc52
+                                  80d10d6b4b0b6cb1 )
 ns1           3600    IN  A       127.0.0.1
 ns2           3600    IN  AAAA    ::1
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
@@ -16,7 +16,7 @@ sub           7200    IN  NS      ns1
 duplicate     300     IN  TXT     "I must be digested just once"
 duplicate     300     IN  TXT     "I must be digested just once"
 foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
-non-apex      900     IN  ZONEMD  2018031900 1 0 (
+non-apex      900     IN  ZONEMD  2018031900 1 1 (
                                   616c6c6f77656420
                                   6275742069676e6f
                                   7265642e20616c6c
