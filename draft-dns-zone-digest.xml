@@ -977,7 +977,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           records should be aware of these tradeoffs.
           While the intention is to secure the zone data,
           misconfigurations or implementation bugs are generally
-          indistinguisable from intentional tampering, and could lead
+          indistinguishable from intentional tampering, and could lead
           to service failures when verification is performed automatically.
         </t>
         <t>
