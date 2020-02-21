@@ -28,7 +28,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC3658 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
-<!ENTITY RFC6605 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6605.xml">
+<!ENTITY RFC6234 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY RFC7696 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
 <!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
@@ -684,7 +684,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
             A zone digest using the SIMPLE scheme is calculated by concatenating the canonical on-the-wire
             form (without name compression) of all RRs in the zone, in the order described
             in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
-            in <xref target="inclusion-exclusion"/>, and then applying the chosen hash algorithm:
+            in <xref target="inclusion-exclusion"/>, and then applying the SHA-384 algorithm:
           </t>
           <figure><artwork>
 digest = hash( RR(1) | RR(2) | RR(3) | ... )
@@ -906,10 +906,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c>N/A</c>
 
         <c>1</c>
-        <c>The SHA384 hash algorithm</c>
+        <c>The SHA-384 hash algorithm</c>
         <c>SHA384</c>
         <c>Mandatory</c>
-        <c><xref target="RFC6605"/></c>
+        <c><xref target="RFC6234"/></c>
 
         <c>240-254</c>
         <c>Private Use</c>
@@ -1237,7 +1237,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     <!-- &RFC3658; -->
     <!-- &RFC4509; -->
     <!-- &RFC5933; -->
-    &RFC6605;
+    &RFC6234;
     &RFC8174;
 
     </references>
