@@ -948,7 +948,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           and signature validation in step <xref target="verify-dnssec-validate" format="counter"/>.
         </t>
         <t>
-          The attacker might alter the Hash Algorithm or Digest fields
+          The attacker might alter the Scheme, Hash Algorithm, or Digest fields
           of the &RRNAME; record.  Such modifications are detectable
           only with DNSSEC validation.
         </t>
@@ -999,7 +999,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       </t>
       <section title="SIMPLE SHA384">
         <t>
-          As mentioned previously, SIMPLE SHA384 may not be
+          As mentioned previously, the SIMPLE scheme may not be
           appropriate for use in zones that are either large or
           highly dynamic.
           Zone publishers should carefully consider the use of &RRNAME;
@@ -1016,7 +1016,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           and report CPU usage of its operation.
           The software was used to generate digests for more than 800
           TLD zones available from <xref target="CZDS"/>.
-          The table below summarizes the the results for SIMPLE SHA384,
+          The table below summarizes the the results for the SIMPLE scheme and SHA384 hash algorithm
           grouped by zone size.
           The Rate column is the mean amount of time per RR to calculate the digest,
           running on commodity hardware at the time of this writing.
@@ -1059,6 +1059,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 	Evan Hunt,
 	Shumon Huque,
         Tatuya Jinmei,
+        Mike St. Johns,
 	Burt Kaliski,
         Shane Kerr,
 	Matt Larson,

@@ -816,9 +816,9 @@ Internet-Draft               DNS Zone Digest               February 2020
    validation and is why Section 4 talks about checking denial-of-
    existence proofs in step 2 and signature validation in step 3.
 
-   The attacker might alter the Hash Algorithm or Digest fields of the
-   ZONEMD record.  Such modifications are detectable only with DNSSEC
-   validation.
+   The attacker might alter the Scheme, Hash Algorithm, or Digest fields
+   of the ZONEMD record.  Such modifications are detectable only with
+   DNSSEC validation.
 
 6.2.  Attacks Utilizing the Zone Digest
 
@@ -867,22 +867,22 @@ Internet-Draft               DNS Zone Digest               February 2020
 
 7.1.  SIMPLE SHA384
 
-   As mentioned previously, SIMPLE SHA384 may not be appropriate for use
-   in zones that are either large or highly dynamic.  Zone publishers
-   should carefully consider the use of ZONEMD in such zones, since it
-   might cause consumers of zone data (e.g., secondary name servers) to
-   expend resources on digest calculation.  Furthermore, for such use
-   cases, it is recommended that ZONEMD only be used when digest
-   calculation time is significantly less than propagation times and
-   update intervals.
+   As mentioned previously, the SIMPLE scheme may not be appropriate for
+   use in zones that are either large or highly dynamic.  Zone
+   publishers should carefully consider the use of ZONEMD in such zones,
+   since it might cause consumers of zone data (e.g., secondary name
+   servers) to expend resources on digest calculation.  Furthermore, for
+   such use cases, it is recommended that ZONEMD only be used when
+   digest calculation time is significantly less than propagation times
+   and update intervals.
 
    The authors' implementation (Section 10.1) includes an option to
    record and report CPU usage of its operation.  The software was used
    to generate digests for more than 800 TLD zones available from
-   [CZDS].  The table below summarizes the the results for SIMPLE
-   SHA384, grouped by zone size.  The Rate column is the mean amount of
-   time per RR to calculate the digest, running on commodity hardware at
-   the time of this writing.
+   [CZDS].  The table below summarizes the the results for the SIMPLE
+   scheme and SHA384 hash algorithm grouped by zone size.  The Rate
+   column is the mean amount of time per RR to calculate the digest,
+   running on commodity hardware at the time of this writing.
 
 
 
@@ -924,11 +924,11 @@ Internet-Draft               DNS Zone Digest               February 2020
    Wilhelm for providing feedback on early drafts of this document.
    Additionally, they thank Joe Abley, Mark Andrews, Ralph Dolmans,
    Richard Gibson, Olafur Gudmundsson, Bob Harold, Paul Hoffman, Evan
-   Hunt, Shumon Huque, Tatuya Jinmei, Burt Kaliski, Shane Kerr, Matt
-   Larson, John Levine, Ed Lewis, Matt Pounsett, Mukund Sivaraman, Petr
-   Spacek, Ondrej Sury, Willem Toorop, Florian Weimer, Tim Wicinksi,
-   Wouter Wijngarrds, Paul Wouters, and other members of the dnsop
-   working group for their input.
+   Hunt, Shumon Huque, Tatuya Jinmei, Mike St. Johns, Burt Kaliski,
+   Shane Kerr, Matt Larson, John Levine, Ed Lewis, Matt Pounsett, Mukund
+   Sivaraman, Petr Spacek, Ondrej Sury, Willem Toorop, Florian Weimer,
+   Tim Wicinksi, Wouter Wijngarrds, Paul Wouters, and other members of
+   the dnsop working group for their input.
 
 10.  Implementation Status
 
