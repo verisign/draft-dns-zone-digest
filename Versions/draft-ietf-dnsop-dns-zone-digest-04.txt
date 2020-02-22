@@ -1205,9 +1205,6 @@ Internet-Draft               DNS Zone Digest               February 2020
    o  Updated examples since changes in this version result in different
       hash values.
 
-   o  Added Performance Considerations with benchmark data for SIMPLE
-      SHA384.
-
 12.  References
 
 12.1.  Normative References
@@ -1225,6 +1222,9 @@ Internet-Draft               DNS Zone Digest               February 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS
+              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,
+              <https://www.rfc-editor.org/info/rfc2181>.
 
 
 
@@ -1233,10 +1233,6 @@ Wessels, et al.          Expires August 24, 2020               [Page 22]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
-
-   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS
-              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,
-              <https://www.rfc-editor.org/info/rfc2181>.
 
    [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
@@ -1281,6 +1277,10 @@ Internet-Draft               DNS Zone Digest               February 2020
               Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
               January 1997, <https://www.rfc-editor.org/info/rfc2065>.
 
+   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
+              RFC 2136, DOI 10.17487/RFC2136, April 1997,
+              <https://www.rfc-editor.org/info/rfc2136>.
 
 
 
@@ -1289,11 +1289,6 @@ Wessels, et al.          Expires August 24, 2020               [Page 23]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
-
-   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
-              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
-              RFC 2136, DOI 10.17487/RFC2136, April 1997,
-              <https://www.rfc-editor.org/info/rfc2136>.
 
    [RFC2535]  Eastlake 3rd, D., "Domain Name System Security
               Extensions", RFC 2535, DOI 10.17487/RFC2535, March 1999,
@@ -1336,6 +1331,11 @@ Internet-Draft               DNS Zone Digest               February 2020
               Terminology", RFC 7719, DOI 10.17487/RFC7719, December
               2015, <https://www.rfc-editor.org/info/rfc7719>.
 
+   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
+              and P. Hoffman, "Specification for DNS over Transport
+              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
+              2016, <https://www.rfc-editor.org/info/rfc7858>.
+
 
 
 
@@ -1345,11 +1345,6 @@ Wessels, et al.          Expires August 24, 2020               [Page 24]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
-
-   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
-              and P. Hoffman, "Specification for DNS over Transport
-              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
-              2016, <https://www.rfc-editor.org/info/rfc7858>.
 
    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -1394,6 +1389,11 @@ A.1.  Simple EXAMPLE Zone
                                      338aabc7aa4314b5 )
    ns1           3600    IN  A       127.0.0.1
    ns2           3600    IN  AAAA    ::1
+
+
+
+
+
 
 
 
