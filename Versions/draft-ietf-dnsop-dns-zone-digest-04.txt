@@ -139,7 +139,7 @@ Internet-Draft               DNS Zone Digest               February 2020
      12.2.  Informative References . . . . . . . . . . . . . . . . .  23
    Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  25
      A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  25
-     A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  25
+     A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  26
      A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  26
      A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  27
      A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  30
@@ -1166,9 +1166,9 @@ Internet-Draft               DNS Zone Digest               February 2020
       Algorithm".  This should make it more obvious how ZONEMD can be
       expanded in the future with new schemes and hash algorithms, while
       sacrificing some of the flexibility that the Parameter was
-      intended to provide.  This adds new IANA requirement for a Scheme
-      registry.
+      intended to provide.
 
+   o  Note: old RDATA fields: Serial, DigestType, Parameter, Digest.
 
 
 
@@ -1177,6 +1177,10 @@ Wessels, et al.          Expires August 24, 2020               [Page 21]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
+
+   o  Note: new RDATA fields: Serial, Scheme, HashAlgorithm, Digest.
+
+   o  Add new IANA requirement for a Scheme registry.
 
    o  Rearranged some sections and separated scheme-specific aspects
       from general aspects of digest calculation.
@@ -1201,6 +1205,9 @@ Internet-Draft               DNS Zone Digest               February 2020
    o  Updated examples since changes in this version result in different
       hash values.
 
+   o  Added Performance Considerations with benchmark data for SIMPLE
+      SHA384.
+
 12.  References
 
 12.1.  Normative References
@@ -1218,6 +1225,15 @@ Internet-Draft               DNS Zone Digest               February 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Wessels, et al.          Expires August 24, 2020               [Page 22]
+
+Internet-Draft               DNS Zone Digest               February 2020
+
+
    [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS
               Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,
               <https://www.rfc-editor.org/info/rfc2181>.
@@ -1226,13 +1242,6 @@ Internet-Draft               DNS Zone Digest               February 2020
               Rose, "Resource Records for the DNS Security Extensions",
               RFC 4034, DOI 10.17487/RFC4034, March 2005,
               <https://www.rfc-editor.org/info/rfc4034>.
-
-
-
-Wessels, et al.          Expires August 24, 2020               [Page 22]
-
-Internet-Draft               DNS Zone Digest               February 2020
-
 
    [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
               (SHA and SHA-based HMAC and HKDF)", RFC 6234,
@@ -1272,15 +1281,6 @@ Internet-Draft               DNS Zone Digest               February 2020
               Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
               January 1997, <https://www.rfc-editor.org/info/rfc2065>.
 
-   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
-              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
-              RFC 2136, DOI 10.17487/RFC2136, April 1997,
-              <https://www.rfc-editor.org/info/rfc2136>.
-
-   [RFC2535]  Eastlake 3rd, D., "Domain Name System Security
-              Extensions", RFC 2535, DOI 10.17487/RFC2535, March 1999,
-              <https://www.rfc-editor.org/info/rfc2535>.
-
 
 
 
@@ -1289,6 +1289,15 @@ Wessels, et al.          Expires August 24, 2020               [Page 23]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
+
+   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
+              RFC 2136, DOI 10.17487/RFC2136, April 1997,
+              <https://www.rfc-editor.org/info/rfc2136>.
+
+   [RFC2535]  Eastlake 3rd, D., "Domain Name System Security
+              Extensions", RFC 2535, DOI 10.17487/RFC2535, March 1999,
+              <https://www.rfc-editor.org/info/rfc2535>.
 
    [RFC2845]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
               Wellington, "Secret Key Transaction Authentication for DNS
@@ -1327,15 +1336,6 @@ Internet-Draft               DNS Zone Digest               February 2020
               Terminology", RFC 7719, DOI 10.17487/RFC7719, December
               2015, <https://www.rfc-editor.org/info/rfc7719>.
 
-   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
-              and P. Hoffman, "Specification for DNS over Transport
-              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
-              2016, <https://www.rfc-editor.org/info/rfc7858>.
-
-   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
-              Writing an IANA Considerations Section in RFCs", BCP 26,
-              RFC 8126, DOI 10.17487/RFC8126, June 2017,
-              <https://www.rfc-editor.org/info/rfc8126>.
 
 
 
@@ -1345,6 +1345,16 @@ Wessels, et al.          Expires August 24, 2020               [Page 24]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
+
+   [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
+              and P. Hoffman, "Specification for DNS over Transport
+              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
+              2016, <https://www.rfc-editor.org/info/rfc7858>.
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              <https://www.rfc-editor.org/info/rfc8126>.
 
    [RootServers]
               Root Server Operators, "Root Server Technical Operations",
@@ -1385,22 +1395,17 @@ A.1.  Simple EXAMPLE Zone
    ns1           3600    IN  A       127.0.0.1
    ns2           3600    IN  AAAA    ::1
 
-A.2.  Complex EXAMPLE Zone
-
-   Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
-   and one out-of-zone RR.
-
-
-
-
-
-
 
 
 Wessels, et al.          Expires August 24, 2020               [Page 25]
 
 Internet-Draft               DNS Zone Digest               February 2020
 
+
+A.2.  Complex EXAMPLE Zone
+
+   Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
+   and one out-of-zone RR.
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1437,11 +1442,6 @@ A.3.  EXAMPLE Zone with multiple digests
    not verifiable, but note that their other fields (Serial, Scheme,
    Hash Algorithm) are included in the calculation of all ZONEMD
    digests.
-
-
-
-
-
 
 
 

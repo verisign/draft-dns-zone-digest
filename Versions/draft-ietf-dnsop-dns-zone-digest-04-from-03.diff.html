@@ -221,7 +221,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock">     <span class="delete">A.3.  EXAMPLE Zone with multiple digests </span> . . . . . . . . . . .  23</td><td> </td><td class="rblock">     <span class="insert">12.2.  Informative References . . . . . .</span> . . . . . . . . . . .  23</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">  A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  24</span></td><td> </td><td class="rblock">   <span class="insert">Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  25</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     A.<span class="delete">5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  27</span></td><td> </td><td class="rblock">     A.<span class="insert">1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  25</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29</span></td><td> </td><td class="rblock">   <span class="insert">  A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  25</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  29</span></td><td> </td><td class="rblock">   <span class="insert">  A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  26</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">     A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  26</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  27</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  30</span></td><td class="lineno"></td></tr>
@@ -925,8 +925,13 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      Algorithm".  This should make it more obvious how ZONEMD can be</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      expanded in the future with new schemes and hash algorithms, while</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      sacrificing some of the flexibility that the Parameter was</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      intended to provide.  This adds new IANA requirement for a Scheme</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      registry.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      intended to provide.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Note: old RDATA fields: Serial, DigestType, Parameter, Digest.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Note: new RDATA fields: Serial, Scheme, HashAlgorithm, Digest.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Add new IANA requirement for a Scheme registry.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Rearranged some sections and separated scheme-specific aspects</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      from general aspects of digest calculation.</span></td><td class="lineno"></td></tr>
@@ -951,6 +956,9 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Updated examples since changes in this version result in different</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      hash values.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Added Performance Considerations with benchmark data for SIMPLE</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      SHA384.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">12.  References</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">                                                                         </span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">12.1.  Normative References</span></td><td class="lineno"></td></tr>
@@ -965,7 +973,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td> </td><td class="right">   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 19, line 49<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 23, line 5<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 19, line 49<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 23, line 14<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS</td><td> </td><td class="right">   [RFC2181]  Elz, R. and R. Bush, "Clarifications to the DNS</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,</td><td> </td><td class="right">              Specification", RFC 2181, DOI 10.17487/RFC2181, July 1997,</td><td class="lineno"></td></tr>
@@ -1010,7 +1018,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              &lt;https://github.com/verisign/ldns-zone-digest&gt;.</td><td> </td><td class="right">              &lt;https://github.com/verisign/ldns-zone-digest&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-6" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-6"><em> page 22, line 7<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-6"><em> page 25, line 11<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-6" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-6"><em> page 22, line 7<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-6"><em> page 25, line 21<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">              Writing an IANA Considerations Section in RFCs", BCP 26,</td><td> </td><td class="right">              Writing an IANA Considerations Section in RFCs", BCP 26,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              RFC 8126, DOI 10.17487/RFC8126, June 2017,</td><td> </td><td class="right">              RFC 8126, DOI 10.17487/RFC8126, June 2017,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc8126&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc8126&gt;.</td><td class="lineno"></td></tr>
@@ -1035,7 +1043,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   This appendix contains example zones with accurate ZONEMD records.</td><td> </td><td class="right">   This appendix contains example zones with accurate ZONEMD records.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   These can be used to verify an implementation of the zone digest</td><td> </td><td class="right">   These can be used to verify an implementation of the zone digest</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-7" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-7"><em> page 22, line 30<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-7"><em> page 25, line 34<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-7" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-7"><em> page 22, line 30<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-7"><em> page 25, line 44<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">A.1.  Simple EXAMPLE Zone</td><td> </td><td class="right">A.1.  Simple EXAMPLE Zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -1214,7 +1222,7 @@ document.onkeydown = function(e) {
 
      <tr><td></td><td class="left"></td><td> </td><td class="right"></td><td></td></tr>
      <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 95 change blocks.&nbsp;</th></tr>
-     <tr class="stats"><td></td><th><i>274 lines changed or deleted</i></th><th><i> </i></th><th><i>404 lines changed or added</i></th><td></td></tr>
+     <tr class="stats"><td></td><th><i>274 lines changed or deleted</i></th><th><i> </i></th><th><i>412 lines changed or added</i></th><td></td></tr>
      <tr><td colspan="5" align="center" class="small"><br/>This html diff was produced by rfcdiff 1.46. The latest version is available from <a href="http://www.tools.ietf.org/tools/rfcdiff/" >http://tools.ietf.org/tools/rfcdiff/</a> </td></tr>
    </table>
    </body>

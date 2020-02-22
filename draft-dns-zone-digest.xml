@@ -1213,7 +1213,10 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <t>From -03 to -04:
       <list style="symbols">
         <t>Addressing WGLC feedback.</t>
-        <t>Changed from "Digest Type + Paramter" to "Scheme + Hash Algorithm".  This should make it more obvious how &RRNAME; can be expanded in the future with new schemes and hash algorithms, while sacrificing some of the flexibility that the Parameter was intended to provide.  This adds new IANA requirement for a Scheme registry.</t>
+        <t>Changed from "Digest Type + Paramter" to "Scheme + Hash Algorithm".  This should make it more obvious how &RRNAME; can be expanded in the future with new schemes and hash algorithms, while sacrificing some of the flexibility that the Parameter was intended to provide.</t>
+        <t>Note: old RDATA fields: Serial, DigestType, Parameter, Digest.</t>
+        <t>Note: new RDATA fields: Serial, Scheme, HashAlgorithm, Digest.</t>
+        <t>Add new IANA requirement for a Scheme registry.</t>
         <t>Rearranged some sections and separated scheme-specific aspects from general aspects of digest calculation.</t>
         <t>When discussing multiple &RRNAME; RRs, allow for Scheme, as well as Hash Algorithm, transition.</t>
         <t>Added Performance Considerations section with some benchmarks.</t>
@@ -1223,6 +1226,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Clarified that all &RRNAME; RRs, even for unsupported hash algorithms, must be zeroized during digest calculation.</t>
         <t>Added Resilience and Fragility to security considerations.</t>
         <t>Updated examples since changes in this version result in different hash values.</t>
+        <t>Added Performance Considerations with benchmark data for SIMPLE SHA384.</t>
       </list></t>
     </section>
 
