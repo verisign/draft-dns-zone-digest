@@ -955,14 +955,18 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           only with DNSSEC validation.
         </t>
       </section>
-      <section title="Attacks Utilizing the Zone Digest">
+      <section title="Attacks Utilizing &RRNAME; Queries">
         <t>
           Nothing in this specification prevents clients from making,
-          and servers from responding to, &RRNAME; queries.  One might
-          consider how well &RRNAME; responses could be used in
-          a distributed denial-of-service amplification attack.
+          and servers from responding to, &RRNAME; queries.
+          Servers SHOULD NOT calculate zone digests dynamically (for
+          each query) as this can be used as a CPU resource exhaustion
+          attack.
         </t>
         <t>
+          One might
+          consider how well &RRNAME; responses could be used in
+          a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
           A single &RRNAME; RR contributes approximately 40 to 65
           octets to a DNS response, for currently defined digest
@@ -1241,6 +1245,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
       <list style="symbols">
         <t>Clarifications about non-apex and multiple &RRNAME; RRs.</t>
         <t>Clarifications about benchmark results.</t>
+        <t>Don't compute &RRNAME; on-the-fly.</t>
       </list></t>
     </section>
 
