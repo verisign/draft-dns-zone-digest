@@ -979,7 +979,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
           The &RRNAME; RR is moderately sized, much like the DS RR.
           A single &RRNAME; RR contributes approximately 40 to 65
           octets to a DNS response, for currently defined digest
-          types.  Certainly other query types result in larger
+          types.  Certainly other RR types result in larger
           amplification effects (i.e., DNSKEY).
         </t>
       </section>
