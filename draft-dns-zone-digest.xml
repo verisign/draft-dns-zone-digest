@@ -840,7 +840,6 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </section -->
 
     <section title="IANA Considerations" anchor="iana">
-      <!-- Whats requirement for adding new entries?  RFC or expert review? -->
       <section title="&RRNAME; RRtype">
         <t>
           This document defines a new DNS RR type, &RRNAME;, whose
@@ -886,6 +885,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c><xref target="RFC8126"/></c>
 
         </texttable>
+        <t>
+          The IANA policy for assigning new values to the &RRNAME;
+          Scheme registry shall be Specification Required, as described
+          in <xref target="RFC8126"/>.
+        </t>
       </section>
 
       <section title="&RRNAME; Hash Algorithm" anchor="hash-alg-registry">
@@ -920,6 +924,11 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <c><xref target="RFC8126"/></c>
 
         </texttable>
+        <t>
+          The IANA policy for assigning new values to the &RRNAME;
+          Hash Algorithm registry shall be Specification Required,
+          as described in <xref target="RFC8126"/>.
+        </t>
       </section>
 
     </section>
@@ -1246,6 +1255,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Clarifications about non-apex and multiple &RRNAME; RRs.</t>
         <t>Clarifications about benchmark results.</t>
         <t>Don't compute &RRNAME; on-the-fly.</t>
+        <t>Specifciation Required for updates to ZONEMD protocol registries.</t>
       </list></t>
     </section>
 
