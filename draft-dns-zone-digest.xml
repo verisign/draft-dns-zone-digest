@@ -1387,14 +1387,14 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 1 (
-                                  b3437dca3d6c9047
-                                  9f43d4bf0c1a805e
-                                  fbfca88635df014f
-                                  04a1049368a23a77
-                                  577d896f0c58c5c7
-                                  338aabc7aa4314b5 )
-ns1           3600    IN  A       127.0.0.1
-ns2           3600    IN  AAAA    ::1
+                                  e12a0dd55a1dd1b8
+                                  e29ec9b1d42d71ec
+                                  09329da5f162f327
+                                  e1eb4803947995ec
+                                  f7c65aa566cf6cfd
+                                  36a0caf8bdb03ac4 )
+ns1           3600    IN  A       203.0.113.63
+ns2           3600    IN  AAAA    2001:db8::63
 ]]></artwork></figure>
       </section>
 
@@ -1408,14 +1408,14 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 1 (
-                                  9c31e37bd2d97ad4
-                                  9ead67b3a44f267e
-                                  a223cc70c1a0988d
-                                  49ac98da1b7ca1ed
-                                  ede57661b6cefc52
-                                  80d10d6b4b0b6cb1 )
-ns1           3600    IN  A       127.0.0.1
-ns2           3600    IN  AAAA    ::1
+                                  626637812169d7ab
+                                  fcb24f13cb704f13
+                                  b8a131fee1c3bc73
+                                  29144fa5ec2608a4
+                                  1b596d41ff8c8310
+                                  b2897e73f6e521fc )
+ns1           3600    IN  A       203.0.113.63
+ns2           3600    IN  AAAA    2001:db8::63
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
 sub           7200    IN  NS      ns1
 duplicate     300     IN  TXT     "I must be digested just once"
@@ -1447,12 +1447,12 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
 example.      86400   IN  NS      ns1.example.
 example.      86400   IN  NS      ns2.example.
 example.      86400   IN  ZONEMD  2018031900 1 1 (
-                                  6a126e222407923d
-                                  f70e7aa44d5e813b
-                                  0b18b469b78d3d50
-                                  84cd3cbf24152eea
-                                  a68c00b6536bba2a
-                                  1f2cab0fd03a8162 )
+                                  366d22ea3bd8df44
+                                  0fa44b6213359d9b
+                                  1f73bb9d8dd67a1b
+                                  4c0bdf6f0b3657c5
+                                  0316f770fbb03057
+                                  0c06adb87c121431 )
 example.      86400   IN  ZONEMD  2018031900 1 240 (
                                   e2d523f654b9422a
                                   96c5a8f44607bbee )
@@ -1475,9 +1475,9 @@ example.      86400   IN  ZONEMD  2018031900 240 1 (
                                   e1846540e33a9e41
                                   89792d18d5d131f6
                                   05fc283e )
-ns1.example.  3600    IN  A       127.0.0.1
+ns1.example.  3600    IN  A       203.0.113.63
 ns2.example.  86400   IN  TXT     "This example has multiple digests"
-ns2.example.  3600    IN  AAAA    ::1
+ns2.example.  3600    IN  AAAA    2001:db8::63
 ]]></artwork></figure>
       </section>
 
