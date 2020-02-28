@@ -1064,7 +1064,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     </section>
 
     <section title="Privacy Considerations" anchor="privacy">
-      <t>This specification has no impacts on user privacy.</t>
+      <t>This specification has no impact on user privacy.</t>
     </section>
 
     <section title="Acknowledgments" anchor="acknowledgments">
