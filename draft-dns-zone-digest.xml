@@ -1266,7 +1266,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
     &RFC2119;
     &RFC1034;
     &RFC1035;
-    &RFC2181;
+    <!-- &RFC2181; -->
     &RFC4034;
     <!-- &RFC3658; -->
     <!-- &RFC4509; -->
