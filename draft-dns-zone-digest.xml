@@ -271,8 +271,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           records can prove that RRSets have not been added or
           removed.  However, not all RRSets
           in a zone are signed.  The design of DNSSEC stipulates that delegations (non-apex NS records) are not signed,
-          and neither are any glue records.  Thus, changes to delegation
-          and glue records cannot be detected by DNSSEC alone. Furthermore, zones
+          and neither are any glue records.  &RRNAME; protects the integrity of delegation,
+          glue, and other records that are not otherwise covered by DNSSEC. Furthermore, zones
           that employ NSEC3 with opt-out are susceptible to the
           removal or addition of names between the signed nodes.
           Whereas DNSSEC is primarily designed to protect consumers
