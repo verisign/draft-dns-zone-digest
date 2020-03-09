@@ -1271,6 +1271,9 @@ where "|" denotes concatenation.
         <t>Don't compute &RRNAME; on-the-fly.</t>
         <t>Specifciation Required for updates to ZONEMD protocol registries.</t>
         <t>Other rewording based on WGLC feedback.</t>
+        <t>Updated RFC numbers for some references.</t>
+        <t>Use documentation IP addresses instead of loopback.</t>
+        <t>Updated examples in the appendix.</t>
       </list></t>
     </section>
 

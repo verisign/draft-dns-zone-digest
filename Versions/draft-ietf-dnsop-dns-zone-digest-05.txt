@@ -1223,9 +1223,9 @@ Internet-Draft               DNS Zone Digest                  March 2020
 
    o  Other rewording based on WGLC feedback.
 
+   o  Updated RFC numbers for some references.
 
-
-
+   o  Use documentation IP addresses instead of loopback.
 
 
 
@@ -1233,6 +1233,8 @@ Wessels, et al.        Expires September 10, 2020              [Page 22]
 
 Internet-Draft               DNS Zone Digest                  March 2020
 
+
+   o  Updated examples in the appendix.
 
 12.  References
 
@@ -1280,8 +1282,6 @@ Internet-Draft               DNS Zone Digest                  March 2020
    [InterNIC]
               ICANN, "InterNIC FTP site", May 2018,
               <ftp://ftp.internic.net/domain/>.
-
-
 
 
 
