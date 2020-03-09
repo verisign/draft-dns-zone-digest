@@ -317,8 +317,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The digest is calculated at the time of zone publication.
           Ideally the zone is signed with DNSSEC to guarantee that any
           modifications of the digest can be detected.  The procedures for
-          digest calculation and DNSSEC signing are similar (i.e., both
-          require the same ordering of RRs) and can be done in parallel.
+          digest calculation and DNSSEC signing are similar.  Both require
+          data to be processed in a well-defined order and format.  In
+          some cases it may be possible to perform DNSSEC signing and
+          digest calculation in parallel.
         </t>
         <t>
           The zone digest is designed to be used on zones that are
@@ -577,6 +579,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
       <section title="Add &RRNAME; Placeholder" anchor="placeholder">
         <t>
           In preparation for calculating the zone digest, any existing &RRNAME; records
+          (and covering RRSIGs)
           at the zone apex
           are first deleted.
         </t>
@@ -634,6 +637,18 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           However, since DNSSEC does not define a canonical ordering for RRSets
           having the same owner name, that ordering is defined here.
         </t>
+        <t>
+          This specification adopts DNSSEC's canonical on-the-wire RR format
+          (without name compression) as specified in <xref target="RFC4034"/>:
+        </t>
+        <figure><artwork>
+RR(i) = owner | type | class | TTL | RDATA length | RDATA
+
+where "|" denotes concatenation.
+        </artwork></figure>
+        <t>
+          The record collating sequence is scheme specific.
+        </t>
         <section title="Order of RRSets Having the Same Owner Name">
           <t>
             For the purposes of calculating the zone digest, RRSets having
@@ -686,17 +701,15 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           </t>
 
           <t>
-            A zone digest using the SIMPLE scheme is calculated by concatenating the canonical on-the-wire
-            form (without name compression) of all RRs in the zone, in the order described
+            A zone digest using the SIMPLE scheme is calculated by concatenating the canonical form
+            form of all RRs in the zone, in the order described
             in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
             in <xref target="inclusion-exclusion"/>, and then applying the SHA-384 algorithm:
           </t>
           <figure><artwork>
 digest = hash( RR(1) | RR(2) | RR(3) | ... )
-  
-where "|" denotes concatenation, and
-  
-RR(i) = owner | type | class | TTL | RDATA length | RDATA
+
+where "|" denotes concatenation.
           </artwork></figure>
 
         </section>
@@ -704,13 +717,14 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
       <section title="Update &RRNAME; RR">
         <t>
-          Once a zone digest has been calculated, its value is
-          then copied to the Digest field of the placeholder
-          &RRNAME; record.  Repeat for each digest if multiple
+          Once a zone digest has been calculated, the published &RRNAME;
+          record is finalised by inserting the digest into the placeholder
+          &RRNAME;.
+          Repeat for each digest if multiple
           digests are to be published.
         </t>
         <t>
-          If the zone is signed with DNSSEC, the appropriate RRSIG records covering the &RRNAME;
+          If the zone is signed with DNSSEC, the RRSIG record(s) covering the &RRNAME;
           RRSet MUST then be added or updated.  Because the &RRNAME; placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
@@ -1256,6 +1270,7 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
         <t>Clarifications about benchmark results.</t>
         <t>Don't compute &RRNAME; on-the-fly.</t>
         <t>Specifciation Required for updates to ZONEMD protocol registries.</t>
+        <t>Other rewording based on WGLC feedback.</t>
       </list></t>
     </section>
 
