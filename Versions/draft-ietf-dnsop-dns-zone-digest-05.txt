@@ -627,9 +627,9 @@ Internet-Draft               DNS Zone Digest                  March 2020
    not good for zones that are large and/or dynamic.
 
    A zone digest using the SIMPLE scheme is calculated by concatenating
-   the canonical form form of all RRs in the zone, in the order
-   described in Section 3.3, subject to the inclusion/exclusion rules
-   described in Section 3.4, and then applying the SHA-384 algorithm:
+   the canonical form of all RRs in the zone, in the order described in
+   Section 3.3, subject to the inclusion/exclusion rules described in
+   Section 3.4, and then applying the SHA-384 algorithm:
 
    digest = hash( RR(1) | RR(2) | RR(3) | ... )
 

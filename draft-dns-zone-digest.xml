@@ -702,7 +702,7 @@ where "|" denotes concatenation.
 
           <t>
             A zone digest using the SIMPLE scheme is calculated by concatenating the canonical form
-            form of all RRs in the zone, in the order described
+            of all RRs in the zone, in the order described
             in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
             in <xref target="inclusion-exclusion"/>, and then applying the SHA-384 algorithm:
           </t>
