@@ -646,9 +646,9 @@ RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
 where "|" denotes concatenation.
         </artwork></figure>
-        <t>
+        <!-- t>
           The record collating sequence is scheme specific.
-        </t>
+        </t -->
         <section title="Order of RRSets Having the Same Owner Name">
           <t>
             For the purposes of calculating the zone digest, RRSets having
