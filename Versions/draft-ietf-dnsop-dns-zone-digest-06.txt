@@ -1216,6 +1216,8 @@ Internet-Draft               DNS Zone Digest                  April 2020
       Per WG suggestion, no longer include any apex ZONEMD record in
       digest calculation.
 
+      Updated examples in the appendix.
+
 12.  References
 
 12.1.  Normative References
@@ -1223,8 +1225,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
               STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
               <https://www.rfc-editor.org/info/rfc1034>.
-
-
 
 
 
@@ -1407,12 +1407,12 @@ Internet-Draft               DNS Zone Digest                  April 2020
                  86400   IN  NS      ns1
                  86400   IN  NS      ns2
                  86400   IN  ZONEMD  2018031900 1 1 (
-                                     e12a0dd55a1dd1b8
-                                     e29ec9b1d42d71ec
-                                     09329da5f162f327
-                                     e1eb4803947995ec
-                                     f7c65aa566cf6cfd
-                                     36a0caf8bdb03ac4 )
+                                     c68090d90a7aed71
+                                     6bc459f9340e3d7c
+                                     1370d4d24b7e2fc3
+                                     a1ddc0b9a87153b9
+                                     a9713b3c9ae5cc27
+                                     777f98b8e730044c )
    ns1           3600    IN  A       203.0.113.63
    ns2           3600    IN  AAAA    2001:db8::63
 
@@ -1426,12 +1426,12 @@ A.2.  Complex EXAMPLE Zone
                  86400   IN  NS      ns1
                  86400   IN  NS      ns2
                  86400   IN  ZONEMD  2018031900 1 1 (
-                                     626637812169d7ab
-                                     fcb24f13cb704f13
-                                     b8a131fee1c3bc73
-                                     29144fa5ec2608a4
-                                     1b596d41ff8c8310
-                                     b2897e73f6e521fc )
+                                     31cefb03814f5062
+                                     ad12fa951ba0ef5f
+                                     8da6ae354a415767
+                                     246f7dc932ceb1e7
+                                     42a2108f529db6a3
+                                     3a11c01493de358d )
    ns1           3600    IN  A       203.0.113.63
    ns2           3600    IN  AAAA    2001:db8::63
    occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
@@ -1473,12 +1473,12 @@ A.3.  EXAMPLE Zone with multiple digests
    example.      86400   IN  NS      ns1.example.
    example.      86400   IN  NS      ns2.example.
    example.      86400   IN  ZONEMD  2018031900 1 1 (
-                                     366d22ea3bd8df44
-                                     0fa44b6213359d9b
-                                     1f73bb9d8dd67a1b
-                                     4c0bdf6f0b3657c5
-                                     0316f770fbb03057
-                                     0c06adb87c121431 )
+                                     62e6cf51b02e54b9
+                                     b5f967d547ce4313
+                                     6792901f9f88e637
+                                     493daaf401c92c27
+                                     9dd10f0edb1c56f8
+                                     080211f8480ee306 )
    example.      86400   IN  ZONEMD  2018031900 1 240 (
                                      e2d523f654b9422a
                                      96c5a8f44607bbee )
@@ -1670,8 +1670,8 @@ Internet-Draft               DNS Zone Digest                  April 2020
    ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
    ;; XFR size: 34 records (messages 1, bytes 3941)
    uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
-       cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5
-       09fa27c62448a7100660bbdb4c90667424b734956b )
+       1291b78ddf7669b1a39d014d87626b709b55774c5d7d58fa
+       dc556439889a10eaf6f11d615900a4f996bd46279514e473 )
 
 
 
@@ -1784,8 +1784,8 @@ Internet-Draft               DNS Zone Digest                  April 2020
    root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
        nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
    root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
-       4fb752b314e4dccb845832b611590b669a80daebb736d4bd22aa76ec06
-       6737c79185c1f7dfd49ec91d9523e6240ea2c4 )
+       f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97
+       8a3b11dbfc1c776d5b3e86ae3d973d6b5349ba7f04340f79 )
 
 
 
