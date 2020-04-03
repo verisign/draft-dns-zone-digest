@@ -586,8 +586,8 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
         <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, one or more placeholder &RRNAME; records are added to the
-          zone apex.  This serves two purposes: (1) it allows the digest to cover
-          the Serial, Scheme, and Hash Algorithm fields, and (2) ensures that 
+          zone apex.  This <!-- serves two purposes: (1) it allows the digest to cover
+          the Serial, Scheme, and Hash Algorithm fields, and (2) --> ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
           When multiple &RRNAME; RRs are published in the zone, e.g.,
@@ -603,9 +603,10 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           The Scheme field is set to the value for the chosen collation scheme.
           The Hash Algorithm field is set
           to the value for the chosen hash algorithm.
-          The Digest
+          <!-- The Digest
           field is set to all zeroes and of length appropriate
-          for the chosen hash algorithm.
+          for the chosen hash algorithm. -->
+          The value of the Digest field does not matter at this point in the process.
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -676,7 +677,7 @@ where "|" denotes concatenation.
           <t>All records in the zone, including glue records, MUST be included.</t>
           <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
           <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
-          <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
+          <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
           <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
           <t>The RRSIG covering &RRNAME; MUST NOT be included
             because the RRSIG will be updated after all digests have been calculated.</t>
@@ -793,34 +794,34 @@ where "|" denotes concatenation.
             The received Digest value is copied to
             a temporary location.  Repeat for each &RRNAME; RR present.
           </t>
-          <t anchor="verify-zeroize-digest">
+          <!-- t anchor="verify-zeroize-digest">
             The &RRNAME; RR's Digest field MUST be set to all zeroes.
             Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
-          </t>
+          </t -->
           <t>
             The zone digest is computed over the zone data as
             described in <xref target="collate-iterate"/>.
           </t>
           <t>
-            The calculated digest is compared to the received digest
-            stored in the temporary location.
+            The calculated digest is compared to the received digest.
+            <!-- stored in the temporary location. -->
             If the two digest values match, verification is considered
             successful.  Otherwise, verification MUST NOT be
             considered successful.
           </t>
-          <t>
+          <!-- t>
             The &RRNAME; RR's RDATA is reset to the received
             Digest stored in the temporary location.
             Thus, any downstream clients can similarly verify the zone.
-          </t>
+          </t -->
         </list>
       </t>
-      <t>
+      <!-- t>
           Note that when multiple &RRNAME; RRs are present in the zone, 
           the Digest field of each MUST be zeroed in step <xref
           target="verify-zeroize-digest" format="counter"/> above, even for
           unsupported Scheme and Hash Algorithm values.
-      </t>
+      </t -->
     </section>
 
     <!-- section title="Scope of Experimentation">
@@ -1276,7 +1277,9 @@ where "|" denotes concatenation.
         <t>Updated examples in the appendix.</t>
       </list></t>
       <t>From -05 to -06:
-      </t>
+      <list>
+        <t>Per WG suggestion, no longer include any apex ZONEMD record in digest calculation.</t>
+      </list></t>
     </section>
 
   </middle>
