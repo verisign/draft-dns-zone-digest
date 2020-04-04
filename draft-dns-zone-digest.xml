@@ -42,7 +42,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-05" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-06" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -131,7 +131,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </address>
     </author>
 
-    <date day="9" month="March" year="2020"/>
+    <date day="3" month="April" year="2020"/>
 
     <area>General</area>
 
@@ -586,8 +586,8 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
         <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, one or more placeholder &RRNAME; records are added to the
-          zone apex.  This serves two purposes: (1) it allows the digest to cover
-          the Serial, Scheme, and Hash Algorithm fields, and (2) ensures that 
+          zone apex.  This <!-- serves two purposes: (1) it allows the digest to cover
+          the Serial, Scheme, and Hash Algorithm fields, and (2) --> ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
           When multiple &RRNAME; RRs are published in the zone, e.g.,
@@ -603,9 +603,10 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           The Scheme field is set to the value for the chosen collation scheme.
           The Hash Algorithm field is set
           to the value for the chosen hash algorithm.
-          The Digest
+          <!-- The Digest
           field is set to all zeroes and of length appropriate
-          for the chosen hash algorithm.
+          for the chosen hash algorithm. -->
+          The value of the Digest field does not matter at this point in the process.
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -676,7 +677,7 @@ where "|" denotes concatenation.
           <t>All records in the zone, including glue records, MUST be included.</t>
           <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
           <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
-          <t>The placeholder &RRNAME; RR(s) MUST be included.</t>
+          <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
           <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
           <t>The RRSIG covering &RRNAME; MUST NOT be included
             because the RRSIG will be updated after all digests have been calculated.</t>
@@ -793,34 +794,34 @@ where "|" denotes concatenation.
             The received Digest value is copied to
             a temporary location.  Repeat for each &RRNAME; RR present.
           </t>
-          <t anchor="verify-zeroize-digest">
+          <!-- t anchor="verify-zeroize-digest">
             The &RRNAME; RR's Digest field MUST be set to all zeroes.
             Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
-          </t>
+          </t -->
           <t>
             The zone digest is computed over the zone data as
             described in <xref target="collate-iterate"/>.
           </t>
           <t>
-            The calculated digest is compared to the received digest
-            stored in the temporary location.
+            The calculated digest is compared to the received digest.
+            <!-- stored in the temporary location. -->
             If the two digest values match, verification is considered
             successful.  Otherwise, verification MUST NOT be
             considered successful.
           </t>
-          <t>
+          <!-- t>
             The &RRNAME; RR's RDATA is reset to the received
             Digest stored in the temporary location.
             Thus, any downstream clients can similarly verify the zone.
-          </t>
+          </t -->
         </list>
       </t>
-      <t>
+      <!-- t>
           Note that when multiple &RRNAME; RRs are present in the zone, 
           the Digest field of each MUST be zeroed in step <xref
           target="verify-zeroize-digest" format="counter"/> above, even for
           unsupported Scheme and Hash Algorithm values.
-      </t>
+      </t -->
     </section>
 
     <!-- section title="Scope of Experimentation">
@@ -1275,6 +1276,11 @@ where "|" denotes concatenation.
         <t>Use documentation IP addresses instead of loopback.</t>
         <t>Updated examples in the appendix.</t>
       </list></t>
+      <t>From -05 to -06:
+      <list>
+        <t>Per WG suggestion, no longer include any apex ZONEMD record in digest calculation.</t>
+        <t>Updated examples in the appendix.</t>
+      </list></t>
     </section>
 
   </middle>
@@ -1405,12 +1411,12 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 1 (
-                                  e12a0dd55a1dd1b8
-                                  e29ec9b1d42d71ec
-                                  09329da5f162f327
-                                  e1eb4803947995ec
-                                  f7c65aa566cf6cfd
-                                  36a0caf8bdb03ac4 )
+                                  c68090d90a7aed71
+                                  6bc459f9340e3d7c
+                                  1370d4d24b7e2fc3
+                                  a1ddc0b9a87153b9
+                                  a9713b3c9ae5cc27
+                                  777f98b8e730044c )
 ns1           3600    IN  A       203.0.113.63
 ns2           3600    IN  AAAA    2001:db8::63
 ]]></artwork></figure>
@@ -1426,12 +1432,12 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 1 (
-                                  626637812169d7ab
-                                  fcb24f13cb704f13
-                                  b8a131fee1c3bc73
-                                  29144fa5ec2608a4
-                                  1b596d41ff8c8310
-                                  b2897e73f6e521fc )
+                                  31cefb03814f5062
+                                  ad12fa951ba0ef5f
+                                  8da6ae354a415767
+                                  246f7dc932ceb1e7
+                                  42a2108f529db6a3
+                                  3a11c01493de358d )
 ns1           3600    IN  A       203.0.113.63
 ns2           3600    IN  AAAA    2001:db8::63
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
@@ -1465,12 +1471,12 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
 example.      86400   IN  NS      ns1.example.
 example.      86400   IN  NS      ns2.example.
 example.      86400   IN  ZONEMD  2018031900 1 1 (
-                                  366d22ea3bd8df44
-                                  0fa44b6213359d9b
-                                  1f73bb9d8dd67a1b
-                                  4c0bdf6f0b3657c5
-                                  0316f770fbb03057
-                                  0c06adb87c121431 )
+                                  62e6cf51b02e54b9
+                                  b5f967d547ce4313
+                                  6792901f9f88e637
+                                  493daaf401c92c27
+                                  9dd10f0edb1c56f8
+                                  080211f8480ee306 )
 example.      86400   IN  ZONEMD  2018031900 1 240 (
                                   e2d523f654b9422a
                                   96c5a8f44607bbee )
@@ -1641,8 +1647,8 @@ uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
 ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
 ;; XFR size: 34 records (messages 1, bytes 3941)
 uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
-    cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5
-    09fa27c62448a7100660bbdb4c90667424b734956b )
+    1291b78ddf7669b1a39d014d87626b709b55774c5d7d58fa
+    dc556439889a10eaf6f11d615900a4f996bd46279514e473 )
 ]]></artwork></figure>
       </section>
 
@@ -1697,8 +1703,8 @@ m.root-servers.net.   3600000 IN  A       202.12.27.33
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
     nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
 root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
-    4fb752b314e4dccb845832b611590b669a80daebb736d4bd22aa76ec06
-    6737c79185c1f7dfd49ec91d9523e6240ea2c4 )
+    f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97
+    8a3b11dbfc1c776d5b3e86ae3d973d6b5349ba7f04340f79 )
 ]]></artwork></figure>
       </section>
     </section>
