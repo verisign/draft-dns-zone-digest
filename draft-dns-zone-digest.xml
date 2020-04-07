@@ -1195,11 +1195,11 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -04 to -05:
       <list style="symbols">
-       <t>Made SHA384 the only supported ZONEMD digest type.</t>
-       <t>Disassociated ZONEMD digest types from DS digest types.</t>
+       <t>Made SHA384 the only supported &RRNAME; digest type.</t>
+       <t>Disassociated &RRNAME; digest types from DS digest types.</t>
        <t>Updates to Introduction based on list feedback.</t>
        <t>Changed "zone file" to "zone" everywhere.</t>
-       <t>Restored text about why ZONEMD has a Serial field.</t>
+       <t>Restored text about why &RRNAME; has a Serial field.</t>
        <t>Clarified ordering of RRSets having same owner to be numerically ascending.</t>
        <t>Clarified that all duplicate RRs (not just SOA) must be suppressed in digest calculation.</t>
        <t>Clarified that the Reserved field must be set to zero and checked for zero in verification.</t>
@@ -1270,7 +1270,7 @@ where "|" denotes concatenation.
         <t>Clarifications about non-apex and multiple &RRNAME; RRs.</t>
         <t>Clarifications about benchmark results.</t>
         <t>Don't compute &RRNAME; on-the-fly.</t>
-        <t>Specifciation Required for updates to ZONEMD protocol registries.</t>
+        <t>Specifciation Required for updates to &RRNAME; protocol registries.</t>
         <t>Other rewording based on WGLC feedback.</t>
         <t>Updated RFC numbers for some references.</t>
         <t>Use documentation IP addresses instead of loopback.</t>
@@ -1278,7 +1278,7 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -05 to -06:
       <list>
-        <t>Per WG suggestion, no longer include any apex ZONEMD record in digest calculation.</t>
+        <t>Per WG suggestion, no longer include any apex &RRNAME; record in digest calculation.</t>
         <t>Updated examples in the appendix.</t>
       </list></t>
     </section>
