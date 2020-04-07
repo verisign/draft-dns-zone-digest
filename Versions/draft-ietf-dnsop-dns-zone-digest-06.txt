@@ -118,10 +118,10 @@ Internet-Draft               DNS Zone Digest                  April 2020
      3.6.  Update ZONEMD RR  . . . . . . . . . . . . . . . . . . . .  12
    4.  Verifying Zone Digest . . . . . . . . . . . . . . . . . . . .  12
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  13
-     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  13
+     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  14
      5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  14
      5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  14
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  14
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
      6.1.  Attacks Against the Zone Digest . . . . . . . . . . . . .  15
      6.2.  Attacks Utilizing ZONEMD Queries  . . . . . . . . . . . .  15
      6.3.  Resilience and Fragility  . . . . . . . . . . . . . . . .  15
@@ -131,13 +131,13 @@ Internet-Draft               DNS Zone Digest                  April 2020
    9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  17
    10. Implementation Status . . . . . . . . . . . . . . . . . . . .  17
      10.1.  Authors' Implementation  . . . . . . . . . . . . . . . .  17
-     10.2.  Shane Kerr's Implementation  . . . . . . . . . . . . . .  17
+     10.2.  Shane Kerr's Implementation  . . . . . . . . . . . . . .  18
    11. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  18
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  22
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  22
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  23
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  23
      12.2.  Informative References . . . . . . . . . . . . . . . . .  23
    Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  25
-     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  25
+     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  26
      A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  26
      A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  27
      A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  28
@@ -534,8 +534,10 @@ Internet-Draft               DNS Zone Digest                  April 2020
    In the placeholder record, the Serial field is set to the current SOA
    Serial.  The Scheme field is set to the value for the chosen
    collation scheme.  The Hash Algorithm field is set to the value for
-   the chosen hash algorithm.  The value of the Digest field does not
-   matter at this point in the process.
+   the chosen hash algorithm.  Since ZONEMD records are excluded from
+   digest calculation, the value of the Digest field does not matter at
+   this point in the process.  Implementations MAY want to set the
+   Digest field to all zeroes anyway.
 
 3.2.  Optionally Sign the Zone
 
@@ -552,8 +554,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    consistent format and ordering.  Correct ordering depends on (1)
    ordering of owner names, (2) ordering of RRSets with the same owner
    name, and (3) ordering of RRs within an RRSet.
-
-
 
 
 
@@ -692,26 +692,43 @@ Internet-Draft               DNS Zone Digest                  April 2020
        Scheme and Hash Algorithm, digest verification MUST NOT be
        considered successful.
 
-   5.  The SOA Serial field MUST exactly match the ZONEMD Serial field.
-       If the fields to not match, digest verification MUST NOT be
-       considered successful.
+   5.  Loop over all apex ZONEMD RRs and perform the following steps:
 
-   6.  The ZONEMD Hash Algorithm field MUST be checked.  If the verifier
-       does not support the given Hash Algorithm, it SHOULD report that
-       the zone digest could not be verified due to an unsupported
-       algorithm.
+       A.  The SOA Serial field MUST exactly match the ZONEMD Serial
+           field.  If the fields do not match, digest verification MUST
+           NOT be considered successful with this ZONEMD RR.
 
-   7.  The received Digest value is copied to a temporary location.
-       Repeat for each ZONEMD RR present.
+       B.  The Scheme field MUST be checked.  If the verifier does not
+           support the given scheme, it SHOULD report that the RR's
+           digest could not be verified due to an unsupported scheme.
 
-   8.  The zone digest is computed over the zone data as described in
-       Section 3.5.
+       C.  The Hash Algorithm field MUST be checked.  If the verifier
+           does not support the given hash algorithm, it SHOULD report
+           that the RR's digest could not be verified due to an
+           unsupported algorithm.
 
-   9.  The calculated digest is compared to the received digest.  If the
-       two digest values match, verification is considered successful.
-       Otherwise, verification MUST NOT be considered successful.
+       D.  The zone digest is computed over the zone data as described
+           in Section 3.5, using the Scheme and Hash Algorithm for the
+           current ZONEMD RR.
+
+       E.  The computed digest is compared to the received digest.  If
+           the two digest values match, verification is considered
+           successful.  Otherwise, verification MUST NOT be considered
+           successful for this ZONEMD RR.
 
 5.  IANA Considerations
+
+
+
+
+
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 13]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
 
 5.1.  ZONEMD RRtype
 
@@ -722,13 +739,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    Type: ZONEMD
 
    Value: 63
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 13]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
    Meaning: Message Digest Over Zone Data
 
@@ -769,22 +779,17 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
                   Table 2: ZONEMD Hash Algorithm Registry
 
-   The IANA policy for assigning new values to the ZONEMD Hash Algorithm
-   registry shall be Specification Required, as described in [RFC8126].
-
-6.  Security Considerations
-
-
-
-
-
-
 
 
 Wessels, et al.          Expires October 5, 2020               [Page 14]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+   The IANA policy for assigning new values to the ZONEMD Hash Algorithm
+   registry shall be Specification Required, as described in [RFC8126].
+
+6.  Security Considerations
 
 6.1.  Attacks Against the Zone Digest
 
@@ -829,11 +834,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    records should be aware of these tradeoffs.  While the intention is
    to secure the zone data, misconfigurations or implementation bugs are
    generally indistinguishable from intentional tampering, and could
-   lead to service failures when verification is performed
-   automatically.
-
-   Zone publishers may want to deploy ZONEMD gradually, perhaps by
-   utilizing one of the private use hash algorithms listed in
 
 
 
@@ -842,6 +842,11 @@ Wessels, et al.          Expires October 5, 2020               [Page 15]
 Internet-Draft               DNS Zone Digest                  April 2020
 
 
+   lead to service failures when verification is performed
+   automatically.
+
+   Zone publishers may want to deploy ZONEMD gradually, perhaps by
+   utilizing one of the private use hash algorithms listed in
    Section 5.3.  Similarly, recipients may want to initially configure
    verification failures only as a warning, and later as an error after
    gaining experience and confidence with the feature.
@@ -883,13 +888,8 @@ Internet-Draft               DNS Zone Digest                  April 2020
                  | 10000000 - 99999999 |         0.0148 |
                  +---------------------+----------------+
 
-   For example, based on the above table, it takes approximately 0.13
-   seconds to calculate a SIMPLE SHA384 digest for a zone with 22,000
-   RRs, and about 2.5 seconds for a zone with 300,000 RRs.
 
-   These benchmarks attempt to emulate a worst-case scenario and take
-   into account the time required to canonicalize the zone for
-   processing.  Each of the 800+ zones were measured three times, and
+
 
 
 
@@ -898,6 +898,13 @@ Wessels, et al.          Expires October 5, 2020               [Page 16]
 Internet-Draft               DNS Zone Digest                  April 2020
 
 
+   For example, based on the above table, it takes approximately 0.13
+   seconds to calculate a SIMPLE SHA384 digest for a zone with 22,000
+   RRs, and about 2.5 seconds for a zone with 300,000 RRs.
+
+   These benchmarks attempt to emulate a worst-case scenario and take
+   into account the time required to canonicalize the zone for
+   processing.  Each of the 800+ zones were measured three times, and
    then averaged, with a different random sorting of the input data
    prior to each measurement.
 
@@ -938,13 +945,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    o  Perform DNSSEC validation of the ZONEMD record during
       verification.
 
-10.2.  Shane Kerr's Implementation
-
-   Shane Kerr wrote an implementation of this specification during the
-   IETF 102 hackathon [ZoneDigestHackathon].  This implementation is in
-   Python and is able to perform the following functions:
-
-   o  Read an input zone and output a zone with ZONEMD record.
 
 
 
@@ -953,6 +953,14 @@ Wessels, et al.          Expires October 5, 2020               [Page 17]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+10.2.  Shane Kerr's Implementation
+
+   Shane Kerr wrote an implementation of this specification during the
+   IETF 102 hackathon [ZoneDigestHackathon].  This implementation is in
+   Python and is able to perform the following functions:
+
+   o  Read an input zone and output a zone with ZONEMD record.
 
    o  Verify the zone digest from an input zone.
 
@@ -993,6 +1001,15 @@ Internet-Draft               DNS Zone Digest                  April 2020
    o  Clarified that a zone's NS records always sort before the SOA
       record.
 
+
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 18]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
    o  Clarified that all records in the zone must are digested, except
       as specified in the exclusion rules.
 
@@ -1002,13 +1019,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
       number change.
 
    o  Added persons to acknowledgments.
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 18]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
    From -02 to -03:
 
@@ -1049,6 +1059,13 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
    o  Changed "zone file" to "zone" everywhere.
 
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 19]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
    o  Restored text about why ZONEMD has a Serial field.
 
    o  Clarified ordering of RRSets having same owner to be numerically
@@ -1056,15 +1073,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
    o  Clarified that all duplicate RRs (not just SOA) must be suppressed
       in digest calculation.
-
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 19]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
    o  Clarified that the Reserved field must be set to zero and checked
       for zero in verification.
@@ -1106,14 +1114,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
    o  Describe verification when there are multiple ZONEMD RRs.
 
-   From -00 to -01:
-
-   o  Simplified requirements around verifying multiple digests.  Any
-      one match is sufficient.
-
-   o  Updated implementation notes.
-
-
 
 
 
@@ -1121,6 +1121,13 @@ Wessels, et al.          Expires October 5, 2020               [Page 20]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+   From -00 to -01:
+
+   o  Simplified requirements around verifying multiple digests.  Any
+      one match is sufficient.
+
+   o  Updated implementation notes.
 
    o  Both implementations produce expected results on examples given in
       this document.
@@ -1163,13 +1170,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
    o  Add new IANA requirement for a Scheme registry.
 
-   o  Rearranged some sections and separated scheme-specific aspects
-      from general aspects of digest calculation.
-
-   o  When discussing multiple ZONEMD RRs, allow for Scheme, as well as
-      Hash Algorithm, transition.
-
-   o  Added Performance Considerations section with some benchmarks.
 
 
 
@@ -1177,6 +1177,14 @@ Wessels, et al.          Expires October 5, 2020               [Page 21]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+   o  Rearranged some sections and separated scheme-specific aspects
+      from general aspects of digest calculation.
+
+   o  When discussing multiple ZONEMD RRs, allow for Scheme, as well as
+      Hash Algorithm, transition.
+
+   o  Added Performance Considerations section with some benchmarks.
 
    o  Further clarifications about non-apex ZONEMD RRs.
 
@@ -1213,18 +1221,10 @@ Internet-Draft               DNS Zone Digest                  April 2020
 
    From -05 to -06:
 
-      Per WG suggestion, no longer include any apex ZONEMD record in
+   o  Per WG suggestion, no longer include any apex ZONEMD record in
       digest calculation.
 
-      Updated examples in the appendix.
-
-12.  References
-
-12.1.  Normative References
-
-   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
-              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
-              <https://www.rfc-editor.org/info/rfc1034>.
+   o  Updated examples in the appendix.
 
 
 
@@ -1233,6 +1233,17 @@ Wessels, et al.          Expires October 5, 2020               [Page 22]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+   o  Clarified verification procedure by describing a loop over all
+      ZONEMD RRs.
+
+12.  References
+
+12.1.  Normative References
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
+              <https://www.rfc-editor.org/info/rfc1034>.
 
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
@@ -1269,6 +1280,16 @@ Internet-Draft               DNS Zone Digest                  April 2020
               progress), June 2018, <https://tools.ietf.org/html/
               draft-ietf-doh-dns-over-https-12>.
 
+
+
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 23]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
    [InterNIC]
               ICANN, "InterNIC FTP site", May 2018,
               <ftp://ftp.internic.net/domain/>.
@@ -1281,14 +1302,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
    [RFC1995]  Ohta, M., "Incremental Zone Transfer in DNS", RFC 1995,
               DOI 10.17487/RFC1995, August 1996,
               <https://www.rfc-editor.org/info/rfc1995>.
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 23]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
    [RFC2065]  Eastlake 3rd, D. and C. Kaufman, "Domain Name System
               Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
@@ -1326,6 +1339,13 @@ Internet-Draft               DNS Zone Digest                  April 2020
               (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
               <https://www.rfc-editor.org/info/rfc5936>.
 
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 24]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
    [RFC7696]  Housley, R., "Guidelines for Cryptographic Algorithm
               Agility and Selecting Mandatory-to-Implement Algorithms",
               BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
@@ -1335,16 +1355,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
               Servers by Running One on Loopback", RFC 7706,
               DOI 10.17487/RFC7706, November 2015,
               <https://www.rfc-editor.org/info/rfc7706>.
-
-
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 24]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
    [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
               and P. Hoffman, "Specification for DNS over Transport
@@ -1380,16 +1390,6 @@ Appendix A.  Example Zones With Digests
    These can be used to verify an implementation of the zone digest
    protocol.
 
-A.1.  Simple EXAMPLE Zone
-
-   Here, the EXAMPLE zone contains an SOA record, NS and glue records,
-   and a ZONEMD record.
-
-
-
-
-
-
 
 
 
@@ -1401,6 +1401,11 @@ Wessels, et al.          Expires October 5, 2020               [Page 25]
 
 Internet-Draft               DNS Zone Digest                  April 2020
 
+
+A.1.  Simple EXAMPLE Zone
+
+   Here, the EXAMPLE zone contains an SOA record, NS and glue records,
+   and a ZONEMD record.
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1420,6 +1425,38 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 26]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1447,26 +1484,35 @@ A.2.  Complex EXAMPLE Zone
                                      2069676e6f726564
                                      2e20616c6c6f7765 )
 
-
-
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 26]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
-
 A.3.  EXAMPLE Zone with multiple digests
 
    Here, the EXAMPLE zone contains multiple ZONEMD records.  Since only
-   one Hash Algorithm is defined at this time (SHA384), this example
-   utilizes additional ZONEMD records with Hash Algorithm values in the
-   private range (240-254).  These additional private-range digests are
-   not verifiable, but note that their other fields (Serial, Scheme,
-   Hash Algorithm) are included in the calculation of all ZONEMD
-   digests.
+   one Scheme (SIMPLE) and one Hash Algorithm (SHA384) is defined at
+   this time, this example utilizes additional ZONEMD records with
+   Scheme and Hash Algorithm values in the private range (240-254).
+   These additional private-range digests are not verifiable.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 27]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1482,37 +1528,13 @@ A.3.  EXAMPLE Zone with multiple digests
    example.      86400   IN  ZONEMD  2018031900 1 240 (
                                      e2d523f654b9422a
                                      96c5a8f44607bbee )
-   example.      86400   IN  ZONEMD  2018031900 1 241 (
-                                     5732dd91240611f8
-                                     314adb6b4769bdd2 )
-   example.      86400   IN  ZONEMD  2018031900 1 242 (
-                                     7c32e06779315c7d
-                                     81ba8c72f5cf9116
-                                     496b6395 )
-   example.      86400   IN  ZONEMD  2018031900 1 243 (
-                                     183770af4a629f80
-                                     2e674e305b8d0d11
-                                     3dfe0837 )
-   example.      86400   IN  ZONEMD  2018031900 1 244 (
-                                     e1846540e33a9e41
-                                     89792d18d5d131f6
-                                     05fc283e )
-   example.      86400   IN  ZONEMD  2018031900 240 1 (
+   example.      86400   IN  ZONEMD  2018031900 241 1 (
                                      e1846540e33a9e41
                                      89792d18d5d131f6
                                      05fc283e )
    ns1.example.  3600    IN  A       203.0.113.63
    ns2.example.  86400   IN  TXT     "This example has multiple digests"
    ns2.example.  3600    IN  AAAA    2001:db8::63
-
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 27]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
 
 A.4.  The URI.ARPA Zone
 
@@ -1540,6 +1562,14 @@ A.4.  The URI.ARPA Zone
        lTtD8JVeN1mCvcNFZpagwIgB7XhTtm6Beur/m5ES+4uSnVeS6Q66HBZK
        A3mR95IpevuVIZvvJ+GcCAQpBo6KRODYvJ/c/ZG6sfYWkZ7qg/Em5/+3 4UI= )
    uri.arpa.         3600    IN      RRSIG   DNSKEY 8 2 3600 (
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 28]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
        20181028152832 20181007175821 15796 uri.arpa.
        nzpbnh0OqsgBBP8St28pLvPEQ3wZAUdEBuUwil+rtjjWlYYiqjPxZ286
        XF4Rq1usfV5x71jZz5IqswOaQgia91ylodFpLuXD6FTGs2nXGhNKkg1V
@@ -1562,14 +1592,6 @@ A.4.  The URI.ARPA Zone
        qn8yBNoHDjGdT79U2Wu9IIahoS0YPOgYP8lG+qwPcrZ1BwGiHywuoUa2
        Mx6BWZlg+HDyaxj2iOmox+IIqoUHhXUbO7IUkJFlgrOKCgAR2twDHrXu
        9BUQHy9SoV16wYm3kBTEPyxW5FFm8vcdnKAF7sxSY8BbaYNpRIEjDx4A JUc= )
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 28]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
-
    uri.arpa.         3600    IN      NSEC    ftp.uri.arpa. NS SOA (
        MX RRSIG NSEC DNSKEY )
    uri.arpa.         86400   IN      NS      a.iana-servers.net.
@@ -1596,6 +1618,14 @@ Internet-Draft               DNS Zone Digest                  April 2020
        wcgzVfsxUGa2MmeA4hgkAooC3uy+tTmoMsgy8uq/JAj24DjiHzd46LfD
        FK/qMidVqFpYSHeq2Vv5ojkuIsx4oe4KsafGWYNOczKZgH5loGjN2aJG
        mrIm++XCphOskgCsQYl65MIzuXffzJyxlAuts+ecAIiVeqRaqQfr8LRU
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 29]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
        7wIsLxinXirprtQrbor+EtvlHp9qXE6ARTZDzf4jvsNpKvLFZtmxzFf3
        e/UJz5eHjpwDSiZL7xE8aE1o1nGfPtJx9ZnB3bapltaJ5wY+5XOCKgY0
        xmJVvNQlwdE= )
@@ -1618,14 +1648,6 @@ Internet-Draft               DNS Zone Digest                  April 2020
        U03NntQ73LHWpfLmUK8nMsqkwVsOGW2KdsyuHYAjqQSZvKbtmbv7HBmE
        H1+Ii3Z+wtfdMZBy5aC/6sHdx69BfZJs16xumycMlAy6325DKTQbIMN+
        ift9GrKBC7cgCd2msF/uzSrYxxg4MJQzBPvlkwXnY3b7eJSlIXisBIn7 3b8= )
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 29]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
-
    http.uri.arpa.    604800  IN      RRSIG   NAPTR 8 3 604800 (
        20181029011815 20181007205525 47155 uri.arpa.
        T7mRrdag+WSmG+n22mtBSQ/0Y3v+rdDnfQV90LN5Fq32N5K2iYFajF7F
@@ -1652,6 +1674,14 @@ Internet-Draft               DNS Zone Digest                  April 2020
    urn.uri.arpa.     3600    IN      RRSIG   NSEC 8 3 3600 (
        20181028123243 20181007175821 47155 uri.arpa.
        Hgsw4Deops1O8uWyELGe6hpR/OEqCnTHvahlwiQkHhO5CSEQrbhmFAWe
+
+
+
+Wessels, et al.          Expires October 5, 2020               [Page 30]
+
+Internet-Draft               DNS Zone Digest                  April 2020
+
+
        UOkmGAdTEYrSz+skLRQuITRMwzyFf4oUkZihGyhZyzHbcxWfuDc/Pd/9
        DSl56gdeBwy1evn5wBTms8yWQVkNtphbJH395gRqZuaJs3LD/qTyJ5Dp LvA= )
    urn.uri.arpa.     604800  IN      RRSIG   NAPTR 8 3 604800 (
@@ -1673,39 +1703,9 @@ Internet-Draft               DNS Zone Digest                  April 2020
        1291b78ddf7669b1a39d014d87626b709b55774c5d7d58fa
        dc556439889a10eaf6f11d615900a4f996bd46279514e473 )
 
-
-
-
-
-Wessels, et al.          Expires October 5, 2020               [Page 30]
-
-Internet-Draft               DNS Zone Digest                  April 2020
-
-
 A.5.  The ROOT-SERVERS.NET Zone
 
    The ROOT-SERVERS.NET zone retreived 2018-10-21.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
