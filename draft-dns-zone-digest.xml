@@ -779,35 +779,47 @@ where "|" denotes concatenation.
             If the &RRNAME; RRSet contains more than one RR with the same Scheme and Hash Algorithm, digest verification
             MUST NOT be considered successful.
           </t>
-          <t anchor="verify-check-serials">
-            The SOA Serial field MUST exactly match the &RRNAME;
-            Serial field.  If the fields to not match, digest
-            verification MUST NOT be considered successful.
-          </t>
           <t>
-            The &RRNAME; Hash Algorithm field MUST be checked.  If the
-            verifier does not support the given Hash Algorithm, it
-            SHOULD report that the zone digest could not be verified
-            due to an unsupported algorithm.
-          </t>
-          <t>
-            The received Digest value is copied to
-            a temporary location.  Repeat for each &RRNAME; RR present.
-          </t>
-          <!-- t anchor="verify-zeroize-digest">
-            The &RRNAME; RR's Digest field MUST be set to all zeroes.
-            Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
-          </t -->
-          <t>
-            The zone digest is computed over the zone data as
-            described in <xref target="collate-iterate"/>.
-          </t>
-          <t>
-            The calculated digest is compared to the received digest.
-            <!-- stored in the temporary location. -->
-            If the two digest values match, verification is considered
-            successful.  Otherwise, verification MUST NOT be
-            considered successful.
+            Loop over all apex &RRNAME; RRs and perform the following steps:
+            <list style="letters">
+              <t anchor="verify-check-serials">
+                The SOA Serial field MUST exactly match the &RRNAME;
+                Serial field.  If the fields do not match, digest
+                verification MUST NOT be considered successful with this &RRNAME; RR.
+              </t>
+              <t>
+                The Scheme field MUST be checked.  If the
+                verifier does not support the given scheme, it
+                SHOULD report that the RR's digest could not be verified
+                due to an unsupported scheme.
+              </t>
+              <t>
+                The Hash Algorithm field MUST be checked.  If the
+                verifier does not support the given hash algorithm, it
+                SHOULD report that the RR's digest could not be verified
+                due to an unsupported algorithm.
+              </t>
+              <!-- t>
+                The received Digest value is copied to
+                a temporary location.  Repeat for each &RRNAME; RR present.
+              </t -->
+              <!-- t anchor="verify-zeroize-digest">
+                The &RRNAME; RR's Digest field MUST be set to all zeroes.
+                Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
+              </t -->
+              <t>
+                The zone digest is computed over the zone data as
+                described in <xref target="collate-iterate"/>,
+                using the Scheme and Hash Algorithm for the current &RRNAME; RR.
+              </t>
+              <t>
+                The computed digest is compared to the received digest.
+                <!-- stored in the temporary location. -->
+                If the two digest values match, verification is considered
+                successful.  Otherwise, verification MUST NOT be
+                considered successful for this &RRNAME; RR.
+              </t>
+            </list>
           </t>
           <!-- t>
             The &RRNAME; RR's RDATA is reset to the received
@@ -1277,9 +1289,10 @@ where "|" denotes concatenation.
         <t>Updated examples in the appendix.</t>
       </list></t>
       <t>From -05 to -06:
-      <list>
+      <list style="symbols">
         <t>Per WG suggestion, no longer include any apex &RRNAME; record in digest calculation.</t>
         <t>Updated examples in the appendix.</t>
+        <t>Clarified verification procedure by describing a loop over all &RRNAME; RRs.</t>
       </list></t>
     </section>
 
