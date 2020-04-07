@@ -1458,12 +1458,10 @@ non-apex      900     IN  ZONEMD  2018031900 1 1 (
       <section title="EXAMPLE Zone with multiple digests">
         <t>
           Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Hash Algorithm is defined at this time (SHA384), this
-          example utilizes additional &RRNAME; records with Hash Algorithm
+          only one Scheme (SIMPLE) and one Hash Algorithm (SHA384) is defined at this time, this
+          example utilizes additional &RRNAME; records with Scheme and Hash Algorithm
           values in the private range (240-254).  These additional
-          private-range digests are not verifiable, but note that their
-          other fields (Serial, Scheme, Hash Algorithm) are included in
-          the calculation of all &RRNAME; digests.
+          private-range digests are not verifiable.
         </t>
         <figure><artwork align="left"><![CDATA[
 example.      86400   IN  SOA     ns1 admin 2018031900 (
@@ -1480,22 +1478,7 @@ example.      86400   IN  ZONEMD  2018031900 1 1 (
 example.      86400   IN  ZONEMD  2018031900 1 240 (
                                   e2d523f654b9422a
                                   96c5a8f44607bbee )
-example.      86400   IN  ZONEMD  2018031900 1 241 (
-                                  5732dd91240611f8
-                                  314adb6b4769bdd2 )
-example.      86400   IN  ZONEMD  2018031900 1 242 (
-                                  7c32e06779315c7d
-                                  81ba8c72f5cf9116
-                                  496b6395 )
-example.      86400   IN  ZONEMD  2018031900 1 243 (
-                                  183770af4a629f80
-                                  2e674e305b8d0d11
-                                  3dfe0837 )
-example.      86400   IN  ZONEMD  2018031900 1 244 (
-                                  e1846540e33a9e41
-                                  89792d18d5d131f6
-                                  05fc283e )
-example.      86400   IN  ZONEMD  2018031900 240 1 (
+example.      86400   IN  ZONEMD  2018031900 241 1 (
                                   e1846540e33a9e41
                                   89792d18d5d131f6
                                   05fc283e )
