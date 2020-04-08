@@ -31,6 +31,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC7858 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
 <!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC8484 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8484.xml">
 <!ENTITY RFC8499 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
@@ -247,7 +248,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           to provide channel security. 
           One can easily imagine
           the distribution of zones over HTTPS-enabled web servers,
-          as well as DNS-over-HTTPS <xref target="dns-over-https"/>, and perhaps
+          as well as DNS-over-HTTPS <xref target="RFC8484"/>, and perhaps
           even a future version of DNS-over-TLS (<xref target="RFC7858"/>).
         </t>
         <t>
@@ -1331,6 +1332,7 @@ where "|" denotes concatenation.
     &RFC7858;
     &RFC7696;
     &RFC8126;
+    &RFC8484;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
         <front>
@@ -1350,20 +1352,6 @@ where "|" denotes concatenation.
           </author>
           <date year="2018" month="July" day="2"/>
         </front>
-     </reference>
-
-     <reference anchor="dns-over-https" target="https://tools.ietf.org/html/draft-ietf-doh-dns-over-https-12">
-        <front>
-          <title>DNS Queries over HTTPS (DoH)</title>
-          <author initials="P." surname="Hoffman" fullname="Paul Hoffman">
-            <organization>ICANN</organization>
-          </author>
-          <author initials="P." surname="McManus" fullname="Patrick McManus">
-            <organization>Mozilla</organization>
-          </author>
-          <date year="2018" month="June" day="27"/>
-        </front>
-        <seriesInfo name="Internet-Draft" value="draft-ietf-doh-dns-over-https-12" />
      </reference>
 
      <reference anchor="ldns-zone-digest" target="https://github.com/verisign/ldns-zone-digest">
