@@ -1168,6 +1168,21 @@ where "|" denotes concatenation.
           </list>
         </t>
       </section>
+      <section title="NIC Chile Labs Implementation">
+        <t>
+          NIC Chile Labs wrote an implementation of this specification
+          as part of "dns-tools" suite <xref target="DnsTools"/>,
+          which besides digesting, can also sign and verify zones. This
+          implementation is in Go and is able to perform the following
+          functions:
+          <list style="symbols">
+          <t>Compute zone digest over signed zone and update the ZONEMD record.</t>
+          <t>Verify the zone digest from an input zone.</t>
+          <t>Perform DNSSEC validation of the ZONEMD record during verification.</t>
+          <t>Re-compute DNSSEC signature over the ZONEMD record.</t>
+          </list>
+        </t>
+      </section>
     </section>
 
     <section anchor="Changes" title="Change Log">
@@ -1298,6 +1313,10 @@ where "|" denotes concatenation.
         <t>Updated examples in the appendix.</t>
         <t>Clarified verification procedure by describing a loop over all &RRNAME; RRs.</t>
       </list></t>
+      <t>From -06 to -07:
+      <list style="symbols">
+        <t>Added NIC Chile Labs implementation.</t>
+      </list></t>
     </section>
 
   </middle>
@@ -1370,6 +1389,17 @@ where "|" denotes concatenation.
           <author initials="S." surname="Kerr" fullname="Shane Kerr">
           </author>
           <date year="2018" month="July" day="14"/>
+        </front>
+     </reference>
+
+     <reference anchor="DnsTools" target="https://github.com/niclabs/dns-tools">
+        <front>
+          <title>DNS tools for zone signature (file, pkcs11-hsm)
+      and validation, and zone digest (ZONEMD)</title>
+          <author>
+            <organization>NIC Chile Labs</organization>
+          </author>
+          <date year="2020" month="April"/>
         </front>
      </reference>
 
