@@ -92,17 +92,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     </author>
 
     <author fullname="Matt Weinberg" initials="M." surname="Weinberg">
-      <organization>Verisign</organization>
+      <organization>Amazon</organization>
       <address>
-        <postal>
-          <street>12061 Bluemont Way</street>
-          <city>Reston</city>
-          <region>VA</region>
-          <code>20190</code>
-        </postal>
-        <phone>+1 703 948-3200</phone>
-        <email>mweinberg@verisign.com</email>
-        <uri>http://verisign.com</uri>
+        <email>matweinb@amazon.com</email>
+        <uri>http://amazon.com</uri>
       </address>
     </author>
 
