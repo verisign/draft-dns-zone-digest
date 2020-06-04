@@ -340,9 +340,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </section>
 
       <section title="Use Cases">
-        <!-- MSJ: 1.3 - general  - add something like "Specifically,
-        ZONEMD covers the integrity of <your text here> records that
-        are not otherwise covered by DNSSEC". -->
         <section title="Root Zone">
           <t>
             The root zone <xref target="InterNIC"/>
@@ -580,8 +577,8 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
         <t>
           Prior to calculation of the digest, and prior to signing with
           DNSSEC, one or more placeholder &RRNAME; records are added to the
-          zone apex.  This <!-- serves two purposes: (1) it allows the digest to cover
-          the Serial, Scheme, and Hash Algorithm fields, and (2) --> ensures that 
+          zone apex.  This 
+          ensures that 
           appropriate denial-of-existence (NSEC, NSEC3) records are created
           if the zone is signed with DNSSEC.
           When multiple &RRNAME; RRs are published in the zone, e.g.,
@@ -597,9 +594,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           The Scheme field is set to the value for the chosen collation scheme.
           The Hash Algorithm field is set
           to the value for the chosen hash algorithm.
-          <!-- The Digest
-          field is set to all zeroes and of length appropriate
-          for the chosen hash algorithm. -->
           Since &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
@@ -654,18 +648,6 @@ where "|" denotes concatenation.
           </t>
         </section>
       </section>
-
-      <!-- section title="Handling Duplicate RRs">
-        <t>
-          As stated in Section 5 of <xref target="RFC2181"/>
-          and Section 6.3 of <xref target="RFC4034"/>, it
-          is meaningless for a zone to have multiple RRs with
-          equal owner name, class, type, and RDATA.  In the
-          interest of consistency and interoperability,
-          only one instance of duplicate RRs with equal owner,
-          class, type and RDATA is included in a zone digest.
-        </t>
-      </section -->
 
       <section title="Inclusion/Exclusion Rules" anchor="inclusion-exclusion">
         <t>
@@ -796,14 +778,6 @@ where "|" denotes concatenation.
                 SHOULD report that the RR's digest could not be verified
                 due to an unsupported algorithm.
               </t>
-              <!-- t>
-                The received Digest value is copied to
-                a temporary location.  Repeat for each &RRNAME; RR present.
-              </t -->
-              <!-- t anchor="verify-zeroize-digest">
-                The &RRNAME; RR's Digest field MUST be set to all zeroes.
-                Repeat for each RR present in the apex &RRNAME; RRSet, even for unsupported Scheme and Hash Algorithm values.
-              </t -->
               <t>
                 The zone digest is computed over the zone data as
                 described in <xref target="collate-iterate"/>,
@@ -811,26 +785,14 @@ where "|" denotes concatenation.
               </t>
               <t>
                 The computed digest is compared to the received digest.
-                <!-- stored in the temporary location. -->
                 If the two digest values match, verification is considered
                 successful.  Otherwise, verification MUST NOT be
                 considered successful for this &RRNAME; RR.
               </t>
             </list>
           </t>
-          <!-- t>
-            The &RRNAME; RR's RDATA is reset to the received
-            Digest stored in the temporary location.
-            Thus, any downstream clients can similarly verify the zone.
-          </t -->
         </list>
       </t>
-      <!-- t>
-          Note that when multiple &RRNAME; RRs are present in the zone, 
-          the Digest field of each MUST be zeroed in step <xref
-          target="verify-zeroize-digest" format="counter"/> above, even for
-          unsupported Scheme and Hash Algorithm values.
-      </t -->
     </section>
 
     <!-- section title="Scope of Experimentation">
