@@ -616,59 +616,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
         </t>
       </section>
 
-      <section title="Canonical Format and Ordering" anchor="canonical-ordering">
-        <t>
-          Calculation of a zone digest REQUIRES RRs
-          to be processed in a consistent format and ordering.  Correct ordering
-          depends on (1) ordering of owner names, (2)
-          ordering of RRSets with the same owner name, and (3) ordering of
-          RRs within an RRSet.
-        </t>
-        <t>
-          This specification adopts DNSSEC's canonical ordering for names
-          (Section 6.1 of <xref target="RFC4034"/>),
-          and canonical ordering for RRs within an RRSet
-          (Section 6.3 of <xref target="RFC4034"/>).
-          It also adopts DNSSEC's canonical RR form
-          (Section 6.2 of <xref target="RFC4034"/>).
-          However, since DNSSEC does not define a canonical ordering for RRSets
-          having the same owner name, that ordering is defined here.
-        </t>
-        <t>
-          This specification adopts DNSSEC's canonical on-the-wire RR format
-          (without name compression) as specified in <xref target="RFC4034"/>:
-        </t>
-        <figure><artwork>
-RR(i) = owner | type | class | TTL | RDATA length | RDATA
-
-where "|" denotes concatenation.
-        </artwork></figure>
-        <!-- t>
-          The record collating sequence is scheme specific.
-        </t -->
-        <section title="Order of RRSets Having the Same Owner Name">
-          <t>
-            For the purposes of calculating the zone digest, RRSets having
-            the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
-          </t>
-        </section>
-      </section>
-
-      <section title="Inclusion/Exclusion Rules" anchor="inclusion-exclusion">
-        <t>
-          When iterating over records in the zone, the following inclusion/exclusion rules apply:
-          <list style="symbols">
-          <t>All records in the zone, including glue records, MUST be included.</t>
-          <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
-          <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
-          <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
-          <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
-          <t>The RRSIG covering &RRNAME; MUST NOT be included
-            because the RRSIG will be updated after all digests have been calculated.</t>
-          </list>
-        </t>
-      </section>
-
       <section title="Scheme-Specific Processing" anchor="collate-iterate">
         <t>
           At this time, only the SIMPLE collation scheme is defined.
@@ -685,19 +632,74 @@ where "|" denotes concatenation.
             large and/or dynamic.
           </t>
 
-          <t>
-            A zone digest using the SIMPLE scheme is calculated by concatenating the canonical form
-            of all RRs in the zone, in the order described
-            in <xref target="canonical-ordering"/>, subject to the inclusion/exclusion rules described
-            in <xref target="inclusion-exclusion"/>, and then applying the SHA-384 algorithm:
-          </t>
-          <figure><artwork>
-digest = hash( RR(1) | RR(2) | RR(3) | ... )
+          <section title="SIMPLE Scheme RR Format" anchor="simple-format">
+            <t>
+              This specification adopts DNSSEC's canonical on-the-wire RR format
+              (without name compression) as specified in <xref target="RFC4034"/>:
+            </t>
+            <figure><artwork>
+RR(i) = owner | type | class | TTL | RDATA length | RDATA
 
 where "|" denotes concatenation.
-          </artwork></figure>
+            </artwork></figure>
+          </section>
+
+          <section title="SIMPLE Scheme RR Ordering" anchor="simple-ordering">
+            <t>
+              Calculation of a zone digest REQUIRES RRs
+              to be processed in a consistent format and ordering.  Correct ordering
+              depends on (1) ordering of owner names, (2)
+              ordering of RRSets with the same owner name, and (3) ordering of
+              RRs within an RRSet.
+            </t>
+            <t>
+              This specification adopts DNSSEC's canonical ordering for names
+              (Section 6.1 of <xref target="RFC4034"/>),
+              and canonical ordering for RRs within an RRSet
+              (Section 6.3 of <xref target="RFC4034"/>).
+              It also adopts DNSSEC's canonical RR form
+              (Section 6.2 of <xref target="RFC4034"/>).
+            </t>
+            <t>
+              However, since DNSSEC does not define a canonical ordering for RRSets
+              having the same owner name, that ordering is defined here.
+              For the purposes of calculating the zone digest, RRSets having
+              the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
+            </t>
+          </section>
+
+          <section title="SIMPLE Scheme Inclusion/Exclusion Rules" anchor="simple-inclusion-exclusion">
+            <t>
+              When iterating over records in the zone, the following inclusion/exclusion rules apply:
+              <list style="symbols">
+              <t>All records in the zone, including glue records, MUST be included.</t>
+              <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
+              <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
+              <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
+              <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
+              <t>The RRSIG covering &RRNAME; MUST NOT be included
+                because the RRSIG will be updated after all digests have been calculated.</t>
+              </list>
+            </t>
+          </section>
+
+          <section title="SIMPLE Digest Calculation">
+            <t>
+              A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
+              in the format described in <xref target="simple-format"/>,
+              in the order described in <xref target="simple-ordering"/>,
+              subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion"/>,
+              and then applying the SHA-384 algorithm:
+            </t>
+            <figure><artwork>
+digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+
+where "|" denotes concatenation.
+            </artwork></figure>
+          </section>
 
         </section>
+
       </section>
 
       <section title="Update &RRNAME; RR">
@@ -1277,6 +1279,7 @@ where "|" denotes concatenation.
       <list style="symbols">
         <t>Added NIC Chile Labs implementation.</t>
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
+        <t>Moved format, ordering, inclusion/exclusion into a sub section specific to the SIMPLE scheme.</t>
       </list></t>
     </section>
 
