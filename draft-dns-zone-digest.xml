@@ -579,8 +579,13 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           DNSSEC, one or more placeholder &RRNAME; records are added to the
           zone apex.  This 
           ensures that 
-          appropriate denial-of-existence (NSEC, NSEC3) records are created
-          if the zone is signed with DNSSEC.
+          denial-of-existence (NSEC, NSEC3) records are created correctly
+          if the zone is signed with DNSSEC.  If placeholders are not added prior to
+          signing, the later addition of &RRNAME; records would also require updating the
+          Type Bit Maps field of any apex NSEC/NSEC3 RRs, which then invalidates
+          the calculated digest value.
+        </t>
+        <t>
           When multiple &RRNAME; RRs are published in the zone, e.g.,
           during an algorithm rollover, each must specify a unique Scheme
           and Hash Algorithm tuple.
