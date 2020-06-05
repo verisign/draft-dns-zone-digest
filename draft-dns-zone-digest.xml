@@ -631,8 +631,12 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           (Section 6.3 of <xref target="RFC4034"/>).
           It also adopts DNSSEC's canonical RR form
           (Section 6.2 of <xref target="RFC4034"/>).
+        </t>
+        <t>
           However, since DNSSEC does not define a canonical ordering for RRSets
           having the same owner name, that ordering is defined here.
+          For the purposes of calculating the zone digest, RRSets having
+          the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
         </t>
         <t>
           This specification adopts DNSSEC's canonical on-the-wire RR format
@@ -646,12 +650,6 @@ where "|" denotes concatenation.
         <!-- t>
           The record collating sequence is scheme specific.
         </t -->
-        <section title="Order of RRSets Having the Same Owner Name">
-          <t>
-            For the purposes of calculating the zone digest, RRSets having
-            the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
-          </t>
-        </section>
       </section>
 
       <section title="Inclusion/Exclusion Rules" anchor="inclusion-exclusion">
@@ -1277,6 +1275,7 @@ where "|" denotes concatenation.
       <list style="symbols">
         <t>Added NIC Chile Labs implementation.</t>
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
+        <t>Moved subsection ("Order of RRSets Having the Same Owner Name") with single sentence paragraph up into parent section.</t>
       </list></t>
     </section>
 
