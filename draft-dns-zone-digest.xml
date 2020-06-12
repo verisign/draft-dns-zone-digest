@@ -43,7 +43,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-07" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-08" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -1274,6 +1274,9 @@ where "|" denotes concatenation.
       <t>From -06 to -07:
       <list style="symbols">
         <t>Added NIC Chile Labs implementation.</t>
+      </list></t>
+      <t>From -07 to -08:
+      <list style="symbols">
         <t>Update an author's affiliation.</t>
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
         <t>Moved subsection ("Order of RRSets Having the Same Owner Name") with single sentence paragraph up into parent section.</t>
