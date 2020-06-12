@@ -1274,6 +1274,7 @@ where "|" denotes concatenation.
       <t>From -06 to -07:
       <list style="symbols">
         <t>Added NIC Chile Labs implementation.</t>
+        <t>Update an author's affiliation.</t>
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
         <t>Moved subsection ("Order of RRSets Having the Same Owner Name") with single sentence paragraph up into parent section.</t>
       </list></t>
