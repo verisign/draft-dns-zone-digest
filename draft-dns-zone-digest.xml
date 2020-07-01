@@ -43,7 +43,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-07" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-09" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN" 
@@ -125,7 +125,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </address>
     </author>
 
-    <date day="28" month="April" year="2020"/>
+    <date day="12" month="June" year="2020"/>
 
     <area>General</area>
 
@@ -632,6 +632,14 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
             large and/or dynamic.
           </t>
 
+          <t>
+            Calculation of a zone digest REQUIRES RRs
+            to be processed in a consistent format and ordering.  Correct ordering
+            depends on (1) ordering of owner names, (2)
+            ordering of RRSets with the same owner name, and (3) ordering of
+            RRs within an RRSet.
+          </t>
+
           <section title="SIMPLE Scheme RR Format" anchor="simple-format">
             <t>
               This specification adopts DNSSEC's canonical on-the-wire RR format
@@ -645,13 +653,6 @@ where "|" denotes concatenation.
           </section>
 
           <section title="SIMPLE Scheme RR Ordering" anchor="simple-ordering">
-            <t>
-              Calculation of a zone digest REQUIRES RRs
-              to be processed in a consistent format and ordering.  Correct ordering
-              depends on (1) ordering of owner names, (2)
-              ordering of RRSets with the same owner name, and (3) ordering of
-              RRs within an RRSet.
-            </t>
             <t>
               This specification adopts DNSSEC's canonical ordering for names
               (Section 6.1 of <xref target="RFC4034"/>),
@@ -683,7 +684,7 @@ where "|" denotes concatenation.
             </t>
           </section>
 
-          <section title="SIMPLE Digest Calculation">
+          <section title="SIMPLE Scheme Digest Calculation">
             <t>
               A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
               in the format described in <xref target="simple-format"/>,
@@ -1278,7 +1279,15 @@ where "|" denotes concatenation.
       <t>From -06 to -07:
       <list style="symbols">
         <t>Added NIC Chile Labs implementation.</t>
+      </list></t>
+      <t>From -07 to -08:
+      <list style="symbols">
+        <t>Update an author's affiliation.</t>
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
+        <t>Moved subsection ("Order of RRSets Having the Same Owner Name") with single sentence paragraph up into parent section.</t>
+      </list></t>
+      <t>From -07 to -08:
+      <list style="symbols">
         <t>Moved format, ordering, inclusion/exclusion into a sub section specific to the SIMPLE scheme.</t>
       </list></t>
     </section>
