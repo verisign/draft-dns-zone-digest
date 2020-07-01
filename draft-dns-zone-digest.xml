@@ -1286,7 +1286,7 @@ where "|" denotes concatenation.
         <t>Clarified why placeholder RRs are still important (for NSEC/NSEC3).</t>
         <t>Moved subsection ("Order of RRSets Having the Same Owner Name") with single sentence paragraph up into parent section.</t>
       </list></t>
-      <t>From -07 to -08:
+      <t>From -08 to -09:
       <list style="symbols">
         <t>Moved format, ordering, inclusion/exclusion into a sub section specific to the SIMPLE scheme.</t>
       </list></t>

@@ -1281,7 +1281,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
    o  Moved subsection ("Order of RRSets Having the Same Owner Name")
       with single sentence paragraph up into parent section.
 
-   From -07 to -08:
+   From -08 to -09:
 
 
 
