@@ -27,7 +27,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC6234 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY RFC7696 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
-<!ENTITY RFC7706 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
+<!ENTITY RFC8806 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8806.xml">
 <!ENTITY RFC7858 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
 <!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
@@ -179,7 +179,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         the AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/>
         protocols.
         Zone files can also be distributed outside of the DNS, with
-        such protocols as FTP, HTTP, rsync, and even via email.
+        such protocols as FTP, HTTP, and rsync, and even via email.
         Currently there is no standard way to verify the authenticity
         of a stand-alone zone.
       </t>
@@ -277,7 +277,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           There are existing tools and protocols that provide data
           security, such as OpenPGP <xref target="RFC4880"/> and S/MIME
           <xref target="RFC5751"/>.  In fact, the internic.net site
-          publishes PGP signatures along side the root zone and other
+          publishes PGP signatures alongside the root zone and other
           files available there.  However, this is a detached signature
           with no strong association to the corresponding zone file other
           than its timestamp.  Non-detached signatures are, of course,
@@ -334,7 +334,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           zone which fails verification.  For signed zones, the name
           server needs a trust anchor to perform DNSSEC validation.
           For signed non-root zones, the name server may need to send
-          queries to validate a chain-of-trust.  Digest verification
+          queries to validate a chain of trust.  Digest verification
           could also be performed externally.
         </t>
       </section>
@@ -348,7 +348,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             at the time of this writing.  Additionally, many organizations
             configure their own name servers to serve the root zone locally.
             Reasons for doing so include privacy and reduced access time.
-            <xref target="RFC7706"/> describes one, but not the only, way
+            <xref target="RFC8806"/> describes one, but not the only, way
             to do this.  As the root zone spreads beyond its traditional
             deployment boundaries, the need for verification of the
             completeness of the zone contents becomes increasingly
@@ -602,7 +602,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           Since &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
-          Implementations MAY want to set the Digest field to all zeroes anyway.
+          <!-- Implementations MAY want to set the Digest field to all zeroes anyway. -->
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -676,6 +676,10 @@ where "|" denotes concatenation.
               <t>All records in the zone, including glue records, MUST be included.</t>
               <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
               <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
+              <!-- XXX It’s not wrong, but it’s slightly jarring that
+              all the items around this say “MUST” and this one
+              says “SHALL”.  Any reason, or should we switch this
+              to “MUST” to match the others? -->
               <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
               <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
               <t>The RRSIG covering &RRNAME; MUST NOT be included
@@ -971,10 +975,10 @@ where "|" denotes concatenation.
           consider how well &RRNAME; responses could be used in
           a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
-          A single &RRNAME; RR contributes approximately 40 to 65
-          octets to a DNS response, for currently defined digest
-          types.  Certainly other RR types result in larger
-          amplification effects (i.e., DNSKEY).
+          A single &RRNAME; RR contributes 54
+          octets of RDATA to a DNS response, for currently defined digest
+          types.  Certainly other RR types, such as DNSKEY, can result in larger
+          amplification effects.
         </t>
       </section>
       <section title="Resilience and Fragility">
@@ -1319,7 +1323,7 @@ where "|" denotes concatenation.
     &RFC5751;
     &RFC4880;
     &RFC5936;
-    &RFC7706;
+    &RFC8806;
     &RFC8499;
     &RFC7858;
     &RFC7696;
