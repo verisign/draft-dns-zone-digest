@@ -1292,6 +1292,10 @@ where "|" denotes concatenation.
       <t>From -08 to -09:
       <list style="symbols">
         <t>Moved format, ordering, inclusion/exclusion into a sub section specific to the SIMPLE scheme.</t>
+        <t>Further clarified rules about multiple &RRNAME; RRs (AD comments).</t>
+        <t>Reworeded rules about processing of duplicate zone RRs (AD comments).</t>
+        <t>Removed sentence about optional zeroing of digest prior to calculation (AD comments).</t>
+        <t>Other minor changes (AD comments).</t>
       </list></t>
     </section>
 
