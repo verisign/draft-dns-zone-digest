@@ -976,8 +976,8 @@ where "|" denotes concatenation.
           The &RRNAME; RR is moderately sized, much like the DS RR.
           A single &RRNAME; RR contributes approximately 40 to 65
           octets to a DNS response, for currently defined digest
-          types.  Certainly other RR types result in larger
-          amplification effects (i.e., DNSKEY).
+          types.  Certainly other RR types, such as DNSKEY, can result in larger
+          amplification effects.
         </t>
       </section>
       <section title="Resilience and Fragility">
