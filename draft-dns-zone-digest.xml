@@ -334,7 +334,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           zone which fails verification.  For signed zones, the name
           server needs a trust anchor to perform DNSSEC validation.
           For signed non-root zones, the name server may need to send
-          queries to validate a chain-of-trust.  Digest verification
+          queries to validate a chain of trust.  Digest verification
           could also be performed externally.
         </t>
       </section>
