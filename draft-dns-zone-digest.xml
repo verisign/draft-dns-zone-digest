@@ -602,7 +602,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           Since &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
-          Implementations MAY want to set the Digest field to all zeroes anyway.
+          <!-- Implementations MAY want to set the Digest field to all zeroes anyway. -->
         </t>
       </section>
       <section title="Optionally Sign the Zone">
