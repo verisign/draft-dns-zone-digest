@@ -179,7 +179,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         the AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/>
         protocols.
         Zone files can also be distributed outside of the DNS, with
-        such protocols as FTP, HTTP, rsync, and even via email.
+        such protocols as FTP, HTTP, and rsync, and even via email.
         Currently there is no standard way to verify the authenticity
         of a stand-alone zone.
       </t>
