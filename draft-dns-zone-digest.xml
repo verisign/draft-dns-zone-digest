@@ -277,7 +277,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           There are existing tools and protocols that provide data
           security, such as OpenPGP <xref target="RFC4880"/> and S/MIME
           <xref target="RFC5751"/>.  In fact, the internic.net site
-          publishes PGP signatures along side the root zone and other
+          publishes PGP signatures alongside the root zone and other
           files available there.  However, this is a detached signature
           with no strong association to the corresponding zone file other
           than its timestamp.  Non-detached signatures are, of course,
