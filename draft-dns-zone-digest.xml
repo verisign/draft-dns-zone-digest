@@ -27,7 +27,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC6234 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY RFC7696 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
-<!ENTITY RFC7706 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7706.xml">
+<!ENTITY RFC8806 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8806.xml">
 <!ENTITY RFC7858 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
 <!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
@@ -348,7 +348,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             at the time of this writing.  Additionally, many organizations
             configure their own name servers to serve the root zone locally.
             Reasons for doing so include privacy and reduced access time.
-            <xref target="RFC7706"/> describes one, but not the only, way
+            <xref target="RFC8806"/> describes one, but not the only, way
             to do this.  As the root zone spreads beyond its traditional
             deployment boundaries, the need for verification of the
             completeness of the zone contents becomes increasingly
@@ -1319,7 +1319,7 @@ where "|" denotes concatenation.
     &RFC5751;
     &RFC4880;
     &RFC5936;
-    &RFC7706;
+    &RFC8806;
     &RFC8499;
     &RFC7858;
     &RFC7696;
