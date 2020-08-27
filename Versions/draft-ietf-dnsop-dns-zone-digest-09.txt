@@ -154,8 +154,8 @@ Internet-Draft               DNS Zone Digest                   June 2020
    [RFC1034].  Zones are generally distributed among name servers using
    the AXFR [RFC5936], and IXFR [RFC1995] protocols.  Zone files can
    also be distributed outside of the DNS, with such protocols as FTP,
-   HTTP, rsync, and even via email.  Currently there is no standard way
-   to verify the authenticity of a stand-alone zone.
+   HTTP, and rsync, and even via email.  Currently there is no standard
+   way to verify the authenticity of a stand-alone zone.
 
    This document introduces a new RR type that serves as a cryptographic
    message digest of the data in a zone.  It allows a receiver of the
@@ -251,7 +251,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
 
    There are existing tools and protocols that provide data security,
    such as OpenPGP [RFC4880] and S/MIME [RFC5751].  In fact, the
-   internic.net site publishes PGP signatures along side the root zone
+   internic.net site publishes PGP signatures alongside the root zone
    and other files available there.  However, this is a detached
    signature with no strong association to the corresponding zone file
    other than its timestamp.  Non-detached signatures are, of course,
@@ -306,7 +306,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
    verify the zone data it was given and refuse to serve a zone which
    fails verification.  For signed zones, the name server needs a trust
    anchor to perform DNSSEC validation.  For signed non-root zones, the
-   name server may need to send queries to validate a chain-of-trust.
+   name server may need to send queries to validate a chain of trust.
    Digest verification could also be performed externally.
 
 1.3.  Use Cases
@@ -318,7 +318,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
    [RootServers] at the time of this writing.  Additionally, many
    organizations configure their own name servers to serve the root zone
    locally.  Reasons for doing so include privacy and reduced access
-   time.  [RFC7706] describes one, but not the only, way to do this.  As
+   time.  [RFC8806] describes one, but not the only, way to do this.  As
    the root zone spreads beyond its traditional deployment boundaries,
    the need for verification of the completeness of the zone contents
    becomes increasingly important.
@@ -395,10 +395,11 @@ Internet-Draft               DNS Zone Digest                   June 2020
 
 
    A zone MAY contain multiple ZONEMD RRs to support algorithm agility
-   [RFC7696] and rollovers.  Each ZONEMD RR must specify a unique Scheme
-   and Hash Algorithm tuple.  It is recommended that a zone include only
-   one ZONEMD RR, unless the zone publisher is in the process of
-   transitioning to a new Scheme or Hash Algorithm.
+   [RFC7696] and rollovers.  When multiple ZONEMD RRs are present, each
+   must specify a unique Scheme and Hash Algorithm tuple.  It is
+   recommended that a zone include only one ZONEMD RR, unless the zone
+   publisher is in the process of transitioning to a new Scheme or Hash
+   Algorithm.
 
 2.1.  Non-apex ZONEMD Records
 
@@ -440,7 +441,6 @@ Internet-Draft               DNS Zone Digest                   June 2020
    response messages of type ZONEMD meaningful.  Without the serial
    number, a stand-alone ZONEMD digest has no association to any
    particular instance of a zone.
-
 
 
 
@@ -541,8 +541,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
    collation scheme.  The Hash Algorithm field is set to the value for
    the chosen hash algorithm.  Since ZONEMD records are excluded from
    digest calculation, the value of the Digest field does not matter at
-   this point in the process.  Implementations MAY want to set the
-   Digest field to all zeroes anyway.
+   this point in the process.
 
 3.2.  Optionally Sign the Zone
 
@@ -552,6 +551,7 @@ Internet-Draft               DNS Zone Digest                   June 2020
    MUST be recalculated and updated as well.  Therefore, the signer is
    not required to calculate a signature over the placeholder record at
    this step in the process, but it is harmless to do so.
+
 
 
 
@@ -618,8 +618,9 @@ Wessels, et al.         Expires December 14, 2020              [Page 11]
 Internet-Draft               DNS Zone Digest                   June 2020
 
 
-   o  Only one instance of duplicate RRs with equal owner, class, type
-      and RDATA SHALL be included ([RFC4034] Section 6.3).
+   o  If there are duplicate RRs with equal owner, class, type, and
+      RDATA, only one instance is included ([RFC4034] Section 6.3), and
+      the duplicates MUST be omitted.
 
    o  The placeholder ZONEMD RR(s) MUST NOT be included.
 
@@ -668,7 +669,6 @@ Internet-Draft               DNS Zone Digest                   June 2020
 
 
 
-
 Wessels, et al.         Expires December 14, 2020              [Page 12]
 
 Internet-Draft               DNS Zone Digest                   June 2020
@@ -692,9 +692,10 @@ Internet-Draft               DNS Zone Digest                   June 2020
        DNSSEC validation of the SOA or ZONEMD records fails, digest
        verification MUST NOT be considered successful.
 
-   4.  If the ZONEMD RRSet contains more than one RR with the same
-       Scheme and Hash Algorithm, digest verification MUST NOT be
-       considered successful.
+   4.  When multiple ZONEMD RRs are present, each must specify a unique
+       Scheme and Hash Algorithm tuple.  If the ZONEMD RRSet contains
+       more than one RR with the same Scheme and Hash Algorithm, digest
+       verification MUST NOT be considered successful.
 
    5.  Loop over all apex ZONEMD RRs and perform the following steps:
 
@@ -719,7 +720,6 @@ Internet-Draft               DNS Zone Digest                   June 2020
            the two digest values match, verification is considered
            successful.  Otherwise, verification MUST NOT be considered
            successful for this ZONEMD RR.
-
 
 
 
@@ -842,8 +842,8 @@ Wessels, et al.         Expires December 14, 2020              [Page 15]
 Internet-Draft               DNS Zone Digest                   June 2020
 
 
-   currently defined digest types.  Certainly other RR types result in
-   larger amplification effects (i.e., DNSKEY).
+   currently defined digest types.  Certainly other RR types, such as
+   DNSKEY, can result in larger amplification effects.
 
 6.3.  Resilience and Fragility
 
@@ -1407,11 +1407,6 @@ Internet-Draft               DNS Zone Digest                   June 2020
               BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
               <https://www.rfc-editor.org/info/rfc7696>.
 
-   [RFC7706]  Kumari, W. and P. Hoffman, "Decreasing Access Time to Root
-              Servers by Running One on Loopback", RFC 7706,
-              DOI 10.17487/RFC7706, November 2015,
-              <https://www.rfc-editor.org/info/rfc7706>.
-
    [RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,
               and P. Hoffman, "Specification for DNS over Transport
               Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May
@@ -1430,14 +1425,18 @@ Internet-Draft               DNS Zone Digest                   June 2020
               Terminology", BCP 219, RFC 8499, DOI 10.17487/RFC8499,
               January 2019, <https://www.rfc-editor.org/info/rfc8499>.
 
+   [RFC8806]  Kumari, W. and P. Hoffman, "Running a Root Server Local to
+              a Resolver", RFC 8806, DOI 10.17487/RFC8806, June 2020,
+              <https://www.rfc-editor.org/info/rfc8806>.
+
    [RootServers]
               Root Server Operators, "Root Server Technical Operations",
               July 2018, <https://www.root-servers.org/>.
 
    [RPZ]      Vixie, P. and V. Schryver, "DNS Response Policy Zones
               (RPZ)", draft-vixie-dnsop-dns-rpz-00 (work in progress),
-              June 2018, <https://tools.ietf.org/html/
-              draft-vixie-dnsop-dns-rpz-00>.
+              June 2018, <https://tools.ietf.org/html/draft-vixie-dnsop-
+              dns-rpz-00>.
 
    [ZoneDigestHackathon]
               Kerr, S., "Prototype implementation of ZONEMD for the IETF
@@ -1449,6 +1448,7 @@ Appendix A.  Example Zones With Digests
    This appendix contains example zones with accurate ZONEMD records.
    These can be used to verify an implementation of the zone digest
    protocol.
+
 
 
 
