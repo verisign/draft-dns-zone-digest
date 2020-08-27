@@ -675,7 +675,9 @@ where "|" denotes concatenation.
               <list style="symbols">
               <t>All records in the zone, including glue records, MUST be included.</t>
               <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
-              <t>Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3).</t>
+              <!-- V1: Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included. -->
+              <!-- V2: Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3). -->
+              <t>If there are duplicate RRs with equal owner, class, type, and RDATA, only one instance is included (<xref target="RFC4034"/> Section 6.3), and the duplicates MUST be omitted.</t>
               <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
               <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
               <t>The RRSIG covering &RRNAME; MUST NOT be included
