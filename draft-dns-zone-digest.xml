@@ -255,6 +255,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           to verify data that is read after transmission is complete.
           For example, a name server loading saved zone data upon restart
           cannot guarantee that the on-disk data has not been modified.
+          Such modification could be the result of
+          an accidental corruption of the file, or perhaps an incompletely
+          saved file <xref target="disk-full-failure"/>.
           For these reasons, it is preferable to secure the data itself.
         </t>
 
@@ -1299,6 +1302,7 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -09 to -10:
       <list style="symbols">
+        <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
       </list></t>
     </section>
 
@@ -1408,6 +1412,16 @@ where "|" denotes concatenation.
           <date year="2018" month="June" day="21"/>
         </front>
         <seriesInfo name="Internet-Draft" value="draft-vixie-dnsop-dns-rpz-00" />
+     </reference>
+
+     <reference anchor="disk-full-failure" target="http://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
+        <front>
+          <title>Background of the Partial Failure of the Name Service for .de Domains</title>
+          <author>
+            <organization>DENIC</organization>
+          </author>
+          <date year="2010" month="May" day="14"/>
+        </front>
      </reference>
 
     </references>
