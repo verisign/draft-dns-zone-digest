@@ -964,6 +964,19 @@ where "|" denotes concatenation.
           only with DNSSEC validation.
         </t>
       </section>
+      <section title="DNSSESC Timing Considerations">
+        <t>
+          As with all DNSSEC signatures, the ability to perform signature
+          validation of a &RRNAME; record is limited in time.
+          If the DS record(s) or trust anchors for the zone to be verified
+          are no longer available, the recipient cannot validate
+          the ZONEMD RRSet.
+          This could happen even if the &RRNAME; signature is still current
+          (not expired), since the zone's DS record(s)
+          may have been withdrawn following a KSK rollover.
+          Therefore, verification must be timely.
+        </t>
+      </section>
       <section title="Attacks Utilizing &RRNAME; Queries">
         <t>
           Nothing in this specification prevents clients from making,
