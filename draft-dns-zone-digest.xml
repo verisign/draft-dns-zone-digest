@@ -672,7 +672,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           <section title="SIMPLE Scheme Digest Calculation">
             <t>
               A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
-              in the format and order described in <xref target="simple-format"/>
+              in the format and order described in <xref target="scheme-simple"/>
               subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion"/>,
               and then applying the SHA-384 algorithm:
             </t>
