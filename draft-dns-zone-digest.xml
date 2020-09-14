@@ -1321,6 +1321,7 @@ where "|" denotes concatenation.
       <t>From -09 to -10:
       <list style="symbols">
         <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
+        <t>Added concerns that timing of KSK rollovers could affect validation of &RRNAME; record.</t>
       </list></t>
     </section>
 
