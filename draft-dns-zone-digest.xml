@@ -646,7 +646,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
             to be processed in a consistent format and ordering.
             This specification uses DNSSEC’s canonical on-the-wire RR
             format (without name compression) and ordering as specified
-            in Sections 6.1, 6.2, and 6.3 of <xref target="rfc4034"/> with the additional
+            in Sections 6.1, 6.2, and 6.3 of <xref target="RFC4034"/> with the additional
             provision that
             RRSets having
             the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
