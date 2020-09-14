@@ -478,7 +478,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
         <section title="The Serial Field">
           <t>
-            The Serial field is a 32-bit unsigned integer in network btye
+            The Serial field is a 32-bit unsigned integer in network byte
             order. It is the serial number from the zone's
             SOA record (<xref target="RFC1035"/> section 3.3.13) for
             which the zone digest was generated.
