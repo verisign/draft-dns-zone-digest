@@ -140,7 +140,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <abstract>
       <t>
         This document describes a protocol and new DNS Resource Record
-        that can be used to provide a cryptographic message digest over DNS zone data.
+        that provides a cryptographic message digest over DNS zone data.
         The &RRNAME; Resource Record conveys the digest data in
         the zone itself.
         When a zone publisher includes an &RRNAME; record, recipients
@@ -150,18 +150,18 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         transmitted and received.
       </t>
       <t>
-        &RRNAME; is not designed to replace DNSSEC.
+        &RRNAME; does not replace DNSSEC.
         Whereas DNSSEC protects individual RRSets (DNS data with
         fine granularity), &RRNAME; protects a zone's data
         as a whole, whether consumed by authoritative name
         servers, recursive name servers, or any other applications.
       </t>
       <t>
-        As specified herein, &RRNAME; is not designed for use
-        in large, dynamic zones due to the time and resources
+        As specified herein, &RRNAME; is impractical
+        for large, dynamic zones due to the time and resources
         required for digest calculation.
-        The &RRNAME; record described in this document
-        is designed so that new digest schemes may be developed in the future to support large, dynamic
+        However, The &RRNAME; record is extensible
+        so that new digest schemes may be added in the future to support large, dynamic
         zones.
       </t>
     </abstract>
@@ -173,28 +173,28 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <t>
         In the DNS, a zone is the collection of authoritative resource
         records (RRs) sharing a common origin (<xref target="RFC8499"/>).
-        Zones are often stored as files on disk in the so-called
+        Zones are often stored as files in the so-called
         master file format <xref target="RFC1034"/>.
         Zones are generally distributed among name servers using 
-        the AXFR <xref target="RFC5936"/>, and IXFR <xref target="RFC1995"/>
+        the AXFR (zone transfer <xref target="RFC5936"/>), and IXFR (incremental zone transfer <xref target="RFC1995"/>)
         protocols.
-        Zone files can also be distributed outside of the DNS, with
-        such protocols as FTP, HTTP, and rsync, and even via email.
+        They can also be distributed outside of the DNS, with any file transfer
+        protocol such as FTP, HTTP, and rsync, or even as email attachments.
         Currently there is no standard way to verify the authenticity
         of a stand-alone zone.
       </t>
       <t>
-        This document introduces a new RR type that serves as a
+        This document specifies an RR type that provides a
         cryptographic message digest of the data in a zone.
         It allows a receiver of the zone to verify the zone's
         integrity, and when used in combination with DNSSEC,
         its authenticity.
-        This technique makes the
-        digest a part of the zone itself, allowing
-        verification the zone as a whole, no matter how it is
+        The
+        digest RR is a part of the zone itself, allowing
+        verification the zone, no matter how it is
         transmitted.
-        Furthermore, the digest is based on the wire format of zone data.
-        Thus, it is independent of presentation format, such as changes in
+        The digest uses the wire format of zone data in a canonical ordering.
+        Thus, it is independent of presentation format, such as
         whitespace, capitalization, and comments.
       </t>
       <t>
@@ -212,8 +212,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <section title="Motivation">
         <t>
-          The motivation for this protocol enhancement is the desire for
-          the ability to verify the authenticity of a stand-alone zone,
+          The motivation for this protocol enhancement is the desire 
+          to verify the authenticity of a stand-alone zone,
           regardless of how it is transmitted.  A consumer of zone data
           should be able to verify that the data is as-published by the
           zone operator.
@@ -223,7 +223,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <t>
           One approach to preventing data tampering and corruption is
           to secure the distribution channel.  The DNS has a number
-          of features that can already be used for channel security.
+          of features that are already used for channel security.
           Perhaps the most widely used is DNS transaction signatures
           (TSIG <xref target="RFC2845"/>).  TSIG uses shared secret keys
           and a message digest to protect individual query and response
@@ -233,15 +233,15 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
         <t>
           DNS Request and Transaction Signatures (SIG(0) <xref
-          target="RFC2931"/>) is another protocol extension designed to
-          authenticate individual DNS transactions.  Whereas SIG records
-          were originally designed to cover specific RR types, SIG(0)
+          target="RFC2931"/>) is another protocol extension that
+          authenticates individual DNS transactions.  Whereas SIG records
+          normally cover specific RR types, SIG(0)
           is used to sign an entire DNS message.  Unlike TSIG, SIG(0)
           uses public key cryptography rather than shared secrets.
         </t>
         <t>
-          The Transport Layer Security protocol suite is also designed
-          to provide channel security. 
+          The Transport Layer Security protocol suite also 
+          provides channel security. 
           One can easily imagine
           the distribution of zones over HTTPS-enabled web servers,
           as well as DNS-over-HTTPS <xref target="RFC8484"/>, and perhaps
@@ -250,31 +250,31 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <t>
           Unfortunately, the protections provided by these channel
           security techniques are (in practice) ephemeral and are not retained after the
-          data transfer is complete.  They can ensure that the client
+          data transfer is complete.  They ensure that the client
           receives the data from the expected server, and that the
           data sent by the server is not modified during transmission.
           However, they do not guarantee that the server transmits the
           data as originally published, and do not provide any methods
           to verify data that is read after transmission is complete.
           For example, a name server loading saved zone data upon restart
-          cannot guarantee that the on-disk data has not been modified.
+          cannot guarantee that the on-disk data has not been corrupted or modified.
           For these reasons, it is preferable to secure the data itself.
         </t>
 
         <t>
           Why not simply rely on DNSSEC, which provides certain data security guarantees?
-          Certainly for zones that are signed, a recipient could
+          For zones that are signed, a recipient could
           validate all of the signed RRSets.  Additionally, denial-of-existence
-          records can prove that RRSets have not been added or
-          removed.  However, not all RRSets
-          in a zone are signed.  The design of DNSSEC stipulates that delegations (non-apex NS records) are not signed,
+          records prove that RRSets have not been added or
+          removed.  However, 
+          delegations (non-apex NS records) are not signed by DNSSEC,
           and neither are any glue records.  &RRNAME; protects the integrity of delegation,
           glue, and other records that are not otherwise covered by DNSSEC. Furthermore, zones
           that employ NSEC3 with opt-out are susceptible to the
           removal or addition of names between the signed nodes.
-          Whereas DNSSEC is primarily designed to protect consumers
-          of DNS response messages, this protocol is designed to
-          protect consumers of zones.
+          Whereas DNSSEC is primarily protects consumers
+          of DNS response messages, this protocol
+          protects consumers of zones.
         </t>
         <t>
           There are existing tools and protocols that provide data
@@ -285,10 +285,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           with no strong association to the corresponding zone file other
           than its timestamp.  Non-detached signatures are, of course,
           possible, but these necessarily change the format of the file
-          being distributed.  That is, a zone signed with OpenPGP or
+          being distributed; a zone signed with OpenPGP or
           S/MIME no longer looks like a DNS zone and could not directly
           be loaded into a name server.  Once loaded the signature data
-          is lost, so it does not survive further propagation.
+          is lost, so it cannot be further propagated.
         </t>
         <t>
           It seems the desire for data security in DNS zones was envisioned
@@ -309,29 +309,29 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
       <section title="Design Overview">
         <t>
-          This document introduces a new Resource Record type designed
+          This document specifies a new Resource Record type
           to convey a message digest of the content of a zone.
           The digest is calculated at the time of zone publication.
-          Ideally the zone is signed with DNSSEC to guarantee that any
+          If the zone is signed with DNSSEC, any
           modifications of the digest can be detected.  The procedures for
           digest calculation and DNSSEC signing are similar.  Both require
-          data to be processed in a well-defined order and format.  In
-          some cases it may be possible to perform DNSSEC signing and
+          data to be processed in a well-defined order and format.
+          It may be possible to perform DNSSEC signing and
           digest calculation in parallel.
         </t>
         <t>
-          The zone digest is designed to be used on zones that are
-          relatively stable and have infrequent updates.  Herein,
+          The zone digest is designed to be used on zones that
+          have infrequent updates.  As specified herein,
           the digest is re-calculated over the entire zone
           content each time.  This specification does not provide
-          an efficient mechanism for incremental updates of zone
-          data.  It is, however, extensible so that
+          an efficient mechanism for updating the digest on incremental updates of zone
+          data.  It is, however, extensible so
           future schemes to support incremental
           zone digest algorithms (e.g. using Merkle trees) can be accommodated.
         </t>
         <!-- XXX Joe Abley: remove following paragraph -->
         <t>
-          It is expected that verification of a zone digest would be
+          It is expected that verification of a zone digest ill be
           implemented in name server software.  That is, a name server
           can verify the zone data it was given and refuse to serve a
           zone which fails verification.  For signed zones, the name
@@ -351,10 +351,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             at the time of this writing.  Additionally, many organizations
             configure their own name servers to serve the root zone locally.
             Reasons for doing so include privacy and reduced access time.
-            <xref target="RFC8806"/> describes one, but not the only, way
+            <xref target="RFC8806"/> describes one way
             to do this.  As the root zone spreads beyond its traditional
-            deployment boundaries, the need for verification of the
-            completeness of the zone contents becomes increasingly
+            deployment boundaries, the verification of the
+            completeness of the zone contents becomes more
             important.
           </t>
         </section>
@@ -362,9 +362,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             Since its very early days, the developers of the DNS
             recognized the importance of secondary name servers and
-            service diversity.  However, they may not have anticipated
-            the complexity of modern DNS service provisioning which
-            can include  multiple third-party providers and hundreds
+            service diversity.  However,
+            modern DNS service has complex provisioning which
+            includes multiple third-party providers and hundreds
             of anycast instances.  Instead of a simple primary-to-secondary
             zone distribution system, today it is possible to have
             multiple levels, multiple parties, and multiple protocols
@@ -378,10 +378,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             DNS Response Policy Zones is "a method of expressing
             DNS response policy information inside specially
             constructed DNS zones..." <xref target="RPZ"/>.  A
-            number of companies provide RPZ feeds, which can be
-            consumed by name server and firewall products.  Since
-            these are zones, AXFR is often, but not necessarily
-            used for transmission.  While RPZ zones can certainly
+            number of companies provide RPZ feeds, which are
+            consumed by name server and firewall products.
+            While RPZ zones can
             be signed with DNSSEC, the data is not queried directly,
             and would not be subject to DNSSEC validation.
           </t>
@@ -390,11 +389,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             ICANN operates the Centralized Zone Data Service <xref
             target="CZDS"/>, which is a repository of top-level
-            domain zone files.  Users request access to the system,
-            and to individual zones, and are then able to download
-            zone data for certain uses.  Adding a zone digest to
+            domain zone files.  Users that have been granted access are then able to download
+            zone data.  Adding a zone digest to
             these would provide CZDS users with assurances that the
-            data has not been modified.  Note that &RRNAME; could
+            data has not been modified.  &RRNAME; could
             be added to CZDS zone data independently of the zone
             served by production name servers.
           </t>
@@ -444,14 +442,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
       <section title="Non-apex &RRNAME; Records">
         <t>
-          This specification utilizes &RRNAME; RRs located at the
+          This document specifies &RRNAME; RRs located at the
           zone apex.  Non-apex &RRNAME; RRs are not forbidden, but
           have no meaning in this specification.
           Non-apex &RRNAME; RRs MUST NOT be used for verification.
         </t>
         <t>
           During digest calculation,
-          non-apex &RRNAME; RRs are treated like any other RRs.
+          non-apex &RRNAME; RRs are treated as ordinary RRs.
           They are digested as-is and the RR is not replaced
           by a placeholder RR.
         </t>
@@ -480,13 +478,13 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
         <section title="The Serial Field">
           <t>
-            The Serial field is a 32-bit unsigned integer in network
-            order. It is equal to the serial number from the zone's
+            The Serial field is a 32-bit unsigned integer in network btye
+            order. It is the serial number from the zone's
             SOA record (<xref target="RFC1035"/> section 3.3.13) for
             which the zone digest was generated.
           </t>
           <t>
-            The zone's serial number is included here in order to
+            It is included here in order to
             make DNS response messages of type &RRNAME; meaningful.
             Without the serial number, a stand-alone &RRNAME; digest
             has no association to any particular instance of a zone.
@@ -566,7 +564,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
       <section title="&RRNAME; Example">
         <t>
-          The following example shows a &RRNAME; RR.
+          The following example shows a &RRNAME; RR in presentation format:
         </t>
         <figure><artwork>
 example.com. 86400 IN &RRNAME; 2018031500 1 1 (
@@ -591,18 +589,18 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           zone apex.  This 
           ensures that 
           denial-of-existence (NSEC, NSEC3) records are created correctly
-          if the zone is signed with DNSSEC.  If placeholders are not added prior to
+          if the zone is signed with DNSSEC.  If placeholders were not added prior to
           signing, the later addition of &RRNAME; records would also require updating the
           Type Bit Maps field of any apex NSEC/NSEC3 RRs, which then invalidates
           the calculated digest value.
         </t>
         <t>
           When multiple &RRNAME; RRs are published in the zone, e.g.,
-          during an algorithm rollover, each must specify a unique Scheme
+          during an algorithm rollover, each MUST specify a unique Scheme
           and Hash Algorithm tuple.
         </t>
         <t>
-          It is recommended that the TTL of the &RRNAME; record match the TTL of the SOA.
+          It is RECOMMENDED that the TTL of the &RRNAME; record match the TTL of the SOA.
         </t>
         <t>
           In the placeholder record, the Serial field is
@@ -619,7 +617,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
       <section title="Optionally Sign the Zone">
         <t>
           Following addition of placeholder records, the zone may be signed with DNSSEC.
-          Note that when the digest calculation is complete, and the &RRNAME; record is updated,
+          When the digest calculation is complete, and the &RRNAME; record is updated,
           the signature(s) for the &RRNAME; RRSet MUST be recalculated and
           updated as well.
           Therefore, the signer is not required to calculate a signature over the placeholder record at
@@ -691,9 +689,9 @@ where "|" denotes concatenation.
 
       <section title="Update &RRNAME; RR">
         <t>
-          Once a zone digest has been calculated, the published &RRNAME;
-          record is finalised by inserting the digest into the placeholder
-          &RRNAME;.
+          The calculated zone digest 
+          is inserted into the placeholder
+          &RRNAME; RR.
           Repeat for each digest if multiple
           digests are to be published.
         </t>
@@ -704,9 +702,9 @@ where "|" denotes concatenation.
         </t>
         <t>
           Some DNSSEC implementations (especially "online signing") might
-          be designed such that the SOA serial number is updated whenever
+          update the SOA serial number whenever
           a new signature is made.  To preserve the calculated digest,
-          generation of an &RRNAME; signature must not also result in
+          generation of an &RRNAME; signature MUST NOT also result in
           a change to the SOA serial number.  The &RRNAME; RR and the
           matching SOA MUST be published at the same time.
         </t>
@@ -716,7 +714,7 @@ where "|" denotes concatenation.
 
     <section title="Verifying Zone Digest" anchor="verifying">
       <t>
-        The recipient of a zone that has a &RRNAME; RR can verify the zone
+        The recipient of a zone that has a &RRNAME; RR verifies the zone
         by calculating the digest as follows.
           If multiple &RRNAME; RRs are present in the zone, e.g.,
           during an algorithm rollover, a match using any one of the recipient's
@@ -727,17 +725,17 @@ where "|" denotes concatenation.
           <t anchor="verify-check-dnssec">
             The verifier MUST first determine
             whether or not to expect DNSSEC records in the zone.
-            This can be done by examining locally configured trust
+            This is done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
             parent zone.  For zones that are provably insecure,
-            or if DNSSEC validation can not be performed,
-            digest validation continues at step <xref target="verify-check-digest-count" format="counter"/> below.
+            or if DNSSEC validation is not performed,
+            digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
           </t>
           <t anchor="verify-check-existence">
             For zones that are provably secure, the existence of
             the apex &RRNAME; record MUST be verified.  If the &RRNAME;
             record provably does not exist, digest verification
-            cannot be done.  If the &RRNAME; record does provably
+            cannot occur.  If the &RRNAME; record does provably
             exist, but is not found in the zone, digest verification
             MUST NOT be considered successful.
           </t>
@@ -749,8 +747,9 @@ where "|" denotes concatenation.
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
-            When multiple &RRNAME; RRs are present, each must specify a unique Scheme and Hash Algorithm tuple.
+            When multiple &RRNAME; RRs are present, each MUST specify a unique Scheme and Hash Algorithm tuple.
             If the &RRNAME; RRSet contains more than one RR with the same Scheme and Hash Algorithm, digest verification
+            for those &RRNAME; RRs
             MUST NOT be considered successful.
           </t>
           <t>
@@ -946,9 +945,10 @@ where "|" denotes concatenation.
     <section title="Security Considerations" anchor="security">
       <section title="Attacks Against the Zone Digest">
         <t>
-          A zone digest allows the recipient of a
-          zone to verify the zone's integrity and, when used in
-          combination with DNSSEC, its authenticity.
+          The zone digest allows the recipient of a zone to verify its integrity.
+          In conjunction with DNSSEC, the recipient can authenticate that it is as published by the zone originator.
+        </t>
+        <t>
           An attacker, whose goal is to modify zone content before
           it is used by the victim, may consider a number of different
           approaches.
@@ -982,21 +982,21 @@ where "|" denotes concatenation.
           attack.
         </t>
         <t>
-          One might
-          consider how well &RRNAME; responses could be used in
+          &RRNAME; responses could be used in
           a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
           A single &RRNAME; RR contributes approximately 40 to 65
           octets to a DNS response, for digest
-          types defined herein.  Certainly other RR types, such as DNSKEY, can result in larger
+          types defined herein.  Other RR types, such as DNSKEY, can result in larger
           amplification effects.
         </t>
       </section>
       <section title="Resilience and Fragility">
         <t>
-          &RRNAME; can be used to detect incomplete or corrupted
-          zone data prior to its use, thereby increasing resilience,
-          but also introducing some fragility.
+          &RRNAME; is used to detect incomplete or corrupted
+          zone data prior to its use, thereby increasing resilience by not using corrupt data,
+          but also introduces some denial-of-service fragility
+          by making good data in a zone unavailable if some other data is missing or corrupt.
           Publishers and consumers of zones containing &RRNAME;
           records should be aware of these tradeoffs.
           While the intention is to secure the zone data,
@@ -1023,14 +1023,14 @@ where "|" denotes concatenation.
       </t>
       <section title="SIMPLE SHA384">
         <t>
-          As mentioned previously, the SIMPLE scheme may not be
-          appropriate for use in zones that are either large or
+          As mentioned previously, the SIMPLE scheme may be
+          impractical for use in zones that are either large or
           highly dynamic.
           Zone publishers should carefully consider the use of &RRNAME;
           in such zones, since it might cause consumers of zone data
           (e.g., secondary name servers) to expend resources on digest
           calculation.
-          Furthermore, for such use cases, it is recommended that &RRNAME;
+          For such use cases, it is recommended that &RRNAME;
           only be used when digest calculation time is significantly
           less than propagation times and update intervals.
         </t>
@@ -1040,10 +1040,10 @@ where "|" denotes concatenation.
           and report CPU usage of its operation.
           The software was used to generate digests for more than 800
           TLD zones available from <xref target="CZDS"/>.
-          The table below summarizes the the results for the SIMPLE scheme and SHA384 hash algorithm
+          The table below summarizes the results for the SIMPLE scheme and SHA384 hash algorithm
           grouped by zone size.
           The Rate column is the mean amount of time per RR to calculate the digest,
-          running on commodity hardware as of early 2020.
+          running on commodity hardware in early 2020.
         </t>
         <texttable>
           <ttcol align="right">Zone Size (RRs)</ttcol>
@@ -1164,7 +1164,7 @@ where "|" denotes concatenation.
     </section>
 
     <section anchor="Changes" title="Change Log">
-      <t>RFC Editor: Please remove this section.</t>
+      <t>RFC Editor: Please remove this section before publication.</t>
       <t>This section lists substantial changes to the document as it is being worked on.</t>
       <t>From -00 to -01:
       <list style="symbols">
@@ -1305,14 +1305,14 @@ where "|" denotes concatenation.
       <list style="symbols">
         <t>Moved format, ordering, inclusion/exclusion into a sub section specific to the SIMPLE scheme.</t>
         <t>Further clarified rules about multiple &RRNAME; RRs (AD comments).</t>
-        <t>Reworeded rules about processing of duplicate zone RRs (AD comments).</t>
+        <t>Reworded rules about processing of duplicate zone RRs (AD comments).</t>
         <t>Removed sentence about optional zeroing of digest prior to calculation (AD comments).</t>
         <t>Other minor changes (AD comments).</t>
       </list></t>
       <t>From -09 to -10:
       <list style="symbols">
         <t>Addressed feedback from SECDIR review.</t>
-      </list></t>
+      </list>Addressed SECDIR review and accepted most proposed edits.</t>
     </section>
 
   </middle>
