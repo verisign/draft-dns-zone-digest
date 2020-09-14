@@ -501,7 +501,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
           <t>
             Herein, SIMPLE, with value 1, is the only
-            standardized Scheme defined for &RRNAME; records.  The Scheme registry
+            standardized Scheme defined for &RRNAME; records and it MUST be implemented.  The Scheme registry
             is further described in <xref target="iana"/>.
           </t>
           <t>
@@ -518,7 +518,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             Herein, SHA384, with value 1, is the only
             standardized
-            Hash Algorithm defined for &RRNAME; records.  The Hash Algorithm registry
+            Hash Algorithm defined for &RRNAME; records and it MUST be implemented.
+            When SHA384 is used, the size of the Digest Field is 48 bytes.
+            The Hash Algorithm registry
             is further described in <xref target="iana"/>.
           </t>
           <t>
@@ -530,6 +532,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             The Digest field is a variable-length sequence of octets
             containing the output of the hash algorithm.  The Digest field must not be empty.
+            The length of the Digest field is determined by deducting
+            the fixed size of the Serial, Scheme, and Hash Algorithm
+            fields from the RDATA size in the ZONEMD RR header.
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
