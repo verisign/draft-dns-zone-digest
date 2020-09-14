@@ -842,10 +842,14 @@ where "|" denotes concatenation.
 
       <section title="&RRNAME; Scheme">
         <t>
-          This document asks IANA to create a new
-          "&RRNAME; Scheme" registry
-          with initial contents as follows:
+          IANA is requested to create a new
+          registry
+          on the "Domain Name System (DNS) Parameters" web page
+          as follows:
         </t>
+        <t>Registry Name: &RRNAME; Schemes</t>
+        <t>Registration Procedure: Specification Required</t>
+        <t>Reference: This document</t>
         <texttable anchor="scheme-table" title="&RRNAME; Scheme Registry">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
@@ -855,9 +859,9 @@ where "|" denotes concatenation.
 
         <c>0</c>
         <c>Reserved</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         <c>1</c>
         <c>Simple &RRNAME; collation</c>
@@ -867,35 +871,35 @@ where "|" denotes concatenation.
 
         <c>2-239</c>
         <c>Unassigned</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         <c>240-254</c>
         <c>Private Use</c>
-        <c>-</c>
+        <c>N/A</c>
         <c>N/A</c>
         <c>This document</c>
 
         <c>255</c>
         <c>Reserved</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         </texttable>
-        <t>
-          The IANA policy for assigning new values to the &RRNAME;
-          Scheme registry shall be Specification Required.
-        </t>
       </section>
 
       <section title="&RRNAME; Hash Algorithm" anchor="hash-alg-registry">
         <t>
-          This document asks IANA to create a new
-          "&RRNAME; Hash Algorithm" registry
-          with initial contents as follows:
+          IANA is requested to create a new
+          registry
+          on the "Domain Name System (DNS) Parameters" web page
+          as follows:
         </t>
+        <t>Registry Name: &RRNAME; Hash Algorithms</t>
+        <t>Registration Procedure: Specification Required</t>
+        <t>Reference: This document</t>
         <texttable anchor="digest-type-table" title="&RRNAME; Hash Algorithm Registry">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
@@ -905,33 +909,33 @@ where "|" denotes concatenation.
 
         <c>0</c>
         <c>Reserved</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         <c>1</c>
-        <c>The SHA-384 hash algorithm</c>
+        <c>SHA-384</c>
         <c>SHA384</c>
         <c>Mandatory</c>
-        <c><xref target="RFC6234"/></c>
+        <c>this document</c>
 
         <c>2-239</c>
         <c>Unassigned</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         <c>240-254</c>
         <c>Private Use</c>
-        <c>-</c>
+        <c>N/A</c>
         <c>N/A</c>
         <c>This document</c>
 
         <c>255</c>
         <c>Reserved</c>
-        <c>-</c>
-        <c>N/A</c>
-        <c>N/A</c>
+        <c></c>
+        <c></c>
+        <c></c>
 
         </texttable>
         <t>
