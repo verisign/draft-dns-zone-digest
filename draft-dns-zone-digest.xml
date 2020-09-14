@@ -837,7 +837,7 @@ where "|" denotes concatenation.
         <t>Type: &RRNAME;</t>
         <t>Value: 63</t>
         <t>Meaning: Message Digest Over Zone Data</t>
-        <t>Reference: This document</t>
+        <t>Reference: [this document]</t>
       </section>
 
       <section title="&RRNAME; Scheme">
@@ -849,7 +849,7 @@ where "|" denotes concatenation.
         </t>
         <t>Registry Name: &RRNAME; Schemes</t>
         <t>Registration Procedure: Specification Required</t>
-        <t>Reference: This document</t>
+        <t>Reference: [this document]</t>
         <texttable anchor="scheme-table" title="&RRNAME; Scheme Registry">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
@@ -867,7 +867,7 @@ where "|" denotes concatenation.
         <c>Simple &RRNAME; collation</c>
         <c>SIMPLE</c>
         <c>Mandatory</c>
-        <c>This document</c>
+        <c>[this document]</c>
 
         <c>2-239</c>
         <c>Unassigned</c>
@@ -879,7 +879,7 @@ where "|" denotes concatenation.
         <c>Private Use</c>
         <c>N/A</c>
         <c>N/A</c>
-        <c>This document</c>
+        <c>[this document]</c>
 
         <c>255</c>
         <c>Reserved</c>
@@ -899,7 +899,7 @@ where "|" denotes concatenation.
         </t>
         <t>Registry Name: &RRNAME; Hash Algorithms</t>
         <t>Registration Procedure: Specification Required</t>
-        <t>Reference: This document</t>
+        <t>Reference: [this document]</t>
         <texttable anchor="digest-type-table" title="&RRNAME; Hash Algorithm Registry">
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
@@ -917,7 +917,7 @@ where "|" denotes concatenation.
         <c>SHA-384</c>
         <c>SHA384</c>
         <c>Mandatory</c>
-        <c>this document</c>
+        <c>[this document]</c>
 
         <c>2-239</c>
         <c>Unassigned</c>
@@ -929,7 +929,7 @@ where "|" denotes concatenation.
         <c>Private Use</c>
         <c>N/A</c>
         <c>N/A</c>
-        <c>This document</c>
+        <c>[his document]</c>
 
         <c>255</c>
         <c>Reserved</c>
