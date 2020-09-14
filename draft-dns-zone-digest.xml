@@ -326,7 +326,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           future schemes to support incremental
           zone digest algorithms (e.g. using Merkle trees) can be accommodated.
         </t>
-        <!-- XXX Joe Abley: remove following paragraph -->
         <t>
           It is expected that verification of a zone digest would be
           implemented in name server software.  That is, a name server
@@ -454,7 +453,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </section>
 
       <section title="&RRNAME; RDATA Wire Format">
-        <!-- XXX Joe Abley: specify short names for the fields -->
         <t>The &RRNAME; RDATA wire format is encoded as follows:</t>
         <figure><artwork align="left"><![CDATA[
                      1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
@@ -602,7 +600,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           Since &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
-          <!-- Implementations MAY want to set the Digest field to all zeroes anyway. -->
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -805,36 +802,6 @@ where "|" denotes concatenation.
         </list>
       </t>
     </section>
-
-    <!-- section title="Scope of Experimentation">
-      <t>
-        This memo is published as an Experimental RFC.  The purpose
-        of the experimental period is to provide the community time
-        to analyze and evaluate the methods defined in this
-        document, particularly with regard to the wide variety of
-        DNS zones in use on the Internet.
-      </t>
-      <t>
-        Additionally, the &RRNAME; record defined in this document
-        includes a Parameter field in the form of an 8-bit integer.  The authors have a particular
-        future use in mind for this field, namely to support efficient
-        digests in large, dynamic zones.  We intend to conduct
-        future experiments using Merkle trees of varying depth.  The
-        choice of tree depth can be encoded in this reserved
-        field.  We expect values for tree depth to range from 0 to
-        10, requiring at most four bits of this field.  This leaves
-        another four bits available for other future uses, if
-        absolutely necessary.
-      </t>
-      <t>
-        The duration of the experiment is expected to be no less
-        than two years from the publication of this document.  If
-        the experiment is successful, it is expected that the
-        findings of the experiment will result in an updated document
-        for Standards Track approval.
-      </t>
-
-    </section -->
 
     <section title="IANA Considerations" anchor="iana">
       <section title="&RRNAME; RRtype">
@@ -1309,11 +1276,7 @@ where "|" denotes concatenation.
     &RFC2119;
     &RFC1034;
     &RFC1035;
-    <!-- &RFC2181; -->
     &RFC4034;
-    <!-- &RFC3658; -->
-    <!-- &RFC4509; -->
-    <!-- &RFC5933; -->
     &RFC6234;
     &RFC8174;
 
