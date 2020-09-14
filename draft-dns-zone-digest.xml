@@ -255,6 +255,9 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           to verify data that is read after transmission is complete.
           For example, a name server loading saved zone data upon restart
           cannot guarantee that the on-disk data has not been modified.
+          Such modification could be the result of
+          an accidental corruption of the file, or perhaps an incompletely
+          saved file <xref target="disk-full-failure"/>.
           For these reasons, it is preferable to secure the data itself.
         </t>
 
@@ -928,6 +931,24 @@ where "|" denotes concatenation.
           only with DNSSEC validation.
         </t>
       </section>
+      <section title="DNSSESC Timing Considerations">
+        <t>
+          As with all DNSSEC signatures, the ability to perform signature
+          validation of a &RRNAME; record is limited in time.
+          If the DS record(s) or trust anchors for the zone to be verified
+          are no longer available, the recipient cannot validate
+          the ZONEMD RRSet.
+          This could happen even if the &RRNAME; signature is still current
+          (not expired), since the zone's DS record(s)
+          may have been withdrawn following a KSK rollover.
+        </t>
+        <t>
+          For zones where it may be important to validate a &RRNAME;
+          RRset through its entire signature validity period, the zone
+          operator should ensure that KSK rollover timing takes this
+          into consideration.
+        </t>
+      </section>
       <section title="Attacks Utilizing &RRNAME; Queries">
         <t>
           Nothing in this specification prevents clients from making,
@@ -1266,6 +1287,8 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -09 to -10:
       <list style="symbols">
+        <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
+        <t>Added concerns that timing of KSK rollovers could affect validation of &RRNAME; record.</t>
       </list></t>
     </section>
 
@@ -1371,6 +1394,16 @@ where "|" denotes concatenation.
           <date year="2018" month="June" day="21"/>
         </front>
         <seriesInfo name="Internet-Draft" value="draft-vixie-dnsop-dns-rpz-00" />
+     </reference>
+
+     <reference anchor="disk-full-failure" target="http://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
+        <front>
+          <title>Background of the Partial Failure of the Name Service for .de Domains</title>
+          <author>
+            <organization>DENIC</organization>
+          </author>
+          <date year="2010" month="May" day="14"/>
+        </front>
      </reference>
 
     </references>
