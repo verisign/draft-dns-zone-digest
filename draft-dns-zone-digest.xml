@@ -974,7 +974,12 @@ where "|" denotes concatenation.
           This could happen even if the &RRNAME; signature is still current
           (not expired), since the zone's DS record(s)
           may have been withdrawn following a KSK rollover.
-          Therefore, verification must be timely.
+        </t>
+        <t>
+          For zones where it may be important to validate a &RRNAME;
+          RRset through its entire signature validity period, the zone
+          operator should ensure that KSK rollover timing takes this
+          into consideration.
         </t>
       </section>
       <section title="Attacks Utilizing &RRNAME; Queries">
