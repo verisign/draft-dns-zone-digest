@@ -645,40 +645,14 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
 
           <t>
             Calculation of a zone digest REQUIRES RRs
-            to be processed in a consistent format and ordering.  Correct ordering
-            depends on (1) ordering of owner names, (2)
-            ordering of RRSets with the same owner name, and (3) ordering of
-            RRs within an RRSet.
+            to be processed in a consistent format and ordering.
+            This specification uses DNSSEC’s canonical on-the-wire RR
+            format (without name compression) and ordering as specified
+            in Sections 6.1, 6.2, and 6.3 of <xref target="rfc4034"/> with the additional
+            provision that
+            RRSets having
+            the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
           </t>
-
-          <section title="SIMPLE Scheme RR Format" anchor="simple-format">
-            <t>
-              This specification adopts DNSSEC's canonical on-the-wire RR format
-              (without name compression) as specified in <xref target="RFC4034"/>:
-            </t>
-            <figure><artwork>
-RR(i) = owner | type | class | TTL | RDATA length | RDATA
-
-where "|" denotes concatenation.
-            </artwork></figure>
-          </section>
-
-          <section title="SIMPLE Scheme RR Ordering" anchor="simple-ordering">
-            <t>
-              This specification adopts DNSSEC's canonical ordering for names
-              (Section 6.1 of <xref target="RFC4034"/>),
-              and canonical ordering for RRs within an RRSet
-              (Section 6.3 of <xref target="RFC4034"/>).
-              It also adopts DNSSEC's canonical RR form
-              (Section 6.2 of <xref target="RFC4034"/>).
-            </t>
-            <t>
-              However, since DNSSEC does not define a canonical ordering for RRSets
-              having the same owner name, that ordering is defined here.
-              For the purposes of calculating the zone digest, RRSets having
-              the same owner name MUST be numerically ordered, in ascending order, by their numeric RR TYPE.
-            </t>
-          </section>
 
           <section title="SIMPLE Scheme Inclusion/Exclusion Rules" anchor="simple-inclusion-exclusion">
             <t>
@@ -700,8 +674,7 @@ where "|" denotes concatenation.
           <section title="SIMPLE Scheme Digest Calculation">
             <t>
               A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
-              in the format described in <xref target="simple-format"/>,
-              in the order described in <xref target="simple-ordering"/>,
+              in the format and order described in <xref target="simple-format"/>
               subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion"/>,
               and then applying the SHA-384 algorithm:
             </t>
