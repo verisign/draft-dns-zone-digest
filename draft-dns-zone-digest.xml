@@ -407,13 +407,18 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </section>
       </section>
 
-      <section title="Requirements Language">
+      <section title="Terminology">
         <t>
           The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
           "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
           "OPTIONAL" in this document are to be interpreted as described in
           BCP 14 <xref target="RFC2119"/> <xref target="RFC8174"/> when, and only when, they appear in all
           capitals, as shown here.
+        </t>
+        <t>
+          The terms Private Use, Reserved, Unassigned, and Specification
+          Required are to be interpreted as defined in <xref
+          target="RFC8126"/>.
         </t>
       </section>
     </section>
@@ -498,8 +503,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             is further described in <xref target="iana"/>.
           </t>
           <t>
-            Scheme values 240-254 are allocated for Private Use as
-            described in <xref target="RFC8126"/>.
+            Scheme values 240-254 are allocated for Private Use.
           </t>
         </section>
 
@@ -516,8 +520,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             is further described in <xref target="iana"/>.
           </t>
           <t>
-            Hash Algorithm values 240-254 are allocated for Private Use as
-            described in <xref target="RFC8126"/>.
+            Hash Algorithm values 240-254 are allocated for Private Use.
           </t>
         </section>
 
@@ -897,8 +900,7 @@ where "|" denotes concatenation.
         </texttable>
         <t>
           The IANA policy for assigning new values to the &RRNAME;
-          Scheme registry shall be Specification Required, as described
-          in <xref target="RFC8126"/>.
+          Scheme registry shall be Specification Required.
         </t>
       </section>
 
@@ -948,8 +950,7 @@ where "|" denotes concatenation.
         </texttable>
         <t>
           The IANA policy for assigning new values to the &RRNAME;
-          Hash Algorithm registry shall be Specification Required,
-          as described in <xref target="RFC8126"/>.
+          Hash Algorithm registry shall be Specification Required.
         </t>
       </section>
 
