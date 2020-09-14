@@ -191,7 +191,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         its authenticity.
         The
         digest RR is a part of the zone itself, allowing
-        verification the zone, no matter how it is
+        verification of the zone, no matter how it is
         transmitted.
         The digest uses the wire format of zone data in a canonical ordering.
         Thus, it is independent of presentation format, such as
@@ -298,7 +298,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           as far back as 1997.
           <xref target="RFC2065"/> is an obsoleted specification
           of the first generation DNSSEC Security Extensions.  It
-          describes a zone transfer signature, aka AXFR SIG, which
+          describes a zone transfer signature, identified as the AXFR SIG, which
           is similar to the technique proposed by this document.
           That is, it proposes ordering all (signed) RRSets in a zone,
           hashing their contents, and then signing the zone hash.
