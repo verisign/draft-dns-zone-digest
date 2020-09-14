@@ -198,6 +198,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         whitespace, capitalization, and comments.
       </t>
       <t>
+        This specification is OPTIONAL to implement by both publishers
+        and consumers of zone data.
+      </t>
+      <t>
         DNSSEC provides three strong security guarantees relevant
         to this protocol:
         <list style="numbers">
@@ -205,10 +209,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <t>whether or not to expect a &RRNAME; record in a signed zone, and</t>
         <t>whether or not the &RRNAME; record has been altered since it was signed.</t>
         </list>
-      </t>
-      <t>
-        This specification is OPTIONAL to implement by both publishers
-        and consumers of zone data.
       </t>
       <section title="Motivation">
         <t>
@@ -218,6 +218,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           should be able to verify that the data is as-published by the
           zone operator.
         </t>
+      </section>
+      <section title="Alternative Approaches">
         <t>
           One approach to preventing data tampering and corruption is
           to secure the distribution channel.  The DNS has a number
