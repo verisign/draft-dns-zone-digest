@@ -331,7 +331,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
         <!-- XXX Joe Abley: remove following paragraph -->
         <t>
-          It is expected that verification of a zone digest ill be
+          It is expected that verification of a zone digest will be
           implemented in name server software.  That is, a name server
           can verify the zone data it was given and refuse to serve a
           zone which fails verification.  For signed zones, the name
