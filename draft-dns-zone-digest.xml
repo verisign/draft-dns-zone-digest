@@ -801,6 +801,13 @@ where "|" denotes concatenation.
                 due to an unsupported algorithm.
               </t>
               <t>
+                The Digest field size MUST be checked.  If the size of the
+                given Digest field is not equal to the size expected for the
+                corresponding Hash Algorithm,
+                the verifier SHOULD report that the RR's digest
+                could not be verified to to an incorrect digest length.
+              </t>
+              <t>
                 The zone digest is computed over the zone data as
                 described in <xref target="collate-iterate"/>,
                 using the Scheme and Hash Algorithm for the current &RRNAME; RR.
