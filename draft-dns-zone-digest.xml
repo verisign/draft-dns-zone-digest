@@ -187,7 +187,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This document introduces a new RR type that serves as a
         cryptographic message digest of the data in a zone.
         It allows a receiver of the zone to verify the zone's
-        authenticity, especially when used in combination with DNSSEC.
+        integrity, and when used in combination with DNSSEC,
+        its authenticity.
         This technique makes the
         digest a part of the zone itself, allowing
         verification the zone as a whole, no matter how it is
@@ -933,10 +934,9 @@ where "|" denotes concatenation.
     <section title="Security Considerations" anchor="security">
       <section title="Attacks Against the Zone Digest">
         <t>
-          The zone digest allows the receiver to verify that the zone
-          contents haven't been modified since the zone was
-          generated/published.  Verification is strongest when the
-          zone is also signed with DNSSEC.
+          A zone digest allows the recipient of a
+          zone to verify the zone's integrity and, when used in
+          combination with DNSSEC, its authenticity.
           An attacker, whose goal is to modify zone content before
           it is used by the victim, may consider a number of different
           approaches.
