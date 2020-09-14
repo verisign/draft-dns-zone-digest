@@ -866,7 +866,7 @@ where "|" denotes concatenation.
 
         <c>0</c>
         <c>Reserved</c>
-        <c>RESERVED</c>
+        <c>-</c>
         <c>N/A</c>
         <c>N/A</c>
 
@@ -876,11 +876,23 @@ where "|" denotes concatenation.
         <c>Mandatory</c>
         <c>This document</c>
 
+        <c>2-239</c>
+        <c>Unassigned</c>
+        <c>-</c>
+        <c>N/A</c>
+        <c>N/A</c>
+
         <c>240-254</c>
         <c>Private Use</c>
+        <c>-</c>
+        <c>N/A</c>
+        <c>This document</c>
+
+        <c>255</c>
+        <c>Reserved</c>
+        <c>-</c>
         <c>N/A</c>
         <c>N/A</c>
-        <c><xref target="RFC8126"/></c>
 
         </texttable>
         <t>
@@ -905,7 +917,7 @@ where "|" denotes concatenation.
 
         <c>0</c>
         <c>Reserved</c>
-        <c>RESERVED</c>
+        <c>-</c>
         <c>N/A</c>
         <c>N/A</c>
 
@@ -915,11 +927,23 @@ where "|" denotes concatenation.
         <c>Mandatory</c>
         <c><xref target="RFC6234"/></c>
 
+        <c>2-239</c>
+        <c>Unassigned</c>
+        <c>-</c>
+        <c>N/A</c>
+        <c>N/A</c>
+
         <c>240-254</c>
         <c>Private Use</c>
+        <c>-</c>
+        <c>N/A</c>
+        <c>This document</c>
+
+        <c>255</c>
+        <c>Reserved</c>
+        <c>-</c>
         <c>N/A</c>
         <c>N/A</c>
-        <c><xref target="RFC8126"/></c>
 
         </texttable>
         <t>
