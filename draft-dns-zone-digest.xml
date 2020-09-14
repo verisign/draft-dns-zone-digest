@@ -157,7 +157,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         servers, recursive name servers, or any other applications.
       </t>
       <t>
-        As specified at this time, &RRNAME; is not designed for use
+        As specified herein, &RRNAME; is not designed for use
         in large, dynamic zones due to the time and resources
         required for digest calculation.
         The &RRNAME; record described in this document
@@ -321,8 +321,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </t>
         <t>
           The zone digest is designed to be used on zones that are
-          relatively stable and have infrequent updates.  As currently
-          specified, the digest is re-calculated over the entire zone
+          relatively stable and have infrequent updates.  Herein,
+          the digest is re-calculated over the entire zone
           content each time.  This specification does not provide
           an efficient mechanism for incremental updates of zone
           data.  It is, however, extensible so that
@@ -500,7 +500,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             as input to the hashing function.
           </t>
           <t>
-            At the time of this writing, SIMPLE, with value 1, is the only
+            Herein, SIMPLE, with value 1, is the only
             standardized Scheme defined for &RRNAME; records.  The Scheme registry
             is further described in <xref target="iana"/>.
           </t>
@@ -516,7 +516,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             used to construct the digest.
           </t>
           <t>
-            At the time of this writing, SHA384, with value 1, is the only
+            Herein, SHA384, with value 1, is the only
             standardized
             Hash Algorithm defined for &RRNAME; records.  The Hash Algorithm registry
             is further described in <xref target="iana"/>.
@@ -624,7 +624,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
 
       <section title="Scheme-Specific Processing" anchor="collate-iterate">
         <t>
-          At this time, only the SIMPLE collation scheme is defined.
+          Herein, only the SIMPLE collation scheme is defined.
           Additional schemes may be defined in future updates to this document.
         </t>
 
@@ -1002,8 +1002,8 @@ where "|" denotes concatenation.
           a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
           A single &RRNAME; RR contributes approximately 40 to 65
-          octets to a DNS response, for currently defined digest
-          types.  Certainly other RR types, such as DNSKEY, can result in larger
+          octets to a DNS response, for digest
+          types defined herein.  Certainly other RR types, such as DNSKEY, can result in larger
           amplification effects.
         </t>
       </section>
@@ -1058,7 +1058,7 @@ where "|" denotes concatenation.
           The table below summarizes the the results for the SIMPLE scheme and SHA384 hash algorithm
           grouped by zone size.
           The Rate column is the mean amount of time per RR to calculate the digest,
-          running on commodity hardware at the time of this writing.
+          running on commodity hardware as of early 2020.
         </t>
         <texttable>
           <ttcol align="right">Zone Size (RRs)</ttcol>
@@ -1326,6 +1326,7 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -09 to -10:
       <list style="symbols">
+        <t>Addressed feedback from SECDIR review.</t>
       </list></t>
     </section>
 
@@ -1502,7 +1503,7 @@ non-apex      900     IN  ZONEMD  2018031900 1 1 (
       <section title="EXAMPLE Zone with multiple digests">
         <t>
           Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Scheme (SIMPLE) and one Hash Algorithm (SHA384) is defined at this time, this
+          only one Scheme (SIMPLE) and one Hash Algorithm (SHA384) is defined herein, this
           example utilizes additional &RRNAME; records with Scheme and Hash Algorithm
           values in the private range (240-254).  These additional
           private-range digests are not verifiable.
