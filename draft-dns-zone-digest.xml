@@ -257,7 +257,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           data as originally published, and do not provide any methods
           to verify data that is read after transmission is complete.
           For example, a name server loading saved zone data upon restart
-          cannot guarantee that the on-disk data has not been corrupted or modified.
+          cannot guarantee that the on-disk data has not been modified.
+          Such modification could be the result of
+          an accidental corruption of the file, or perhaps an incompletely
+          saved file <xref target="disk-full-failure"/>.
           For these reasons, it is preferable to secure the data itself.
         </t>
 
@@ -329,7 +332,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           future schemes to support incremental
           zone digest algorithms (e.g. using Merkle trees) can be accommodated.
         </t>
-        <!-- XXX Joe Abley: remove following paragraph -->
         <t>
           It is expected that verification of a zone digest will be
           implemented in name server software.  That is, a name server
@@ -460,7 +462,6 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </section>
 
       <section title="&RRNAME; RDATA Wire Format">
-        <!-- XXX Joe Abley: specify short names for the fields -->
         <t>The &RRNAME; RDATA wire format is encoded as follows:</t>
         <figure><artwork align="left"><![CDATA[
                      1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
@@ -611,7 +612,6 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           Since &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
-          <!-- Implementations MAY want to set the Digest field to all zeroes anyway. -->
         </t>
       </section>
       <section title="Optionally Sign the Zone">
@@ -796,36 +796,6 @@ where "|" denotes concatenation.
       </t>
     </section>
 
-    <!-- section title="Scope of Experimentation">
-      <t>
-        This memo is published as an Experimental RFC.  The purpose
-        of the experimental period is to provide the community time
-        to analyze and evaluate the methods defined in this
-        document, particularly with regard to the wide variety of
-        DNS zones in use on the Internet.
-      </t>
-      <t>
-        Additionally, the &RRNAME; record defined in this document
-        includes a Parameter field in the form of an 8-bit integer.  The authors have a particular
-        future use in mind for this field, namely to support efficient
-        digests in large, dynamic zones.  We intend to conduct
-        future experiments using Merkle trees of varying depth.  The
-        choice of tree depth can be encoded in this reserved
-        field.  We expect values for tree depth to range from 0 to
-        10, requiring at most four bits of this field.  This leaves
-        another four bits available for other future uses, if
-        absolutely necessary.
-      </t>
-      <t>
-        The duration of the experiment is expected to be no less
-        than two years from the publication of this document.  If
-        the experiment is successful, it is expected that the
-        findings of the experiment will result in an updated document
-        for Standards Track approval.
-      </t>
-
-    </section -->
-
     <section title="IANA Considerations" anchor="iana">
       <section title="&RRNAME; RRtype">
         <t>
@@ -975,6 +945,24 @@ where "|" denotes concatenation.
           The attacker might alter the Scheme, Hash Algorithm, or Digest fields
           of the &RRNAME; record.  Such modifications are detectable
           only with DNSSEC validation.
+        </t>
+      </section>
+      <section title="DNSSESC Timing Considerations">
+        <t>
+          As with all DNSSEC signatures, the ability to perform signature
+          validation of a &RRNAME; record is limited in time.
+          If the DS record(s) or trust anchors for the zone to be verified
+          are no longer available, the recipient cannot validate
+          the ZONEMD RRSet.
+          This could happen even if the &RRNAME; signature is still current
+          (not expired), since the zone's DS record(s)
+          may have been withdrawn following a KSK rollover.
+        </t>
+        <t>
+          For zones where it may be important to validate a &RRNAME;
+          RRset through its entire signature validity period, the zone
+          operator should ensure that KSK rollover timing takes this
+          into consideration.
         </t>
       </section>
       <section title="Attacks Utilizing &RRNAME; Queries">
@@ -1346,8 +1334,10 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -09 to -10:
       <list style="symbols">
+        <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
+        <t>Added concerns that timing of KSK rollovers could affect validation of &RRNAME; record.</t>
         <t>Addressed SECDIR review and accepted most proposed edits.</t>
-      </list>
+      </list></t>
     </section>
 
   </middle>
@@ -1357,11 +1347,7 @@ where "|" denotes concatenation.
     &RFC2119;
     &RFC1034;
     &RFC1035;
-    <!-- &RFC2181; -->
     &RFC4034;
-    <!-- &RFC3658; -->
-    <!-- &RFC4509; -->
-    <!-- &RFC5933; -->
     &RFC6234;
     &RFC8174;
 
@@ -1456,6 +1442,16 @@ where "|" denotes concatenation.
           <date year="2018" month="June" day="21"/>
         </front>
         <seriesInfo name="Internet-Draft" value="draft-vixie-dnsop-dns-rpz-00" />
+     </reference>
+
+     <reference anchor="disk-full-failure" target="http://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
+        <front>
+          <title>Background of the Partial Failure of the Name Service for .de Domains</title>
+          <author>
+            <organization>DENIC</organization>
+          </author>
+          <date year="2010" month="May" day="14"/>
+        </front>
      </reference>
 
     </references>
