@@ -12,7 +12,7 @@ ${DST}-${VER}.txt: ${SRC}.xml
 rfcdiff: ${DST}-${VER}.txt
 	mv ${DST}-${VER}.txt Versions
 	cd Versions; bash ../rfcdiff ${DST}-${VERQ}.txt ${DST}-${VER}.txt
-	cd Versions; mv ${DST}-${VER}-from-${VERP}.diff.html ${DST}-${VER}-from-${VERQ}.diff.html
+	cd Versions; test -s ${DST}-${VER}-from-${VERP}.diff.html && mv ${DST}-${VER}-from-${VERP}.diff.html ${DST}-${VER}-from-${VERQ}.diff.html || true
 
 .PHONY: clean
 	
