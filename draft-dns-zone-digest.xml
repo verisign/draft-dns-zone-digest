@@ -518,7 +518,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             Herein, SHA384, with value 1, is the only
             standardized
             Hash Algorithm defined for &RRNAME; records and it MUST be implemented.
-            When SHA384 is used, the size of the Digest Field is 48 bytes.
+            When SHA384 is used, the size of the Digest Field is 48 octets.
             The Hash Algorithm registry
             is further described in <xref target="iana"/>.
           </t>
@@ -530,7 +530,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the output of the hash algorithm.  The Digest field must not be empty.
+            containing the output of the hash algorithm.
+            The Digest Field MUST NOT be shorter than 12 octets.
             The length of the Digest field is determined by deducting
             the fixed size of the Serial, Scheme, and Hash Algorithm
             fields from the RDATA size in the ZONEMD RR header.
@@ -762,20 +763,21 @@ where "|" denotes concatenation.
               </t>
               <t>
                 The Scheme field MUST be checked.  If the
-                verifier does not support the given scheme, it
+                verifier does not support the given scheme, verification MUST NOT be considered successful with this &RRNAME; RR and it
                 SHOULD report that the RR's digest could not be verified
                 due to an unsupported scheme.
               </t>
               <t>
                 The Hash Algorithm field MUST be checked.  If the
-                verifier does not support the given hash algorithm, it
+                verifier does not support the given hash algorithm, verification MUST NOT be considered successful with this &RRNAME; RR and it
                 SHOULD report that the RR's digest could not be verified
                 due to an unsupported algorithm.
               </t>
               <t>
                 The Digest field size MUST be checked.  If the size of the
-                given Digest field is not equal to the size expected for the
+                given Digest field is smaller than 12 octets, or if the size is not equal to the size expected for the
                 corresponding Hash Algorithm,
+                verification MUST NOT be considered successful with this &RRNAME; RR and
                 the verifier SHOULD report that the RR's digest
                 could not be verified to to an incorrect digest length.
               </t>
