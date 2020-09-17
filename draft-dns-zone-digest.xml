@@ -515,15 +515,22 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             used to construct the digest.
           </t>
           <t>
-            Herein, SHA384, with value 1, is the only
+            Herein, SHA384 <xref target="RFC6234"/>, with value 1, is the only
             standardized
-            Hash Algorithm defined for &RRNAME; records and it MUST be implemented.
+            Hash Algorithm defined for &RRNAME; records that MUST be implemented.
             When SHA384 is used, the size of the Digest Field is 48 octets.
-            The Hash Algorithm registry
-            is further described in <xref target="iana"/>.
+          </t>
+          <t>
+            SHA512 <xref target="RFC6234"/>, with Hash Algorithm value 2, is also defined for &RRNAME; records,
+            and SHOULD be implemented.
+            When SHA512 is used, the size of the Digest Field is 64 octets.
           </t>
           <t>
             Hash Algorithm values 240-254 are allocated for Private Use.
+          </t>
+          <t>
+            The Hash Algorithm registry
+            is further described in <xref target="iana"/>.
           </t>
         </section>
 
@@ -675,10 +682,10 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
               A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
               in the format and order described in <xref target="scheme-simple"/>
               subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion"/>,
-              and then applying the SHA-384 <xref target="RFC6234"/> algorithm:
+              and then applying the chosen hash algorithm:
             </t>
             <figure><artwork>
-digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+digest = hash( RR(1) | RR(2) | RR(3) | ... )
 
 where "|" denotes concatenation.
             </artwork></figure>
@@ -891,7 +898,13 @@ where "|" denotes concatenation.
         <c>Mandatory</c>
         <c>[this document]</c>
 
-        <c>2-239</c>
+        <c>2</c>
+        <c>SHA-512</c>
+        <c>SHA512</c>
+        <c>Optional</c>
+        <c>[this document]</c>
+
+        <c>3-239</c>
         <c>Unassigned</c>
         <c></c>
         <c></c>
@@ -1339,6 +1352,8 @@ where "|" denotes concatenation.
         <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
         <t>Added concerns that timing of KSK rollovers could affect validation of &RRNAME; record.</t>
         <t>Addressed SECDIR review and accepted most proposed edits.</t>
+        <t>From SECDIR review, require minimum digest length of 12 octets.</t>
+        <t>From SECDIR review, add SHA512 has hash algorithm 2.</t>
       </list></t>
     </section>
 
