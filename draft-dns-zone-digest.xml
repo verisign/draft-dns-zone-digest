@@ -727,6 +727,8 @@ where "|" denotes concatenation.
           If multiple &RRNAME; RRs are present in the zone, e.g.,
           during an algorithm rollover, a match using any one of the recipient's
           supported Schemes and Hash Algorithms is sufficient to verify the zone.
+          The verifier MAY ignore a &RRNAME; RR if its Scheme and Hash Algorithm
+          violates local policy.
       </t>
       <t>
         <list style="numbers">
@@ -1354,6 +1356,7 @@ where "|" denotes concatenation.
         <t>Addressed SECDIR review and accepted most proposed edits.</t>
         <t>From SECDIR review, require minimum digest length of 12 octets.</t>
         <t>From SECDIR review, add SHA512 has hash algorithm 2.</t>
+        <t>From SECDIR review, say that &RRNAME; RRs MAY be ignored by local policy.</t>
       </list></t>
     </section>
 
