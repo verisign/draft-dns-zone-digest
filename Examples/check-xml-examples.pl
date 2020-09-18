@@ -18,7 +18,7 @@ while (<F>) {
 		$entities->{$1} = $2;
 		next;
 	}
-	while (/(\w+);/) {
+	while (/\&(\w+);/) {
 		my $k = $1;
 		my $v = $entities->{$k};
 		s/\&$k;/$v/;
