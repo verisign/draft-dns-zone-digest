@@ -835,7 +835,7 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
@@ -847,7 +847,7 @@ where "|" denotes concatenation.
         <c>1</c>
         <c>Simple &RRNAME; collation</c>
         <c>SIMPLE</c>
-        <c>Mandatory</c>
+        <c>MUST</c>
         <c>[this document]</c>
 
         <c>2-239</c>
@@ -885,7 +885,7 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
@@ -897,13 +897,13 @@ where "|" denotes concatenation.
         <c>1</c>
         <c>SHA-384</c>
         <c>SHA384</c>
-        <c>Mandatory</c>
+        <c>MUST</c>
         <c>[this document]</c>
 
         <c>2</c>
         <c>SHA-512</c>
         <c>SHA512</c>
-        <c>Optional</c>
+        <c>SHOULD</c>
         <c>[this document]</c>
 
         <c>3-239</c>
