@@ -1277,6 +1277,8 @@ where "|" denotes concatenation.
         <t>From SECDIR review, require minimum digest length of 12 octets.</t>
         <t>From SECDIR review, add SHA512 has hash algorithm 2.</t>
         <t>From SECDIR review, say that &RRNAME; RRs MAY be ignored by local policy.</t>
+        <t>Moved Implmentation Status to an appendix with the intention to retain it in RFC.</t>
+        <t>In registry tables, changed Status column to Implementation Requirement.</t>
       </list></t>
     </section>
 
