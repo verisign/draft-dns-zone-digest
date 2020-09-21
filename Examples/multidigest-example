@@ -1,13 +1,32 @@
-example.	86400	IN	NS	ns1.example.
-example.	86400	IN	NS	ns2.example.
-example.	86400	IN	SOA	ns1.example. admin.example. 2018031900 1800 900 604800 86400
-example.	86400	IN	ZONEMD	2018031900 1 1 6a126e222407923df70e7aa44d5e813b0b18b469b78d3d5084cd3cbf24152eeaa68c00b6536bba2a1f2cab0fd03a8162
-example.	86400	IN	ZONEMD	2018031900 1 240 e2d523f654b9422a96c5a8f44607bbee
-example.	86400	IN	ZONEMD	2018031900 1 241 5732dd91240611f8314adb6b4769bdd2
-example.	86400	IN	ZONEMD	2018031900 1 242 7c32e06779315c7d81ba8c72f5cf9116496b6395
-example.	86400	IN	ZONEMD	2018031900 1 243 183770af4a629f802e674e305b8d0d113dfe0837
-example.	86400	IN	ZONEMD	2018031900 1 244 e1846540e33a9e4189792d18d5d131f605fc283e
-example.	86400	IN	ZONEMD	2018031900 240 1 e1846540e33a9e4189792d18d5d131f605fc283e
-ns1.example.	3600	IN	A	127.0.0.1
-ns2.example.	86400	IN	TXT	"This example has multiple digests"
-ns2.example.	3600	IN	AAAA	::1
+; This file is a copy of the Multidigest EXAMPLE Zone in the XML document
+; It must manually be kept in sync with the XML doc
+example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                  1800 900 604800 86400 )
+example.      86400   IN  NS      ns1.example.
+example.      86400   IN  NS      ns2.example.
+example.      86400   IN  ZONEMD  2018031900 1 1 (
+                                  62e6cf51b02e54b9
+                                  b5f967d547ce4313
+                                  6792901f9f88e637
+                                  493daaf401c92c27
+                                  9dd10f0edb1c56f8
+                                  080211f8480ee306 )
+example.      86400   IN  ZONEMD  2018031900 1 2 (
+                                  08cfa1115c7b948c
+                                  4163a901270395ea
+                                  226a930cd2cbcf2f
+                                  a9a5e6eb85f37c8a
+                                  4e114d884e66f176
+                                  eab121cb02db7d65
+                                  2e0cc4827e7a3204
+                                  f166b47e5613fd27 )
+example.      86400   IN  ZONEMD  2018031900 1 240 (
+                                  e2d523f654b9422a
+                                  96c5a8f44607bbee )
+example.      86400   IN  ZONEMD  2018031900 241 1 (
+                                  e1846540e33a9e41
+                                  89792d18d5d131f6
+                                  05fc283e )
+ns1.example.  3600    IN  A       203.0.113.63
+ns2.example.  86400   IN  TXT     "This example has multiple digests"
+ns2.example.  3600    IN  AAAA    2001:db8::63

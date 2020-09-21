@@ -515,22 +515,30 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             used to construct the digest.
           </t>
           <t>
-            Herein, SHA384, with value 1, is the only
+            Herein, SHA384 <xref target="RFC6234"/>, with value 1, is the only
             standardized
-            Hash Algorithm defined for &RRNAME; records and it MUST be implemented.
-            When SHA384 is used, the size of the Digest Field is 48 bytes.
-            The Hash Algorithm registry
-            is further described in <xref target="iana"/>.
+            Hash Algorithm defined for &RRNAME; records that MUST be implemented.
+            When SHA384 is used, the size of the Digest Field is 48 octets.
+          </t>
+          <t>
+            SHA512 <xref target="RFC6234"/>, with Hash Algorithm value 2, is also defined for &RRNAME; records,
+            and SHOULD be implemented.
+            When SHA512 is used, the size of the Digest Field is 64 octets.
           </t>
           <t>
             Hash Algorithm values 240-254 are allocated for Private Use.
+          </t>
+          <t>
+            The Hash Algorithm registry
+            is further described in <xref target="iana"/>.
           </t>
         </section>
 
         <section title="The Digest Field">
           <t>
             The Digest field is a variable-length sequence of octets
-            containing the output of the hash algorithm.  The Digest field must not be empty.
+            containing the output of the hash algorithm.
+            The Digest Field MUST NOT be shorter than 12 octets.
             The length of the Digest field is determined by deducting
             the fixed size of the Serial, Scheme, and Hash Algorithm
             fields from the RDATA size in the ZONEMD RR header.
@@ -674,10 +682,10 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
               A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
               in the format and order described in <xref target="scheme-simple"/>
               subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion"/>,
-              and then applying the SHA-384 <xref target="RFC6234"/> algorithm:
+              and then applying the chosen hash algorithm:
             </t>
             <figure><artwork>
-digest = SHA384( RR(1) | RR(2) | RR(3) | ... )
+digest = hash( RR(1) | RR(2) | RR(3) | ... )
 
 where "|" denotes concatenation.
             </artwork></figure>
@@ -719,6 +727,8 @@ where "|" denotes concatenation.
           If multiple &RRNAME; RRs are present in the zone, e.g.,
           during an algorithm rollover, a match using any one of the recipient's
           supported Schemes and Hash Algorithms is sufficient to verify the zone.
+          The verifier MAY ignore a &RRNAME; RR if its Scheme and Hash Algorithm
+          violates local policy.
       </t>
       <t>
         <list style="numbers">
@@ -762,20 +772,21 @@ where "|" denotes concatenation.
               </t>
               <t>
                 The Scheme field MUST be checked.  If the
-                verifier does not support the given scheme, it
+                verifier does not support the given scheme, verification MUST NOT be considered successful with this &RRNAME; RR and it
                 SHOULD report that the RR's digest could not be verified
                 due to an unsupported scheme.
               </t>
               <t>
                 The Hash Algorithm field MUST be checked.  If the
-                verifier does not support the given hash algorithm, it
+                verifier does not support the given hash algorithm, verification MUST NOT be considered successful with this &RRNAME; RR and it
                 SHOULD report that the RR's digest could not be verified
                 due to an unsupported algorithm.
               </t>
               <t>
                 The Digest field size MUST be checked.  If the size of the
-                given Digest field is not equal to the size expected for the
+                given Digest field is smaller than 12 octets, or if the size is not equal to the size expected for the
                 corresponding Hash Algorithm,
+                verification MUST NOT be considered successful with this &RRNAME; RR and
                 the verifier SHOULD report that the RR's digest
                 could not be verified to to an incorrect digest length.
               </t>
@@ -824,7 +835,7 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
@@ -836,7 +847,7 @@ where "|" denotes concatenation.
         <c>1</c>
         <c>Simple &RRNAME; collation</c>
         <c>SIMPLE</c>
-        <c>Mandatory</c>
+        <c>MUST</c>
         <c>[this document]</c>
 
         <c>2-239</c>
@@ -874,7 +885,7 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Status</ttcol>
+        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
@@ -886,10 +897,16 @@ where "|" denotes concatenation.
         <c>1</c>
         <c>SHA-384</c>
         <c>SHA384</c>
-        <c>Mandatory</c>
+        <c>MUST</c>
         <c>[this document]</c>
 
-        <c>2-239</c>
+        <c>2</c>
+        <c>SHA-512</c>
+        <c>SHA512</c>
+        <c>SHOULD</c>
+        <c>[this document]</c>
+
+        <c>3-239</c>
         <c>Unassigned</c>
         <c></c>
         <c></c>
@@ -1106,86 +1123,6 @@ where "|" denotes concatenation.
       </t>
     </section>
 
-    <section anchor="Implementation" title="Implementation Status">
-
-      <t>
-        RFC Editor: Please remove this section before publication.
-      </t>
-
-      <t>
-        This section records the status of known implementations of the
-        protocol defined by this specification at the time of posting of
-        this Internet-Draft, and is based on a proposal described in
-        RFC 7942.  The description of implementations in this section is
-        intended to assist the IETF in its decision processes in
-        progressing drafts to RFCs.  Please note that the listing of any
-        individual implementation here does not imply endorsement by the
-        IETF.  Furthermore, no effort has been spent to verify the
-        information presented here that was supplied by IETF contributors.
-        This is not intended as, and must not be construed to be, a
-        catalog of available implementations or their features.  Readers
-        are advised to note that other implementations may exist.
-      </t>
-
-      <t>
-        According to RFC 7942, "this will allow reviewers and working
-        groups to assign due consideration to documents that have the
-        benefit of running code, which may serve as evidence of valuable
-        experimentation and feedback that have made the implemented
-        protocols more mature.  It is up to the individual working groups
-        to use this information as they see fit".
-      </t>
-
-      <section title="Authors' Implementation" anchor="authors-implementation">
-        <t>
-          The authors have an open source implementation in
-          C, using the ldns library <xref target="ldns-zone-digest"/>.  This implementation is able to
-          perform the following functions:
-          <list style="symbols">
-          <t>Read an input zone and output a zone with the &RRNAME; placeholder.</t>
-          <t>Compute zone digest over signed zone and update the &RRNAME; record.</t>
-          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
-          <t>Verify the zone digest from an input zone.</t>
-          </list>
-          This implementation does not:
-          <list style="symbols">
-          <t>Perform DNSSEC validation of the &RRNAME; record during verification.</t>
-          </list>
-        </t>
-      </section>
-      <section title="Shane Kerr's Implementation">
-        <t> Shane Kerr wrote an implementation of this specification during the IETF 102 hackathon
-          <xref target="ZoneDigestHackathon"/>.  This implementation is in Python and is able to
-          perform the following functions:
-          <list style="symbols">
-          <t>Read an input zone and output a zone with &RRNAME; record.</t>
-          <t>Verify the zone digest from an input zone.</t>
-          <t>Output the &RRNAME; record in its defined presentation format.</t>
-          </list>
-          This implementation does not:
-          <list style="symbols">
-          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
-          <t>Perform DNSSEC validation of the &RRNAME; record.</t>
-          </list>
-        </t>
-      </section>
-      <section title="NIC Chile Labs Implementation">
-        <t>
-          NIC Chile Labs wrote an implementation of this specification
-          as part of "dns-tools" suite <xref target="DnsTools"/>,
-          which besides digesting, can also sign and verify zones. This
-          implementation is in Go and is able to perform the following
-          functions:
-          <list style="symbols">
-          <t>Compute zone digest over signed zone and update the ZONEMD record.</t>
-          <t>Verify the zone digest from an input zone.</t>
-          <t>Perform DNSSEC validation of the ZONEMD record during verification.</t>
-          <t>Re-compute DNSSEC signature over the ZONEMD record.</t>
-          </list>
-        </t>
-      </section>
-    </section>
-
     <section anchor="Changes" title="Change Log">
       <t>RFC Editor: Please remove this section before publication.</t>
       <t>This section lists substantial changes to the document as it is being worked on.</t>
@@ -1337,6 +1274,11 @@ where "|" denotes concatenation.
         <t>Add clarification and reference to on-disk modification / corruption of zone files.</t>
         <t>Added concerns that timing of KSK rollovers could affect validation of &RRNAME; record.</t>
         <t>Addressed SECDIR review and accepted most proposed edits.</t>
+        <t>From SECDIR review, require minimum digest length of 12 octets.</t>
+        <t>From SECDIR review, add SHA512 has hash algorithm 2.</t>
+        <t>From SECDIR review, say that &RRNAME; RRs MAY be ignored by local policy.</t>
+        <t>Moved Implmentation Status to an appendix with the intention to retain it in RFC.</t>
+        <t>In registry tables, changed Status column to Implementation Requirement.</t>
       </list></t>
     </section>
 
@@ -1518,9 +1460,9 @@ non-apex      900     IN  ZONEMD  2018031900 1 1 (
 
       <section title="EXAMPLE Zone with multiple digests">
         <t>
-          Here, the EXAMPLE zone contains multiple &RRNAME; records. Since
-          only one Scheme (SIMPLE) and one Hash Algorithm (SHA384) is defined herein, this
-          example utilizes additional &RRNAME; records with Scheme and Hash Algorithm
+          Here, the EXAMPLE zone contains multiple &RRNAME; records. It has both
+          SHA384 and SHA512 digests using the SIMPLE scheme.  It also includes
+          &RRNAME; records with Scheme and Hash Algorithm
           values in the private range (240-254).  These additional
           private-range digests are not verifiable.
         </t>
@@ -1536,6 +1478,15 @@ example.      86400   IN  ZONEMD  2018031900 1 1 (
                                   493daaf401c92c27
                                   9dd10f0edb1c56f8
                                   080211f8480ee306 )
+example.      86400   IN  ZONEMD  2018031900 1 2 (
+                                  08cfa1115c7b948c
+                                  4163a901270395ea
+                                  226a930cd2cbcf2f
+                                  a9a5e6eb85f37c8a
+                                  4e114d884e66f176
+                                  eab121cb02db7d65
+                                  2e0cc4827e7a3204
+                                  f166b47e5613fd27 )
 example.      86400   IN  ZONEMD  2018031900 1 240 (
                                   e2d523f654b9422a
                                   96c5a8f44607bbee )
@@ -1750,6 +1701,77 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
     f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97
     8a3b11dbfc1c776d5b3e86ae3d973d6b5349ba7f04340f79 )
 ]]></artwork></figure>
+      </section>
+    </section>
+
+    <section anchor="Implementation" title="Implementation Status">
+
+      <t>
+        RFC Editor: Please retain this section upon publication.
+      </t>
+
+      <t>
+        This section records the status of known implementations of the
+        protocol defined by this specification at the time of posting of
+        this Internet-Draft, and is based on a proposal described in
+        RFC 7942.  The description of implementations in this section is
+        intended to assist the IETF in its decision processes in
+        progressing drafts to RFCs.  Please note that the listing of any
+        individual implementation here does not imply endorsement by the
+        IETF.  Furthermore, no effort has been spent to verify the
+        information presented here that was supplied by IETF contributors.
+        This is not intended as, and must not be construed to be, a
+        catalog of available implementations or their features.  Readers
+        are advised to note that other implementations may exist.
+      </t>
+
+      <section title="Authors' Implementation" anchor="authors-implementation">
+        <t>
+          The authors have an open source implementation in
+          C, using the ldns library <xref target="ldns-zone-digest"/>.  This implementation is able to
+          perform the following functions:
+          <list style="symbols">
+          <t>Read an input zone and output a zone with the &RRNAME; placeholder.</t>
+          <t>Compute zone digest over signed zone and update the &RRNAME; record.</t>
+          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
+          <t>Verify the zone digest from an input zone.</t>
+          </list>
+          This implementation does not:
+          <list style="symbols">
+          <t>Perform DNSSEC validation of the &RRNAME; record during verification.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Shane Kerr's Implementation">
+        <t> Shane Kerr wrote an implementation of this specification during the IETF 102 hackathon
+          <xref target="ZoneDigestHackathon"/>.  This implementation is in Python and is able to
+          perform the following functions:
+          <list style="symbols">
+          <t>Read an input zone and output a zone with &RRNAME; record.</t>
+          <t>Verify the zone digest from an input zone.</t>
+          <t>Output the &RRNAME; record in its defined presentation format.</t>
+          </list>
+          This implementation does not:
+          <list style="symbols">
+          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
+          <t>Perform DNSSEC validation of the &RRNAME; record.</t>
+          </list>
+        </t>
+      </section>
+      <section title="NIC Chile Labs Implementation">
+        <t>
+          NIC Chile Labs wrote an implementation of this specification
+          as part of "dns-tools" suite <xref target="DnsTools"/>,
+          which besides digesting, can also sign and verify zones. This
+          implementation is in Go and is able to perform the following
+          functions:
+          <list style="symbols">
+          <t>Compute zone digest over signed zone and update the ZONEMD record.</t>
+          <t>Verify the zone digest from an input zone.</t>
+          <t>Perform DNSSEC validation of the ZONEMD record during verification.</t>
+          <t>Re-compute DNSSEC signature over the ZONEMD record.</t>
+          </list>
+        </t>
       </section>
     </section>
 

@@ -1,3 +1,5 @@
+; This file is a copy of the example root-servers.net zone in the XML document
+; It must manually be kept in sync with the XML doc
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
     nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
 root-servers.net.     3600000 IN  NS      a.root-servers.net.
@@ -44,5 +46,5 @@ m.root-servers.net.   3600000 IN  A       202.12.27.33
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
     nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
 root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
-    4fb752b314e4dccb845832b611590b669a80daebb736d4bd22aa76ec06
-    6737c79185c1f7dfd49ec91d9523e6240ea2c4 )
+    f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97
+    8a3b11dbfc1c776d5b3e86ae3d973d6b5349ba7f04340f79 )

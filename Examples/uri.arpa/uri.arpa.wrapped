@@ -1,3 +1,5 @@
+; This file is a copy of the example uri.arpa zone in the XML document
+; It must manually be kept in sync with the XML doc
 ; <<>> DiG 9.9.4 <<>> @lax.xfr.dns.icann.org uri.arpa axfr
 ; (2 servers found)
 ;; global options: +cmd
@@ -133,5 +135,5 @@ uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
 ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
 ;; XFR size: 34 records (messages 1, bytes 3941)
 uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
-    cc4a0b6556272fc739b8ff74b80b4a43ac9575d91445ecc0dc22f5
-    09fa27c62448a7100660bbdb4c90667424b734956b )
+    1291b78ddf7669b1a39d014d87626b709b55774c5d7d58fa
+    dc556439889a10eaf6f11d615900a4f996bd46279514e473 )
