@@ -2,37 +2,37 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!-- One method to get references from the online citation libraries.
 There has to be one entity for each item to be referenced. 
-An alternate method (rfc include) is described in the references. --><!ENTITY RFC5966 SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
-<!ENTITY I-D.ietf-tcpm-fastopen SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tcpm-fastopen">
-<!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "http://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
-<!ENTITY RFC1034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
-<!ENTITY RFC1035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
-<!ENTITY RFC1995 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
-<!ENTITY RFC2065 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2065.xml">
-<!ENTITY RFC2119 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY RFC2136 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
-<!ENTITY RFC2181 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2181.xml">
-<!ENTITY RFC2535 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2535.xml">
-<!ENTITY RFC2629 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
-<!ENTITY RFC2845 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
-<!ENTITY RFC2931 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml">
-<!ENTITY RFC3658 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
-<!ENTITY RFC4033 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
-<!ENTITY RFC4034 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
-<!ENTITY RFC4035 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
-<!ENTITY RFC4509 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
-<!ENTITY RFC4880 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4880.xml">
-<!ENTITY RFC5751 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5751.xml">
-<!ENTITY RFC5933 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
-<!ENTITY RFC5936 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
-<!ENTITY RFC6234 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
-<!ENTITY RFC7696 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
-<!ENTITY RFC8806 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8806.xml">
-<!ENTITY RFC7858 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
-<!ENTITY RFC8126 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
-<!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
-<!ENTITY RFC8484 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8484.xml">
-<!ENTITY RFC8499 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml">
+An alternate method (rfc include) is described in the references. --><!ENTITY RFC5966 SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
+<!ENTITY I-D.ietf-tcpm-fastopen SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tcpm-fastopen">
+<!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
+<!ENTITY RFC1034 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
+<!ENTITY RFC1035 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
+<!ENTITY RFC1995 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
+<!ENTITY RFC2065 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2065.xml">
+<!ENTITY RFC2119 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2136 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml">
+<!ENTITY RFC2181 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2181.xml">
+<!ENTITY RFC2535 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2535.xml">
+<!ENTITY RFC2629 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
+<!ENTITY RFC2845 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
+<!ENTITY RFC2931 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml">
+<!ENTITY RFC3658 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
+<!ENTITY RFC4033 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
+<!ENTITY RFC4034 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
+<!ENTITY RFC4035 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
+<!ENTITY RFC4509 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
+<!ENTITY RFC4880 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4880.xml">
+<!ENTITY RFC5751 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5751.xml">
+<!ENTITY RFC5933 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
+<!ENTITY RFC5936 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
+<!ENTITY RFC6234 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
+<!ENTITY RFC7696 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
+<!ENTITY RFC8806 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8806.xml">
+<!ENTITY RFC7858 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
+<!ENTITY RFC8126 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
+<!ENTITY RFC8174 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
+<!ENTITY RFC8484 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8484.xml">
+<!ENTITY RFC8499 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -72,7 +72,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </postal>
         <phone>+1 703 948-3200</phone>
         <email>dwessels@verisign.com</email>
-        <uri>http://verisign.com</uri>
+        <uri>https://verisign.com</uri>
       </address>
     </author>
 
@@ -87,7 +87,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </postal>
         <phone>+1 703 948-3200</phone>
         <email>pbarber@verisign.com</email>
-        <uri>http://verisign.com</uri>
+        <uri>https://verisign.com</uri>
       </address>
     </author>
 
@@ -95,7 +95,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <organization>Amazon</organization>
       <address>
         <email>matweinb@amazon.com</email>
-        <uri>http://amazon.com</uri>
+        <uri>https://amazon.com</uri>
       </address>
     </author>
 
@@ -1386,7 +1386,7 @@ where "|" denotes concatenation.
         <seriesInfo name="Internet-Draft" value="draft-vixie-dnsop-dns-rpz-00" />
      </reference>
 
-     <reference anchor="disk-full-failure" target="http://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
+     <reference anchor="disk-full-failure" target="https://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
         <front>
           <title>Background of the Partial Failure of the Name Service for .de Domains</title>
           <author>
