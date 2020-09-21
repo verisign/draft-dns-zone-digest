@@ -1332,8 +1332,8 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    [disk-full-failure]
               DENIC, "Background of the Partial Failure of the Name
-              Service for .de Domains", May 2010, <http://web.archive.or
-              g/web/20100618032705/https://www.denic.de/en/denic-in-
+              Service for .de Domains", May 2010, <https://web.archive.o
+              rg/web/20100618032705/https://www.denic.de/en/denic-in-
               dialogue/news/2733.html>.
 
 
@@ -1937,7 +1937,7 @@ Authors' Addresses
 
    Phone: +1 703 948-3200
    Email: dwessels@verisign.com
-   URI:   http://verisign.com
+   URI:   https://verisign.com
 
 
    Piet Barber
@@ -1947,7 +1947,7 @@ Authors' Addresses
 
    Phone: +1 703 948-3200
    Email: pbarber@verisign.com
-   URI:   http://verisign.com
+   URI:   https://verisign.com
 
 
 
@@ -1966,7 +1966,7 @@ Internet-Draft               DNS Zone Digest              September 2020
    Amazon
 
    Email: matweinb@amazon.com
-   URI:   http://amazon.com
+   URI:   https://amazon.com
 
 
    Warren Kumari
