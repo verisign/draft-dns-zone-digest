@@ -541,7 +541,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             The Digest Field MUST NOT be shorter than 12 octets.
             The length of the Digest field is determined by deducting
             the fixed size of the Serial, Scheme, and Hash Algorithm
-            fields from the RDATA size in the ZONEMD RR header.
+            fields from the RDATA size in the &RRNAME; RR header.
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
@@ -970,14 +970,14 @@ where "|" denotes concatenation.
           validation of a &RRNAME; record is limited in time.
           If the DS record(s) or trust anchors for the zone to be verified
           are no longer available, the recipient cannot validate
-          the ZONEMD RRSet.
+          the &RRNAME; RRSet.
           This could happen even if the &RRNAME; signature is still current
           (not expired), since the zone's DS record(s)
           may have been withdrawn following a KSK rollover.
         </t>
         <t>
           For zones where it may be important to validate a &RRNAME;
-          RRset through its entire signature validity period, the zone
+          RRSet through its entire signature validity period, the zone
           operator should ensure that KSK rollover timing takes this
           into consideration.
         </t>
@@ -1239,7 +1239,7 @@ where "|" denotes concatenation.
         <t>Clarifications about non-apex and multiple &RRNAME; RRs.</t>
         <t>Clarifications about benchmark results.</t>
         <t>Don't compute &RRNAME; on-the-fly.</t>
-        <t>Specifciation Required for updates to &RRNAME; protocol registries.</t>
+        <t>Specification Required for updates to &RRNAME; protocol registries.</t>
         <t>Other rewording based on WGLC feedback.</t>
         <t>Updated RFC numbers for some references.</t>
         <t>Use documentation IP addresses instead of loopback.</t>
@@ -1277,7 +1277,7 @@ where "|" denotes concatenation.
         <t>From SECDIR review, require minimum digest length of 12 octets.</t>
         <t>From SECDIR review, add SHA512 has hash algorithm 2.</t>
         <t>From SECDIR review, say that &RRNAME; RRs MAY be ignored by local policy.</t>
-        <t>Moved Implmentation Status to an appendix with the intention to retain it in RFC.</t>
+        <t>Moved Implementation Status to an appendix with the intention to retain it in RFC.</t>
         <t>In registry tables, changed Status column to Implementation Requirement.</t>
       </list></t>
     </section>
@@ -1649,7 +1649,7 @@ uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
 
       <section title="The ROOT-SERVERS.NET Zone">
         <t>
-          The ROOT-SERVERS.NET zone retreived 2018-10-21.
+          The ROOT-SERVERS.NET zone retrieved 2018-10-21.
         </t>
         <figure><artwork align="left"><![CDATA[
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
@@ -1766,10 +1766,10 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
           implementation is in Go and is able to perform the following
           functions:
           <list style="symbols">
-          <t>Compute zone digest over signed zone and update the ZONEMD record.</t>
+          <t>Compute zone digest over signed zone and update the &RRNAME; record.</t>
           <t>Verify the zone digest from an input zone.</t>
-          <t>Perform DNSSEC validation of the ZONEMD record during verification.</t>
-          <t>Re-compute DNSSEC signature over the ZONEMD record.</t>
+          <t>Perform DNSSEC validation of the &RRNAME; record during verification.</t>
+          <t>Re-compute DNSSEC signature over the &RRNAME; record.</t>
           </list>
         </t>
       </section>
