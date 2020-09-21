@@ -143,7 +143,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         that provides a cryptographic message digest over DNS zone data.
         The &RRNAME; Resource Record conveys the digest data in
         the zone itself.
-        When a zone publisher includes an &RRNAME; record, recipients
+        When a zone publisher includes a &RRNAME; record, recipients
         can verify the zone contents for accuracy and completeness.
         This provides assurance that received zone data matches
         published data, regardless of how the zone data has been
@@ -712,7 +712,7 @@ where "|" denotes concatenation.
           Some DNSSEC implementations (especially "online signing") might
           update the SOA serial number whenever
           a new signature is made.  To preserve the calculated digest,
-          generation of an &RRNAME; signature MUST NOT also result in
+          generation of a &RRNAME; signature MUST NOT also result in
           a change to the SOA serial number.  The &RRNAME; RR and the
           matching SOA MUST be published at the same time.
         </t>
