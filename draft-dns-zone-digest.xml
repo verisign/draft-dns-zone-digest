@@ -394,7 +394,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             domain zone files.  Users that have been granted access are then able to download
             zone data.  Adding a zone digest to
             these would provide CZDS users with assurances that the
-            data has not been modified.  &RRNAME; could
+            data has not been modified between origination and retrieval.  &RRNAME; could
             be added to CZDS zone data independently of the zone
             served by production name servers.
           </t>
@@ -610,6 +610,8 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
         </t>
         <t>
           It is RECOMMENDED that the TTL of the &RRNAME; record match the TTL of the SOA.
+          However, the TTL of the &RRNAME; record may be safely ignored during verification
+          in all cases.
         </t>
         <t>
           In the placeholder record, the Serial field is
@@ -1279,6 +1281,11 @@ where "|" denotes concatenation.
         <t>From SECDIR review, say that &RRNAME; RRs MAY be ignored by local policy.</t>
         <t>Moved Implementation Status to an appendix with the intention to retain it in RFC.</t>
         <t>In registry tables, changed Status column to Implementation Requirement.</t>
+      </list></t>
+      <t>From -10 to -11:
+      <list style="symbols">
+        <t>Say "has not been modified between origination and retrieval."
+        <t>Say that &RRNAME; TTL doesn't matter during verification.
       </list></t>
     </section>
 
