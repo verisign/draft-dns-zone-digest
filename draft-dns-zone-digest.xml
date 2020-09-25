@@ -551,7 +551,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             Digests for the SHA384 and SHA512 hash algorithms specified herein are 
             never truncated.  Digests for future hash algorithms MAY be truncated,
             but MUST NOT be truncated to a length that results in less than
-            96-bits of equivalent strength.
+            96-bits (12 octets) of equivalent strength.
           </t>
           <t>
             <xref target="calculating"/>
