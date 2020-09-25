@@ -1274,8 +1274,8 @@ where "|" denotes concatenation.
       <t>From -10 to -11:
       <list style="symbols">
         <t>Fixed people's names in the acknowledgments section (blush)</t>
-        <t>Say "has not been modified between origination and retrieval."
-        <t>Say that &RRNAME; TTL doesn't matter during verification.
+        <t>Say "has not been modified between origination and retrieval."</t>
+        <t>Say that &RRNAME; TTL doesn't matter during verification.</t>
         <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.  Future algs might be truncated, but never below 96 bits.</t>
       </list></t>
     </section>
