@@ -58,6 +58,8 @@
 #	
 #	--stdout	Send output to stdout instead to a file
 #	
+#	--context LINES	Provide a different number of lines of context,
+#			by default 10
 #
 # Copyright:
 #	-----------------------------------------------------------------
@@ -102,7 +104,7 @@
 #		http://tools.ietf.org/tools/rfcdiff/
 #
 
-export version="1.46"
+export version="1.48"
 export progdate=""
 export prelines="10"
 export basename=$(basename $0)
@@ -790,7 +792,7 @@ die() {
 # Default values
 opthtml=1; optdiff=0; optchbars=0; optwdiff=0; optshow=0; optnowdiff=0;
 optkeep=0; optinfo=0; optwidth=0;  optnums=0;  optbody=0; optabdiff=0;
-optstrip=1; opthwdiff=0; optlinks=0;
+optstrip=1; opthwdiff=0; optlinks=0; optfold=0;
 optoldcolour="red"; optnewcolour="green"; optlarger=""
 optstdout=0;
 
@@ -811,7 +813,10 @@ while [ $# -gt 0 ]; do
       --keep)	optkeep=1;;
       --info)	optinfo=1; keyword=$2; shift;;
       --help)	optinfo=1; keyword="Usage";;
+      --fold)	optfold=$2; shift;;
       --width)	optwidth=$2; shift;;
+      --context)prelines=$2; shift;;
+      --full)	prelines=999999;;
       --oldcolor)     optoldcolour=$2; shift;;
       --oldcolour)    optoldcolour=$2; shift;;
       --newcolor)     optnewcolour=$2; shift;;
@@ -943,6 +948,17 @@ if [ $optbody -gt 0 ]; then
 fi
 
 # ----------------------------------------------------------------------
+# Maybe do line folding
+# ----------------------------------------------------------------------
+if [ $optfold -gt 0 ]; then
+   foldbin=$(lookfor fold)
+   $foldbin -s -w$optfold $workdir/1/"$base1" > $workdir/1/"$base1".folded
+   mv $workdir/1/"$base1".folded $workdir/1/"$base1"
+   $foldbin -s -w$optfold $workdir/2/"$base2" > $workdir/2/"$base2".folded
+   mv $workdir/2/"$base2".folded $workdir/2/"$base2"
+fi
+
+# ----------------------------------------------------------------------
 # Get output file name
 # ----------------------------------------------------------------------
 if [ "$3" ]; then
@@ -1047,7 +1063,7 @@ function change_chunk(offset) {
     }
     old_chunk = new_chunk;
     old_chunk.style.outline = "1px solid red";
-    window.location.replace("#" + new_str)
+    window.location.hash = "#" + new_str;
     window.scrollBy(0,-100);
     chunk_index = index;
 }
