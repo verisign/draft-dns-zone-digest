@@ -1257,6 +1257,10 @@ where "|" denotes concatenation.
         <t>Moved Implementation Status to an appendix with the intention to retain it in RFC.</t>
         <t>In registry tables, changed Status column to Implementation Requirement.</t>
       </list></t>
+      <t>From -10 to -11:
+      <list style="symbols">
+        <t>Fixed people's names in the acknowledgments section (blush)</t>
+      </list></t>
     </section>
 
   </middle>
