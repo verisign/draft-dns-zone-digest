@@ -1272,7 +1272,7 @@ where "|" denotes concatenation.
       <t>From -10 to -11:
       <list style="symbols">
         <t>Fixed people's names in the acknowledgments section (blush)</t>
-        <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.</t>
+        <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.  Future algs might be truncated, but never below 96 bits.</t>
       </list></t>
     </section>
 
