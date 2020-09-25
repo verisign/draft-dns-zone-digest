@@ -1089,37 +1089,14 @@ where "|" denotes concatenation.
       <t>
         The authors wish to thank David Blacka, Scott Hollenbeck, and Rick Wilhelm
         for providing feedback on early drafts of this document.  Additionally, they
-	thank
-	Joe Abley,
-        Mark Andrews,
-        Ralph Dolmans,
-        Donald Eastlake,
-        Richard Gibson,
-	Olafur Gudmundsson,
-        Bob Harold,
-	Paul Hoffman,
-	Evan Hunt,
-	Shumon Huque,
-        Tatuya Jinmei,
-        Mike St. Johns,
-	Burt Kaliski,
-        Shane Kerr,
-	Matt Larson,
-        Barry Leiba,
-	John Levine,
-	Ed Lewis,
-	Matt Pounsett,
-	Mukund Sivaraman,
-	Petr Spacek,
-	Ondrej Sury,
-        Willem Toorop,
-	Florian Weimer,
-	Tim Wicinksi,
-        Wouter Wijngarrds,
-	Paul Wouters,
-        and other members of
-        the dnsop working group
-        for their input.
+	      thank Joe Abley,  Mark Andrews,  Ralph Dolmans,  Donald Eastlake,
+        Richard Gibson,  Olafur Gudmundsson,  Bob Harold,  Paul Hoffman,
+        Evan Hunt,  Shumon Huque,  Tatuya Jinmei,  Mike St. Johns,
+        Burt Kaliski,  Shane Kerr,  Matt Larson,  Barry Leiba,  John Levine,
+        Ed Lewis,  Matt Pounsett,  Mukund Sivaraman,  Petr Spacek,
+        Ondrej Sury,  Willem Toorop,  Florian Weimer,  Tim Wicinski,
+        Wouter Wijngaards,  Paul Wouters, and other members of the
+        DNS working group for their input.
       </t>
     </section>
 
