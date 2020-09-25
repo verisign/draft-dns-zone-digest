@@ -519,11 +519,15 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             standardized
             Hash Algorithm defined for &RRNAME; records that MUST be implemented.
             When SHA384 is used, the size of the Digest field is 48 octets.
+            The result of the SHA384 digest algorithm MUST NOT be truncated, and the entire
+            48 octet digest is published in the &RRNAME; record.
           </t>
           <t>
             SHA512 <xref target="RFC6234"/>, with Hash Algorithm value 2, is also defined for &RRNAME; records,
             and SHOULD be implemented.
             When SHA512 is used, the size of the Digest field is 64 octets.
+            The result of the SHA512 digest algorithm MUST NOT be truncated, and the entire
+            64 octet digest is published in the &RRNAME; record.
           </t>
           <t>
             Hash Algorithm values 240-254 are allocated for Private Use.
@@ -1260,6 +1264,7 @@ where "|" denotes concatenation.
       <t>From -10 to -11:
       <list style="symbols">
         <t>Fixed people's names in the acknowledgments section (blush)</t>
+        <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.</t>
       </list></t>
     </section>
 
