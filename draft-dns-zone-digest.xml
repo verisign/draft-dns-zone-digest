@@ -542,10 +542,18 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             The Digest field is a variable-length sequence of octets
             containing the output of the hash algorithm.
-            The Digest field MUST NOT be shorter than 12 octets.
             The length of the Digest field is determined by deducting
             the fixed size of the Serial, Scheme, and Hash Algorithm
             fields from the RDATA size in the &RRNAME; RR header.
+          </t>
+          <t>
+            The Digest field MUST NOT be shorter than 12 octets.
+            Digests for the SHA384 and SHA512 hash algorithms specified herein are 
+            never truncated.  Digests for future hash algorithms MAY be truncated,
+            but MUST NOT be truncated to a length that results in less than
+            96-bits of equivalent strength.
+          </t>
+          <t>
             <xref target="calculating"/>
             describes how to calculate the digest for a zone.
             <xref target="verifying"/> describes how to use the digest to
