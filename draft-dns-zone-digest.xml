@@ -1276,6 +1276,16 @@ where "|" denotes concatenation.
         <t>Say that &RRNAME; TTL doesn't matter during verification.</t>
         <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.  Future algs might be truncated, but never below 96 bits.</t>
       </list></t>
+      <t>From -11 to -12:
+      <list style="symbols">
+        <t>SECDIR review: make "recommended" all caps.</t>
+        <t>SECDIR review: tweak explanation of why &RRNAME; RR has copy of SOA serial.</t>
+        <t>SECDIR review: be even more clear about apex &RRNAME; RRs vs non-apex.</t>
+        <t>SECDIR review: Forgot to delete sentence about IANA policy for adding new hash algorithms.</t>
+        <t>SECDIR review: Spell out Key Signing Key first time.</t>
+        <t>SECDIR review: say "private use hash algorithm code points."</t>
+        <t>SECDIR review: Update estimates of &RRNAME; RR size.</t>
+      </list></t>
     </section>
 
   </middle>
