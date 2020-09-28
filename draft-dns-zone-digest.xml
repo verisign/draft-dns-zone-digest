@@ -1004,7 +1004,9 @@ where "|" denotes concatenation.
           &RRNAME; responses could be used in
           a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
-          A single &RRNAME; RR contributes approximately 40 to 65
+          <!-- SHA384 SIMPLE for . is 65 bytes -->
+          <!-- SHA512 SIMPLE for example.com is 93 bytes -->
+          A single &RRNAME; RR contributes approximately 65 to 95
           octets to a DNS response, for digest
           types defined herein.  Other RR types, such as DNSKEY, can result in larger
           amplification effects.
