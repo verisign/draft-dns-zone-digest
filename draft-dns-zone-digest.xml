@@ -939,10 +939,6 @@ where "|" denotes concatenation.
         <c></c>
 
         </texttable>
-        <t>
-          The IANA policy for assigning new values to the &RRNAME;
-          Hash Algorithm registry shall be Specification Required.
-        </t>
       </section>
 
     </section>
