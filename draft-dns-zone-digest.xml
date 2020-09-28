@@ -485,10 +485,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             which the zone digest was generated.
           </t>
           <t>
-            It is included here in order to
-            make DNS response messages of type &RRNAME; meaningful.
+            It is included here to clearly bind the &RRNAME; RR
+            to a particular version of the zone's content.
             Without the serial number, a stand-alone &RRNAME; digest
-            has no association to any particular instance of a zone.
+            has no obvious association to any particular instance of a zone.
           </t>
         </section>
 
