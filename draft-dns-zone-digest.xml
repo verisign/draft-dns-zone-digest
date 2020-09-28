@@ -983,7 +983,7 @@ where "|" denotes concatenation.
           the &RRNAME; RRSet.
           This could happen even if the &RRNAME; signature is still current
           (not expired), since the zone's DS record(s)
-          may have been withdrawn following a KSK rollover.
+          may have been withdrawn following a Key Signing Key (KSK) rollover.
         </t>
         <t>
           For zones where it may be important to validate a &RRNAME;
