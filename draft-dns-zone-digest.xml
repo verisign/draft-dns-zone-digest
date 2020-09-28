@@ -1025,7 +1025,7 @@ where "|" denotes concatenation.
         </t>
         <t>
           Zone publishers may want to deploy &RRNAME; gradually, perhaps
-          by utilizing one of the private use hash algorithms listed
+          by utilizing one of the private use hash algorithm code points listed
           in <xref target="hash-alg-registry"/>.  Similarly, recipients
           may want to initially configure verification failures only as
           a warning, and later as an error after gaining experience and
