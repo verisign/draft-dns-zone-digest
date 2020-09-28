@@ -802,7 +802,7 @@ where "|" denotes concatenation.
                 corresponding Hash Algorithm,
                 verification MUST NOT be considered successful with this &RRNAME; RR and
                 the verifier SHOULD report that the RR's digest
-                could not be verified to to an incorrect digest length.
+                could not be verified due to an incorrect digest length.
               </t>
               <t>
                 The zone digest is computed over the zone data as
