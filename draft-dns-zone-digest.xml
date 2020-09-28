@@ -631,7 +631,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           The Scheme field is set to the value for the chosen collation scheme.
           The Hash Algorithm field is set
           to the value for the chosen hash algorithm.
-          Since &RRNAME; records are excluded from digest calculation,
+          Since apex &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
         </t>
@@ -683,9 +683,9 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
               <!-- V1: Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included. -->
               <!-- V2: Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3). -->
               <t>If there are duplicate RRs with equal owner, class, type, and RDATA, only one instance is included (<xref target="RFC4034"/> Section 6.3), and the duplicates MUST be omitted.</t>
-              <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
+              <t>The placeholder apex &RRNAME; RR(s) MUST NOT be included.</t>
               <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
-              <t>The RRSIG covering &RRNAME; MUST NOT be included
+              <t>The RRSIG covering the apex &RRNAME; RRSet MUST NOT be included
                 because the RRSIG will be updated after all digests have been calculated.</t>
               </list>
             </t>
