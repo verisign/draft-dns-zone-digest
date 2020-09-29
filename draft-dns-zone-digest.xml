@@ -437,7 +437,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/> and rollovers.
        When multiple &RRNAME; RRs are present, each must specify a unique Scheme and Hash Algorithm tuple.
-       It is recommended that a zone include only one &RRNAME; RR, unless
+       It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
        Scheme or Hash Algorithm.
       </t>
@@ -485,10 +485,10 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             which the zone digest was generated.
           </t>
           <t>
-            It is included here in order to
-            make DNS response messages of type &RRNAME; meaningful.
+            It is included here to clearly bind the &RRNAME; RR
+            to a particular version of the zone's content.
             Without the serial number, a stand-alone &RRNAME; digest
-            has no association to any particular instance of a zone.
+            has no obvious association to any particular instance of a zone.
           </t>
         </section>
 
@@ -631,7 +631,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           The Scheme field is set to the value for the chosen collation scheme.
           The Hash Algorithm field is set
           to the value for the chosen hash algorithm.
-          Since &RRNAME; records are excluded from digest calculation,
+          Since apex &RRNAME; records are excluded from digest calculation,
           the value of the Digest field does not matter at this point
           in the process.
         </t>
@@ -683,9 +683,9 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
               <!-- V1: Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included. -->
               <!-- V2: Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3). -->
               <t>If there are duplicate RRs with equal owner, class, type, and RDATA, only one instance is included (<xref target="RFC4034"/> Section 6.3), and the duplicates MUST be omitted.</t>
-              <t>The placeholder &RRNAME; RR(s) MUST NOT be included.</t>
+              <t>The placeholder apex &RRNAME; RR(s) MUST NOT be included.</t>
               <t>If the zone is signed, DNSSEC RRs MUST be included, except:</t>
-              <t>The RRSIG covering &RRNAME; MUST NOT be included
+              <t>The RRSIG covering the apex &RRNAME; RRSet MUST NOT be included
                 because the RRSIG will be updated after all digests have been calculated.</t>
               </list>
             </t>
@@ -939,10 +939,6 @@ where "|" denotes concatenation.
         <c></c>
 
         </texttable>
-        <t>
-          The IANA policy for assigning new values to the &RRNAME;
-          Hash Algorithm registry shall be Specification Required.
-        </t>
       </section>
 
     </section>
@@ -987,7 +983,7 @@ where "|" denotes concatenation.
           the &RRNAME; RRSet.
           This could happen even if the &RRNAME; signature is still current
           (not expired), since the zone's DS record(s)
-          may have been withdrawn following a KSK rollover.
+          may have been withdrawn following a Key Signing Key (KSK) rollover.
         </t>
         <t>
           For zones where it may be important to validate a &RRNAME;
@@ -1008,7 +1004,9 @@ where "|" denotes concatenation.
           &RRNAME; responses could be used in
           a distributed denial-of-service amplification attack.
           The &RRNAME; RR is moderately sized, much like the DS RR.
-          A single &RRNAME; RR contributes approximately 40 to 65
+          <!-- SHA384 SIMPLE for . is 65 bytes -->
+          <!-- SHA512 SIMPLE for example.com is 93 bytes -->
+          A single &RRNAME; RR contributes approximately 65 to 95
           octets to a DNS response, for digest
           types defined herein.  Other RR types, such as DNSKEY, can result in larger
           amplification effects.
@@ -1029,7 +1027,7 @@ where "|" denotes concatenation.
         </t>
         <t>
           Zone publishers may want to deploy &RRNAME; gradually, perhaps
-          by utilizing one of the private use hash algorithms listed
+          by utilizing one of the private use hash algorithm code points listed
           in <xref target="hash-alg-registry"/>.  Similarly, recipients
           may want to initially configure verification failures only as
           a warning, and later as an error after gaining experience and
@@ -1277,6 +1275,16 @@ where "|" denotes concatenation.
         <t>Say "has not been modified between origination and retrieval."</t>
         <t>Say that &RRNAME; TTL doesn't matter during verification.</t>
         <t>Further clarification that the SHA-384 and SHA-512 hashes are not truncated.  Future algs might be truncated, but never below 96 bits.</t>
+      </list></t>
+      <t>From -11 to -12:
+      <list style="symbols">
+        <t>SECDIR review: make "recommended" all caps.</t>
+        <t>SECDIR review: tweak explanation of why &RRNAME; RR has copy of SOA serial.</t>
+        <t>SECDIR review: be even more clear about apex &RRNAME; RRs vs non-apex.</t>
+        <t>SECDIR review: Forgot to delete sentence about IANA policy for adding new hash algorithms.</t>
+        <t>SECDIR review: Spell out Key Signing Key first time.</t>
+        <t>SECDIR review: say "private use hash algorithm code points."</t>
+        <t>SECDIR review: Update estimates of &RRNAME; RR size.</t>
       </list></t>
     </section>
 
