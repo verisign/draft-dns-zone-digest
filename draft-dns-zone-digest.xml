@@ -220,6 +220,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           zone operator.  Authenticity can only be assured when the zone
           is signed with DNSSEC.
         </t>
+        <t>
+          A secondary motivation is to provide a checksum, allowing a
+          zone recipient to check for operational errors, such as accidental
+          truncation.
+        </t>
       </section>
       <section title="Alternative Approaches">
         <t>
