@@ -141,11 +141,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
     <abstract>
       <t>
         This document describes a protocol and new DNS Resource Record
-        that provides a cryptographic message digest over DNS zone data.
+        that provides a cryptographic message digest over DNS zone data at rest.
         The &RRNAME; Resource Record conveys the digest data in
         the zone itself.
         When a zone publisher includes a &RRNAME; record, recipients
-        can verify the zone contents for accuracy and completeness.
+        can verify the zone contents for integrity and, when signed with DNSSEC, origin authenticity.
         This provides assurance that received zone data matches
         published data, regardless of how the zone data has been
         transmitted and received.
@@ -181,7 +181,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         protocols.
         They can also be distributed outside of the DNS, with any file transfer
         protocol such as FTP, HTTP, and rsync, or even as email attachments.
-        Currently there is no standard way to verify the integrity and authenticity
+        Currently there is no standard way to verify the integrity and origin authenticity
         of a stand-alone zone.
       </t>
       <t>
@@ -214,10 +214,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <section title="Motivation">
         <t>
           The motivation for this protocol enhancement is the desire
-          to verify the authenticity of a stand-alone zone,
+          to verify the data integrity and origin authenticity of a stand-alone zone,
           regardless of how it is transmitted.  A consumer of zone data
-          should be able to verify that the data is as-published by the
-          zone operator.
+          should be able to verify that it is as-published by the
+          zone operator.  Authenticity can only be assured when the zone
+          is signed with DNSSEC.
         </t>
       </section>
       <section title="Alternative Approaches">
