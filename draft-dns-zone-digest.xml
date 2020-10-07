@@ -329,11 +329,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           The zone digest is designed to be used on zones that
           have infrequent updates.  As specified herein,
           the digest is re-calculated over the entire zone
-          content each time.  This specification does not provide
+          content each time the zone is updated.  This specification does not provide
           an efficient mechanism for updating the digest on incremental updates of zone
-          data.  It is, however, extensible so
-          future schemes to support incremental
-          zone digest algorithms (e.g. using Merkle trees) can be accommodated.
+          data.  It is, however, extensible so that
+          future schemes may be defined to support efficient incremental
+          digest updates.
         </t>
         <t>
           It is expected that verification of a zone digest will be
@@ -440,8 +440,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
-       agility <xref target="RFC7696"/> and rollovers.
-       When multiple &RRNAME; RRs are present, each must specify a unique Scheme and Hash Algorithm tuple.
+       agility <xref target="RFC7696"/>.
+       When multiple &RRNAME; RRs are present, each MUST specify a unique Scheme and Hash Algorithm tuple.
        It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
        Scheme or Hash Algorithm.
@@ -757,6 +757,8 @@ where "|" denotes concatenation.
             whether or not to expect DNSSEC records in the zone.
             This is done by examining locally configured trust
             anchors, and, if necessary, querying for (and validating) DS RRs in the
+            anchors, or querying for (and validating) DS RRs in the
+<!-- XXX Roman suggests changing "provably insecure" etc -->
             parent zone.  For zones that are provably insecure,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
@@ -987,6 +989,16 @@ where "|" denotes concatenation.
           resources improve with time.
           Implementors and publishers of zone digests should anticipate
           the need for algorithm agility on long timescales.
+        </t>
+      </section>
+      <section title="Use of Multiple &RRNAME; Hash Algorithms">
+        <t>
+          When a zone publishes multiple &RRNAME; RRs, the overall security is
+          only as good as the weakest hash algorithm in use.  For this reason, 
+          <xref target="rrtype"/> recommends only publishing multiple &RRNAME; RRs
+          when transitioning to a new scheme or hash algorithm.  Once the transition
+          is complete, the old scheme or hash algorithm should be removed from
+          the &RRNAME; RRSet.
         </t>
       </section>
       <section title="DNSSEC Timing Considerations">
