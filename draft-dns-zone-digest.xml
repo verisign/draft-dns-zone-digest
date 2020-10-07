@@ -959,15 +959,21 @@ where "|" denotes concatenation.
     <section title="Security Considerations" anchor="security">
       <section title="Attacks Against the Zone Digest">
         <t>
-          The zone digest allows the recipient of a zone to verify its integrity.
-          In conjunction with DNSSEC, the recipient can authenticate that it is as published by the zone originator.
-        </t>
-        <t>
-          An attacker, whose goal is to modify zone content before
-          it is used by the victim, may consider a number of different
-          approaches.  For zones not signed with DNSSEC, an attacker
+          DNSSEC is the only defense against an attacker whose goal
+          is to modify zone content and a zone digest before it is
+          used by the victim.
+          While zone digests can be used in the absence of
+          DNSSEC, this only provides protection against accidental
+          zone corruption, such as truncation. When used in this
+          manner, it does not provide protection against attack,
+          and effectively serves only as a checksum.
+          For zones not signed with DNSSEC, an attacker
           can make any zone modifications appear to be valid
           by recomputing Digest field of a &RRNAME; RR.
+        </t>
+        <t>
+          For zones that are signed with DNSSEC, an attacker
+          may consider a number of different approaches.
         </t>
         <t>
           The attacker might perform a downgrade attack to an unsigned
