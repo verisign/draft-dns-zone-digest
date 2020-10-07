@@ -552,7 +552,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
           <t>
             The Digest field MUST NOT be shorter than 12 octets.
-            Digests for the SHA384 and SHA512 hash algorithms specified herein are 
+            Digests for the SHA384 and SHA512 hash algorithms specified herein are
             never truncated.  Digests for future hash algorithms MAY be truncated,
             but MUST NOT be truncated to a length that results in less than
             96-bits (12 octets) of equivalent strength.
@@ -1730,11 +1730,12 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
 
       <t>
         This section records the status of known implementations of the
-        protocol defined by this specification at the time of posting of
-        this Internet-Draft, and is based on a proposal described in
-        RFC 7942.  The description of implementations in this section is
-        intended to assist the IETF in its decision processes in
-        progressing drafts to RFCs.  Please note that the listing of any
+        protocol defined by this specification, and is inspired by the
+        concepts described in RFC7942.
+      </t>
+
+      <t>
+        Please note that the listing of any
         individual implementation here does not imply endorsement by the
         IETF.  Furthermore, no effort has been spent to verify the
         information presented here that was supplied by IETF contributors.
