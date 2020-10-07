@@ -381,7 +381,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             A Response Policy Zone (RPZ) is "a mechanism to introduce a
             customized policy in Domain Name System servers, so that
-            recursive resolvers return possibly modified results
+            recursive resolvers return possibly modified results"
             <xref target="RPZ"/>.
             The policy information is carried inside specially constructed DNS zones.
             A number of companies provide RPZ feeds, which are
