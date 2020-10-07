@@ -751,6 +751,7 @@ where "|" denotes concatenation.
             whether or not to expect DNSSEC records in the zone.
             This is done by examining locally configured trust
             anchors, or querying for (and validating) DS RRs in the
+<!-- XXX Roman suggests changing "provably insecure" etc -->
             parent zone.  For zones that are provably insecure,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
