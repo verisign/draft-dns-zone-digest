@@ -3,8 +3,7 @@
 <!-- One method to get references from the online citation libraries.
 There has to be one entity for each item to be referenced.
 An alternate method (rfc include) is described in the references. --><!ENTITY RFC5966 SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5966.xml">
-<!ENTITY I-D.ietf-tcpm-fastopen SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.ietf-tcpm-fastopen">
-<!ENTITY I-D.draft-ietf-dnsop-edns-tcp-keepalive SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dnsop-edns-tcp-keepalive-00.xml">
+<!ENTITY I-D.ietf-dprive-xfr-over-tls SYSTEM "https://xml2rfc.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-dprive-xfr-over-tls-02.xml">
 <!ENTITY RFC1034 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1034.xml">
 <!ENTITY RFC1035 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1035.xml">
 <!ENTITY RFC1995 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.1995.xml">
@@ -16,23 +15,25 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <!ENTITY RFC2629 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2629.xml">
 <!ENTITY RFC2845 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml">
 <!ENTITY RFC2931 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml">
+<!ENTITY RFC3258 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3258.xml">
 <!ENTITY RFC3658 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3658.xml">
 <!ENTITY RFC4033 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4033.xml">
 <!ENTITY RFC4034 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4034.xml">
 <!ENTITY RFC4035 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4035.xml">
 <!ENTITY RFC4509 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4509.xml">
 <!ENTITY RFC4880 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4880.xml">
+<!ENTITY RFC5155 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5155.xml">
 <!ENTITY RFC5751 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5751.xml">
 <!ENTITY RFC5933 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5933.xml">
 <!ENTITY RFC5936 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml">
 <!ENTITY RFC6234 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.6234.xml">
 <!ENTITY RFC7696 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7696.xml">
 <!ENTITY RFC8806 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8806.xml">
-<!ENTITY RFC7858 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.7858.xml">
 <!ENTITY RFC8126 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8126.xml">
 <!ENTITY RFC8174 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 <!ENTITY RFC8484 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8484.xml">
 <!ENTITY RFC8499 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8499.xml">
+<!ENTITY RFC8901 PUBLIC "" "https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8901.xml">
 <!ENTITY RRNAME "ZONEMD">
 ]>
 <?xml-stylesheet type='text/xsl' href='rfc2629.xslt' ?>
@@ -180,7 +181,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         protocols.
         They can also be distributed outside of the DNS, with any file transfer
         protocol such as FTP, HTTP, and rsync, or even as email attachments.
-        Currently there is no standard way to verify the authenticity
+        Currently there is no standard way to verify the integrity and authenticity
         of a stand-alone zone.
       </t>
       <t>
@@ -242,10 +243,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         <t>
           The Transport Layer Security protocol suite also
           provides channel security.
-          One can easily imagine
+          The DPRIVE working group is in the process of specifying
+          DNS Zone Transfer-over-TLS <xref target="I-D.ietf-dprive-xfr-over-tls"/>.
+          One can also easily imagine
           the distribution of zones over HTTPS-enabled web servers,
-          as well as DNS-over-HTTPS <xref target="RFC8484"/>, and perhaps
-          even a future version of DNS-over-TLS (<xref target="RFC7858"/>).
+          as well as DNS-over-HTTPS <xref target="RFC8484"/>.
         </t>
         <t>
           Unfortunately, the protections provided by these channel
@@ -261,7 +263,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           Such modification could be the result of
           an accidental corruption of the file, or perhaps an incompletely
           saved file <xref target="disk-full-failure"/>.
-          For these reasons, it is preferable to secure the data itself.
+          For these reasons, it is preferable to protect the integrity of the data itself.
         </t>
 
         <t>
@@ -273,7 +275,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           delegations (non-apex NS records) are not signed by DNSSEC,
           and neither are any glue records.  &RRNAME; protects the integrity of delegation,
           glue, and other records that are not otherwise covered by DNSSEC. Furthermore, zones
-          that employ NSEC3 with opt-out are susceptible to the
+          that employ NSEC3 with opt-out <xref target="RFC5155"/> are susceptible to the
           removal or addition of names between the signed nodes.
           Whereas DNSSEC is primarily protects consumers
           of DNS response messages, this protocol
@@ -366,8 +368,8 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             recognized the importance of secondary name servers and
             service diversity.  However,
             modern DNS service has complex provisioning which
-            includes multiple third-party providers and hundreds
-            of anycast instances.  Instead of a simple primary-to-secondary
+            includes multiple third-party providers (<xref target="RFC8901"/>) and hundreds
+            of anycast instances (<xref target="RFC3258"/>).  Instead of a simple primary-to-secondary
             zone distribution system, today it is possible to have
             multiple levels, multiple parties, and multiple protocols
             involved in the distribution of zone data.  This complexity
@@ -377,10 +379,12 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         </section>
         <section title="Response Policy Zones">
           <t>
-            DNS Response Policy Zones is "a method of expressing
-            DNS response policy information inside specially
-            constructed DNS zones..." <xref target="RPZ"/>.  A
-            number of companies provide RPZ feeds, which are
+            A Response Policy Zone (RPZ) is "a mechanism to introduce a
+            customized policy in Domain Name System servers, so that
+            recursive resolvers return possibly modified results
+            <xref target="RPZ"/>.
+            The policy information is carried inside specially constructed DNS zones.
+            A number of companies provide RPZ feeds, which are
             consumed by name server and firewall products.
             While RPZ zones can
             be signed with DNSSEC, the data is not queried directly,
@@ -664,6 +668,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           </t>
 
           <t>
+            <!-- XXX REQUIRES is not BCP14? -->
             Calculation of a zone digest REQUIRES RRs
             to be processed in a consistent format and ordering.
             This specification uses DNSSEC’s canonical on-the-wire RR
@@ -678,7 +683,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
             <t>
               When iterating over records in the zone, the following inclusion/exclusion rules apply:
               <list style="symbols">
-              <t>All records in the zone, including glue records, MUST be included.</t>
+              <t>All records in the zone, including glue records, MUST be included, unless excluded by a subsequent rule.</t>
               <t>Occluded data (<xref target="RFC5936"/> Section 3.5) MUST be included.</t>
               <!-- V1: Duplicate RRs with equal owner, class, type, and RDATA MUST NOT be included. -->
               <!-- V2: Only one instance of duplicate RRs with equal owner, class, type and RDATA SHALL be included (<xref target="RFC4034"/> Section 6.3). -->
@@ -750,7 +755,7 @@ where "|" denotes concatenation.
             The verifier MUST first determine
             whether or not to expect DNSSEC records in the zone.
             This is done by examining locally configured trust
-            anchors, or querying for (and validating) DS RRs in the
+            anchors, and, if necessary, querying for (and validating) DS RRs in the
             parent zone.  For zones that are provably insecure,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
@@ -952,7 +957,9 @@ where "|" denotes concatenation.
         <t>
           An attacker, whose goal is to modify zone content before
           it is used by the victim, may consider a number of different
-          approaches.
+          approaches.  For zones not signed with DNSSEC, an attacker
+          can make any zone modifications appear to be valid
+          by recomputing Digest field of a &RRNAME; RR.
         </t>
         <t>
           The attacker might perform a downgrade attack to an unsigned
@@ -972,6 +979,13 @@ where "|" denotes concatenation.
           The attacker might alter the Scheme, Hash Algorithm, or Digest fields
           of the &RRNAME; record.  Such modifications are detectable
           only with DNSSEC validation.
+        </t>
+        <t>
+          As stated in <xref target="RFC7696"/>, cryptographic algorithms
+          age and become weaker as cryptanalysis techniques and computing
+          resources improve with time.
+          Implementors and publishers of zone digests should anticipate
+          the need for algorithm agility on long timescales.
         </t>
       </section>
       <section title="DNSSESC Timing Considerations">
@@ -1108,7 +1122,7 @@ where "|" denotes concatenation.
         Ed Lewis,  Matt Pounsett,  Mukund Sivaraman,  Petr Spacek,
         Ondrej Sury,  Willem Toorop,  Florian Weimer,  Tim Wicinski,
         Wouter Wijngaards,  Paul Wouters, and other members of the
-        DNS working group for their input.
+        DNSOP working group for their input.
       </t>
     </section>
 
@@ -1298,7 +1312,6 @@ where "|" denotes concatenation.
     &RFC4034;
     &RFC6234;
     &RFC8174;
-
     </references>
 
     <references title="Informative References">
@@ -1308,15 +1321,18 @@ where "|" denotes concatenation.
     &RFC2535;
     &RFC2845;
     &RFC2931;
-    &RFC5751;
+    &RFC3258;
     &RFC4880;
+    &RFC5155;
+    &RFC5751;
     &RFC5936;
-    &RFC8806;
-    &RFC8499;
-    &RFC7858;
     &RFC7696;
     &RFC8126;
     &RFC8484;
+    &RFC8499;
+    &RFC8806;
+    &RFC8901;
+    &I-D.ietf-dprive-xfr-over-tls;
 
      <reference anchor="InterNIC" target="ftp://ftp.internic.net/domain/">
         <front>
@@ -1378,18 +1394,14 @@ where "|" denotes concatenation.
         </front>
      </reference>
 
-     <reference anchor="RPZ" target="https://tools.ietf.org/html/draft-vixie-dnsop-dns-rpz-00">
+     <reference anchor="RPZ" target="https://en.wikipedia.org/w/index.php?title=Response_policy_zone&amp;oldid=960043728">
         <front>
-          <title>DNS Response Policy Zones (RPZ)</title>
-          <author initials="P." surname="Vixie" fullname="Paul Vixie">
-            <organization>Farsight Security, Inc.</organization>
+          <title>Response policy zone</title>
+          <author>
+            <organization>Wikipedia</organization>
           </author>
-          <author initials="V." surname="Schryver" fullname="Vernon Schryver">
-            <organization>Rhyolite Software, LLC</organization>
-          </author>
-          <date year="2018" month="June" day="21"/>
+          <date year="2020" month="May" day="31"/>
         </front>
-        <seriesInfo name="Internet-Draft" value="draft-vixie-dnsop-dns-rpz-00" />
      </reference>
 
      <reference anchor="disk-full-failure" target="https://web.archive.org/web/20100618032705/https://www.denic.de/en/denic-in-dialogue/news/2733.html">
