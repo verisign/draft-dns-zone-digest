@@ -278,7 +278,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           glue, and other records that are not otherwise covered by DNSSEC. Furthermore, zones
           that employ NSEC3 with opt-out <xref target="RFC5155"/> are susceptible to the
           removal or addition of names between the signed nodes.
-          Whereas DNSSEC is primarily protects consumers
+          Whereas DNSSEC primarily protects consumers
           of DNS response messages, this protocol
           protects consumers of zones.
         </t>
@@ -989,7 +989,7 @@ where "|" denotes concatenation.
           the need for algorithm agility on long timescales.
         </t>
       </section>
-      <section title="DNSSESC Timing Considerations">
+      <section title="DNSSEC Timing Considerations">
         <t>
           As with all DNSSEC signatures, the ability to perform signature
           validation of a &RRNAME; record is limited in time.
