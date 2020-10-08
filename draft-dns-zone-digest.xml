@@ -451,6 +451,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       <t>
        A zone MAY contain multiple &RRNAME; RRs to support algorithm
        agility <xref target="RFC7696"/>.
+       [RFC Editor: change that to BCP 201]
        When multiple &RRNAME; RRs are present, each MUST specify a unique Scheme and Hash Algorithm tuple.
        It is RECOMMENDED that a zone include only one &RRNAME; RR, unless
        the zone publisher is in the process of transitioning to a new
@@ -1317,7 +1318,11 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -12 to -13:
       <list style="symbols">
-        <t>...</t>
+        <t>Added reference to draft-ietf-dprive-xfr-over-tls.</t>
+        <t>Dropped Implementation Requirement from registry tables.</t>
+        <t>Added Use of Multiple ZONEMD Hash Algorithms to Security Considerations.</t>
+        <t>Added notes about the need for algorithm agility due to crypto algorithm aging.</t>
+        <t>Numerous small edits and clarifications from IESG reviewer comments.</t>
       </list></t>
     </section>
 
