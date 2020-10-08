@@ -149,7 +149,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This provides assurance that received zone data matches
         published data, regardless of how the zone data has been
         transmitted and received.  When used without DNSSEC, &RRNAME;
-        functions only as a checksum, guarding only against unintentional changes.
+        functions as a checksum, guarding only against unintentional changes.
       </t>
       <t>
         &RRNAME; does not replace DNSSEC.
