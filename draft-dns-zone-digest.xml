@@ -671,8 +671,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           </t>
 
           <t>
-            <!-- XXX REQUIRES is not BCP14? -->
-            Calculation of a zone digest REQUIRES RRs
+            Calculation of a zone digest requires RRs
             to be processed in a consistent format and ordering.
             This specification uses DNSSEC’s canonical on-the-wire RR
             format (without name compression) and ordering as specified
