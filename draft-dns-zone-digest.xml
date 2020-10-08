@@ -1730,7 +1730,7 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
 
       <t>
         This section records the status of known implementations of the
-        protocol defined by this specification, and is inspired by the
+        protocol defined by this specification at the time of publication, and is inspired by the
         concepts described in RFC7942.
       </t>
 
