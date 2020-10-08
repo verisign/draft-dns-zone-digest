@@ -44,7 +44,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-12" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-13" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -1300,6 +1300,10 @@ where "|" denotes concatenation.
         <t>SECDIR review: Spell out Key Signing Key first time.</t>
         <t>SECDIR review: say "private use hash algorithm code points."</t>
         <t>SECDIR review: Update estimates of &RRNAME; RR size.</t>
+      </list></t>
+      <t>From -12 to -13:
+      <list style="symbols">
+        <t>...</t>
       </list></t>
     </section>
 
