@@ -121,31 +121,31 @@ Internet-Draft               DNS Zone Digest              September 2020
      5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  14
      5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  14
      5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  15
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  15
      6.1.  Attacks Against the Zone Digest . . . . . . . . . . . . .  16
      6.2.  Use of Multiple ZONEMD Hash Algorithms  . . . . . . . . .  16
      6.3.  DNSSEC Timing Considerations  . . . . . . . . . . . . . .  16
      6.4.  Attacks Utilizing ZONEMD Queries  . . . . . . . . . . . .  17
      6.5.  Resilience and Fragility  . . . . . . . . . . . . . . . .  17
    7.  Performance Considerations  . . . . . . . . . . . . . . . . .  17
-     7.1.  SIMPLE SHA384 . . . . . . . . . . . . . . . . . . . . . .  18
+     7.1.  SIMPLE SHA384 . . . . . . . . . . . . . . . . . . . . . .  17
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  18
-   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  19
+   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  18
    10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  19
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  25
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  25
      11.2.  Informative References . . . . . . . . . . . . . . . . .  26
    Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  28
-     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  29
+     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  28
      A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  29
      A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  30
-     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  31
-     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  34
-   Appendix B.  Implementation Status  . . . . . . . . . . . . . . .  36
-     B.1.  Authors' Implementation . . . . . . . . . . . . . . . . .  36
-     B.2.  Shane Kerr's Implementation . . . . . . . . . . . . . . .  36
-     B.3.  NIC Chile Labs Implementation . . . . . . . . . . . . . .  37
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  37
+     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  30
+     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  33
+   Appendix B.  Implementation Status  . . . . . . . . . . . . . . .  35
+     B.1.  Authors' Implementation . . . . . . . . . . . . . . . . .  35
+     B.2.  Shane Kerr's Implementation . . . . . . . . . . . . . . .  35
+     B.3.  NIC Chile Labs Implementation . . . . . . . . . . . . . .  36
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  36
 
 1.  Introduction
 
@@ -792,18 +792,15 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    Reference: [this document]
 
-   +---------+---------------+----------+------------------+-----------+
-   | Value   | Description   | Mnemonic | Implementation   | Reference |
-   |         |               |          | Requirement      |           |
-   +---------+---------------+----------+------------------+-----------+
-   | 0       | Reserved      |          |                  |           |
-   | 1       | Simple ZONEMD | SIMPLE   | MUST             | [this     |
-   |         | collation     |          |                  | document] |
-   | 2-239   | Unassigned    |          |                  |           |
-   | 240-254 | Private Use   | N/A      | N/A              | [this     |
-   |         |               |          |                  | document] |
-   | 255     | Reserved      |          |                  |           |
-   +---------+---------------+----------+------------------+-----------+
+    +---------+-------------------------+----------+-----------------+
+    | Value   | Description             | Mnemonic | Reference       |
+    +---------+-------------------------+----------+-----------------+
+    | 0       | Reserved                |          |                 |
+    | 1       | Simple ZONEMD collation | SIMPLE   | [this document] |
+    | 2-239   | Unassigned              |          |                 |
+    | 240-254 | Private Use             | N/A      | [this document] |
+    | 255     | Reserved                |          |                 |
+    +---------+-------------------------+----------+-----------------+
 
                       Table 1: ZONEMD Scheme Registry
 
@@ -818,22 +815,25 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    Reference: [this document]
 
-   +---------+-------------+----------+-------------------+------------+
-   | Value   | Description | Mnemonic | Implementation    | Reference  |
-   |         |             |          | Requirement       |            |
-   +---------+-------------+----------+-------------------+------------+
-   | 0       | Reserved    |          |                   |            |
-   | 1       | SHA-384     | SHA384   | MUST              | [this      |
-   |         |             |          |                   | document]  |
-   | 2       | SHA-512     | SHA512   | SHOULD            | [this      |
-   |         |             |          |                   | document]  |
-   | 3-239   | Unassigned  |          |                   |            |
-   | 240-254 | Private Use | N/A      | N/A               | [his       |
-   |         |             |          |                   | document]  |
-   | 255     | Reserved    |          |                   |            |
-   +---------+-------------+----------+-------------------+------------+
+          +---------+-------------+----------+-----------------+
+          | Value   | Description | Mnemonic | Reference       |
+          +---------+-------------+----------+-----------------+
+          | 0       | Reserved    |          |                 |
+          | 1       | SHA-384     | SHA384   | [this document] |
+          | 2       | SHA-512     | SHA512   | [this document] |
+          | 3-239   | Unassigned  |          |                 |
+          | 240-254 | Private Use | N/A      | [his document]  |
+          | 255     | Reserved    |          |                 |
+          +---------+-------------+----------+-----------------+
 
                   Table 2: ZONEMD Hash Algorithm Registry
+
+6.  Security Considerations
+
+
+
+
+
 
 
 
@@ -841,8 +841,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 15]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-6.  Security Considerations
 
 6.1.  Attacks Against the Zone Digest
 
@@ -890,6 +888,8 @@ Internet-Draft               DNS Zone Digest              September 2020
    record(s) or trust anchors for the zone to be verified are no longer
    available, the recipient cannot validate the ZONEMD RRSet.  This
    could happen even if the ZONEMD signature is still current (not
+   expired), since the zone's DS record(s) may have been withdrawn
+   following a Key Signing Key (KSK) rollover.
 
 
 
@@ -897,9 +897,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 16]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-   expired), since the zone's DS record(s) may have been withdrawn
-   following a Key Signing Key (KSK) rollover.
 
    For zones where it may be important to validate a ZONEMD RRSet
    through its entire signature validity period, the zone operator
@@ -942,10 +939,13 @@ Internet-Draft               DNS Zone Digest              September 2020
    performance requirements and implications of including ZONEMD RRs in
    a zone.
 
+7.1.  SIMPLE SHA384
 
-
-
-
+   As mentioned previously, the SIMPLE scheme may be impractical for use
+   in zones that are either large or highly dynamic.  Zone publishers
+   should carefully consider the use of ZONEMD in such zones, since it
+   might cause consumers of zone data (e.g., secondary name servers) to
+   expend resources on digest calculation.  For such use cases, it is
 
 
 
@@ -954,13 +954,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 17]
 Internet-Draft               DNS Zone Digest              September 2020
 
 
-7.1.  SIMPLE SHA384
-
-   As mentioned previously, the SIMPLE scheme may be impractical for use
-   in zones that are either large or highly dynamic.  Zone publishers
-   should carefully consider the use of ZONEMD in such zones, since it
-   might cause consumers of zone data (e.g., secondary name servers) to
-   expend resources on digest calculation.  For such use cases, it is
    recommended that ZONEMD only be used when digest calculation time is
    significantly less than propagation times and update intervals.
 
@@ -998,18 +991,6 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    This specification has no impact on user privacy.
 
-
-
-
-
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 18]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
 9.  Acknowledgments
 
    The authors wish to thank David Blacka, Scott Hollenbeck, and Rick
@@ -1020,6 +1001,15 @@ Internet-Draft               DNS Zone Digest              September 2020
    Kaliski, Shane Kerr, Matt Larson, Barry Leiba, John Levine, Ed Lewis,
    Matt Pounsett, Mukund Sivaraman, Petr Spacek, Ondrej Sury, Willem
    Toorop, Florian Weimer, Tim Wicinski, Wouter Wijngaards, Paul
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 18]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
+
    Wouters, and other members of the DNSOP working group for their
    input.
 
@@ -1057,15 +1047,6 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    o  Added for discussion out-of-zone and occluded records.
 
-
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 19]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    o  Clarified that update of ZONEMD signature must not cause a serial
       number change.
 
@@ -1076,6 +1057,14 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  Added recommendation to set ZONEMD TTL to SOA TTL.
 
    o  Clarified that digest input uses uncompressed names.
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 19]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  Updated Implementations section.
 
@@ -1115,13 +1104,6 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  Clarified ordering of RRSets having same owner to be numerically
       ascending.
 
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 20]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    o  Clarified that all duplicate RRs (not just SOA) must be suppressed
       in digest calculation.
 
@@ -1132,6 +1114,13 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    o  Clarified procedure for verification, using temporary location for
       received digest.
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 20]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  Explained why Reserved field is 8-bits.
 
@@ -1170,14 +1159,6 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  Simplified requirements around verifying multiple digests.  Any
       one match is sufficient.
 
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 21]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    o  Updated implementation notes.
 
    o  Both implementations produce expected results on examples given in
@@ -1188,6 +1169,14 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  Changed the name of the Reserved field to Parameter.
 
    o  Changed the name of Digest Type 1 from SHA384 to SHA384-STABLE.
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 21]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  The meaning of the Parameter field now depends on Digest Type.
 
@@ -1227,13 +1216,6 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  When discussing multiple ZONEMD RRs, allow for Scheme, as well as
       Hash Algorithm, transition.
 
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 22]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    o  Added Performance Considerations section with some benchmarks.
 
    o  Further clarifications about non-apex ZONEMD RRs.
@@ -1242,6 +1224,15 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    o  Removed or lowercased some inappropriately used RFC 2119 key
       words.
+
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 22]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  Clarified that all ZONEMD RRs, even for unsupported hash
       algorithms, must be zeroized during digest calculation.
@@ -1283,19 +1274,21 @@ Internet-Draft               DNS Zone Digest              September 2020
 
    o  Added NIC Chile Labs implementation.
 
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 23]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    From -07 to -08:
 
    o  Update an author's affiliation.
 
    o  Clarified why placeholder RRs are still important (for NSEC/
       NSEC3).
+
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 23]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  Moved subsection ("Order of RRSets Having the Same Owner Name")
       with single sentence paragraph up into parent section.
@@ -1338,14 +1331,6 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  In registry tables, changed Status column to Implementation
       Requirement.
 
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 24]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
    From -10 to -11:
 
    o  Fixed people's names in the acknowledgments section (blush)
@@ -1353,6 +1338,13 @@ Internet-Draft               DNS Zone Digest              September 2020
    o  Say "has not been modified between origination and retrieval."
 
    o  Say that ZONEMD TTL doesn't matter during verification.
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 24]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
 
    o  Further clarification that the SHA-384 and SHA-512 hashes are not
       truncated.  Future algs might be truncated, but never below 96
@@ -1394,6 +1386,14 @@ Internet-Draft               DNS Zone Digest              September 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+              Rose, "Resource Records for the DNS Security Extensions",
+              RFC 4034, DOI 10.17487/RFC4034, March 2005,
+              <https://www.rfc-editor.org/info/rfc4034>.
+
+
+
+
 
 
 
@@ -1401,11 +1401,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 25]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-   [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
-              Rose, "Resource Records for the DNS Security Extensions",
-              RFC 4034, DOI 10.17487/RFC4034, March 2005,
-              <https://www.rfc-editor.org/info/rfc4034>.
 
    [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
               (SHA and SHA-based HMAC and HKDF)", RFC 6234,
@@ -1451,16 +1446,17 @@ Internet-Draft               DNS Zone Digest              September 2020
               DOI 10.17487/RFC1995, August 1996,
               <https://www.rfc-editor.org/info/rfc1995>.
 
+   [RFC2065]  Eastlake 3rd, D. and C. Kaufman, "Domain Name System
+              Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
+              January 1997, <https://www.rfc-editor.org/info/rfc2065>.
+
+
 
 
 Wessels, et al.           Expires April 2, 2021                [Page 26]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-   [RFC2065]  Eastlake 3rd, D. and C. Kaufman, "Domain Name System
-              Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
-              January 1997, <https://www.rfc-editor.org/info/rfc2065>.
 
    [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
               "Dynamic Updates in the Domain Name System (DNS UPDATE)",
@@ -1503,6 +1499,10 @@ Internet-Draft               DNS Zone Digest              September 2020
               (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
               <https://www.rfc-editor.org/info/rfc5936>.
 
+   [RFC7696]  Housley, R., "Guidelines for Cryptographic Algorithm
+              Agility and Selecting Mandatory-to-Implement Algorithms",
+              BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
+              <https://www.rfc-editor.org/info/rfc7696>.
 
 
 
@@ -1513,11 +1513,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 27]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-   [RFC7696]  Housley, R., "Guidelines for Cryptographic Algorithm
-              Agility and Selecting Mandatory-to-Implement Algorithms",
-              BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
-              <https://www.rfc-editor.org/info/rfc7696>.
 
    [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
               Writing an IANA Considerations Section in RFCs", BCP 26,
@@ -1560,6 +1555,11 @@ Appendix A.  Example Zones With Digests
    These can be used to verify an implementation of the zone digest
    protocol.
 
+A.1.  Simple EXAMPLE Zone
+
+   Here, the EXAMPLE zone contains an SOA record, NS and glue records,
+   and a ZONEMD record.
+
 
 
 
@@ -1569,11 +1569,6 @@ Wessels, et al.           Expires April 2, 2021                [Page 28]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
-
-A.1.  Simple EXAMPLE Zone
-
-   Here, the EXAMPLE zone contains an SOA record, NS and glue records,
-   and a ZONEMD record.
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1593,38 +1588,6 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 29]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1652,6 +1615,17 @@ Internet-Draft               DNS Zone Digest              September 2020
                                      2069676e6f726564
                                      2e20616c6c6f7765 )
 
+
+
+
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 29]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
+
 A.3.  EXAMPLE Zone with multiple digests
 
    Here, the EXAMPLE zone contains multiple ZONEMD records.  It has both
@@ -1659,28 +1633,6 @@ A.3.  EXAMPLE Zone with multiple digests
    ZONEMD records with Scheme and Hash Algorithm values in the private
    range (240-254).  These additional private-range digests are not
    verifiable.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 30]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
 
    example.      86400   IN  SOA     ns1 admin 2018031900 (
                                      1800 900 604800 86400 )
@@ -1722,6 +1674,14 @@ A.4.  The URI.ARPA Zone
    ; (2 servers found)
    ;; global options: +cmd
    uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 30]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
+
        noc.dns.icann.org. 2018100702 10800 3600 1209600 3600 )
    uri.arpa.         3600    IN      RRSIG   NSEC 8 2 3600 (
        20181028142623 20181007205525 47155 uri.arpa.
@@ -1730,14 +1690,6 @@ A.4.  The URI.ARPA Zone
        HAE9EDDzoNVfL1PyV/2fde9tDeUuAGVVwmD399NGq9jWYMRpyri2kysr q/g= )
    uri.arpa.         86400   IN      RRSIG   NS 8 2 86400 (
        20181028172020 20181007175821 47155 uri.arpa.
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 31]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
        ATyV2A2A8ZoggC+68u4GuP5MOUuR+2rr3eWOkEU55zAHld/7FiBxl4ln
        4byJYy7NudUwlMOEXajqFZE7DVl8PpcvrP3HeeGaVzKqaWj+aus0jbKF
        Bsvs2b1qDZemBfkz/IfAhUTJKnto0vSUicJKfItu0GjyYNJCz2CqEuGD Wxc= )
@@ -1778,6 +1730,14 @@ Internet-Draft               DNS Zone Digest              September 2020
    uri.arpa.         86400   IN      NS      sec3.apnic.net.
    uri.arpa.         600     IN      MX      10 pechora.icann.org.
    uri.arpa.         3600    IN      DNSKEY  256 3 8 (
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 31]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
+
        AwEAAcBi7tSart2J599zbYWspMNGN70IBWb4ziqyQYH9MTB/VCz6WyUK
        uXunwiJJbbQ3bcLqTLWEw134B6cTMHrZpjTAb5WAwg4XcWUu8mdcPTiL
        Bl6qVRlRD0WiFCTzuYUfkwsh1Rbr7rvrxSQhF5rh71zSpwV5jjjp65Wx
@@ -1786,14 +1746,6 @@ Internet-Draft               DNS Zone Digest              September 2020
        AwEAAbNVv6ulgRdO31MtAehz7j3ALRjwZglWesnzvllQl/+hBRZr9QoY
        cO2I+DkO4Q1NKxox4DUIxj8SxPO3GwDuOFR9q2/CFi2O0mZjafbdYtWc
        3zSdBbi3q0cwCIx7GuG9eqlL+pg7mdk9dgdNZfHwB0LnqTD8ebLPsrO/
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 32]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
        Id7kBaiqYOfMlZnh2fp+2h6OOJZHtY0DK1UlssyB5PKsE0tVzo5s6zo9
        iXKe5u+8WTMaGDY49vG80JPAKE7ezMiH/NZcUMiE0PRZ8D3foq2dYuS5
        ym+vA83Z7v8A+Rwh4UGnjxKB8zmr803V0ASAmHz/gwH5Vb0nH+LObwFt
@@ -1834,6 +1786,14 @@ Internet-Draft               DNS Zone Digest              September 2020
        RRSIG NSEC )
    http.uri.arpa.    604800  IN      NAPTR   0 0 "" "" (
        "!^http://([^:/?#]*).*$!\\1!i" . )
+
+
+
+Wessels, et al.           Expires April 2, 2021                [Page 32]
+
+Internet-Draft               DNS Zone Digest              September 2020
+
+
    mailto.uri.arpa.  3600    IN      RRSIG   NSEC 8 3 3600 (
        20181028110727 20181007175821 47155 uri.arpa.
        GvxzVL85rEukwGqtuLxek9ipwjBMfTOFIEyJ7afC8HxVMs6mfFa/nEM/
@@ -1842,14 +1802,6 @@ Internet-Draft               DNS Zone Digest              September 2020
    mailto.uri.arpa.  604800  IN      RRSIG   NAPTR 8 3 604800 (
        20181028141825 20181007205525 47155 uri.arpa.
        MaADUgc3fc5v++M0YmqjGk3jBdfIA5RuP62hUSlPsFZO4k37erjIGCfF
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 33]
-
-Internet-Draft               DNS Zone Digest              September 2020
-
-
        j+g84yc+QgbSde0PQHszl9fE/+SU5ZXiS9YdcbzSZxp2erFpZOTchrpg
        916T4vx6i59scodjb0l6bDyZ+mtIPrc1w6b4hUyOUTsDQoAJYxdfEuMg Vy4= )
    mailto.uri.arpa.  3600    IN      NSEC    urn.uri.arpa. NAPTR (
@@ -1893,15 +1845,7 @@ A.5.  The ROOT-SERVERS.NET Zone
 
 
 
-
-
-
-
-
-
-
-
-Wessels, et al.           Expires April 2, 2021                [Page 34]
+Wessels, et al.           Expires April 2, 2021                [Page 33]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
@@ -1957,7 +1901,7 @@ Internet-Draft               DNS Zone Digest              September 2020
 
 
 
-Wessels, et al.           Expires April 2, 2021                [Page 35]
+Wessels, et al.           Expires April 2, 2021                [Page 34]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
@@ -2013,7 +1957,7 @@ B.2.  Shane Kerr's Implementation
 
 
 
-Wessels, et al.           Expires April 2, 2021                [Page 36]
+Wessels, et al.           Expires April 2, 2021                [Page 35]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
@@ -2069,7 +2013,7 @@ Authors' Addresses
 
 
 
-Wessels, et al.           Expires April 2, 2021                [Page 37]
+Wessels, et al.           Expires April 2, 2021                [Page 36]
 
 Internet-Draft               DNS Zone Digest              September 2020
 
@@ -2125,4 +2069,4 @@ Internet-Draft               DNS Zone Digest              September 2020
 
 
 
-Wessels, et al.           Expires April 2, 2021                [Page 38]
+Wessels, et al.           Expires April 2, 2021                [Page 37]

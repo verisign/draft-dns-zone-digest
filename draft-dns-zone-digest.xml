@@ -399,9 +399,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             domain zone files.  Users that have been granted access are then able to download
             zone data.  Adding a zone digest to
             these would provide CZDS users with assurances that the
-            data has not been modified between origination and retrieval.  &RRNAME; could
-            be added to CZDS zone data independently of the zone
-            served by production name servers.
+            data has not been modified between origination and retrieval.
+            Note that &RRNAME; could be added to zone data supplied to
+            CZDS without requiring it to be present in the zone data
+            served by production name servers, since the digest is
+            inherently attached to the specific copy of the zone.
           </t>
         </section>
         <section title="General Purpose Comparison Check">
