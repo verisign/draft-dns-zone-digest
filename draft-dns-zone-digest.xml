@@ -44,7 +44,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-12" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-13" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -404,9 +404,11 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             domain zone files.  Users that have been granted access are then able to download
             zone data.  Adding a zone digest to
             these would provide CZDS users with assurances that the
-            data has not been modified between origination and retrieval.  &RRNAME; could
-            be added to CZDS zone data independently of the zone
-            served by production name servers.
+            data has not been modified between origination and retrieval.
+            Note that &RRNAME; could be added to zone data supplied to
+            CZDS without requiring it to be present in the zone data
+            served by production name servers, since the digest is
+            inherently attached to the specific copy of the zone.
           </t>
         </section>
         <section title="General Purpose Comparison Check">
@@ -674,8 +676,7 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
           </t>
 
           <t>
-            <!-- XXX REQUIRES is not BCP14? -->
-            Calculation of a zone digest REQUIRES RRs
+            Calculation of a zone digest requires RRs
             to be processed in a consistent format and ordering.
             This specification uses DNSSEC’s canonical on-the-wire RR
             format (without name compression) and ordering as specified
@@ -862,36 +863,30 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
         <c>Reserved</c>
         <c></c>
         <c></c>
-        <c></c>
 
         <c>1</c>
         <c>Simple &RRNAME; collation</c>
         <c>SIMPLE</c>
-        <c>MUST</c>
         <c>[this document]</c>
 
         <c>2-239</c>
         <c>Unassigned</c>
         <c></c>
         <c></c>
-        <c></c>
 
         <c>240-254</c>
         <c>Private Use</c>
-        <c>N/A</c>
         <c>N/A</c>
         <c>[this document]</c>
 
         <c>255</c>
         <c>Reserved</c>
-        <c></c>
         <c></c>
         <c></c>
 
@@ -912,42 +907,35 @@ where "|" denotes concatenation.
         <ttcol align="left">Value</ttcol>
         <ttcol align="left">Description</ttcol>
         <ttcol align="left">Mnemonic</ttcol>
-        <ttcol align="left">Implementation Requirement</ttcol>
         <ttcol align="left">Reference</ttcol>
 
         <c>0</c>
         <c>Reserved</c>
         <c></c>
         <c></c>
-        <c></c>
 
         <c>1</c>
         <c>SHA-384</c>
         <c>SHA384</c>
-        <c>MUST</c>
         <c>[this document]</c>
 
         <c>2</c>
         <c>SHA-512</c>
         <c>SHA512</c>
-        <c>SHOULD</c>
         <c>[this document]</c>
 
         <c>3-239</c>
         <c>Unassigned</c>
         <c></c>
         <c></c>
-        <c></c>
 
         <c>240-254</c>
         <c>Private Use</c>
-        <c>N/A</c>
         <c>N/A</c>
         <c>[his document]</c>
 
         <c>255</c>
         <c>Reserved</c>
-        <c></c>
         <c></c>
         <c></c>
 
@@ -1323,6 +1311,10 @@ where "|" denotes concatenation.
         <t>SECDIR review: Spell out Key Signing Key first time.</t>
         <t>SECDIR review: say "private use hash algorithm code points."</t>
         <t>SECDIR review: Update estimates of &RRNAME; RR size.</t>
+      </list></t>
+      <t>From -12 to -13:
+      <list style="symbols">
+        <t>...</t>
       </list></t>
     </section>
 
@@ -1754,7 +1746,7 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
 
       <t>
         This section records the status of known implementations of the
-        protocol defined by this specification, and is inspired by the
+        protocol defined by this specification at the time of publication, and is inspired by the
         concepts described in RFC7942.
       </t>
 
