@@ -605,9 +605,20 @@ example.com. 86400 IN &RRNAME; 2018031500 1 1 (
     </section>
 
     <section title="Calculating the Digest" anchor="calculating">
+
+      <t>
+        The algorithm described in this section is designed for the
+        common case of offline DNSSEC signing.
+        Slight deviations may be permitted or necessary in other
+        situations, such as with unsigned zones or online DNSSEC signing.
+        Implementations that deviate from the described algorithm are
+        advised to ensure that identical &RRNAME; RRs, signatures,
+        and dential-of-existence records are produced.
+      </t>
+
       <section title="Add &RRNAME; Placeholder" anchor="placeholder">
         <t>
-          In preparation for calculating the zone digest, any existing &RRNAME; records
+          In preparation for calculating the zone digest(s), any existing &RRNAME; records
           (and covering RRSIGs)
           at the zone apex
           are first deleted.
