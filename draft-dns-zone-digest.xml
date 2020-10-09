@@ -840,6 +840,15 @@ where "|" denotes concatenation.
           </t>
         </list>
       </t>
+      <t>
+        [ Maybe remove all the "SHOULD report" above and just say this:]
+      </t>
+      <t>
+        Each time zone verification is performed, the verifier SHOULD
+        report the status as either successful or unsuccessful.
+        When unsuccessful, the verifier SHOULD report the reason(s) that
+        verification did not succeed.
+      </t>
     </section>
 
     <section title="IANA Considerations" anchor="iana">
