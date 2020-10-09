@@ -44,7 +44,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
 <?rfc sortrefs="yes" ?>
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
-<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-13" ipr="trust200902">
+<rfc category="std" docName="draft-ietf-dnsop-dns-zone-digest-14" ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
   ipr values: full3667, noModification3667, noDerivatives3667
   you can add the attributes updates="NNNN" and obsoletes="NNNN"
@@ -1347,6 +1347,10 @@ where "|" denotes concatenation.
         <t>For unsigned zones, &RRNAME; serves only as a checksum.</t>
         <t>Calculation algorithm is designed for common case of offline signing.  Deviations may be allowed as long as the end result is the same.</t>
         <t>Numerous small edits and clarifications from IESG reviewer comments.</t>
+      </list></t>
+      <t>From -13 to -14:
+      <list style="symbols">
+        <t></t>
       </list></t>
     </section>
 
