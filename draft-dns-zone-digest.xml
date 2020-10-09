@@ -126,7 +126,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </address>
     </author>
 
-    <date day="29" month="September" year="2020"/>
+    <date day="9" month="October" year="2020"/>
 
     <area>General</area>
 
@@ -1341,6 +1341,7 @@ where "|" denotes concatenation.
         <t>Added reference to draft-ietf-dprive-xfr-over-tls.</t>
         <t>Dropped Implementation Requirement from registry tables.</t>
         <t>Added Use of Multiple ZONEMD Hash Algorithms to Security Considerations.</t>
+        <t>Added Using Zone Digest Without DNSSEC to Security Considerations.</t>
         <t>Added notes about the need for algorithm agility due to crypto algorithm aging.</t>
         <t>Further clarified that only with DNSSEC can &RRNAME; guarantee integrity and authenticity.</t>
         <t>For unsigned zones, &RRNAME; serves only as a checksum.</t>
