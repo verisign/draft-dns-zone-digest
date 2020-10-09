@@ -507,7 +507,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
             as input to the hashing function.
           </t>
           <t>
-            Herein, SIMPLE, with value 1, is the only
+            Herein, SIMPLE, with Hash Algorithm value 1, is the only
             standardized Scheme defined for &RRNAME; records and it MUST be implemented.  The Scheme registry
             is further described in <xref target="iana"/>.
           </t>
