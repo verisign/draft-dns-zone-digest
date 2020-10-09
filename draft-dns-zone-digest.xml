@@ -1342,6 +1342,9 @@ where "|" denotes concatenation.
         <t>Dropped Implementation Requirement from registry tables.</t>
         <t>Added Use of Multiple ZONEMD Hash Algorithms to Security Considerations.</t>
         <t>Added notes about the need for algorithm agility due to crypto algorithm aging.</t>
+        <t>Further clarified that only with DNSSEC can &RRNAME; guarantee integrity and authenticity.</t>
+        <t>For unsigned zones, &RRNAME; serves only as a checksum.</t>
+        <t>Calculation algorithm is designed for common case of offline signing.  Deviations may be allowed as long as the end result is the same.</t>
         <t>Numerous small edits and clarifications from IESG reviewer comments.</t>
       </list></t>
     </section>
