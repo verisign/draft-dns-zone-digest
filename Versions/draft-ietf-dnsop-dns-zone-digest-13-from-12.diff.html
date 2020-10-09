@@ -91,24 +91,27 @@ document.onkeydown = function(e) {
   <table border="0" cellpadding="0" cellspacing="0"> 
   <tr id="part-1" bgcolor="orange"><th></th><th>&nbsp;draft-ietf-dnsop-dns-zone-digest-12.txt&nbsp;</th><th> </th><th>&nbsp;draft-ietf-dnsop-dns-zone-digest-13.txt&nbsp;</th><th></th></tr> 
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-1" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-1"><em> page 1, line 15<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-1"><em> page 1, line 15<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">Internet Engineering Task Force                               D. Wessels</td><td> </td><td class="right">Internet Engineering Task Force                               D. Wessels</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Internet-Draft                                                 P. Barber</td><td> </td><td class="right">Internet-Draft                                                 P. Barber</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">Intended status: Standards Track                                Verisign</td><td> </td><td class="right">Intended status: Standards Track                                Verisign</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">Expires: April 2, 2021                                       M. Weinberg</td><td> </td><td class="right">Expires: April 2, 2021                                       M. Weinberg</td><td class="lineno"></td></tr>
+      <tr id="diff0001"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">Expires: April <span class="delete">2, 2021 </span>                                      M. Weinberg</td><td> </td><td class="rblock">Expires: April <span class="insert">12, 2021</span>                                      M. Weinberg</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                                                  Amazon</td><td> </td><td class="right">                                                                  Amazon</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                                               W. Kumari</td><td> </td><td class="right">                                                               W. Kumari</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                                                  Google</td><td> </td><td class="right">                                                                  Google</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                                             W. Hardaker</td><td> </td><td class="right">                                                             W. Hardaker</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                                                                 USC/ISI</td><td> </td><td class="right">                                                                 USC/ISI</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">                                                      September 29, 2020</td><td> </td><td class="right">                                                      September 29, 2020</td><td class="lineno"></td></tr>
+      <tr id="diff0002"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">                                                      <span class="delete">September 2</span>9, 2020</td><td> </td><td class="rblock">                                                      <span class="insert">   October </span>9, 2020</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">                      Message Digest for DNS Zones</td><td> </td><td class="right">                      Message Digest for DNS Zones</td><td class="lineno"></td></tr>
-      <tr id="diff0001"><td></td></tr>
+      <tr id="diff0003"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">                  draft-ietf-dnsop-dns-zone-digest-1<span class="delete">2</span></td><td> </td><td class="rblock">                  draft-ietf-dnsop-dns-zone-digest-1<span class="insert">3</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">Abstract</td><td> </td><td class="right">Abstract</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   This document describes a protocol and new DNS Resource Record that</td><td> </td><td class="right">   This document describes a protocol and new DNS Resource Record that</td><td class="lineno"></td></tr>
-      <tr id="diff0002"><td></td></tr>
+      <tr id="diff0004"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   provides a cryptographic message digest over DNS zone <span class="delete">data.</span>  The</td><td> </td><td class="rblock">   provides a cryptographic message digest over DNS zone <span class="insert">data at rest.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   ZONEMD Resource Record conveys the digest data in the zone itself.</td><td> </td><td class="rblock">   The ZONEMD Resource Record conveys the digest data in the zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   When <span class="delete">a zone publisher includes a</span> ZONEMD <span class="delete">record,</span> recipients <span class="delete">can</span> verify</td><td> </td><td class="rblock">   itself.  When <span class="insert">used in combination with DNSSEC,</span> ZONEMD <span class="insert">allows</span></td><td class="lineno"></td></tr>
@@ -116,7 +119,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock">   assurance that received zone data matches published data, regardless</td><td> </td><td class="rblock"><span class="insert">   authenticity.</span>  This provides assurance that received zone data</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   of how the zone data has been transmitted and received.</td><td> </td><td class="rblock">   matches published data, regardless of how the zone data has been</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   transmitted and received.  <span class="insert">When used without DNSSEC, ZONEMD functions</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   only as a checksum, guarding only against unintentional changes.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   as a checksum, guarding only against unintentional changes.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   ZONEMD does not replace DNSSEC.  Whereas DNSSEC protects individual</td><td> </td><td class="right">   ZONEMD does not replace DNSSEC.  Whereas DNSSEC protects individual</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   RRSets (DNS data with fine granularity), ZONEMD protects a zone's</td><td> </td><td class="right">   RRSets (DNS data with fine granularity), ZONEMD protects a zone's</td><td class="lineno"></td></tr>
@@ -128,7 +131,31 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   However, The ZONEMD record is extensible so that new digest schemes</td><td> </td><td class="right">   However, The ZONEMD record is extensible so that new digest schemes</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   may be added in the future to support large, dynamic zones.</td><td> </td><td class="right">   may be added in the future to support large, dynamic zones.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-2" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-2"><em> page 2, line 32<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-2"><em> page 2, line 35<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-2" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-2"><em> page 2, line 7<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-2"><em> page 2, line 10<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Internet-Drafts are working documents of the Internet Engineering</td><td> </td><td class="right">   Internet-Drafts are working documents of the Internet Engineering</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Task Force (IETF).  Note that other groups may also distribute</td><td> </td><td class="right">   Task Force (IETF).  Note that other groups may also distribute</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   working documents as Internet-Drafts.  The list of current Internet-</td><td> </td><td class="right">   working documents as Internet-Drafts.  The list of current Internet-</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Drafts is at https://datatracker.ietf.org/drafts/current/.</td><td> </td><td class="right">   Drafts is at https://datatracker.ietf.org/drafts/current/.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Internet-Drafts are draft documents valid for a maximum of six months</td><td> </td><td class="right">   Internet-Drafts are draft documents valid for a maximum of six months</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   and may be updated, replaced, or obsoleted by other documents at any</td><td> </td><td class="right">   and may be updated, replaced, or obsoleted by other documents at any</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   time.  It is inappropriate to use Internet-Drafts as reference</td><td> </td><td class="right">   time.  It is inappropriate to use Internet-Drafts as reference</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   material or to cite them other than as "work in progress."</td><td> </td><td class="right">   material or to cite them other than as "work in progress."</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0005"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   This Internet-Draft will expire on April 2, 2021.</td><td> </td><td class="rblock">   This Internet-Draft will expire on April <span class="insert">1</span>2, 2021.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">Copyright Notice</td><td> </td><td class="right">Copyright Notice</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Copyright (c) 2020 IETF Trust and the persons identified as the</td><td> </td><td class="right">   Copyright (c) 2020 IETF Trust and the persons identified as the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   document authors.  All rights reserved.</td><td> </td><td class="right">   document authors.  All rights reserved.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   This document is subject to BCP 78 and the IETF Trust's Legal</td><td> </td><td class="right">   This document is subject to BCP 78 and the IETF Trust's Legal</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Provisions Relating to IETF Documents</td><td> </td><td class="right">   Provisions Relating to IETF Documents</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   (https://trustee.ietf.org/license-info) in effect on the date of</td><td> </td><td class="right">   (https://trustee.ietf.org/license-info) in effect on the date of</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   publication of this document.  Please review these documents</td><td> </td><td class="right">   publication of this document.  Please review these documents</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-3" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-3"><em> page 2, line 32<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-3"><em> page 2, line 35<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">   described in the Simplified BSD License.</td><td> </td><td class="right">   described in the Simplified BSD License.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">Table of Contents</td><td> </td><td class="right">Table of Contents</td><td class="lineno"></td></tr>
@@ -139,42 +166,41 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">     1.3.  Design Overview . . . . . . . . . . . . . . . . . . . . .   6</td><td> </td><td class="right">     1.3.  Design Overview . . . . . . . . . . . . . . . . . . . . .   6</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     1.4.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . .   6</td><td> </td><td class="right">     1.4.  Use Cases . . . . . . . . . . . . . . . . . . . . . . . .   6</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       1.4.1.  Root Zone . . . . . . . . . . . . . . . . . . . . . .   6</td><td> </td><td class="right">       1.4.1.  Root Zone . . . . . . . . . . . . . . . . . . . . . .   6</td><td class="lineno"></td></tr>
-      <tr id="diff0003"><td></td></tr>
+      <tr id="diff0006"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       1.4.2.  Providers, Secondaries, and Anycast . . . . . . . . .   <span class="delete">6</span></td><td> </td><td class="rblock">       1.4.2.  Providers, Secondaries, and Anycast . . . . . . . . .   <span class="insert">7</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       1.4.3.  Response Policy Zones . . . . . . . . . . . . . . . .   7</td><td> </td><td class="right">       1.4.3.  Response Policy Zones . . . . . . . . . . . . . . . .   7</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       1.4.4.  Centralized Zone Data Service . . . . . . . . . . . .   7</td><td> </td><td class="right">       1.4.4.  Centralized Zone Data Service . . . . . . . . . . . .   7</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       1.4.5.  General Purpose Comparison Check  . . . . . . . . . .   7</td><td> </td><td class="right">       1.4.5.  General Purpose Comparison Check  . . . . . . . . . .   7</td><td class="lineno"></td></tr>
-      <tr id="diff0004"><td></td></tr>
+      <tr id="diff0007"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     1.5.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   <span class="delete">7</span></td><td> </td><td class="rblock">     1.5.  Terminology . . . . . . . . . . . . . . . . . . . . . . .   <span class="insert">8</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   2.  The ZONEMD Resource Record  . . . . . . . . . . . . . . . . .   <span class="delete">7</span></td><td> </td><td class="rblock">   2.  The ZONEMD Resource Record  . . . . . . . . . . . . . . . . .   <span class="insert">8</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     2.1.  Non-apex ZONEMD Records . . . . . . . . . . . . . . . . .   8</td><td> </td><td class="right">     2.1.  Non-apex ZONEMD Records . . . . . . . . . . . . . . . . .   8</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     2.2.  ZONEMD RDATA Wire Format  . . . . . . . . . . . . . . . .   8</td><td> </td><td class="right">     2.2.  ZONEMD RDATA Wire Format  . . . . . . . . . . . . . . . .   8</td><td class="lineno"></td></tr>
-      <tr id="diff0005"><td></td></tr>
+      <tr id="diff0008"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       2.2.1.  The Serial Field  . . . . . . . . . . . . . . . . . .   <span class="delete">8</span></td><td> </td><td class="rblock">       2.2.1.  The Serial Field  . . . . . . . . . . . . . . . . . .   <span class="insert">9</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       2.2.2.  The Scheme Field  . . . . . . . . . . . . . . . . . .   9</td><td> </td><td class="right">       2.2.2.  The Scheme Field  . . . . . . . . . . . . . . . . . .   9</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       2.2.3.  The Hash Algorithm Field  . . . . . . . . . . . . . .   9</td><td> </td><td class="right">       2.2.3.  The Hash Algorithm Field  . . . . . . . . . . . . . .   9</td><td class="lineno"></td></tr>
-      <tr id="diff0006"><td></td></tr>
+      <tr id="diff0009"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       2.2.4.  The Digest Field  . . . . . . . . . . . . . . . . . .  <span class="delete"> 9</span></td><td> </td><td class="rblock">       2.2.4.  The Digest Field  . . . . . . . . . . . . . . . . . .  <span class="insert">10</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     2.3.  ZONEMD Presentation Format  . . . . . . . . . . . . . . .  10</td><td> </td><td class="right">     2.3.  ZONEMD Presentation Format  . . . . . . . . . . . . . . .  10</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     2.4.  ZONEMD Example  . . . . . . . . . . . . . . . . . . . . .  10</td><td> </td><td class="right">     2.4.  ZONEMD Example  . . . . . . . . . . . . . . . . . . . . .  10</td><td class="lineno"></td></tr>
-      <tr id="diff0007"><td></td></tr>
+      <tr id="diff0010"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   3.  Calculating the Digest  . . . . . . . . . . . . . . . . . . .  <span class="delete">10</span></td><td> </td><td class="rblock">   3.  Calculating the Digest  . . . . . . . . . . . . . . . . . . .  <span class="insert">11</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     3.1.  Add ZONEMD Placeholder  . . . . . . . . . . . . . . . . .  <span class="delete">10</span></td><td> </td><td class="rblock">     3.1.  Add ZONEMD Placeholder  . . . . . . . . . . . . . . . . .  <span class="insert">11</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     3.2.  Optionally Sign the Zone  . . . . . . . . . . . . . . . .  11</td><td> </td><td class="right">     3.2.  Optionally Sign the Zone  . . . . . . . . . . . . . . . .  11</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">     3.3.  Scheme-Specific Processing  . . . . . . . . . . . . . . .  11</td><td> </td><td class="right">     3.3.  Scheme-Specific Processing  . . . . . . . . . . . . . . .  11</td><td class="lineno"></td></tr>
-      <tr id="diff0008"><td></td></tr>
+      <tr id="diff0011"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     3.3.  Scheme-Specific Processing  . . . . . . . . . . . . . . .  <span class="delete">11</span></td><td> </td><td class="rblock">     3.3.  Scheme-Specific Processing  . . . . . . . . . . . . . . .  <span class="insert">12</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       3.3.1.  The SIMPLE Scheme . . . . . . . . . . . . . . . . . .  <span class="delete">11</span></td><td> </td><td class="rblock">       3.3.1.  The SIMPLE Scheme . . . . . . . . . . . . . . . . . .  <span class="insert">12</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">         3.3.1.1.  SIMPLE Scheme Inclusion/Exclusion Rules . . . . .  <span class="delete">11</span></td><td> </td><td class="rblock">         3.3.1.1.  SIMPLE Scheme Inclusion/Exclusion Rules . . . . .  <span class="insert">12</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">         3.3.1.2.  SIMPLE Scheme Digest Calculation  . . . . . . . .  12</td><td> </td><td class="right">         3.3.1.2.  SIMPLE Scheme Digest Calculation  . . . . . . . .  12</td><td class="lineno"></td></tr>
-      <tr id="diff0009"><td></td></tr>
+      <tr id="diff0012"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     3.4.  Update ZONEMD RR  . . . . . . . . . . . . . . . . . . . .  <span class="delete">12</span></td><td> </td><td class="rblock">     3.4.  Update ZONEMD RR  . . . . . . . . . . . . . . . . . . . .  <span class="insert">13</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   4.  Verifying Zone Digest . . . . . . . . . . . . . . . . . . . .  <span class="delete">12</span></td><td> </td><td class="rblock">   4.  Verifying Zone Digest . . . . . . . . . . . . . . . . . . . .  <span class="insert">13</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14</td><td> </td><td class="right">   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  14</td><td> </td><td class="right">     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  14</td><td class="lineno"></td></tr>
-      <tr id="diff0010"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">     5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  1<span class="delete">4</span></td><td> </td><td class="rblock">     5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  1<span class="insert">5</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  <span class="delete">14</span></td><td> </td><td class="rblock">   5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  <span class="insert">15</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  <span class="delete">14</span></td><td> </td><td class="rblock">     5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  <span class="insert">15</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  <span class="delete">14</span></td><td> </td><td class="rblock">     5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  <span class="insert">15</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">     5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  15</td><td> </td><td class="right">     5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  15</td><td class="lineno"></td></tr>
-      <tr id="diff0011"><td></td></tr>
+      <tr id="diff0013"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  <span class="delete">15</span></td><td> </td><td class="rblock">   6.  Security Considerations . . . . . . . . . . . . . . . . . . .  <span class="insert">16</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     6.1.  Attacks Against the Zone Digest . . . . . . . . . . . . .  16</td><td> </td><td class="rblock">     6.1.  <span class="insert">Using Zone Digest Without DNSSEC  . . . . . . . . . . . .  16</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     <span class="delete">6.2.  DNSSESC</span> Timing Considerations . . . . . . . . . . . . . .  <span class="delete">16</span></td><td> </td><td class="rblock"><span class="insert">     6.2.</span>  Attacks Against the Zone Digest . . . . . . . . . . . . .  16</td><td class="lineno"></td></tr>
@@ -189,11 +215,11 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock">     11.1.  Normative References . . . . . . . . . . . . . . . . . .  <span class="delete">25</span></td><td> </td><td class="rblock">   10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  <span class="insert">19</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     11.2.  Informative References . . . . . . . . . . . . . . . . .  <span class="delete">25</span></td><td> </td><td class="rblock">   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  <span class="insert">26</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  <span class="delete">28</span></td><td> </td><td class="rblock">     11.1.  Normative References . . . . . . . . . . . . . . . . . .  <span class="insert">26</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  <span class="delete">28</span></td><td> </td><td class="rblock">     11.2.  Informative References . . . . . . . . . . . . . . . . .  <span class="insert">26</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  <span class="delete">28</span></td><td> </td><td class="rblock">     11.2.  Informative References . . . . . . . . . . . . . . . . .  <span class="insert">27</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  <span class="delete">28</span></td><td> </td><td class="rblock">   Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  <span class="insert">29</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  <span class="delete">29</span></td><td> </td><td class="rblock">     A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  <span class="insert">29</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  <span class="delete">30</span></td><td> </td><td class="rblock">     A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  <span class="insert">29</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  <span class="delete">33</span></td><td> </td><td class="rblock">     A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  <span class="insert">30</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  <span class="delete">30</span></td><td> </td><td class="rblock">     A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  <span class="insert">30</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  <span class="delete">33</span></td><td> </td><td class="rblock">     A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  <span class="insert">31</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Appendix B.  Implementation Status  . . . . . . . . . . . . . . .  <span class="delete">35</span></td><td> </td><td class="rblock">     A.4.  The URI.ARPA Zone . . . . . . . . . . . . . . . . . . . .  <span class="insert">31</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     B.1.  Authors' Implementation . . . . . . . . . . . . . . . . .  <span class="delete">35</span></td><td> </td><td class="rblock">     A.5.  The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  <span class="insert">34</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">     B.2.  Shane Kerr's Implementation . . . . . . . . . . . . . . .  <span class="delete">35</span></td><td> </td><td class="rblock">   Appendix B.  Implementation Status  . . . . . . . . . . . . . . .  <span class="insert">36</span></td><td class="lineno"></td></tr>
@@ -211,7 +237,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   transfer [RFC5936]), and IXFR (incremental zone transfer [RFC1995])</td><td> </td><td class="right">   transfer [RFC5936]), and IXFR (incremental zone transfer [RFC1995])</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   protocols.  They can also be distributed outside of the DNS, with any</td><td> </td><td class="right">   protocols.  They can also be distributed outside of the DNS, with any</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   file transfer protocol such as FTP, HTTP, and rsync, or even as email</td><td> </td><td class="right">   file transfer protocol such as FTP, HTTP, and rsync, or even as email</td><td class="lineno"></td></tr>
-      <tr id="diff0012"><td></td></tr>
+      <tr id="diff0014"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   attachments.  <span class="delete">Currently</span> there is no standard way to <span class="delete">verify the</span></td><td> </td><td class="rblock">   attachments.  <span class="insert">Currently,</span> there is no standard way to <span class="insert">compute a hash</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   authenticity of</span> a stand-alone zone.</td><td> </td><td class="rblock"><span class="insert">   or message digest for</span> a stand-alone zone.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -227,7 +253,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   This specification is OPTIONAL to implement by both publishers and</td><td> </td><td class="right">   This specification is OPTIONAL to implement by both publishers and</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   consumers of zone data.</td><td> </td><td class="right">   consumers of zone data.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0013"><td></td></tr>
+      <tr id="diff0015"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   DNSSEC provides three strong security guarantees relevant to this</td><td> </td><td class="rblock"><span class="insert">1.1.  Motivation</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   protocol:</td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   The motivation for this protocol enhancement is the desire to verify</span></td><td class="lineno"></td></tr>
@@ -246,7 +272,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   3.  whether or not the ZONEMD record has been altered since it was</td><td> </td><td class="right">   3.  whether or not the ZONEMD record has been altered since it was</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       signed.</td><td> </td><td class="right">       signed.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0014"><td></td></tr>
+      <tr id="diff0016"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">1.1.  Motivation</span></td><td> </td><td class="rblock">   <span class="insert">A secondary</span> motivation is to <span class="insert">provide</span> the <span class="insert">equivalent</span> of a <span class="insert">checksum,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete"></span></td><td> </td><td class="rblock"><span class="insert">   allowing a</span> zone <span class="insert">recipient</span> to <span class="insert">check for unintended changes and</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   The</span> motivation <span class="delete">for this protocol enhancement</span> is <span class="delete">the desire</span> to <span class="delete">verify</span></td><td> </td><td class="rblock"><span class="insert">   operational errors, such as accidental truncation.</span></td><td class="lineno"></td></tr>
@@ -271,7 +297,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   cryptography rather than shared secrets.</td><td> </td><td class="right">   cryptography rather than shared secrets.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The Transport Layer Security protocol suite also provides channel</td><td> </td><td class="right">   The Transport Layer Security protocol suite also provides channel</td><td class="lineno"></td></tr>
-      <tr id="diff0015"><td></td></tr>
+      <tr id="diff0017"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   security.  One can easily imagine the distribution of zones over</td><td> </td><td class="rblock">   security.  <span class="insert">The DPRIVE working group is in the process of specifying</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   HTTPS-enabled web servers, as well as DNS-over-HTTPS <span class="delete">[RFC8484], and</span></td><td> </td><td class="rblock"><span class="insert">   DNS Zone Transfer-over-TLS [I-D.ietf-dprive-xfr-over-tls].</span>  One can</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   perhaps even a future version of DNS-over-TLS ([RFC7858]).</span></td><td> </td><td class="rblock">   <span class="insert">also</span> easily imagine the distribution of zones over HTTPS-enabled web</td><td class="lineno"></td></tr>
@@ -289,7 +315,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   been modified.  Such modification could be the result of an</td><td> </td><td class="right">   been modified.  Such modification could be the result of an</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   accidental corruption of the file, or perhaps an incompletely saved</td><td> </td><td class="right">   accidental corruption of the file, or perhaps an incompletely saved</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   file [disk-full-failure].  For these reasons, it is preferable to</td><td> </td><td class="right">   file [disk-full-failure].  For these reasons, it is preferable to</td><td class="lineno"></td></tr>
-      <tr id="diff0016"><td></td></tr>
+      <tr id="diff0018"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">secure</span> the data itself.</td><td> </td><td class="rblock">   <span class="insert">protect the integrity of</span> the data itself.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Why not simply rely on DNSSEC, which provides certain data security</td><td> </td><td class="right">   Why not simply rely on DNSSEC, which provides certain data security</td><td class="lineno"></td></tr>
@@ -299,7 +325,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   delegations (non-apex NS records) are not signed by DNSSEC, and</td><td> </td><td class="right">   delegations (non-apex NS records) are not signed by DNSSEC, and</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   neither are any glue records.  ZONEMD protects the integrity of</td><td> </td><td class="right">   neither are any glue records.  ZONEMD protects the integrity of</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   delegation, glue, and other records that are not otherwise covered by</td><td> </td><td class="right">   delegation, glue, and other records that are not otherwise covered by</td><td class="lineno"></td></tr>
-      <tr id="diff0017"><td></td></tr>
+      <tr id="diff0019"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   DNSSEC.  Furthermore, zones that employ NSEC3 with opt-out are</td><td> </td><td class="rblock">   DNSSEC.  Furthermore, zones that employ NSEC3 with opt-out <span class="insert">[RFC5155]</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   susceptible to the removal or addition of names between the signed</td><td> </td><td class="rblock">   are susceptible to the removal or addition of names between the</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   nodes.  Whereas DNSSEC <span class="delete">is</span> primarily protects consumers of DNS</td><td> </td><td class="rblock">   signed nodes.  Whereas DNSSEC primarily protects consumers of DNS</td><td class="lineno"></td></tr>
@@ -314,7 +340,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   possible, but these necessarily change the format of the file being</td><td> </td><td class="right">   possible, but these necessarily change the format of the file being</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   distributed; a zone signed with OpenPGP or S/MIME no longer looks</td><td> </td><td class="right">   distributed; a zone signed with OpenPGP or S/MIME no longer looks</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-3" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-3"><em> page 6, line 18<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-3"><em> page 6, line 30<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-4" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-4"><em> page 6, line 18<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-4"><em> page 6, line 30<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">   message digest of the content of a zone.  The digest is calculated at</td><td> </td><td class="right">   message digest of the content of a zone.  The digest is calculated at</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   the time of zone publication.  If the zone is signed with DNSSEC, any</td><td> </td><td class="right">   the time of zone publication.  If the zone is signed with DNSSEC, any</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   modifications of the digest can be detected.  The procedures for</td><td> </td><td class="right">   modifications of the digest can be detected.  The procedures for</td><td class="lineno"></td></tr>
@@ -325,7 +351,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The zone digest is designed to be used on zones that have infrequent</td><td> </td><td class="right">   The zone digest is designed to be used on zones that have infrequent</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   updates.  As specified herein, the digest is re-calculated over the</td><td> </td><td class="right">   updates.  As specified herein, the digest is re-calculated over the</td><td class="lineno"></td></tr>
-      <tr id="diff0018"><td></td></tr>
+      <tr id="diff0020"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   entire zone content each <span class="delete">time.</span>  This specification does not provide</td><td> </td><td class="rblock">   entire zone content each <span class="insert">time the zone is updated.</span>  This</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   an efficient mechanism for updating the digest on incremental updates</td><td> </td><td class="rblock">   specification does not provide an efficient mechanism for updating</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   of zone data.  It is, however, extensible so future schemes to</td><td> </td><td class="rblock">   the digest on incremental updates of zone data.  It is, however,</td><td class="lineno"></td></tr>
@@ -342,7 +368,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">1.4.  Use Cases</td><td> </td><td class="right">1.4.  Use Cases</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-4" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-4"><em> page 6, line 51<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-4"><em> page 7, line 14<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 6, line 51<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 7, line 14<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">   time.  [RFC8806] describes one way to do this.  As the root zone</td><td> </td><td class="right">   time.  [RFC8806] describes one way to do this.  As the root zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   spreads beyond its traditional deployment boundaries, the</td><td> </td><td class="right">   spreads beyond its traditional deployment boundaries, the</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   verification of the completeness of the zone contents becomes more</td><td> </td><td class="right">   verification of the completeness of the zone contents becomes more</td><td class="lineno"></td></tr>
@@ -353,7 +379,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Since its very early days, the developers of the DNS recognized the</td><td> </td><td class="right">   Since its very early days, the developers of the DNS recognized the</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   importance of secondary name servers and service diversity.  However,</td><td> </td><td class="right">   importance of secondary name servers and service diversity.  However,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   modern DNS service has complex provisioning which includes multiple</td><td> </td><td class="right">   modern DNS service has complex provisioning which includes multiple</td><td class="lineno"></td></tr>
-      <tr id="diff0019"><td></td></tr>
+      <tr id="diff0021"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   third-party providers and hundreds of anycast <span class="delete">instances.</span>  Instead of</td><td> </td><td class="rblock">   third-party providers <span class="insert">([RFC8901])</span> and hundreds of anycast <span class="insert">instances</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   a simple primary-to-secondary zone distribution system, today it is</td><td> </td><td class="rblock"><span class="insert">   ([RFC3258]).</span>  Instead of a simple primary-to-secondary zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   possible to have multiple levels, multiple parties, and multiple</td><td> </td><td class="rblock">   distribution system, today it is possible to have multiple levels,</td><td class="lineno"></td></tr>
@@ -364,7 +390,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">1.4.3.  Response Policy Zones</td><td> </td><td class="right">1.4.3.  Response Policy Zones</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0020"><td></td></tr>
+      <tr id="diff0022"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">DNS</span> Response Policy <span class="delete">Zones</span> is "a <span class="delete">method of expressing DNS response</span></td><td> </td><td class="rblock">   <span class="insert">A</span> Response Policy <span class="insert">Zone (RPZ)</span> is "a <span class="insert">mechanism to introduce a</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   policy information inside specially constructed DNS <span class="delete">zones..." [RPZ].</span></td><td> </td><td class="rblock"><span class="insert">   customized policy in Domain Name System servers, so that recursive</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   A number of companies provide RPZ feeds, which are consumed by name</td><td> </td><td class="rblock"><span class="insert">   resolvers return possibly modified results" [RPZ].  The</span> policy</td><td class="lineno"></td></tr>
@@ -380,7 +406,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   repository of top-level domain zone files.  Users that have been</td><td> </td><td class="right">   repository of top-level domain zone files.  Users that have been</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   granted access are then able to download zone data.  Adding a zone</td><td> </td><td class="right">   granted access are then able to download zone data.  Adding a zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   digest to these would provide CZDS users with assurances that the</td><td> </td><td class="right">   digest to these would provide CZDS users with assurances that the</td><td class="lineno"></td></tr>
-      <tr id="diff0021"><td></td></tr>
+      <tr id="diff0023"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   data has not been modified between origination and retrieval.  ZONEMD</td><td> </td><td class="rblock">   data has not been modified between origination and retrieval.  <span class="insert">Note</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   could be added to <span class="delete">CZDS</span> zone data <span class="delete">independently of</span> the zone served by</td><td> </td><td class="rblock"><span class="insert">   that</span> ZONEMD could be added to zone data <span class="insert">supplied to CZDS without</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   production name <span class="delete">servers.</span></td><td> </td><td class="rblock"><span class="insert">   requiring it to be present in</span> the zone <span class="insert">data</span> served by production name</td><td class="lineno"></td></tr>
@@ -392,7 +418,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Since the zone digest calculation does not depend on presentation</td><td> </td><td class="right">   Since the zone digest calculation does not depend on presentation</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   format, it could be used to compare multiple copies of a zone</td><td> </td><td class="right">   format, it could be used to compare multiple copies of a zone</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   received from different sources, or copies generated by different</td><td> </td><td class="right">   received from different sources, or copies generated by different</td><td class="lineno"></td></tr>
-      <tr id="diff0022"><td></td></tr>
+      <tr id="diff0024"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   processes.</td><td> </td><td class="rblock">   processes.  <span class="insert">In this case, it serves as a checksum and can be useful</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   even for unsigned zones.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -406,7 +432,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The terms Private Use, Reserved, Unassigned, and Specification</td><td> </td><td class="right">   The terms Private Use, Reserved, Unassigned, and Specification</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-5" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-5"><em> page 8, line 8<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-5"><em> page 8, line 25<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-6" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-6"><em> page 8, line 8<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-6"><em> page 8, line 25<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">2.  The ZONEMD Resource Record</td><td> </td><td class="right">2.  The ZONEMD Resource Record</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -417,7 +443,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Algorithm, and Digest.</td><td> </td><td class="right">   Algorithm, and Digest.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   A zone MAY contain multiple ZONEMD RRs to support algorithm agility</td><td> </td><td class="right">   A zone MAY contain multiple ZONEMD RRs to support algorithm agility</td><td class="lineno"></td></tr>
-      <tr id="diff0023"><td></td></tr>
+      <tr id="diff0025"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">[RFC7696] and rollovers.</span>  When multiple ZONEMD RRs are present, each</td><td> </td><td class="rblock">   <span class="insert">[RFC7696].  [RFC Editor: change that to BCP 201]</span> When multiple ZONEMD</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">must</span> specify a unique Scheme and Hash Algorithm tuple.  It is</td><td> </td><td class="rblock">   RRs are present, each <span class="insert">MUST</span> specify a unique Scheme and Hash Algorithm</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   RECOMMENDED that a zone include only one ZONEMD RR, unless the zone</td><td> </td><td class="rblock">   tuple.  It is RECOMMENDED that a zone include only one ZONEMD RR,</td><td class="lineno"></td></tr>
@@ -434,7 +460,69 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   During digest calculation, non-apex ZONEMD RRs are treated as</td><td> </td><td class="right">   During digest calculation, non-apex ZONEMD RRs are treated as</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   ordinary RRs.  They are digested as-is and the RR is not replaced by</td><td> </td><td class="right">   ordinary RRs.  They are digested as-is and the RR is not replaced by</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-6" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-6"><em> page 11, line 38<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-6"><em> page 12, line 13<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-7" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-7"><em> page 9, line 13<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-7"><em> page 9, line 34<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">   version of the zone's content.  Without the serial number, a stand-</td><td> </td><td class="right">   version of the zone's content.  Without the serial number, a stand-</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   alone ZONEMD digest has no obvious association to any particular</td><td> </td><td class="right">   alone ZONEMD digest has no obvious association to any particular</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   instance of a zone.</td><td> </td><td class="right">   instance of a zone.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.2.2.  The Scheme Field</td><td> </td><td class="right">2.2.2.  The Scheme Field</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   The Scheme field is an 8-bit unsigned integer that identifies the</td><td> </td><td class="right">   The Scheme field is an 8-bit unsigned integer that identifies the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   methods by which data is collated and presented as input to the</td><td> </td><td class="right">   methods by which data is collated and presented as input to the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   hashing function.</td><td> </td><td class="right">   hashing function.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0026"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   Herein, SIMPLE, with value 1, is the only standardized Scheme defined</td><td> </td><td class="rblock">   Herein, SIMPLE, with <span class="insert">Hash Algorithm</span> value 1, is the only standardized</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   for ZONEMD records and it MUST be implemented.  The Scheme registry</td><td> </td><td class="rblock">   Scheme defined for ZONEMD records and it MUST be implemented.  The</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   is further described in Section 5.</td><td> </td><td class="rblock">   Scheme registry is further described in Section 5.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Scheme values 240-254 are allocated for Private Use.</td><td> </td><td class="right">   Scheme values 240-254 are allocated for Private Use.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.2.3.  The Hash Algorithm Field</td><td> </td><td class="right">2.2.3.  The Hash Algorithm Field</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   The Hash Algorithm field is an 8-bit unsigned integer that identifies</td><td> </td><td class="right">   The Hash Algorithm field is an 8-bit unsigned integer that identifies</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   the cryptographic hash algorithm used to construct the digest.</td><td> </td><td class="right">   the cryptographic hash algorithm used to construct the digest.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Herein, SHA384 [RFC6234], with value 1, is the only standardized Hash</td><td> </td><td class="right">   Herein, SHA384 [RFC6234], with value 1, is the only standardized Hash</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Algorithm defined for ZONEMD records that MUST be implemented.  When</td><td> </td><td class="right">   Algorithm defined for ZONEMD records that MUST be implemented.  When</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-8" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-8"><em> page 10, line 34<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-8"><em> page 11, line 7<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">2.4.  ZONEMD Example</td><td> </td><td class="right">2.4.  ZONEMD Example</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   The following example shows a ZONEMD RR in presentation format:</td><td> </td><td class="right">   The following example shows a ZONEMD RR in presentation format:</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   example.com. 86400 IN ZONEMD 2018031500 1 1 (</td><td> </td><td class="right">   example.com. 86400 IN ZONEMD 2018031500 1 1 (</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">       FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE</td><td> </td><td class="right">       FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">       7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )</td><td> </td><td class="right">       7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">3.  Calculating the Digest</td><td> </td><td class="right">3.  Calculating the Digest</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0027"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">The algorithm described in this section is designed for the common</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   case of offline DNSSEC signing.  Slight deviations may be permitted</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   or necessary in other situations, such as with unsigned zones or</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   online DNSSEC signing.  Implementations that deviate from the</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   described algorithm are advised to ensure that identical ZONEMD RRs,</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   signatures, and dential-of-existence records are produced.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                                                                         </td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">3.1.  Add ZONEMD Placeholder</td><td> </td><td class="right">3.1.  Add ZONEMD Placeholder</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0028"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   In preparation for calculating the zone <span class="delete">digest,</span> any existing ZONEMD</td><td> </td><td class="rblock">   In preparation for calculating the zone <span class="insert">digest(s),</span> any existing</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   records (and covering RRSIGs) at the zone apex are first deleted.</td><td> </td><td class="rblock">   ZONEMD records (and covering RRSIGs) at the zone apex are first</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   deleted.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Prior to calculation of the digest, and prior to signing with DNSSEC,</td><td> </td><td class="right">   Prior to calculation of the digest, and prior to signing with DNSSEC,</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   one or more placeholder ZONEMD records are added to the zone apex.</td><td> </td><td class="right">   one or more placeholder ZONEMD records are added to the zone apex.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   This ensures that denial-of-existence (NSEC, NSEC3) records are</td><td> </td><td class="right">   This ensures that denial-of-existence (NSEC, NSEC3) records are</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   created correctly if the zone is signed with DNSSEC.  If placeholders</td><td> </td><td class="right">   created correctly if the zone is signed with DNSSEC.  If placeholders</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   were not added prior to signing, the later addition of ZONEMD records</td><td> </td><td class="right">   were not added prior to signing, the later addition of ZONEMD records</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   would also require updating the Type Bit Maps field of any apex NSEC/</td><td> </td><td class="right">   would also require updating the Type Bit Maps field of any apex NSEC/</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   NSEC3 RRs, which then invalidates the calculated digest value.</td><td> </td><td class="right">   NSEC3 RRs, which then invalidates the calculated digest value.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   When multiple ZONEMD RRs are published in the zone, e.g., during an</td><td> </td><td class="right">   When multiple ZONEMD RRs are published in the zone, e.g., during an</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-9" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-9"><em> page 11, line 38<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-9"><em> page 12, line 18<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">   schemes may be defined in future updates to this document.</td><td> </td><td class="right">   schemes may be defined in future updates to this document.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">3.3.1.  The SIMPLE Scheme</td><td> </td><td class="right">3.3.1.  The SIMPLE Scheme</td><td class="lineno"></td></tr>
@@ -445,7 +533,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   is a good choice for zones that are small and/or stable, but probably</td><td> </td><td class="right">   is a good choice for zones that are small and/or stable, but probably</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   not good for zones that are large and/or dynamic.</td><td> </td><td class="right">   not good for zones that are large and/or dynamic.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0024"><td></td></tr>
+      <tr id="diff0029"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Calculation of a zone digest <span class="delete">REQUIRES</span> RRs to be processed in a</td><td> </td><td class="rblock">   Calculation of a zone digest <span class="insert">requires</span> RRs to be processed in a</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   consistent format and ordering.  This specification uses DNSSEC's</td><td> </td><td class="right">   consistent format and ordering.  This specification uses DNSSEC's</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   canonical on-the-wire RR format (without name compression) and</td><td> </td><td class="right">   canonical on-the-wire RR format (without name compression) and</td><td class="lineno"></td></tr>
@@ -458,7 +546,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   When iterating over records in the zone, the following inclusion/</td><td> </td><td class="right">   When iterating over records in the zone, the following inclusion/</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   exclusion rules apply:</td><td> </td><td class="right">   exclusion rules apply:</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0025"><td></td></tr>
+      <tr id="diff0030"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   o  All records in the zone, including glue records, MUST be <span class="delete">included.</span></td><td> </td><td class="rblock">   o  All records in the zone, including glue records, MUST be <span class="insert">included,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      unless excluded by a subsequent rule.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -472,7 +560,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   o  If the zone is signed, DNSSEC RRs MUST be included, except:</td><td> </td><td class="right">   o  If the zone is signed, DNSSEC RRs MUST be included, except:</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-7" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-7"><em> page 13, line 7<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-7"><em> page 13, line 32<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-10" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-10"><em> page 13, line 7<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-10"><em> page 13, line 36<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The recipient of a zone that has a ZONEMD RR verifies the zone by</td><td> </td><td class="right">   The recipient of a zone that has a ZONEMD RR verifies the zone by</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   calculating the digest as follows.  If multiple ZONEMD RRs are</td><td> </td><td class="right">   calculating the digest as follows.  If multiple ZONEMD RRs are</td><td class="lineno"></td></tr>
@@ -483,7 +571,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   1.  The verifier MUST first determine whether or not to expect DNSSEC</td><td> </td><td class="right">   1.  The verifier MUST first determine whether or not to expect DNSSEC</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       records in the zone.  This is done by examining locally</td><td> </td><td class="right">       records in the zone.  This is done by examining locally</td><td class="lineno"></td></tr>
-      <tr id="diff0026"><td></td></tr>
+      <tr id="diff0031"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       configured trust anchors, or querying for (and validating) DS RRs</td><td> </td><td class="rblock">       configured trust anchors, <span class="insert">and, if necessary, querying for (and</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       in the parent zone.  For zones that are provably insecure, or if</td><td> </td><td class="rblock"><span class="insert">       validating) DS RRs in the anchors,</span> or querying for (and</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">       DNSSEC validation is not performed, digest verification continues</td><td> </td><td class="rblock">       validating) DS RRs in the parent zone.  For zones that are</td><td class="lineno"></td></tr>
@@ -500,8 +588,25 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">       MUST have valid signatures, chaining up to a trust anchor.  If</td><td> </td><td class="right">       MUST have valid signatures, chaining up to a trust anchor.  If</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       DNSSEC validation of the SOA or ZONEMD records fails, digest</td><td> </td><td class="right">       DNSSEC validation of the SOA or ZONEMD records fails, digest</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-8" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-8"><em> page 14, line 25<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-8"><em> page 15, line 4<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-11" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-11"><em> page 14, line 16<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-11"><em> page 14, line 46<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">       E.  The zone digest is computed over the zone data as described</td><td> </td><td class="right">       E.  The zone digest is computed over the zone data as described</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">           in Section 3.3, using the Scheme and Hash Algorithm for the</td><td> </td><td class="right">           in Section 3.3, using the Scheme and Hash Algorithm for the</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">           current ZONEMD RR.</td><td> </td><td class="right">           current ZONEMD RR.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">       F.  The computed digest is compared to the received digest.  If</td><td> </td><td class="right">       F.  The computed digest is compared to the received digest.  If</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">           the two digest values match, verification is considered</td><td> </td><td class="right">           the two digest values match, verification is considered</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">           successful.  Otherwise, verification MUST NOT be considered</td><td> </td><td class="right">           successful.  Otherwise, verification MUST NOT be considered</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">           successful for this ZONEMD RR.</td><td> </td><td class="right">           successful for this ZONEMD RR.</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0032"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">[ Maybe remove all the "SHOULD report" above and just say this:]</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   Each time zone verification is performed, the verifier SHOULD report</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   the status as either successful or unsuccessful.  When unsuccessful,</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   the verifier SHOULD report the reason(s) that verification did not</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   succeed.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">                                                                         </td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">5.  IANA Considerations</td><td> </td><td class="right">5.  IANA Considerations</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">5.1.  ZONEMD RRtype</td><td> </td><td class="right">5.1.  ZONEMD RRtype</td><td class="lineno"></td></tr>
@@ -511,14 +616,9 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   subregistry of the "Domain Name System (DNS) Parameters" registry:</td><td> </td><td class="right">   subregistry of the "Domain Name System (DNS) Parameters" registry:</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Type: ZONEMD</td><td> </td><td class="right">   Type: ZONEMD</td><td class="lineno"></td></tr>
-      <tr id="diff0027"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                                                         </span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   Value: 63</td><td> </td><td class="right">   Value: 63</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   Meaning: Message Digest Over Zone Data</td><td> </td><td class="right">   Meaning: Message Digest Over Zone Data</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   Reference: [this document]</td><td> </td><td class="right">   Reference: [this document]</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-12" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-12"><em> page 15, line 4<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-12"><em> page 15, line 31<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">5.2.  ZONEMD Scheme</td><td> </td><td class="right">5.2.  ZONEMD Scheme</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   IANA is requested to create a new registry on the "Domain Name System</td><td> </td><td class="right">   IANA is requested to create a new registry on the "Domain Name System</td><td class="lineno"></td></tr>
@@ -529,7 +629,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Registration Procedure: Specification Required</td><td> </td><td class="right">   Registration Procedure: Specification Required</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Reference: [this document]</td><td> </td><td class="right">   Reference: [this document]</td><td class="lineno"></td></tr>
-      <tr id="diff0028"><td></td></tr>
+      <tr id="diff0033"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">+---------+---------------+----------+------------------+-----------+</span></td><td> </td><td class="rblock">                                                                         </td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   | Value   | Description   | Mnemonic | <span class="delete">Implementation   |</span> Reference |</td><td> </td><td class="rblock">    <span class="insert">+---------+-------------------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|         |               |          | Requirement      |           |</span></td><td> </td><td class="rblock">    | Value   | Description             | Mnemonic | Reference       |</td><td class="lineno"></td></tr>
@@ -552,21 +652,33 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Registry Name: ZONEMD Hash Algorithms</td><td> </td><td class="right">   Registry Name: ZONEMD Hash Algorithms</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="left">   Registration Procedure: Specification Required</td><td> </td><td class="right">   Registration Procedure: Specification Required</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="part-13" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-13"><em> page 15, line 27<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-13"><em> page 16, line 4<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr><td class="lineno"></td><td class="left">                      Table 1: ZONEMD Scheme Registry</td><td> </td><td class="right">                      Table 1: ZONEMD Scheme Registry</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">5.3.  ZONEMD Hash Algorithm</td><td> </td><td class="right">5.3.  ZONEMD Hash Algorithm</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   IANA is requested to create a new registry on the "Domain Name System</td><td> </td><td class="right">   IANA is requested to create a new registry on the "Domain Name System</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   (DNS) Parameters" web page as follows:</td><td> </td><td class="right">   (DNS) Parameters" web page as follows:</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Registry Name: ZONEMD Hash Algorithms</td><td> </td><td class="right">   Registry Name: ZONEMD Hash Algorithms</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left">   Registration Procedure: Specification Required</td><td> </td><td class="right">   Registration Procedure: Specification Required</td><td class="lineno"></td></tr>
+      <tr id="diff0034"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">                                                                         </span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Reference: [this document]</td><td> </td><td class="right">   Reference: [this document]</td><td class="lineno"></td></tr>
-      <tr id="diff0029"><td></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">                                                                         </td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">+---------+-------------+----------+-------------------+------------+</span></td><td> </td><td class="rblock">          | Value   | Description | Mnemonic | Reference       |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   | Value   | Description | Mnemonic | <span class="delete">Implementation    |</span> Reference  |</td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|         |             |          | Requirement       |            |</span></td><td> </td><td class="rblock">          | 0       | Reserved    |          |                 |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   +---------+-------------+----------+-------------------+------------+</span></td><td> </td><td class="rblock">          | 1       | SHA-384     | SHA384   | [this document] |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   | 0       | Reserved    |          |                   |            |</td><td> </td><td class="rblock">          | 2       | SHA-512     | SHA512   | [this document] |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|</span> 1       | SHA-384     | SHA384   | <span class="delete">MUST              |</span> [this      <span class="delete">|</span></td><td> </td><td class="rblock">          | 3-239   | Unassigned  |          |                 |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   |         |             |          |                   |</span> document]  |</td><td> </td><td class="rblock">          | 240-254 | Private Use | N/A      | [his document]  |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   | 2       | SHA-512     | SHA512   | <span class="delete">SHOULD            |</span> [this      <span class="delete">|</span></td><td> </td><td class="rblock">          | 255     | Reserved    |          |                 |</td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   |         |             |          |                   |</span> document]  |</td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
-      <tr><td class="lineno"></td><td class="lblock">   | 3-239   | Unassigned  |          |                   |            |</td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
+      <tr id="diff0035"><td></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">+---------+-------------+----------+-------------------+------------+</span></td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   | Value   | Description | Mnemonic | <span class="delete">Implementation    |</span> Reference  |</td><td> </td><td class="rblock">          | Value   | Description | Mnemonic | Reference       |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|         |             |          | Requirement       |            |</span></td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   +---------+-------------+----------+-------------------+------------+</span></td><td> </td><td class="rblock">          | 0       | Reserved    |          |                 |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   | 0       | Reserved    |          |                   |            |</td><td> </td><td class="rblock">          | 1       | SHA-384     | SHA384   | [this document] |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|</span> 1       | SHA-384     | SHA384   | <span class="delete">MUST              |</span> [this      <span class="delete">|</span></td><td> </td><td class="rblock">          | 2       | SHA-512     | SHA512   | [this document] |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   |         |             |          |                   |</span> document]  |</td><td> </td><td class="rblock">          | 3-239   | Unassigned  |          |                 |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   | 2       | SHA-512     | SHA512   | <span class="delete">SHOULD            |</span> [this      <span class="delete">|</span></td><td> </td><td class="rblock">          | 240-254 | Private Use | N/A      | [his document]  |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"><span class="delete">   |         |             |          |                   |</span> document]  |</td><td> </td><td class="rblock">          | 255     | Reserved    |          |                 |</td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock">   | 3-239   | Unassigned  |          |                   |            |</td><td> </td><td class="rblock">          <span class="insert">+---------+-------------+----------+-----------------+</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">|</span> 240-254 | Private Use | N/A      | <span class="delete">N/A               |</span> [his       <span class="delete">|</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   |         |             |          |                   |</span> document]  |</td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   | 255     | Reserved    |          |                   |            <span class="delete">|</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
@@ -575,10 +687,10 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">                  Table 2: ZONEMD Hash Algorithm Registry</td><td> </td><td class="right">                  Table 2: ZONEMD Hash Algorithm Registry</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">6.  Security Considerations</td><td> </td><td class="right">6.  Security Considerations</td><td class="lineno"></td></tr>
-      <tr id="diff0030"><td></td></tr>
+      <tr id="diff0036"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">6.1.  Attacks Against the Zone Digest</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0031"><td></td></tr>
+      <tr id="diff0037"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">The</span> zone <span class="delete">digest allows</span> the <span class="delete">recipient</span> of <span class="delete">a</span> zone <span class="delete">to verify its</span></td><td> </td><td class="rblock"><span class="insert">6.1.  Using Zone Digest Without DNSSEC</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   integrity.  In conjunction</span> with DNSSEC, <span class="delete">the recipient</span> can</td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">authenticate that it is as published</span> by the <span class="delete">zone originator.</span></td><td> </td><td class="rblock"><span class="insert">   Users of ZONEMD with unsigned zones are advised that it provides no</span></td><td class="lineno"></td></tr>
@@ -608,7 +720,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   of the ZONEMD record.  Such modifications are detectable only with</td><td> </td><td class="right">   of the ZONEMD record.  Such modifications are detectable only with</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   DNSSEC validation.</td><td> </td><td class="right">   DNSSEC validation.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0032"><td></td></tr>
+      <tr id="diff0038"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">6.2.  DNSSESC</span> Timing Considerations</td><td> </td><td class="rblock">   <span class="insert">As stated in [RFC7696], cryptographic algorithms age and become</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   weaker as cryptanalysis techniques and computing resources improve</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   with time.  Implementors and publishers of zone digests should</span></td><td class="lineno"></td></tr>
@@ -637,7 +749,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   through its entire signature validity period, the zone operator</td><td> </td><td class="right">   through its entire signature validity period, the zone operator</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   should ensure that KSK rollover timing takes this into consideration.</td><td> </td><td class="right">   should ensure that KSK rollover timing takes this into consideration.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0033"><td></td></tr>
+      <tr id="diff0039"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">6.<span class="delete">3</span>.  Attacks Utilizing ZONEMD Queries</td><td> </td><td class="rblock">6.<span class="insert">5</span>.  Attacks Utilizing ZONEMD Queries</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Nothing in this specification prevents clients from making, and</td><td> </td><td class="right">   Nothing in this specification prevents clients from making, and</td><td class="lineno"></td></tr>
@@ -651,7 +763,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   octets to a DNS response, for digest types defined herein.  Other RR</td><td> </td><td class="right">   octets to a DNS response, for digest types defined herein.  Other RR</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   types, such as DNSKEY, can result in larger amplification effects.</td><td> </td><td class="right">   types, such as DNSKEY, can result in larger amplification effects.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0034"><td></td></tr>
+      <tr id="diff0040"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">6.<span class="delete">4</span>.  Resilience and Fragility</td><td> </td><td class="rblock">6.<span class="insert">6</span>.  Resilience and Fragility</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   ZONEMD is used to detect incomplete or corrupted zone data prior to</td><td> </td><td class="right">   ZONEMD is used to detect incomplete or corrupted zone data prior to</td><td class="lineno"></td></tr>
@@ -664,7 +776,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   indistinguishable from intentional tampering, and could lead to</td><td> </td><td class="right">   indistinguishable from intentional tampering, and could lead to</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   service failures when verification is performed automatically.</td><td> </td><td class="right">   service failures when verification is performed automatically.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-9" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-9"><em> page 18, line 41<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-9"><em> page 19, line 22<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-14" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-14"><em> page 18, line 41<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-14"><em> page 19, line 25<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">9.  Acknowledgments</td><td> </td><td class="right">9.  Acknowledgments</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   The authors wish to thank David Blacka, Scott Hollenbeck, and Rick</td><td> </td><td class="right">   The authors wish to thank David Blacka, Scott Hollenbeck, and Rick</td><td class="lineno"></td></tr>
@@ -675,7 +787,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   Kaliski, Shane Kerr, Matt Larson, Barry Leiba, John Levine, Ed Lewis,</td><td> </td><td class="right">   Kaliski, Shane Kerr, Matt Larson, Barry Leiba, John Levine, Ed Lewis,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Matt Pounsett, Mukund Sivaraman, Petr Spacek, Ondrej Sury, Willem</td><td> </td><td class="right">   Matt Pounsett, Mukund Sivaraman, Petr Spacek, Ondrej Sury, Willem</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   Toorop, Florian Weimer, Tim Wicinski, Wouter Wijngaards, Paul</td><td> </td><td class="right">   Toorop, Florian Weimer, Tim Wicinski, Wouter Wijngaards, Paul</td><td class="lineno"></td></tr>
-      <tr id="diff0035"><td></td></tr>
+      <tr id="diff0041"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   Wouters, and other members of the <span class="delete">DNS</span> working group for their input.</td><td> </td><td class="rblock">   Wouters, and other members of the <span class="insert">DNSOP</span> working group for their</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   input.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
@@ -689,7 +801,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   From -00 to -01:</td><td> </td><td class="right">   From -00 to -01:</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-10" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-10"><em> page 25, line 11<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-10"><em> page 25, line 47<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-15" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-15"><em> page 25, line 11<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-15"><em> page 25, line 47<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   o  SECDIR review: Forgot to delete sentence about IANA policy for</td><td> </td><td class="right">   o  SECDIR review: Forgot to delete sentence about IANA policy for</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">      adding new hash algorithms.</td><td> </td><td class="right">      adding new hash algorithms.</td><td class="lineno"></td></tr>
@@ -700,7 +812,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   o  SECDIR review: Update estimates of ZONEMD RR size.</td><td> </td><td class="right">   o  SECDIR review: Update estimates of ZONEMD RR size.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0036"><td></td></tr>
+      <tr id="diff0042"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">From -12 to -13:</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Added reference to draft-ietf-dprive-xfr-over-tls.</span></td><td class="lineno"></td></tr>
@@ -710,8 +822,19 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Added Use of Multiple ZONEMD Hash Algorithms to Security</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      Considerations.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Added Using Zone Digest Without DNSSEC to Security Considerations.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Added notes about the need for algorithm agility due to crypto</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      algorithm aging.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Further clarified that only with DNSSEC can ZONEMD guarantee</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      integrity and authenticity.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  For unsigned zones, ZONEMD serves only as a checksum.</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Calculation algorithm is designed for common case of offline</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      signing.  Deviations may be allowed as long as the end result is</span></td><td class="lineno"></td></tr>
+      <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      the same.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert"></span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">   o  Numerous small edits and clarifications from IESG reviewer</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">      comments.</span></td><td class="lineno"></td></tr>
@@ -727,7 +850,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   [RFC1035]  Mockapetris, P., "Domain names - implementation and</td><td> </td><td class="right">   [RFC1035]  Mockapetris, P., "Domain names - implementation and</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,</td><td> </td><td class="right">              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-11" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-11"><em> page 26, line 10<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-11"><em> page 27, line 16<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-16" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-16"><em> page 26, line 10<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-16"><em> page 27, line 26<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">              DENIC, "Background of the Partial Failure of the Name</td><td> </td><td class="right">              DENIC, "Background of the Partial Failure of the Name</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              Service for .de Domains", May 2010, &lt;https://web.archive.o</td><td> </td><td class="right">              Service for .de Domains", May 2010, &lt;https://web.archive.o</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              rg/web/20100618032705/https://www.denic.de/en/denic-in-</td><td> </td><td class="right">              rg/web/20100618032705/https://www.denic.de/en/denic-in-</td><td class="lineno"></td></tr>
@@ -738,7 +861,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              pkcs11-hsm) and validation, and zone digest (ZONEMD)",</td><td> </td><td class="right">              pkcs11-hsm) and validation, and zone digest (ZONEMD)",</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              April 2020, &lt;https://github.com/niclabs/dns-tools&gt;.</td><td> </td><td class="right">              April 2020, &lt;https://github.com/niclabs/dns-tools&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0037"><td></td></tr>
+      <tr id="diff0043"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">[I-D.ietf-dprive-xfr-over-tls]</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Toorop, W., Dickinson, S., Sahib, S., Aras, P., and A.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Mankin, "DNS Zone Transfer-over-TLS", draft-ietf-dprive-</span></td><td class="lineno"></td></tr>
@@ -755,7 +878,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC1995]  Ohta, M., "Incremental Zone Transfer in DNS", RFC 1995,</td><td> </td><td class="right">   [RFC1995]  Ohta, M., "Incremental Zone Transfer in DNS", RFC 1995,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-12" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-12"><em> page 26, line 45<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-12"><em> page 28, line 9<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-17" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-17"><em> page 26, line 45<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-17"><em> page 28, line 18<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   [RFC2845]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.</td><td> </td><td class="right">   [RFC2845]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              Wellington, "Secret Key Transaction Authentication for DNS</td><td> </td><td class="right">              Wellington, "Secret Key Transaction Authentication for DNS</td><td class="lineno"></td></tr>
@@ -766,7 +889,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              ( SIG(0)s )", RFC 2931, DOI 10.17487/RFC2931, September</td><td> </td><td class="right">              ( SIG(0)s )", RFC 2931, DOI 10.17487/RFC2931, September</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              2000, &lt;https://www.rfc-editor.org/info/rfc2931&gt;.</td><td> </td><td class="right">              2000, &lt;https://www.rfc-editor.org/info/rfc2931&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0038"><td></td></tr>
+      <tr id="diff0044"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">[RFC3258]  Hardie, T., "Distributing Authoritative Name Servers via</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Shared Unicast Addresses", RFC 3258, DOI 10.17487/RFC3258,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              April 2002, &lt;https://www.rfc-editor.org/info/rfc3258&gt;.</span></td><td class="lineno"></td></tr>
@@ -776,7 +899,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              DOI 10.17487/RFC4880, November 2007,</td><td> </td><td class="right">              DOI 10.17487/RFC4880, November 2007,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc4880&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc4880&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0039"><td></td></tr>
+      <tr id="diff0045"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">[RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Security (DNSSEC) Hashed Authenticated Denial of</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,</span></td><td class="lineno"></td></tr>
@@ -796,7 +919,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,</td><td> </td><td class="right">              BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc7696&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc7696&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0040"><td></td></tr>
+      <tr id="diff0046"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   <span class="delete">[RFC7858]  Hu, Z., Zhu, L., Heidemann, J., Mankin, A., Wessels, D.,</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">              and P. Hoffman, "Specification for DNS over Transport</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">              Layer Security (TLS)", RFC 7858, DOI 10.17487/RFC7858, May</span></td><td> </td><td class="rblock"></td><td class="lineno"></td></tr>
@@ -819,7 +942,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              a Resolver", RFC 8806, DOI 10.17487/RFC8806, June 2020,</td><td> </td><td class="right">              a Resolver", RFC 8806, DOI 10.17487/RFC8806, June 2020,</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              &lt;https://www.rfc-editor.org/info/rfc8806&gt;.</td><td> </td><td class="right">              &lt;https://www.rfc-editor.org/info/rfc8806&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0041"><td></td></tr>
+      <tr id="diff0047"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock">   <span class="insert">[RFC8901]  Huque, S., Aras, P., Dickinson, J., Vcelak, J., and D.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              Blacka, "Multi-Signer DNSSEC Models", RFC 8901,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"></td><td> </td><td class="rblock"><span class="insert">              DOI 10.17487/RFC8901, September 2020,</span></td><td class="lineno"></td></tr>
@@ -829,7 +952,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">              Root Server Operators, "Root Server Technical Operations",</td><td> </td><td class="right">              Root Server Operators, "Root Server Technical Operations",</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">              July 2018, &lt;https://www.root-servers.org/&gt;.</td><td> </td><td class="right">              July 2018, &lt;https://www.root-servers.org/&gt;.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="diff0042"><td></td></tr>
+      <tr id="diff0048"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   [RPZ]      <span class="delete">Vixie, P. and V. Schryver, "DNS Response Policy Zones</span></td><td> </td><td class="rblock">   [RPZ]      <span class="insert">Wikipedia, "Response policy zone", May 2020,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">              (RPZ)", draft-vixie-dnsop-dns-rpz-00 (work in progress),</span></td><td> </td><td class="rblock"><span class="insert">              &lt;https://en.wikipedia.org/w/</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">              June 2018, &lt;https://tools.ietf.org/html/</span></td><td> </td><td class="rblock"><span class="insert">              index.php?title=Response_policy_zone&amp;oldid=960043728&gt;.</span></td><td class="lineno"></td></tr>
@@ -845,7 +968,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   This appendix contains example zones with accurate ZONEMD records.</td><td> </td><td class="right">   This appendix contains example zones with accurate ZONEMD records.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   These can be used to verify an implementation of the zone digest</td><td> </td><td class="right">   These can be used to verify an implementation of the zone digest</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
-      <tr id="part-13" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-13"><em> page 35, line 10<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-13"><em> page 36, line 10<span class="hide"> &para;</span></em></a></th><td></td></tr>
+      <tr id="part-18" class="change" ><td></td><th><small>skipping to change at</small><a href="#part-18"><em> page 35, line 10<span class="hide"> &para;</span></em></a></th><th> </th><th><small>skipping to change at</small><a href="#part-18"><em> page 36, line 10<span class="hide"> &para;</span></em></a></th><td></td></tr>
       <tr><td class="lineno"></td><td class="left">       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )</td><td> </td><td class="right">       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (</td><td> </td><td class="right">   root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">       f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97</td><td> </td><td class="right">       f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97</td><td class="lineno"></td></tr>
@@ -856,7 +979,7 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   RFC Editor: Please retain this section upon publication.</td><td> </td><td class="right">   RFC Editor: Please retain this section upon publication.</td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left"></td><td> </td><td class="right"></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="left">   This section records the status of known implementations of the</td><td> </td><td class="right">   This section records the status of known implementations of the</td><td class="lineno"></td></tr>
-      <tr id="diff0043"><td></td></tr>
+      <tr id="diff0049"><td></td></tr>
       <tr><td class="lineno"></td><td class="lblock">   protocol defined by this specification at the time of <span class="delete">posting of this</span></td><td> </td><td class="rblock">   protocol defined by this specification at the time of <span class="insert">publication,</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   Internet-Draft,</span> and is <span class="delete">based on a proposal described in RFC 7942.</span></td><td> </td><td class="rblock">   and is <span class="insert">inspired by</span> the <span class="insert">concepts described</span> in <span class="insert">RFC7942.</span></td><td class="lineno"></td></tr>
       <tr><td class="lineno"></td><td class="lblock"><span class="delete">   The description of implementations in this section is intended to</span></td><td> </td><td class="rblock">                                                                         </td><td class="lineno"></td></tr>
@@ -878,8 +1001,8 @@ document.onkeydown = function(e) {
       <tr><td class="lineno"></td><td class="left">   o  Read an input zone and output a zone with the ZONEMD placeholder.</td><td> </td><td class="right">   o  Read an input zone and output a zone with the ZONEMD placeholder.</td><td class="lineno"></td></tr>
 
      <tr><td></td><td class="left"></td><td> </td><td class="right"></td><td></td></tr>
-     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 43 change blocks.&nbsp;</th></tr>
-     <tr class="stats"><td></td><th><i>143 lines changed or deleted</i></th><th><i> </i></th><th><i>203 lines changed or added</i></th><td></td></tr>
+     <tr id="end" bgcolor="gray"><th colspan="5" align="center">&nbsp;End of changes. 49 change blocks.&nbsp;</th></tr>
+     <tr class="stats"><td></td><th><i>153 lines changed or deleted</i></th><th><i> </i></th><th><i>240 lines changed or added</i></th><td></td></tr>
      <tr><td colspan="5" align="center" class="small"><br/>This html diff was produced by rfcdiff 1.48. The latest version is available from <a href="http://www.tools.ietf.org/tools/rfcdiff/" >http://tools.ietf.org/tools/rfcdiff/</a> </td></tr>
    </table>
    </body>
