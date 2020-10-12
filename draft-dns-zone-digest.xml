@@ -814,23 +814,17 @@ where "|" denotes concatenation.
               </t>
               <t>
                 The Scheme field MUST be checked.  If the
-                verifier does not support the given scheme, verification MUST NOT be considered successful with this &RRNAME; RR and it
-                SHOULD report that the RR's digest could not be verified
-                due to an unsupported scheme.
+                verifier does not support the given scheme, verification MUST NOT be considered successful with this &RRNAME; RR.
               </t>
               <t>
                 The Hash Algorithm field MUST be checked.  If the
-                verifier does not support the given hash algorithm, verification MUST NOT be considered successful with this &RRNAME; RR and it
-                SHOULD report that the RR's digest could not be verified
-                due to an unsupported algorithm.
+                verifier does not support the given hash algorithm, verification MUST NOT be considered successful with this &RRNAME; RR.
               </t>
               <t>
                 The Digest field size MUST be checked.  If the size of the
                 given Digest field is smaller than 12 octets, or if the size is not equal to the size expected for the
                 corresponding Hash Algorithm,
-                verification MUST NOT be considered successful with this &RRNAME; RR and
-                the verifier SHOULD report that the RR's digest
-                could not be verified due to an incorrect digest length.
+                verification MUST NOT be considered successful with this &RRNAME; RR.
               </t>
               <t>
                 The zone digest is computed over the zone data as
@@ -846,9 +840,6 @@ where "|" denotes concatenation.
             </list>
           </t>
         </list>
-      </t>
-      <t>
-        [ Maybe remove all the "SHOULD report" above and just say this:]
       </t>
       <t>
         Each time zone verification is performed, the verifier SHOULD
