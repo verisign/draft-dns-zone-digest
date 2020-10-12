@@ -785,24 +785,28 @@ where "|" denotes concatenation.
           <t anchor="verify-check-dnssec">
             The verifier MUST first determine
             whether or not to expect DNSSEC records in the zone.
-            This is done by attempting DNSSEC validation of the zone's DNSKEY RRSet.  Validation uses locally configured trust
+            This is done by validating the zone's DNSKEY RRSet and determining its DNSSEC state (<xref target="RFC4033"/>).  Validation uses locally configured trust
             anchors, and, if necessary, querying for intermediate keys and DS records in
-            ancestor zones.  For zones whose DNSKEY RRSet is Insecure or Indeterminate (xref <target="RFC4033.txt"/>),
+            ancestor zones.
+            <vspace/>
+            <vspace/>
+            For zones whose DNSKEY RRSet is Insecure or Indeterminate,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
+            For zones whose DNSKEY RRSet is Bogus, digest verification MUST NOT be considered successful.
           </t>
           <t anchor="verify-check-existence">
             For zones whose DNSKEY RRSet is Secure, 
             the zone's denial of existence (NSEC/NSEC3) records prove whether or not the apex &RRNAME; RRSet exists.
             When it is proven to not exist, digest verification
-            cannot occur.  If the &RRNAME; record is proven to
+            cannot occur.  When it is proven to
             exist, but is not found in the zone, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-dnssec-validate">
-            For zones that are provably secure, the SOA and
-            &RRNAME; RRSets MUST have valid signatures, chaining
-            up to a trust anchor.  If DNSSEC validation of the SOA
+            For zones whose DNSKEY RRSet is Secure, the SOA and
+            &RRNAME; RRSets MUST have valid signatures.
+            If DNSSEC validation of the SOA
             or &RRNAME; records fails, digest verification MUST NOT
             be considered successful.
           </t>
@@ -1359,6 +1363,7 @@ where "|" denotes concatenation.
     &RFC2119;
     &RFC1034;
     &RFC1035;
+    &RFC4033;
     &RFC4034;
     &RFC6234;
     &RFC8174;
