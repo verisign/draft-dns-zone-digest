@@ -778,7 +778,6 @@ where "|" denotes concatenation.
             whether or not to expect DNSSEC records in the zone.
             This is done by examining locally configured trust
             anchors, and, if necessary, querying for (and validating) DS RRs in the
-            anchors, or querying for (and validating) DS RRs in the
 <!-- XXX Roman suggests changing "provably insecure" etc -->
             parent zone.  For zones that are provably insecure,
             or if DNSSEC validation is not performed,
