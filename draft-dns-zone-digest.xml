@@ -189,8 +189,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
         This document specifies an RR type that provides a
         cryptographic message digest of the data in a zone.
         It allows a receiver of the zone to verify the zone's
-        integrity, and when used in combination with DNSSEC,
-        its authenticity.
+        integrity and authenticity when used in combination with DNSSEC.
         The
         digest RR is a part of the zone itself, allowing
         verification of the zone, no matter how it is
