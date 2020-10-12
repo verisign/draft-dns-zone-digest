@@ -204,7 +204,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
       </t>
       <section title="Motivation">
         <t>
-          The motivation for this protocol enhancement is the desire
+          The primary motivation for this protocol enhancement is the desire
           to verify the data integrity and origin authenticity of a stand-alone zone,
           regardless of how it is transmitted.  A consumer of zone data
           should be able to verify that it is as-published by the
