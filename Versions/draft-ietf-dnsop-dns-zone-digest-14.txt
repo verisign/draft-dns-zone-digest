@@ -136,8 +136,8 @@ Internet-Draft               DNS Zone Digest                October 2020
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  19
    9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  19
    10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  19
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  26
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  27
      11.2.  Informative References . . . . . . . . . . . . . . . . .  27
    Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  30
      A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  30
@@ -1439,15 +1439,15 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    From -13 to -14:
 
-   o
+   o  A few more edits and clarifications from IESG reviewer comments.
 
-11.  References
+   o  Moved paragraph about multiple digests to new section titled
+      Including ZONEMD RRs in a Zone.
 
-11.1.  Normative References
+   o  MUST be implemented -> MUST be supported by implementations.
 
-   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
-              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
-              <https://www.rfc-editor.org/info/rfc1034>.
+   o  Consolidated SHOULD requirements about error reporting to single
+      place at the conclusion of verification.
 
 
 
@@ -1457,6 +1457,14 @@ Wessels, et al.          Expires April 12, 2021                [Page 26]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+11.  References
+
+11.1.  Normative References
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
+              <https://www.rfc-editor.org/info/rfc1034>.
 
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
@@ -1498,6 +1506,14 @@ Internet-Draft               DNS Zone Digest                October 2020
               pkcs11-hsm) and validation, and zone digest (ZONEMD)",
               April 2020, <https://github.com/niclabs/dns-tools>.
 
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 27]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    [I-D.ietf-dprive-xfr-over-tls]
               Toorop, W., Dickinson, S., Sahib, S., Aras, P., and A.
               Mankin, "DNS Zone Transfer-over-TLS", draft-ietf-dprive-
@@ -1506,13 +1522,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    [InterNIC]
               ICANN, "InterNIC FTP site", May 2018,
               <ftp://ftp.internic.net/domain/>.
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 27]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    [ldns-zone-digest]
               Verisign, "Implementation of Message Digests for DNS Zones
@@ -1554,21 +1563,17 @@ Internet-Draft               DNS Zone Digest                October 2020
               DOI 10.17487/RFC4880, November 2007,
               <https://www.rfc-editor.org/info/rfc4880>.
 
-   [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
-              Security (DNSSEC) Hashed Authenticated Denial of
-              Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,
-              <https://www.rfc-editor.org/info/rfc5155>.
-
-
-
-
-
 
 
 Wessels, et al.          Expires April 12, 2021                [Page 28]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
+              Security (DNSSEC) Hashed Authenticated Denial of
+              Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,
+              <https://www.rfc-editor.org/info/rfc5155>.
 
    [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
               Mail Extensions (S/MIME) Version 3.2 Message
@@ -1614,17 +1619,17 @@ Internet-Draft               DNS Zone Digest                October 2020
               <https://en.wikipedia.org/w/
               index.php?title=Response_policy_zone&oldid=960043728>.
 
-   [ZoneDigestHackathon]
-              Kerr, S., "Prototype implementation of ZONEMD for the IETF
-              102 hackathon in Python", July 2018,
-              <https://github.com/shane-kerr/ZoneDigestHackathon>.
-
 
 
 Wessels, et al.          Expires April 12, 2021                [Page 29]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [ZoneDigestHackathon]
+              Kerr, S., "Prototype implementation of ZONEMD for the IETF
+              102 hackathon in Python", July 2018,
+              <https://github.com/shane-kerr/ZoneDigestHackathon>.
 
 Appendix A.  Example Zones With Digests
 
@@ -1655,11 +1660,6 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
-
-
-
-
-
 
 
 

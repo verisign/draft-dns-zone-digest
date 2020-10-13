@@ -1350,7 +1350,10 @@ where "|" denotes concatenation.
       </list></t>
       <t>From -13 to -14:
       <list style="symbols">
-        <t></t>
+        <t>A few more edits and clarifications from IESG reviewer comments.</t>
+        <t>Moved paragraph about multiple digests to new section titled Including &RRNAME; RRs in a Zone.</t>
+        <t>MUST be implemented -> MUST be supported by implementations.</t>
+        <t>Consolidated SHOULD requirements about error reporting to single place at the conclusion of verification.</t>
       </list></t>
     </section>
 
