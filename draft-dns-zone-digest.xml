@@ -505,7 +505,7 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           </t>
           <t>
             Herein, SIMPLE, with Scheme value 1, is the only
-            standardized Scheme defined for &RRNAME; records and it MUST be implemented.  The Scheme registry
+            standardized Scheme defined for &RRNAME; records and it MUST be supported by implementations.  The Scheme registry
             is further described in <xref target="iana"/>.
           </t>
           <t>
@@ -522,14 +522,14 @@ An alternate method (rfc include) is described in the references. --><!ENTITY RF
           <t>
             Herein, SHA384 <xref target="RFC6234"/>, with Hash Algorithm value 1, is the only
             standardized
-            Hash Algorithm defined for &RRNAME; records that MUST be implemented.
+            Hash Algorithm defined for &RRNAME; records that MUST be supported by implementations.
             When SHA384 is used, the size of the Digest field is 48 octets.
             The result of the SHA384 digest algorithm MUST NOT be truncated, and the entire
             48 octet digest is published in the &RRNAME; record.
           </t>
           <t>
             SHA512 <xref target="RFC6234"/>, with Hash Algorithm value 2, is also defined for &RRNAME; records,
-            and SHOULD be implemented.
+            and SHOULD be supported by implementations.
             When SHA512 is used, the size of the Digest field is 64 octets.
             The result of the SHA512 digest algorithm MUST NOT be truncated, and the entire
             64 octet digest is published in the &RRNAME; record.
