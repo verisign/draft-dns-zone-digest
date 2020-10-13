@@ -789,20 +789,20 @@ where "|" denotes concatenation.
             anchors, and, if necessary, querying for and validating DS RRs in the
             parent zone, the verifier knows whether or not the zone to be verified
             should include DNSSEC keys and signatures.
-            For zones that are known to lack signatures,
+            For zones where signatures are not expected,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
           </t>
           <t anchor="verify-check-existence">
-            For zones that are shown to include signatures, the existence of
-            the apex &RRNAME; record MUST be verified.  If the DNSSEC data proves the &RRNAME;
+            For zones where signatures are expected, the existence of
+            the apex &RRNAME; record MUST be validated.  If the DNSSEC data proves the &RRNAME;
             RRSet does not exist, digest verification
             cannot occur.  If the DNSSEC data proves the &RRNAME; does
             exist, but is not found in the zone, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-dnssec-validate">
-            For zones that are shown to include signatures, the SOA and
+            For zones where signatures are expected, the SOA and
             &RRNAME; RRSets MUST have valid signatures, chaining
             up to a trust anchor.  If DNSSEC validation of the SOA
             or &RRNAME; RRSets fails, digest verification MUST NOT
