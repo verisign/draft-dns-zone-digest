@@ -1458,6 +1458,10 @@ Wessels, et al.          Expires April 12, 2021                [Page 26]
 Internet-Draft               DNS Zone Digest                October 2020
 
 
+   o  Rephrased "provably insecure" etc as using DNSSEC validation to
+      know whether or not the zone is expected to have keys and
+      signatures.
+
 11.  References
 
 11.1.  Normative References
@@ -1501,10 +1505,6 @@ Internet-Draft               DNS Zone Digest                October 2020
               rg/web/20100618032705/https://www.denic.de/en/denic-in-
               dialogue/news/2733.html>.
 
-   [DnsTools]
-              NIC Chile Labs, "DNS tools for zone signature (file,
-              pkcs11-hsm) and validation, and zone digest (ZONEMD)",
-              April 2020, <https://github.com/niclabs/dns-tools>.
 
 
 
@@ -1513,6 +1513,11 @@ Wessels, et al.          Expires April 12, 2021                [Page 27]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [DnsTools]
+              NIC Chile Labs, "DNS tools for zone signature (file,
+              pkcs11-hsm) and validation, and zone digest (ZONEMD)",
+              April 2020, <https://github.com/niclabs/dns-tools>.
 
    [I-D.ietf-dprive-xfr-over-tls]
               Toorop, W., Dickinson, S., Sahib, S., Aras, P., and A.
@@ -1558,17 +1563,17 @@ Internet-Draft               DNS Zone Digest                October 2020
               Shared Unicast Addresses", RFC 3258, DOI 10.17487/RFC3258,
               April 2002, <https://www.rfc-editor.org/info/rfc3258>.
 
-   [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
-              Thayer, "OpenPGP Message Format", RFC 4880,
-              DOI 10.17487/RFC4880, November 2007,
-              <https://www.rfc-editor.org/info/rfc4880>.
-
 
 
 Wessels, et al.          Expires April 12, 2021                [Page 28]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
+              Thayer, "OpenPGP Message Format", RFC 4880,
+              DOI 10.17487/RFC4880, November 2007,
+              <https://www.rfc-editor.org/info/rfc4880>.
 
    [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
               Security (DNSSEC) Hashed Authenticated Denial of
@@ -1611,13 +1616,8 @@ Internet-Draft               DNS Zone Digest                October 2020
               DOI 10.17487/RFC8901, September 2020,
               <https://www.rfc-editor.org/info/rfc8901>.
 
-   [RootServers]
-              Root Server Operators, "Root Server Technical Operations",
-              July 2018, <https://www.root-servers.org/>.
 
-   [RPZ]      Wikipedia, "Response policy zone", May 2020,
-              <https://en.wikipedia.org/w/
-              index.php?title=Response_policy_zone&oldid=960043728>.
+
 
 
 
@@ -1625,6 +1625,14 @@ Wessels, et al.          Expires April 12, 2021                [Page 29]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [RootServers]
+              Root Server Operators, "Root Server Technical Operations",
+              July 2018, <https://www.root-servers.org/>.
+
+   [RPZ]      Wikipedia, "Response policy zone", May 2020,
+              <https://en.wikipedia.org/w/
+              index.php?title=Response_policy_zone&oldid=960043728>.
 
    [ZoneDigestHackathon]
               Kerr, S., "Prototype implementation of ZONEMD for the IETF
@@ -1660,14 +1668,6 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
-
-
-
-
-
-
-
-
 
 
 

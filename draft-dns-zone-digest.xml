@@ -1354,6 +1354,7 @@ where "|" denotes concatenation.
         <t>Moved paragraph about multiple digests to new section titled Including &RRNAME; RRs in a Zone.</t>
         <t>MUST be implemented -> MUST be supported by implementations.</t>
         <t>Consolidated SHOULD requirements about error reporting to single place at the conclusion of verification.</t>
+        <t>Rephrased "provably insecure" etc as using DNSSEC validation to know whether or not the zone is expected to have keys and signatures.</t>
       </list></t>
     </section>
 
