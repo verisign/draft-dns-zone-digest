@@ -785,26 +785,27 @@ where "|" denotes concatenation.
           <t anchor="verify-check-dnssec">
             The verifier MUST first determine
             whether or not to expect DNSSEC records in the zone.
-            This is done by examining locally configured trust
-            anchors, and, if necessary, querying for (and validating) DS RRs in the
-<!-- XXX Roman suggests changing "provably insecure" etc -->
-            parent zone.  For zones that are provably insecure,
+            By examining locally configured trust
+            anchors, and, if necessary, querying for and validating DS RRs in the
+            parent zone, the verifier knows whether or not the zone to be verified
+            should include DNSSEC keys and signatures.
+            For zones that are known to lack signatures,
             or if DNSSEC validation is not performed,
             digest verification continues at step <xref target="verify-check-digest-count" format="counter"/> below.
           </t>
           <t anchor="verify-check-existence">
-            For zones that are provably secure, the existence of
-            the apex &RRNAME; record MUST be verified.  If the &RRNAME;
-            record provably does not exist, digest verification
-            cannot occur.  If the &RRNAME; record does provably
+            For zones that are shown to include signatures, the existence of
+            the apex &RRNAME; record MUST be verified.  If the DNSSEC data proves the &RRNAME;
+            RRSet does not exist, digest verification
+            cannot occur.  If the DNSSEC data proves the &RRNAME; does
             exist, but is not found in the zone, digest verification
             MUST NOT be considered successful.
           </t>
           <t anchor="verify-dnssec-validate">
-            For zones that are provably secure, the SOA and
+            For zones that are shown to include signatures, the SOA and
             &RRNAME; RRSets MUST have valid signatures, chaining
             up to a trust anchor.  If DNSSEC validation of the SOA
-            or &RRNAME; records fails, digest verification MUST NOT
+            or &RRNAME; RRSets fails, digest verification MUST NOT
             be considered successful.
           </t>
           <t anchor="verify-check-digest-count">
