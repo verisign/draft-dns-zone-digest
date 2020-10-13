@@ -139,7 +139,7 @@ Internet-Draft               DNS Zone Digest                October 2020
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  26
      11.2.  Informative References . . . . . . . . . . . . . . . . .  27
-   Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  29
+   Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  30
      A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  30
      A.2.  Complex EXAMPLE Zone  . . . . . . . . . . . . . . . . . .  30
      A.3.  EXAMPLE Zone with multiple digests  . . . . . . . . . . .  31
@@ -468,8 +468,9 @@ Internet-Draft               DNS Zone Digest                October 2020
    hashing function.
 
    Herein, SIMPLE, with Scheme value 1, is the only standardized Scheme
-   defined for ZONEMD records and it MUST be implemented.  The Scheme
-   registry is further described in Section 5.
+   defined for ZONEMD records and it MUST be supported by
+   implementations.  The Scheme registry is further described in
+   Section 5.
 
    Scheme values 240-254 are allocated for Private Use.
 
@@ -480,21 +481,20 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    Herein, SHA384 [RFC6234], with Hash Algorithm value 1, is the only
    standardized Hash Algorithm defined for ZONEMD records that MUST be
-   implemented.  When SHA384 is used, the size of the Digest field is 48
-   octets.  The result of the SHA384 digest algorithm MUST NOT be
-   truncated, and the entire 48 octet digest is published in the ZONEMD
-   record.
+   supported by implementations.  When SHA384 is used, the size of the
+   Digest field is 48 octets.  The result of the SHA384 digest algorithm
+   MUST NOT be truncated, and the entire 48 octet digest is published in
+   the ZONEMD record.
 
    SHA512 [RFC6234], with Hash Algorithm value 2, is also defined for
-   ZONEMD records, and SHOULD be implemented.  When SHA512 is used, the
-   size of the Digest field is 64 octets.  The result of the SHA512
-   digest algorithm MUST NOT be truncated, and the entire 64 octet
-   digest is published in the ZONEMD record.
+   ZONEMD records, and SHOULD be supported by implementations.  When
+   SHA512 is used, the size of the Digest field is 64 octets.  The
+   result of the SHA512 digest algorithm MUST NOT be truncated, and the
+   entire 64 octet digest is published in the ZONEMD record.
 
    Hash Algorithm values 240-254 are allocated for Private Use.
 
    The Hash Algorithm registry is further described in Section 5.
-
 
 
 
@@ -550,7 +550,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    The zone operator chooses an appropriate hash algorithm and scheme,
    and includes the calculated zone digest in the apex ZONEMD RRset.
-   The zone operator may choose any of the defined hash algorithms and
+   The zone operator MAY choose any of the defined hash algorithms and
    schemes, including the private use code points.
 
 
@@ -1428,7 +1428,15 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    From -13 to -14:
 
-   o
+   o  A few more edits and clarifications from IESG reviewer comments.
+
+   o  Moved paragraph about multiple digests to new section titled
+      Including ZONEMD RRs in a Zone.
+
+   o  MUST be implemented -> MUST be supported by implementations.
+
+   o  Consolidated SHOULD requirements about error reporting to single
+      place at the conclusion of verification.
 
 11.  References
 
@@ -1442,14 +1450,6 @@ Internet-Draft               DNS Zone Digest                October 2020
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
               November 1987, <https://www.rfc-editor.org/info/rfc1035>.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119,
-              DOI 10.17487/RFC2119, March 1997,
-              <https://www.rfc-editor.org/info/rfc2119>.
-
-
-
-
 
 
 
@@ -1457,6 +1457,11 @@ Wessels, et al.          Expires April 12, 2021                [Page 26]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              <https://www.rfc-editor.org/info/rfc2119>.
 
    [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Resource Records for the DNS Security Extensions",
@@ -1498,6 +1503,17 @@ Internet-Draft               DNS Zone Digest                October 2020
               ICANN, "InterNIC FTP site", May 2018,
               <ftp://ftp.internic.net/domain/>.
 
+
+
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 27]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    [ldns-zone-digest]
               Verisign, "Implementation of Message Digests for DNS Zones
               using the ldns library", July 2018,
@@ -1506,13 +1522,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    [RFC1995]  Ohta, M., "Incremental Zone Transfer in DNS", RFC 1995,
               DOI 10.17487/RFC1995, August 1996,
               <https://www.rfc-editor.org/info/rfc1995>.
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 27]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    [RFC2065]  Eastlake 3rd, D. and C. Kaufman, "Domain Name System
               Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
@@ -1550,15 +1559,6 @@ Internet-Draft               DNS Zone Digest                October 2020
               Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,
               <https://www.rfc-editor.org/info/rfc5155>.
 
-   [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
-              Mail Extensions (S/MIME) Version 3.2 Message
-              Specification", RFC 5751, DOI 10.17487/RFC5751, January
-              2010, <https://www.rfc-editor.org/info/rfc5751>.
-
-   [RFC5936]  Lewis, E. and A. Hoenes, Ed., "DNS Zone Transfer Protocol
-              (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
-              <https://www.rfc-editor.org/info/rfc5936>.
-
 
 
 
@@ -1569,6 +1569,15 @@ Wessels, et al.          Expires April 12, 2021                [Page 28]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+              Mail Extensions (S/MIME) Version 3.2 Message
+              Specification", RFC 5751, DOI 10.17487/RFC5751, January
+              2010, <https://www.rfc-editor.org/info/rfc5751>.
+
+   [RFC5936]  Lewis, E. and A. Hoenes, Ed., "DNS Zone Transfer Protocol
+              (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
+              <https://www.rfc-editor.org/info/rfc5936>.
 
    [RFC7696]  Housley, R., "Guidelines for Cryptographic Algorithm
               Agility and Selecting Mandatory-to-Implement Algorithms",
@@ -1610,21 +1619,18 @@ Internet-Draft               DNS Zone Digest                October 2020
               102 hackathon in Python", July 2018,
               <https://github.com/shane-kerr/ZoneDigestHackathon>.
 
-Appendix A.  Example Zones With Digests
-
-   This appendix contains example zones with accurate ZONEMD records.
-   These can be used to verify an implementation of the zone digest
-   protocol.
-
-
-
-
 
 
 Wessels, et al.          Expires April 12, 2021                [Page 29]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+Appendix A.  Example Zones With Digests
+
+   This appendix contains example zones with accurate ZONEMD records.
+   These can be used to verify an implementation of the zone digest
+   protocol.
 
 A.1.  Simple EXAMPLE Zone
 
@@ -1649,12 +1655,6 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
-
-
-
-
-
-
 
 
 
