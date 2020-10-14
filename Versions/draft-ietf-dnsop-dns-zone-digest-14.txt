@@ -719,7 +719,7 @@ Internet-Draft               DNS Zone Digest                October 2020
        anchors, and, if necessary, querying for and validating DS RRs in
        the parent zone, the verifier knows whether or not the zone to be
        verified should include DNSSEC keys and signatures.  For zones
-       that are known to lack signatures, or if DNSSEC validation is not
+       where signatures are not expected, or if DNSSEC validation is not
        performed, digest verification continues at step 4 below.
 
 
@@ -730,17 +730,17 @@ Wessels, et al.          Expires April 12, 2021                [Page 13]
 Internet-Draft               DNS Zone Digest                October 2020
 
 
-   2.  For zones that are shown to include signatures, the existence of
-       the apex ZONEMD record MUST be verified.  If the DNSSEC data
-       proves the ZONEMD RRSet does not exist, digest verification
-       cannot occur.  If the DNSSEC data proves the ZONEMD does exist,
-       but is not found in the zone, digest verification MUST NOT be
-       considered successful.
+   2.  For zones where signatures are expected, the existence of the
+       apex ZONEMD record MUST be validated.  If the DNSSEC data proves
+       the ZONEMD RRSet does not exist, digest verification cannot
+       occur.  If the DNSSEC data proves the ZONEMD does exist, but is
+       not found in the zone, digest verification MUST NOT be considered
+       successful.
 
-   3.  For zones that are shown to include signatures, the SOA and
-       ZONEMD RRSets MUST have valid signatures, chaining up to a trust
-       anchor.  If DNSSEC validation of the SOA or ZONEMD RRSets fails,
-       digest verification MUST NOT be considered successful.
+   3.  For zones where signatures are expected, the SOA and ZONEMD
+       RRSets MUST have valid signatures, chaining up to a trust anchor.
+       If DNSSEC validation of the SOA or ZONEMD RRSets fails, digest
+       verification MUST NOT be considered successful.
 
    4.  When multiple ZONEMD RRs are present, each MUST specify a unique
        Scheme and Hash Algorithm tuple.  If the ZONEMD RRSet contains
