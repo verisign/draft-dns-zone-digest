@@ -123,21 +123,21 @@ Internet-Draft               DNS Zone Digest                October 2020
    5.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  15
      5.1.  ZONEMD RRtype . . . . . . . . . . . . . . . . . . . . . .  15
      5.2.  ZONEMD Scheme . . . . . . . . . . . . . . . . . . . . . .  15
-     5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  15
+     5.3.  ZONEMD Hash Algorithm . . . . . . . . . . . . . . . . . .  16
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  16
      6.1.  Using Zone Digest Without DNSSEC  . . . . . . . . . . . .  16
      6.2.  Attacks Against the Zone Digest . . . . . . . . . . . . .  16
      6.3.  Use of Multiple ZONEMD Hash Algorithms  . . . . . . . . .  17
      6.4.  DNSSEC Timing Considerations  . . . . . . . . . . . . . .  17
      6.5.  Attacks Utilizing ZONEMD Queries  . . . . . . . . . . . .  17
-     6.6.  Resilience and Fragility  . . . . . . . . . . . . . . . .  17
+     6.6.  Resilience and Fragility  . . . . . . . . . . . . . . . .  18
    7.  Performance Considerations  . . . . . . . . . . . . . . . . .  18
      7.1.  SIMPLE SHA384 . . . . . . . . . . . . . . . . . . . . . .  18
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  19
    9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  19
    10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  19
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  26
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  26
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  27
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  27
      11.2.  Informative References . . . . . . . . . . . . . . . . .  27
    Appendix A.  Example Zones With Digests . . . . . . . . . . . . .  30
      A.1.  Simple EXAMPLE Zone . . . . . . . . . . . . . . . . . . .  30
@@ -715,12 +715,12 @@ Internet-Draft               DNS Zone Digest                October 2020
    a ZONEMD RR if its Scheme and Hash Algorithm violates local policy.
 
    1.  The verifier MUST first determine whether or not to expect DNSSEC
-       records in the zone.  This is done by examining locally
-       configured trust anchors, and, if necessary, querying for (and
-       validating) DS RRs in the parent zone.  For zones that are
-       provably insecure, or if DNSSEC validation is not performed,
-       digest verification continues at step 4 below.
-
+       records in the zone.  By examining locally configured trust
+       anchors, and, if necessary, querying for and validating DS RRs in
+       the parent zone, the verifier knows whether or not the zone to be
+       verified should include DNSSEC keys and signatures.  For zones
+       that are known to lack signatures, or if DNSSEC validation is not
+       performed, digest verification continues at step 4 below.
 
 
 
@@ -730,16 +730,17 @@ Wessels, et al.          Expires April 12, 2021                [Page 13]
 Internet-Draft               DNS Zone Digest                October 2020
 
 
-   2.  For zones that are provably secure, the existence of the apex
-       ZONEMD record MUST be verified.  If the ZONEMD record provably
-       does not exist, digest verification cannot occur.  If the ZONEMD
-       record does provably exist, but is not found in the zone, digest
-       verification MUST NOT be considered successful.
+   2.  For zones that are shown to include signatures, the existence of
+       the apex ZONEMD record MUST be verified.  If the DNSSEC data
+       proves the ZONEMD RRSet does not exist, digest verification
+       cannot occur.  If the DNSSEC data proves the ZONEMD does exist,
+       but is not found in the zone, digest verification MUST NOT be
+       considered successful.
 
-   3.  For zones that are provably secure, the SOA and ZONEMD RRSets
-       MUST have valid signatures, chaining up to a trust anchor.  If
-       DNSSEC validation of the SOA or ZONEMD records fails, digest
-       verification MUST NOT be considered successful.
+   3.  For zones that are shown to include signatures, the SOA and
+       ZONEMD RRSets MUST have valid signatures, chaining up to a trust
+       anchor.  If DNSSEC validation of the SOA or ZONEMD RRSets fails,
+       digest verification MUST NOT be considered successful.
 
    4.  When multiple ZONEMD RRs are present, each MUST specify a unique
        Scheme and Hash Algorithm tuple.  If the ZONEMD RRSet contains
@@ -776,8 +777,7 @@ Internet-Draft               DNS Zone Digest                October 2020
            successful.  Otherwise, verification MUST NOT be considered
            successful for this ZONEMD RR.
 
-   Each time zone verification is performed, the verifier SHOULD report
-   the status as either successful or unsuccessful.  When unsuccessful,
+
 
 
 
@@ -786,6 +786,8 @@ Wessels, et al.          Expires April 12, 2021                [Page 14]
 Internet-Draft               DNS Zone Digest                October 2020
 
 
+   Each time zone verification is performed, the verifier SHOULD report
+   the status as either successful or unsuccessful.  When unsuccessful,
    the verifier SHOULD report the reason(s) that verification did not
    succeed.
 
@@ -828,12 +830,10 @@ Internet-Draft               DNS Zone Digest                October 2020
 
                       Table 1: ZONEMD Scheme Registry
 
-5.3.  ZONEMD Hash Algorithm
 
-   IANA is requested to create a new registry on the "Domain Name System
-   (DNS) Parameters" web page as follows:
 
-   Registry Name: ZONEMD Hash Algorithms
+
+
 
 
 
@@ -841,6 +841,13 @@ Wessels, et al.          Expires April 12, 2021                [Page 15]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+5.3.  ZONEMD Hash Algorithm
+
+   IANA is requested to create a new registry on the "Domain Name System
+   (DNS) Parameters" web page as follows:
+
+   Registry Name: ZONEMD Hash Algorithms
 
    Registration Procedure: Specification Required
 
@@ -883,13 +890,6 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    The attacker might perform a downgrade attack by removing one or more
    ZONEMD records.  Such a removal is detectable only with DNSSEC
-   validation and is why Section 4 talks about checking denial-of-
-   existence proofs in step 2 and signature validation in step 3.
-
-   The attacker might alter the Scheme, Hash Algorithm, or Digest fields
-   of the ZONEMD record.  Such modifications are detectable only with
-   DNSSEC validation.
-
 
 
 
@@ -897,6 +897,13 @@ Wessels, et al.          Expires April 12, 2021                [Page 16]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
+
+   validation and is why Section 4 talks about checking denial-of-
+   existence proofs in step 2 and signature validation in step 3.
+
+   The attacker might alter the Scheme, Hash Algorithm, or Digest fields
+   of the ZONEMD record.  Such modifications are detectable only with
+   DNSSEC validation.
 
    As stated in [RFC7696], cryptographic algorithms age and become
    weaker as cryptanalysis techniques and computing resources improve
@@ -939,13 +946,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    octets to a DNS response, for digest types defined herein.  Other RR
    types, such as DNSKEY, can result in larger amplification effects.
 
-6.6.  Resilience and Fragility
-
-   ZONEMD is used to detect incomplete or corrupted zone data prior to
-   its use, thereby increasing resilience by not using corrupt data, but
-   also introduces some denial-of-service fragility by making good data
-   in a zone unavailable if some other data is missing or corrupt.
-   Publishers and consumers of zones containing ZONEMD records should be
 
 
 
@@ -954,6 +954,13 @@ Wessels, et al.          Expires April 12, 2021                [Page 17]
 Internet-Draft               DNS Zone Digest                October 2020
 
 
+6.6.  Resilience and Fragility
+
+   ZONEMD is used to detect incomplete or corrupted zone data prior to
+   its use, thereby increasing resilience by not using corrupt data, but
+   also introduces some denial-of-service fragility by making good data
+   in a zone unavailable if some other data is missing or corrupt.
+   Publishers and consumers of zones containing ZONEMD records should be
    aware of these tradeoffs.  While the intention is to secure the zone
    data, misconfigurations or implementation bugs are generally
    indistinguishable from intentional tampering, and could lead to
@@ -989,6 +996,20 @@ Internet-Draft               DNS Zone Digest                October 2020
    the mean amount of time per RR to calculate the digest, running on
    commodity hardware in early 2020.
 
+
+
+
+
+
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 18]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
                  +---------------------+----------------+
                  |     Zone Size (RRs) | Rate (msec/RR) |
                  +---------------------+----------------+
@@ -1000,15 +1021,6 @@ Internet-Draft               DNS Zone Digest                October 2020
                  |   1000000 - 9999999 |         0.0108 |
                  | 10000000 - 99999999 |         0.0148 |
                  +---------------------+----------------+
-
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 18]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    For example, based on the above table, it takes approximately 0.13
    seconds to calculate a SIMPLE SHA384 digest for a zone with 22,000
@@ -1046,6 +1058,14 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    From -00 to -01:
 
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 19]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  Removed requirement to sort by RR CLASS.
 
    o  Added Kumari and Hardaker as coauthors.
@@ -1057,14 +1077,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    From -01 to -02:
 
    o  Emphasize desire for data security over channel security.
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 19]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Expanded motivation into its own subsection.
 
@@ -1103,6 +1115,13 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    o  Added Reserved field for future work supporting dynamic updates.
 
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 20]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  Be more rigorous about having just ONE ZONEMD record in the zone.
 
    o  Expanded use cases.
@@ -1114,13 +1133,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Clarified that only apex ZONEMD RRs shall be processed.
 
    From -04 to -05:
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 20]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Made SHA384 the only supported ZONEMD digest type.
 
@@ -1158,6 +1170,14 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    o  RR type code 63 was assigned to ZONEMD by IANA.
 
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 21]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    From -06 to -07:
 
    o  Fixed mistakes in ZONEMD examples.
@@ -1169,14 +1189,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    From -07 to draft-ietf-dnsop-dns-zone-digest-00:
 
    o  Adopted by dnsop.
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 21]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Clarified further that non-apex ZONEMD RRs have no meaning.
 
@@ -1214,6 +1226,14 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Changed the name of Digest Type 1 from SHA384-STABLE to
       SHA384-SIMPLE.
 
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 22]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  Changed document status from Experimental to Standards Track.
 
    o  Removed Scope of Experimentation section.
@@ -1225,15 +1245,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Changed from "Digest Type + Paramter" to "Scheme + Hash
       Algorithm".  This should make it more obvious how ZONEMD can be
       expanded in the future with new schemes and hash algorithms, while
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 22]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
-
       sacrificing some of the flexibility that the Parameter was
       intended to provide.
 
@@ -1272,6 +1283,13 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    o  Clarifications about benchmark results.
 
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 23]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  Don't compute ZONEMD on-the-fly.
 
    o  Specification Required for updates to ZONEMD protocol registries.
@@ -1281,14 +1299,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Updated RFC numbers for some references.
 
    o  Use documentation IP addresses instead of loopback.
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 23]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Updated examples in the appendix.
 
@@ -1329,6 +1339,13 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Removed sentence about optional zeroing of digest prior to
       calculation (AD comments).
 
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 24]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  Other minor changes (AD comments).
 
    From -09 to -10:
@@ -1338,13 +1355,6 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    o  Added concerns that timing of KSK rollovers could affect
       validation of ZONEMD record.
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 24]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Addressed SECDIR review and accepted most proposed edits.
 
@@ -1383,6 +1393,15 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  SECDIR review: be even more clear about apex ZONEMD RRs vs non-
       apex.
 
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 25]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    o  SECDIR review: Forgot to delete sentence about IANA policy for
       adding new hash algorithms.
 
@@ -1393,14 +1412,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  SECDIR review: Update estimates of ZONEMD RR size.
 
    From -12 to -13:
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 25]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    o  Added reference to draft-ietf-dprive-xfr-over-tls.
 
@@ -1438,6 +1449,19 @@ Internet-Draft               DNS Zone Digest                October 2020
    o  Consolidated SHOULD requirements about error reporting to single
       place at the conclusion of verification.
 
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 26]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
+   o  Rephrased "provably insecure" etc as using DNSSEC validation to
+      know whether or not the zone is expected to have keys and
+      signatures.
+
 11.  References
 
 11.1.  Normative References
@@ -1449,14 +1473,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    [RFC1035]  Mockapetris, P., "Domain names - implementation and
               specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
               November 1987, <https://www.rfc-editor.org/info/rfc1035>.
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 26]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1489,6 +1505,15 @@ Internet-Draft               DNS Zone Digest                October 2020
               rg/web/20100618032705/https://www.denic.de/en/denic-in-
               dialogue/news/2733.html>.
 
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 27]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    [DnsTools]
               NIC Chile Labs, "DNS tools for zone signature (file,
               pkcs11-hsm) and validation, and zone digest (ZONEMD)",
@@ -1502,17 +1527,6 @@ Internet-Draft               DNS Zone Digest                October 2020
    [InterNIC]
               ICANN, "InterNIC FTP site", May 2018,
               <ftp://ftp.internic.net/domain/>.
-
-
-
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 27]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    [ldns-zone-digest]
               Verisign, "Implementation of Message Digests for DNS Zones
@@ -1549,6 +1563,13 @@ Internet-Draft               DNS Zone Digest                October 2020
               Shared Unicast Addresses", RFC 3258, DOI 10.17487/RFC3258,
               April 2002, <https://www.rfc-editor.org/info/rfc3258>.
 
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 28]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
               Thayer, "OpenPGP Message Format", RFC 4880,
               DOI 10.17487/RFC4880, November 2007,
@@ -1558,17 +1579,6 @@ Internet-Draft               DNS Zone Digest                October 2020
               Security (DNSSEC) Hashed Authenticated Denial of
               Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,
               <https://www.rfc-editor.org/info/rfc5155>.
-
-
-
-
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 28]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
    [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
               Mail Extensions (S/MIME) Version 3.2 Message
@@ -1606,6 +1616,16 @@ Internet-Draft               DNS Zone Digest                October 2020
               DOI 10.17487/RFC8901, September 2020,
               <https://www.rfc-editor.org/info/rfc8901>.
 
+
+
+
+
+
+Wessels, et al.          Expires April 12, 2021                [Page 29]
+
+Internet-Draft               DNS Zone Digest                October 2020
+
+
    [RootServers]
               Root Server Operators, "Root Server Technical Operations",
               July 2018, <https://www.root-servers.org/>.
@@ -1618,13 +1638,6 @@ Internet-Draft               DNS Zone Digest                October 2020
               Kerr, S., "Prototype implementation of ZONEMD for the IETF
               102 hackathon in Python", July 2018,
               <https://github.com/shane-kerr/ZoneDigestHackathon>.
-
-
-
-Wessels, et al.          Expires April 12, 2021                [Page 29]
-
-Internet-Draft               DNS Zone Digest                October 2020
-
 
 Appendix A.  Example Zones With Digests
 
@@ -1655,19 +1668,6 @@ A.2.  Complex EXAMPLE Zone
 
    Here, the EXAMPLE zone contains duplicate RRs, and an occluded RR,
    and one out-of-zone RR.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
