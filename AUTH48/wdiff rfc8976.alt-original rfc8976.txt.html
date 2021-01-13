@@ -1,0 +1,1571 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>wdiff rfc8976.alt-original rfc8976.txt</title></head><body>
+<pre><strong><font color="green">﻿</font></strong>
+
+Internet Engineering Task Force <strong><font color="green">(IETF)</font></strong>                        D. Wessels
+<strike><font color="red">Internet-Draft</font></strike>
+<strong><font color="green">Request for Comments: 8976</font></strong>                                     P. Barber
+<strike><font color="red">Intended status:</font></strike>
+<strong><font color="green">Category:</font></strong> Standards Track                                       Verisign
+<strike><font color="red">Expires: April 18, 2021</font></strike>
+<strong><font color="green">ISSN: 2070-1721</font></strong>                                              M. Weinberg
+                                                                  Amazon
+                                                               W. Kumari
+                                                                  Google
+                                                             W. Hardaker
+                                                                 USC/ISI
+                                                        <strike><font color="red">October 15, 2020</font></strike>
+                                                            <strong><font color="green">January 2021</font></strong>
+
+                      Message Digest for DNS Zones
+                  <strike><font color="red">draft-ietf-dnsop-dns-zone-digest-14</font></strike>
+
+Abstract
+
+   This document describes a protocol and new DNS Resource Record that
+   provides a cryptographic message digest over DNS zone data at rest.
+   The ZONEMD Resource Record conveys the digest data in the zone
+   itself.  When used in combination with DNSSEC, ZONEMD allows
+   recipients to verify the zone contents for data integrity and origin
+   authenticity.  This provides assurance that received zone data
+   matches published data, regardless of how the zone data has been
+   transmitted and received.  When used without DNSSEC, ZONEMD functions
+   as a checksum, guarding only against unintentional changes.
+
+   ZONEMD does not replace <strike><font color="red">DNSSEC.  Whereas</font></strike> <strong><font color="green">DNSSEC:</font></strong> DNSSEC protects individual RRSets
+   (DNS data with fine granularity), <strong><font color="green">whereas</font></strong> ZONEMD protects a zone's
+   data as a whole, whether consumed by authoritative name servers,
+   recursive name servers, or any other applications.
+
+   As specified herein, ZONEMD is impractical for large, dynamic zones
+   due to the time and resources required for digest calculation.
+   However, <strike><font color="red">The</font></strike> <strong><font color="green">the</font></strong> ZONEMD record is extensible so that new digest schemes
+   may be added in the future to support large, dynamic zones.
+
+Status of This Memo
+
+   This <strike><font color="red">Internet-Draft</font></strike> is <strike><font color="red">submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents</font></strike> <strong><font color="green">an Internet Standards Track document.
+
+   This document is a product</font></strong> of the Internet Engineering Task Force
+   (IETF).  <strike><font color="red">Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list</font></strike>  <strong><font color="green">It represents the consensus</font></strong> of <strike><font color="red">current Internet-
+   Drafts is at https://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid</font></strike> <strong><font color="green">the IETF community.  It has
+   received public review and has been approved</font></strong> for <strike><font color="red">a maximum</font></strike> <strong><font color="green">publication by the
+   Internet Engineering Steering Group (IESG).  Further information on
+   Internet Standards is available in Section 2 of RFC 7841.
+
+   Information about the current status</font></strong> of <strike><font color="red">six months</font></strike> <strong><font color="green">this document, any errata,</font></strong>
+   and <strong><font color="green">how to provide feedback on it</font></strong> may be <strike><font color="red">updated, replaced, or obsoleted by other documents</font></strike> <strong><font color="green">obtained</font></strong> at <strike><font color="red">any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on April 18, 2021.</font></strike>
+   <strong><font color="green">https://www.rfc-editor.org/info/rfc8976.</font></strong>
+
+Copyright Notice
+
+   Copyright (c) <strike><font color="red">2020</font></strike> <strong><font color="green">2021</font></strong> IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+Table of Contents
+
+   1.  Introduction  <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . . .   3</font></strike>
+     1.1.  Motivation  <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . .   4</font></strike>
+     1.2.  Alternative Approaches  <strike><font color="red">. . . . . . . . . . . . . . . . .   4</font></strike>
+     1.3.  Design Overview <strike><font color="red">. . . . . . . . . . . . . . . . . . . . .   6</font></strike>
+     1.4.  Use Cases <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . . .   6</font></strike>
+       1.4.1.  Root Zone <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . .   6</font></strike>
+       1.4.2.  Providers, Secondaries, and Anycast <strike><font color="red">. . . . . . . . .   7</font></strike>
+       1.4.3.  Response Policy Zones <strike><font color="red">. . . . . . . . . . . . . . . .   7</font></strike>
+       1.4.4.  Centralized Zone Data Service <strike><font color="red">. . . . . . . . . . . .   7</font></strike>
+       1.4.5.  General Purpose Comparison Check  <strike><font color="red">. . . . . . . . . .   7</font></strike>
+     1.5.  Terminology <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . .   8</font></strike>
+   2.  The ZONEMD Resource Record  <strike><font color="red">. . . . . . . . . . . . . . . . .   8</font></strike>
+     2.1.  Non-apex ZONEMD Records <strike><font color="red">. . . . . . . . . . . . . . . . .   8</font></strike>
+     2.2.  ZONEMD RDATA Wire Format  <strike><font color="red">. . . . . . . . . . . . . . . .   8</font></strike>
+       2.2.1.  The Serial Field  <strike><font color="red">. . . . . . . . . . . . . . . . . .   9</font></strike>
+       2.2.2.  The Scheme Field  <strike><font color="red">. . . . . . . . . . . . . . . . . .   9</font></strike>
+       2.2.3.  The Hash Algorithm Field  <strike><font color="red">. . . . . . . . . . . . . .   9</font></strike>
+       2.2.4.  The Digest Field  <strike><font color="red">. . . . . . . . . . . . . . . . . .  10</font></strike>
+     2.3.  ZONEMD Presentation Format  <strike><font color="red">. . . . . . . . . . . . . . .  10</font></strike>
+     2.4.  ZONEMD Example  <strike><font color="red">. . . . . . . . . . . . . . . . . . . . .  10</font></strike>
+     2.5.  Including ZONEMD RRs in a Zone  <strike><font color="red">. . . . . . . . . . . . .  10</font></strike>
+   3.  Calculating the Digest  <strike><font color="red">. . . . . . . . . . . . . . . . . . .  11</font></strike>
+     3.1.  Add ZONEMD Placeholder  <strike><font color="red">. . . . . . . . . . . . . . . . .  11</font></strike>
+     3.2.  Optionally Sign the Zone  <strike><font color="red">. . . . . . . . . . . . . . . .  12</font></strike>
+     3.3.  Scheme-Specific Processing  <strike><font color="red">. . . . . . . . . . . . . . .  12</font></strike>
+       3.3.1.  The SIMPLE Scheme <strike><font color="red">. . . . . . . . . . . . . . . . . .  12</font></strike>
+         3.3.1.1.  SIMPLE Scheme Inclusion/Exclusion Rules <strike><font color="red">. . . . .  12</font></strike>
+         3.3.1.2.  SIMPLE Scheme Digest Calculation  <strike><font color="red">. . . . . . . .  13</font></strike>
+     3.4.  Update ZONEMD RR  <strike><font color="red">. . . . . . . . . . . . . . . . . . . .  13</font></strike>
+   4.  Verifying Zone Digest <strike><font color="red">. . . . . . . . . . . . . . . . . . . .  13</font></strike>
+   5.  IANA Considerations <strike><font color="red">. . . . . . . . . . . . . . . . . . . . .  15</font></strike>
+     5.1.  ZONEMD RRtype <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . .  15</font></strike>
+     5.2.  ZONEMD Scheme <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . .  15</font></strike>
+     5.3.  ZONEMD Hash <strike><font color="red">Algorithm . . . . . . . . . . . . . . . . . .  16</font></strike> <strong><font color="green">Algorithms</font></strong>
+   6.  Security Considerations <strike><font color="red">. . . . . . . . . . . . . . . . . . .  16</font></strike>
+     6.1.  Using Zone Digest <strike><font color="red">Without</font></strike> <strong><font color="green">without</font></strong> DNSSEC  <strike><font color="red">. . . . . . . . . . . .  16</font></strike>
+     6.2.  Attacks <strike><font color="red">Against</font></strike> <strong><font color="green">against</font></strong> the Zone Digest <strike><font color="red">. . . . . . . . . . . . .  16</font></strike>
+     6.3.  Use of Multiple ZONEMD Hash Algorithms  <strike><font color="red">. . . . . . . . .  17</font></strike>
+     6.4.  DNSSEC Timing Considerations  <strike><font color="red">. . . . . . . . . . . . . .  17</font></strike>
+     6.5.  Attacks Utilizing ZONEMD Queries  <strike><font color="red">. . . . . . . . . . . .  17</font></strike>
+     6.6.  Resilience and Fragility  <strike><font color="red">. . . . . . . . . . . . . . . .  18</font></strike>
+   7.  Performance Considerations  <strike><font color="red">. . . . . . . . . . . . . . . . .  18</font></strike>
+     7.1.  SIMPLE SHA384 <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . .  18</font></strike>
+   8.  Privacy Considerations  <strike><font color="red">. . . . . . . . . . . . . . . . . . .  19</font></strike>
+   9.  <strike><font color="red">Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  19
+   10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  19
+   11.</font></strike>  References  <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . . . .  27
+     11.1.</font></strike>
+     <strong><font color="green">9.1.</font></strong>  Normative References <strike><font color="red">. . . . . . . . . . . . . . . . . .  27
+     11.2.</font></strike>
+     <strong><font color="green">9.2.</font></strong>  Informative References <strike><font color="red">. . . . . . . . . . . . . . . . .  27</font></strike>
+   Appendix A.  Example Zones <strike><font color="red">With</font></strike> <strong><font color="green">with</font></strong> Digests <strike><font color="red">. . . . . . . . . . . . .  30</font></strike>
+     A.1.  Simple EXAMPLE Zone <strike><font color="red">. . . . . . . . . . . . . . . . . . .  30</font></strike>
+     A.2.  Complex EXAMPLE Zone  <strike><font color="red">. . . . . . . . . . . . . . . . . .  30</font></strike>
+     A.3.  EXAMPLE Zone with <strike><font color="red">multiple digests  . . . . . . . . . . .  31</font></strike> <strong><font color="green">Multiple Digests</font></strong>
+     A.4.  The URI.ARPA Zone <strike><font color="red">. . . . . . . . . . . . . . . . . . . .  32</font></strike>
+     A.5.  <strike><font color="red">The ROOT-SERVERS.NET Zone . . . . . . . . . . . . . . . .  35
+   Appendix B.  Implementation Status  . . . . . . . . . . . . . . .  37
+     B.1.  Authors' Implementation . . . . . . . . . . . . . . . . .  37
+     B.2.  Shane Kerr's Implementation . . . . . . . . . . . . . . .  37</font></strike>  <strong><font color="green">The ROOT-SERVERS.NET Zone
+   Appendix B.  Implementation Status
+     B.1.  Authors' Implementation
+     B.2.  Shane Kerr's Implementation</font></strong>
+     B.3.  NIC Chile <strike><font color="red">Labs</font></strike> <strong><font color="green">Lab's</font></strong> Implementation <strike><font color="red">. . . . . . . . . . . . . .  38</font></strike>
+   <strong><font color="green">Acknowledgments</font></strong>
+   Authors' Addresses  <strike><font color="red">. . . . . . . . . . . . . . . . . . . . . . .  38</font></strike>
+
+1.  Introduction
+
+   In the DNS, a zone is the collection of authoritative resource
+   records (RRs) sharing a common origin ([RFC8499]).  Zones are often
+   stored as files in the so-called <strike><font color="red">master</font></strike> <strong><font color="green">"master</font></strong> file <strike><font color="red">format</font></strike> <strong><font color="green">format"</font></strong> [RFC1034].
+   Zones are generally distributed among name servers using the <strike><font color="red">AXFR (zone</font></strike> <strong><font color="green">zone</font></strong>
+   transfer <strike><font color="red">[RFC5936]),</font></strike> <strong><font color="green">(AXFR) [RFC5936]</font></strong> and <strike><font color="red">IXFR (incremental</font></strike> <strong><font color="green">incremental</font></strong> zone transfer <strike><font color="red">[RFC1995])</font></strike> <strong><font color="green">(IXFR)
+   [RFC1995]</font></strong> protocols.  They can also be distributed outside of the <strike><font color="red">DNS,</font></strike> <strong><font color="green">DNS</font></strong>
+   with any file transfer protocol such as FTP, HTTP, and rsync, or even
+   as email attachments.  Currently, there is no standard way to compute
+   a hash or message digest for a stand-alone zone.
+
+   This document specifies an RR type that provides a cryptographic
+   message digest of the data in a zone.  It allows a receiver of the
+   zone to verify the zone's integrity and authenticity when used in
+   combination with DNSSEC.  The digest RR is a part of the zone itself,
+   allowing verification of the zone, no matter how it is transmitted.
+   The digest uses the wire format of zone data in a canonical ordering.
+   Thus, it is independent of presentation <strike><font color="red">format,</font></strike> <strong><font color="green">format</font></strong> such as whitespace,
+   capitalization, and comments.
+
+   This specification is OPTIONAL to implement by both publishers and
+   consumers of zone data.
+
+1.1.  Motivation
+
+   The primary motivation for this protocol enhancement is the desire to
+   verify the data integrity and origin authenticity of a stand-alone
+   zone, regardless of how it is transmitted.  A consumer of zone data
+   should be able to verify that it is <strike><font color="red">as-published</font></strike> <strong><font color="green">as published</font></strong> by the zone
+   operator.
+
+   Note, however, that integrity and authenticity can only be assured
+   when the zone is signed.  DNSSEC provides three strong security
+   guarantees relevant to this protocol:
+
+   1.  whether or not to expect DNSSEC records in the zone,
+
+   2.  whether or not to expect a ZONEMD record in a signed zone, and
+
+   3.  whether or not the ZONEMD record has been altered since it was
+       signed.
+
+   A secondary motivation is to provide the equivalent of a checksum,
+   allowing a zone recipient to check for unintended changes and
+   operational <strike><font color="red">errors,</font></strike> <strong><font color="green">errors</font></strong> such as accidental truncation.
+
+1.2.  Alternative Approaches
+
+   One approach to preventing data tampering and corruption is to secure
+   the distribution channel.  The DNS has a number of features that are
+   already used for channel security.  Perhaps the most widely used is
+   DNS transaction signatures <strike><font color="red">(TSIG</font></strike> <strong><font color="green">(TSIGs</font></strong> [RFC2845]).  <strong><font color="green">A</font></strong> TSIG uses shared
+   secret keys and a message digest to protect individual query and
+   response messages.  It is generally used to authenticate and validate
+   UPDATE [RFC2136], AXFR [RFC5936], and IXFR [RFC1995] messages.
+
+   DNS Request and Transaction Signatures <strike><font color="red">(SIG(0) [RFC2931])</font></strike> <strong><font color="green">(SIG(0)) [RFC2931]</font></strong> is another
+   protocol extension that authenticates individual DNS transactions.
+   Whereas SIG records normally cover specific RR types, SIG(0) is used
+   to sign an entire DNS message.  Unlike TSIG, SIG(0) uses public key
+   cryptography rather than shared secrets.
+
+   The Transport Layer Security protocol suite also provides channel
+   security.  The DPRIVE <strike><font color="red">working group</font></strike> <strong><font color="green">Working Group</font></strong> is in the process of specifying
+   DNS Zone Transfer-over-TLS <strike><font color="red">[I-D.ietf-dprive-xfr-over-tls].</font></strike> <strong><font color="green">[DPRIVE-XFR-OVER-TLS].</font></strong>  One can also
+   easily imagine the distribution of zones over HTTPS-enabled web
+   <strike><font color="red">servers,</font></strike>
+   <strong><font color="green">servers</font></strong> as well as DNS-over-HTTPS [RFC8484].
+
+   Unfortunately, the protections provided by these channel security
+   techniques are (in practice) ephemeral and are not retained after the
+   data transfer is complete.  They ensure that the client receives the
+   data from the expected <strike><font color="red">server,</font></strike> <strong><font color="green">server</font></strong> and that the data sent by the server is
+   not modified during transmission.  However, they do not guarantee
+   that the server transmits the data as originally <strike><font color="red">published,</font></strike> <strong><font color="green">published</font></strong> and do not
+   provide any methods to verify data that is read after transmission is
+   complete.  For example, a name server loading saved zone data upon
+   restart cannot guarantee that the on-disk data has not been modified.
+   Such modification could be the result of an accidental corruption of
+   the <strike><font color="red">file,</font></strike> <strong><font color="green">file</font></strong> or perhaps an <strike><font color="red">incompletely saved</font></strike> <strong><font color="green">incomplete saving of the</font></strong> file <strike><font color="red">[disk-full-failure].</font></strike>
+   <strong><font color="green">[DISK-FULL-FAILURE].</font></strong>  For these reasons, it is preferable to protect
+   the integrity of the data itself.
+
+   Why not simply rely on DNSSEC, which provides certain data security
+   guarantees?  For zones that are signed, a recipient could validate
+   all of the signed RRSets.  Additionally, denial-of-existence records
+   prove that RRSets have not been added or removed.  However,
+   delegations (non-apex NS records) are not signed by <strike><font color="red">DNSSEC,</font></strike> <strong><font color="green">DNSSEC</font></strong> and
+   neither are any glue records.  ZONEMD protects the integrity of
+   delegation, glue, and other records that are not otherwise covered by
+   DNSSEC.  Furthermore, zones that employ NSEC3 with <strike><font color="red">opt-out</font></strike> <strong><font color="green">Opt-Out</font></strong> [RFC5155]
+   are susceptible to the removal or addition of names between the
+   signed nodes.  Whereas DNSSEC primarily protects consumers of DNS
+   response messages, this protocol protects consumers of zones.
+
+   There are existing tools and protocols that provide data security,
+   such as OpenPGP [RFC4880] and S/MIME [RFC5751].  In fact, the
+   internic.net site publishes <strike><font color="red">PGP</font></strike> <strong><font color="green">Pretty Good Privacy (PGP)</font></strong> signatures
+   alongside the root zone and other files available there.  However,
+   this is a detached signature with no strong association to the
+   corresponding zone file other than its timestamp.  Non-detached
+   signatures <strike><font color="red">are,</font></strike> <strong><font color="green">are</font></strong> of <strike><font color="red">course,</font></strike> <strong><font color="green">course</font></strong> possible, but these necessarily change the
+   format of the file being distributed; a zone signed with OpenPGP or
+   S/MIME no longer looks like a DNS zone and could not directly be
+   loaded into a name server.  Once <strike><font color="red">loaded</font></strike> <strong><font color="green">loaded,</font></strong> the signature data is lost,
+   so it cannot be further propagated.
+
+   It seems the desire for data security in DNS zones was envisioned as
+   far back as 1997.  [RFC2065] is an obsoleted specification of the
+   first generation DNSSEC Security Extensions.  It describes a zone
+   transfer signature, identified as the AXFR SIG, which is similar to
+   the technique proposed by this document.  That is, it proposes
+   ordering all (signed) RRSets in a zone, hashing their contents, and
+   then signing the zone hash.  The AXFR SIG is described only for use
+   during zone transfers.  It did not postulate the need to validate
+   zone data distributed outside of the DNS.  Furthermore, its
+   successor, [RFC2535], omits the AXFR <strike><font color="red">SIG,</font></strike> <strong><font color="green">SIG</font></strong> while at the same time
+   introducing an IXFR SIG.
+
+1.3.  Design Overview
+
+   This document specifies a new Resource Record type to convey a
+   message digest of the content of a zone.  The digest is calculated at
+   the time of zone publication.  If the zone is signed with DNSSEC, any
+   modifications of the digest can be detected.  The procedures for
+   digest calculation and DNSSEC signing are similar.  Both require data
+   to be processed in a well-defined order and format.  It may be
+   possible to perform DNSSEC signing and digest calculation in
+   parallel.
+
+   The zone digest is designed to be used on zones that have infrequent
+   updates.  As specified herein, the digest is <strike><font color="red">re-calculated</font></strike> <strong><font color="green">recalculated</font></strong> over the
+   entire zone content each time the zone is updated.  This
+   specification does not provide an efficient mechanism for updating
+   the digest on incremental updates of zone data.  It is, however,
+   extensible so that future schemes may be defined to support efficient
+   incremental digest updates.
+
+   It is expected that verification of a zone digest will be implemented
+   in name server software.  That is, a name server can verify the zone
+   data it was given and refuse to serve a zone <strike><font color="red">which</font></strike> <strong><font color="green">that</font></strong> fails verification.
+   For signed zones, the name server needs a trust anchor to perform
+   DNSSEC validation.  For signed non-root zones, the name server may
+   need to send queries to validate a chain of trust.  Digest
+   verification could also be performed externally.
+
+1.4.  Use Cases
+
+1.4.1.  Root Zone
+
+   The root zone [InterNIC] is one of the most widely distributed DNS
+   <strike><font color="red">zone</font></strike>
+   <strong><font color="green">zones</font></strong> on the Internet, served by more than 1000 separate instances
+   <strike><font color="red">[RootServers]</font></strike>
+   <strong><font color="green">[ROOT-SERVERS]</font></strong> at the time of this writing.  Additionally, many
+   organizations configure their own name servers to serve the root zone
+   locally.  Reasons for doing so include privacy and reduced access
+   time.  [RFC8806] describes one way to do this.  As the root zone
+   spreads beyond its traditional deployment boundaries, the
+   verification of the completeness of the zone contents becomes more
+   important.
+
+1.4.2.  Providers, Secondaries, and Anycast
+
+   Since its very early days, the developers of the DNS recognized the
+   importance of secondary name servers and service diversity.  However,
+   modern DNS service has complex provisioning <strike><font color="red">which</font></strike> <strong><font color="green">that</font></strong> includes multiple
+   third-party providers ([RFC8901]) and hundreds of anycast instances
+   ([RFC3258]).  Instead of a simple primary-to-secondary zone
+   distribution system, today it is possible to have multiple levels,
+   multiple parties, and multiple protocols involved in the distribution
+   of zone data.  This complexity introduces new places for problems to
+   arise.  The zone digest protects the integrity of data that flows
+   through such systems.
+
+1.4.3.  Response Policy Zones
+
+   A Response Policy Zone (RPZ) is "a mechanism to introduce a
+   customized policy in Domain Name System servers, so that recursive
+   resolvers return possibly modified results" [RPZ].  The policy
+   information is carried inside specially constructed DNS zones.  A
+   number of companies provide RPZ feeds, which are consumed by name
+   server and firewall products.  While <strike><font color="red">RPZ zones</font></strike> <strong><font color="green">RPZs</font></strong> can be signed with DNSSEC,
+   the data is not queried <strike><font color="red">directly,</font></strike> <strong><font color="green">directly</font></strong> and would not be subject to DNSSEC
+   validation.
+
+1.4.4.  Centralized Zone Data Service
+
+   ICANN operates the Centralized Zone Data Service [CZDS], which is a
+   repository of top-level domain zone files.  Users that have been
+   granted access are then able to download zone data.  Adding a zone
+   digest to these would provide CZDS users with assurances that the
+   data has not been modified between origination and retrieval.  Note
+   that ZONEMD could be added to zone data supplied to CZDS without
+   requiring it to be present in the zone data served by production name
+   servers, since the digest is inherently attached to the specific copy
+   of the zone.
+
+1.4.5.  General Purpose Comparison Check
+
+   Since the zone digest calculation does not depend on presentation
+   format, it could be used to compare multiple copies of a zone
+   received from different sources, or copies generated by different
+   processes.  In this case, it serves as a checksum and can be useful
+   even for unsigned zones.
+
+1.5.  Terminology
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
+   BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
+   capitals, as shown here.
+
+   The terms Private Use, Reserved, Unassigned, and Specification
+   Required are to be interpreted as defined in [RFC8126].
+
+2.  The ZONEMD Resource Record
+
+   This section describes the ZONEMD Resource Record, including its
+   fields, wire format, and presentation format.  The Type value for the
+   ZONEMD RR is 63.  The ZONEMD RR is class independent.  The RDATA of
+   the resource record consists of four fields: Serial, Scheme, Hash
+   Algorithm, and Digest.
+
+2.1.  Non-apex ZONEMD Records
+
+   This document specifies ZONEMD RRs located at the zone apex.  Non-
+   apex ZONEMD RRs are not forbidden, but have no meaning in this
+   specification.  Non-apex ZONEMD RRs MUST NOT be used for
+   verification.
+
+   During digest calculation, non-apex ZONEMD RRs are treated as
+   ordinary RRs.  They are digested <strike><font color="red">as-is</font></strike> <strong><font color="green">as is,</font></strong> and the RR is not replaced by
+   a placeholder RR.
+
+   Unless explicitly stated otherwise, "ZONEMD" always refers to apex
+   records throughout this document.
+
+2.2.  ZONEMD RDATA Wire Format
+
+   The ZONEMD RDATA wire format is encoded as follows:
+
+                        1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 3 3
+    0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |                             Serial                            |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+   |    Scheme     |Hash Algorithm |                               |
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               |
+   |                             Digest                            |
+   /                                                               /
+   /                                                               /
+   +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+2.2.1.  The Serial Field
+
+   The Serial field is a 32-bit unsigned integer in network byte order.
+   It is the serial number from the zone's SOA record <strike><font color="red">([RFC1035] section</font></strike> <strong><font color="green">([RFC1035],
+   Section</font></strong> 3.3.13) for which the zone digest was generated.
+
+   It is included here to clearly bind the ZONEMD RR to a particular
+   version of the zone's content.  Without the serial number, a stand-
+   alone ZONEMD digest has no obvious association to any particular
+   instance of a zone.
+
+2.2.2.  The Scheme Field
+
+   The Scheme field is an 8-bit unsigned integer that identifies the
+   methods by which data is collated and presented as input to the
+   hashing function.
+
+   Herein, SIMPLE, with Scheme value 1, is the only standardized Scheme
+   defined for ZONEMD records and it MUST be supported by
+   implementations.  The <strike><font color="red">Scheme</font></strike> <strong><font color="green">"ZONEMD Schemes"</font></strong> registry is further described
+   in Section 5.
+
+   Scheme values 240-254 are allocated for Private Use.
+
+2.2.3.  The Hash Algorithm Field
+
+   The Hash Algorithm field is an 8-bit unsigned integer that identifies
+   the cryptographic hash algorithm used to construct the digest.
+
+   Herein, SHA384 [RFC6234], with Hash Algorithm value 1, is the only
+   standardized Hash Algorithm defined for ZONEMD records that MUST be
+   supported by implementations.  When SHA384 is used, the size of the
+   Digest field is 48 octets.  The result of the SHA384 digest algorithm
+   MUST NOT be truncated, and the entire <strike><font color="red">48 octet</font></strike> <strong><font color="green">48-octet</font></strong> digest is published in
+   the ZONEMD record.
+
+   SHA512 [RFC6234], with Hash Algorithm value 2, is also defined for
+   ZONEMD <strike><font color="red">records,</font></strike> <strong><font color="green">records</font></strong> and SHOULD be supported by implementations.  When
+   SHA512 is used, the size of the Digest field is 64 octets.  The
+   result of the SHA512 digest algorithm MUST NOT be truncated, and the
+   entire <strike><font color="red">64 octet</font></strike> <strong><font color="green">64-octet</font></strong> digest is published in the ZONEMD record.
+
+   Hash Algorithm values 240-254 are allocated for Private Use.
+
+   The <strong><font color="green">"ZONEMD</font></strong> Hash <strike><font color="red">Algorithm</font></strike> <strong><font color="green">Algorithms"</font></strong> registry is further described in
+   Section 5.
+
+2.2.4.  The Digest Field
+
+   The Digest field is a variable-length sequence of octets containing
+   the output of the hash algorithm.  The length of the Digest field is
+   determined by deducting the fixed size of the Serial, Scheme, and
+   Hash Algorithm fields from the RDATA size in the ZONEMD RR header.
+
+   The Digest field MUST NOT be shorter than 12 octets.  Digests for the
+   SHA384 and SHA512 hash algorithms specified herein are never
+   truncated.  Digests for future hash algorithms MAY be <strike><font color="red">truncated,</font></strike> <strong><font color="green">truncated</font></strong> but
+   MUST NOT be truncated to a length that results in less than <strike><font color="red">96-bits</font></strike> <strong><font color="green">96 bits</font></strong>
+   (12 octets) of equivalent strength.
+
+   Section 3 describes how to calculate the digest for a zone.
+   Section 4 describes how to use the digest to verify the contents of a
+   zone.
+
+2.3.  ZONEMD Presentation Format
+
+   The presentation format of the RDATA portion is as follows:
+
+   <strong><font color="green">*</font></strong>  The Serial field is represented as an unsigned decimal integer.
+
+   <strong><font color="green">*</font></strong>  The Scheme field is represented as an unsigned decimal integer.
+
+   <strong><font color="green">*</font></strong>  The Hash Algorithm field is represented as an unsigned decimal
+      integer.
+
+   <strong><font color="green">*</font></strong>  The Digest is represented as a sequence of case-insensitive
+      hexadecimal digits.  Whitespace is allowed within the hexadecimal
+      text.
+
+2.4.  ZONEMD Example
+
+   The following example shows a ZONEMD RR in presentation format:
+
+   example.com. 86400 IN ZONEMD 2018031500 1 1 (
+       FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE
+       7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )
+
+2.5.  Including ZONEMD RRs in a Zone
+
+   The zone operator chooses an appropriate hash algorithm and <strike><font color="red">scheme,</font></strike> <strong><font color="green">scheme</font></strong>
+   and includes the calculated zone digest in the apex ZONEMD RRset.
+   The zone operator MAY choose any of the defined hash algorithms and
+   schemes, including the <strike><font color="red">private use</font></strike> <strong><font color="green">Private Use</font></strong> code points.
+
+   The ZONEMD RRSet MAY contain multiple records to support algorithm
+   agility <strike><font color="red">[RFC7696].  [RFC Editor: change that to BCP 201]</font></strike> <strong><font color="green">[BCP201].</font></strong>  When multiple ZONEMD RRs are present, each MUST
+   specify a unique Scheme and Hash Algorithm tuple.  It is RECOMMENDED
+   that a zone include only one ZONEMD RR, unless the zone operator is
+   in the process of transitioning to a new scheme or hash algorithm.
+
+3.  Calculating the Digest
+
+   The algorithm described in this section is designed for the common
+   case of offline DNSSEC signing.  Slight deviations may be permitted
+   or necessary in other situations, such as with unsigned zones or
+   online DNSSEC signing.  Implementations that deviate from the
+   described algorithm are advised to ensure that it produces ZONEMD
+   RRs, signatures, and <strike><font color="red">dential-of-existence</font></strike> <strong><font color="green">denial-of-existence</font></strong> records that are identical
+   to the ones generated by this procedure.
+
+3.1.  Add ZONEMD Placeholder
+
+   In preparation for calculating the zone digest(s), any existing
+   ZONEMD records (and covering RRSIGs) at the zone apex are first
+   deleted.
+
+   Prior to calculation of the digest, and prior to signing with DNSSEC,
+   one or more placeholder ZONEMD records are added to the zone apex.
+   This ensures that denial-of-existence (NSEC, NSEC3) records are
+   created correctly if the zone is signed with DNSSEC.  If placeholders
+   were not added prior to signing, the later addition of ZONEMD records
+   would also require updating the Type Bit Maps field of any apex NSEC/
+   NSEC3 RRs, which then invalidates the calculated digest value.
+
+   When multiple ZONEMD RRs are published in the zone, e.g., during an
+   algorithm rollover, each MUST specify a unique Scheme and Hash
+   Algorithm tuple.
+
+   It is RECOMMENDED that the TTL of the ZONEMD record match the TTL of
+   the <strike><font color="red">SOA.</font></strike> <strong><font color="green">Start of Authority (SOA).</font></strong>  However, the TTL of the ZONEMD record
+   may be safely ignored during verification in all cases.
+
+   In the placeholder record, the Serial field is set to the current SOA
+   Serial.  The Scheme field is set to the value for the chosen
+   collation scheme.  The Hash Algorithm field is set to the value for
+   the chosen hash algorithm.  Since apex ZONEMD records are excluded
+   from digest calculation, the value of the Digest field does not
+   matter at this point in the process.
+
+3.2.  Optionally Sign the Zone
+
+   Following <strong><font color="green">the</font></strong> addition of placeholder records, the zone may be signed
+   with DNSSEC.  When the digest calculation is complete, and the ZONEMD
+   record is updated, the signature(s) for the ZONEMD RRSet MUST be
+   recalculated and updated as well.  Therefore, the signer is not
+   required to calculate a signature over the placeholder record at this
+   step in the process, but it is harmless to do so.
+
+3.3.  Scheme-Specific Processing
+
+   Herein, only the SIMPLE collation scheme is defined.  Additional
+   schemes may be defined in future updates to this document.
+
+3.3.1.  The SIMPLE Scheme
+
+   For the SIMPLE scheme, the digest is calculated over the zone as a
+   whole.  This means that a change to a single RR in the zone requires
+   iterating over all RRs in the zone to recalculate the digest.  SIMPLE
+   is a good choice for zones that are small and/or stable, but <strong><font color="green">it is</font></strong>
+   probably not good for zones that are large and/or dynamic.
+
+   Calculation of a zone digest requires RRs to be processed in a
+   consistent format and ordering.  This specification uses DNSSEC's
+   canonical on-the-wire RR format (without name compression) and
+   ordering as specified in Sections 6.1, 6.2, and 6.3 of [RFC4034] with
+   the additional provision that RRSets having the same owner name MUST
+   be numerically ordered, in ascending order, by their numeric RR TYPE.
+
+3.3.1.1.  SIMPLE Scheme Inclusion/Exclusion Rules
+
+   When iterating over records in the zone, the following inclusion/
+   exclusion rules apply:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  All records in the zone, including glue records, MUST be <strike><font color="red">included,</font></strike> <strong><font color="green">included</font></strong>
+      unless excluded by a subsequent rule.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Occluded data <strike><font color="red">([RFC5936]</font></strike> <strong><font color="green">([RFC5936],</font></strong> Section 3.5) MUST be included.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  If there are duplicate RRs with equal owner, class, type, and
+      RDATA, only one instance is included <strike><font color="red">([RFC4034]</font></strike> <strong><font color="green">([RFC4034],</font></strong> Section <strike><font color="red">6.3),</font></strike> <strong><font color="green">6.3)</font></strong> and
+      the duplicates MUST be omitted.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  The placeholder apex ZONEMD RR(s) MUST NOT be included.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  If the zone is signed, DNSSEC RRs MUST be included, except:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  The RRSIG covering the apex ZONEMD RRSet MUST NOT be included
+      because the RRSIG will be updated after all digests have been
+      calculated.
+
+3.3.1.2.  SIMPLE Scheme Digest Calculation
+
+   A zone digest using the SIMPLE scheme is calculated by concatenating
+   all RRs in the zone, in the format and order described in
+   Section 3.3.1 subject to the inclusion/exclusion rules described in
+   Section 3.3.1.1, and then applying the chosen hash algorithm:
+
+   digest = hash( RR(1) | RR(2) | RR(3) | ... )
+
+   where "|" denotes concatenation.
+
+3.4.  Update ZONEMD RR
+
+   The calculated zone digest is inserted into the placeholder ZONEMD
+   RR.  Repeat for each digest if multiple digests are to be published.
+
+   If the zone is signed with DNSSEC, the RRSIG record(s) covering the
+   ZONEMD RRSet MUST then be added or updated.  Because the ZONEMD
+   placeholder was added prior to signing, the zone will already have
+   the appropriate denial-of-existence (NSEC, NSEC3) records.
+
+   Some DNSSEC implementations (especially "online signing") might
+   update the SOA serial number whenever a new signature is made.  To
+   preserve the calculated digest, generation of a ZONEMD signature MUST
+   NOT also result in a change to the SOA serial number.  The ZONEMD RR
+   and the matching SOA MUST be published at the same time.
+
+4.  Verifying Zone Digest
+
+   The recipient of a zone that has a ZONEMD RR verifies the zone by
+   calculating the digest as follows.  If multiple ZONEMD RRs are
+   present in the zone, e.g., during an algorithm rollover, a match
+   using any one of the recipient's supported Schemes and Hash
+   Algorithms is sufficient to verify the zone.  The verifier MAY ignore
+   a ZONEMD RR if its Scheme and Hash Algorithm violates local policy.
+
+   1.  The verifier MUST first determine whether or not to expect DNSSEC
+       records in the zone.  By examining locally configured trust
+       <strike><font color="red">anchors,</font></strike>
+       <strong><font color="green">anchors</font></strong> and, if necessary, querying for and validating <strike><font color="red">DS</font></strike> <strong><font color="green">Delegation
+       Signer (DS)</font></strong> RRs in the parent zone, the verifier knows whether or
+       not the zone to be verified should include DNSSEC keys and
+       signatures.  For zones where signatures are not expected, or if
+       DNSSEC validation is not performed, digest verification continues
+       at step 4 below.
+
+   2.  For zones where signatures are expected, the existence of the
+       apex ZONEMD record MUST be validated.  If the DNSSEC data proves
+       the ZONEMD RRSet does not exist, digest verification cannot
+       occur.  If the DNSSEC data proves the ZONEMD does exist, but is
+       not found in the zone, digest verification MUST NOT be considered
+       successful.
+
+   3.  For zones where signatures are expected, the SOA and ZONEMD
+       RRSets MUST have valid signatures, chaining up to a trust anchor.
+       If DNSSEC validation of the SOA or ZONEMD RRSets fails, digest
+       verification MUST NOT be considered successful.
+
+   4.  When multiple ZONEMD RRs are present, each MUST specify a unique
+       Scheme and Hash Algorithm tuple.  If the ZONEMD RRSet contains
+       more than one RR with the same Scheme and Hash Algorithm, digest
+       verification for those ZONEMD RRs MUST NOT be considered
+       successful.
+
+   5.  Loop over all apex ZONEMD RRs and perform the following steps:
+
+       <strike><font color="red">A.</font></strike>
+
+       <strong><font color="green">a.</font></strong>  The SOA Serial field MUST exactly match the ZONEMD Serial
+           field.  If the fields do not match, digest verification MUST
+           NOT be considered successful with this ZONEMD RR.
+
+       <strike><font color="red">B.</font></strike>
+
+       <strong><font color="green">b.</font></strong>  The Scheme field MUST be checked.  If the verifier does not
+           support the given scheme, verification MUST NOT be considered
+           successful with this ZONEMD RR.
+
+       <strike><font color="red">C.</font></strike>
+
+       <strong><font color="green">c.</font></strong>  The Hash Algorithm field MUST be checked.  If the verifier
+           does not support the given hash algorithm, verification MUST
+           NOT be considered successful with this ZONEMD RR.
+
+       <strike><font color="red">D.</font></strike>
+
+       <strong><font color="green">d.</font></strong>  The Digest field size MUST be checked.  If the size of the
+           given Digest field is smaller than 12 octets, or if the size
+           is not equal to the size expected for the corresponding Hash
+           Algorithm, verification MUST NOT be considered successful
+           with this ZONEMD RR.
+
+       <strike><font color="red">E.</font></strike>
+
+       <strong><font color="green">e.</font></strong>  The zone digest is computed over the zone data as described
+           in Section <strike><font color="red">3.3,</font></strike> <strong><font color="green">3.3</font></strong> using the Scheme and Hash Algorithm for the
+           current ZONEMD RR.
+
+       <strike><font color="red">F.</font></strike>
+
+       <strong><font color="green">f.</font></strong>  The computed digest is compared to the received digest.  If
+           the two digest values match, verification is considered
+           successful.  Otherwise, verification MUST NOT be considered
+           successful for this ZONEMD RR.
+
+   Each time zone verification is performed, the verifier SHOULD report
+   the status as either successful or unsuccessful.  When unsuccessful,
+   the verifier SHOULD report the reason(s) that verification did not
+   succeed.
+
+5.  IANA Considerations
+
+5.1.  ZONEMD RRtype
+
+   This document defines a new DNS RR type, ZONEMD, whose value 63 has
+   been allocated by IANA from the "Resource Record (RR) TYPEs"
+   subregistry of the "Domain Name System (DNS) Parameters" registry:
+
+   Type:  ZONEMD
+   Value:  63
+   Meaning:  Message Digest Over Zone Data
+   Reference: <strike><font color="red">[this document]</font></strike>  <strong><font color="green">[RFC8976]</font></strong>
+
+5.2.  ZONEMD Scheme
+
+   IANA <strike><font color="red">is requested to create</font></strike> <strong><font color="green">has created</font></strong> a new <strike><font color="red">registry on</font></strike> <strong><font color="green">subregistry in</font></strong> the "Domain Name System (DNS)
+   Parameters" <strike><font color="red">web page</font></strike> <strong><font color="green">registry</font></strong> as follows:
+
+   Registry Name:  ZONEMD Schemes
+   Registration Procedure:  Specification Required
+   Reference: <strike><font color="red">[this document]
+
+    +---------+-------------------------+----------+-----------------+</font></strike>  <strong><font color="green">[RFC8976]
+
+       +=========+=========================+==========+===========+</font></strong>
+       | Value   | Description             | Mnemonic | Reference |
+    <strike><font color="red">+---------+-------------------------+----------+-----------------+</font></strike>
+       <strong><font color="green">+=========+=========================+==========+===========+</font></strong>
+       | 0       | Reserved                |          |           |
+       <strong><font color="green">+---------+-------------------------+----------+-----------+</font></strong>
+       | 1       | Simple ZONEMD collation | SIMPLE   | <strike><font color="red">[this document]</font></strike> <strong><font color="green">[RFC8976]</font></strong> |
+       <strong><font color="green">+---------+-------------------------+----------+-----------+</font></strong>
+       | 2-239   | Unassigned              |          |           |
+       <strong><font color="green">+---------+-------------------------+----------+-----------+</font></strong>
+       | 240-254 | Private Use             | N/A      | <strike><font color="red">[this document]</font></strike> <strong><font color="green">[RFC8976]</font></strong> |
+       <strong><font color="green">+---------+-------------------------+----------+-----------+</font></strong>
+       | 255     | Reserved                |          |           |
+    <strike><font color="red">+---------+-------------------------+----------+-----------------+</font></strike>
+       <strong><font color="green">+---------+-------------------------+----------+-----------+</font></strong>
+
+                     Table 1: ZONEMD Scheme Registry
+
+5.3.  ZONEMD Hash <strike><font color="red">Algorithm</font></strike> <strong><font color="green">Algorithms</font></strong>
+
+   IANA <strike><font color="red">is requested to create</font></strike> <strong><font color="green">has created</font></strong> a new <strike><font color="red">registry on</font></strike> <strong><font color="green">subregistry in</font></strong> the "Domain Name System (DNS)
+   Parameters" <strike><font color="red">web page</font></strike> <strong><font color="green">registry</font></strong> as follows:
+
+   Registry Name:  ZONEMD Hash Algorithms
+   Registration Procedure:  Specification Required
+   Reference: <strike><font color="red">[this document]
+
+          +---------+-------------+----------+-----------------+</font></strike>  <strong><font color="green">[RFC8976]
+
+             +=========+=============+==========+===========+</font></strong>
+             | Value   | Description | Mnemonic | Reference |
+          <strike><font color="red">+---------+-------------+----------+-----------------+</font></strike>
+             <strong><font color="green">+=========+=============+==========+===========+</font></strong>
+             | 0       | Reserved    |          |           |
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+             | 1       | SHA-384     | SHA384   | <strike><font color="red">[this document]</font></strike> <strong><font color="green">[RFC8976]</font></strong> |
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+             | 2       | SHA-512     | SHA512   | <strike><font color="red">[this document]</font></strike> <strong><font color="green">[RFC8976]</font></strong> |
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+             | 3-239   | Unassigned  |          |           |
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+             | 240-254 | Private Use | N/A      | <strike><font color="red">[his document]</font></strike> <strong><font color="green">[RFC8976]</font></strong> |
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+             | 255     | Reserved    |          |           |
+          <strike><font color="red">+---------+-------------+----------+-----------------+</font></strike>
+             <strong><font color="green">+---------+-------------+----------+-----------+</font></strong>
+
+                 Table 2: ZONEMD Hash <strike><font color="red">Algorithm</font></strike> <strong><font color="green">Algorithms</font></strong> Registry
+
+6.  Security Considerations
+
+6.1.  Using Zone Digest <strike><font color="red">Without</font></strike> <strong><font color="green">without</font></strong> DNSSEC
+
+   Users of ZONEMD with unsigned zones are advised that it provides no
+   real protection against attacks.  While zone digests can be used in
+   the absence of DNSSEC, this only provides protection against
+   accidental zone <strike><font color="red">corruption,</font></strike> <strong><font color="green">corruption</font></strong> such as transmission errors and
+   truncation.  When used in this manner, it effectively serves only as
+   a checksum.  For zones not signed with DNSSEC, an attacker can make
+   any zone modifications appear to be valid by recomputing <strong><font color="green">the</font></strong> Digest
+   field of a ZONEMD RR.
+
+6.2.  Attacks <strike><font color="red">Against</font></strike> <strong><font color="green">against</font></strong> the Zone Digest
+
+   An attacker, whose goal is to modify zone content before it is used
+   by the victim, may consider a number of different approaches.
+
+   The attacker might perform a downgrade attack to an unsigned zone.
+   This is why Section 4 talks about determining whether or not to
+   expect DNSSEC signatures for the zone in step 1.
+
+   The attacker might perform a downgrade attack by removing one or more
+   ZONEMD records.  Such a removal is detectable only with DNSSEC
+   validation and is why Section 4 talks about checking denial-of-
+   existence proofs in step 2 and signature validation in step 3.
+
+   The attacker might alter the Scheme, Hash Algorithm, or Digest fields
+   of the ZONEMD record.  Such modifications are detectable only with
+   DNSSEC validation.
+
+   As stated in <strike><font color="red">[RFC7696],</font></strike> <strong><font color="green">[BCP201],</font></strong> cryptographic algorithms age and become weaker
+   as cryptanalysis techniques and computing resources improve with
+   time.  Implementors and publishers of zone digests should anticipate
+   the need for algorithm agility on long timescales.
+
+6.3.  Use of Multiple ZONEMD Hash Algorithms
+
+   When a zone publishes multiple ZONEMD RRs, the overall security is
+   only as good as the weakest hash algorithm in use.  For this reason,
+   Section 2 recommends only publishing multiple ZONEMD RRs when
+   transitioning to a new scheme or hash algorithm.  Once the transition
+   is complete, the old scheme or hash algorithm should be removed from
+   the ZONEMD RRSet.
+
+6.4.  DNSSEC Timing Considerations
+
+   As with all DNSSEC signatures, the ability to perform signature
+   validation of a ZONEMD record is limited in time.  If the DS
+   record(s) or trust anchors for the zone to be verified are no longer
+   available, the recipient cannot validate the ZONEMD RRSet.  This
+   could happen even if the ZONEMD signature is still current (not
+   expired), since the zone's DS record(s) may have been withdrawn
+   following a Key Signing Key (KSK) rollover.
+
+   For zones where it may be important to validate a ZONEMD RRSet
+   through its entire signature validity period, the zone operator
+   should ensure that KSK rollover timing takes this into consideration.
+
+6.5.  Attacks Utilizing ZONEMD Queries
+
+   Nothing in this specification prevents clients from making, and
+   servers from responding to, ZONEMD queries.  Servers SHOULD NOT
+   calculate zone digests dynamically (for each query) as this can be
+   used as a CPU resource exhaustion attack.
+
+   ZONEMD responses could be used in a distributed denial-of-service
+   amplification attack.  The ZONEMD RR is moderately sized, much like
+   the DS RR.  A single ZONEMD RR contributes approximately 65 to 95
+   octets to a DNS <strike><font color="red">response,</font></strike> <strong><font color="green">response</font></strong> for digest types defined herein.  Other RR
+   types, such as <strike><font color="red">DNSKEY,</font></strike> <strong><font color="green">DNS Public Key (DNSKEY),</font></strong> can result in larger
+   amplification effects.
+
+6.6.  Resilience and Fragility
+
+   ZONEMD is used to detect incomplete or corrupted zone data prior to
+   its use, thereby increasing resilience by not using corrupt data, but
+   also introduces some denial-of-service fragility by making good data
+   in a zone unavailable if some other data is missing or corrupt.
+   Publishers and consumers of zones containing ZONEMD records should be
+   aware of these <strike><font color="red">tradeoffs.</font></strike> <strong><font color="green">trade-offs.</font></strong>  While the intention is to secure the zone
+   data, misconfigurations or implementation bugs are generally
+   indistinguishable from intentional <strike><font color="red">tampering,</font></strike> <strong><font color="green">tampering</font></strong> and could lead to
+   service failures when verification is performed automatically.
+
+   Zone publishers may want to deploy ZONEMD <strike><font color="red">gradually,</font></strike> <strong><font color="green">gradually</font></strong> perhaps by
+   utilizing one of the <strike><font color="red">private use</font></strike> <strong><font color="green">Private Use</font></strong> hash algorithm code points listed in
+   Section 5.3.  Similarly, recipients may want to initially configure
+   verification failures only as a warning, and later as an error after
+   gaining experience and confidence with the feature.
+
+7.  Performance Considerations
+
+   This section is provided to make zone publishers aware of the
+   performance requirements and implications of including ZONEMD RRs in
+   a zone.
+
+7.1.  SIMPLE SHA384
+
+   As mentioned previously, the SIMPLE scheme may be impractical for use
+   in zones that are either large or highly dynamic.  Zone publishers
+   should carefully consider the use of ZONEMD in such <strike><font color="red">zones,</font></strike> <strong><font color="green">zones</font></strong> since it
+   might cause consumers of zone data (e.g., secondary name servers) to
+   expend resources on digest calculation.  For such use cases, it is
+   recommended that ZONEMD only be used when digest calculation time is
+   significantly less than propagation times and update intervals.
+
+   The authors' implementation (Appendix B.1) includes an option to
+   record and report CPU usage of its operation.  The software was used
+   to generate digests for more than 800 <strike><font color="red">TLD</font></strike> <strong><font color="green">Top-Level Domain (TLD)</font></strong> zones
+   available from [CZDS].  The table below summarizes the results for
+   the SIMPLE scheme and SHA384 hash algorithm grouped by zone size.
+   The Rate column is the mean amount of time per RR to calculate the
+   digest, running on commodity hardware in early 2020.
+
+                 <strike><font color="red">+---------------------+----------------+</font></strike>
+
+                 <strong><font color="green">+=====================+================+</font></strong>
+                 |     Zone Size (RRs) | Rate (msec/RR) |
+                 <strike><font color="red">+---------------------+----------------+</font></strike>
+                 <strong><font color="green">+=====================+================+</font></strong>
+                 |             10 - 99 |        0.00683 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 |           100 - 999 |        0.00551 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 |         1000 - 9999 |        0.00505 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 |       10000 - 99999 |        0.00602 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 |     100000 - 999999 |        0.00845 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 |   1000000 - 9999999 |         0.0108 |
+                 <strong><font color="green">+---------------------+----------------+</font></strong>
+                 | 10000000 - 99999999 |         0.0148 |
+                 +---------------------+----------------+
+
+                                 <strong><font color="green">Table 3</font></strong>
+
+   For example, based on the above table, it takes approximately 0.13
+   seconds to calculate a SIMPLE SHA384 digest for a zone with 22,000
+   RRs, and about 2.5 seconds for a zone with 300,000 RRs.
+
+   These benchmarks attempt to emulate a worst-case scenario and take
+   into account the time required to canonicalize the zone for
+   processing.  Each of the 800+ zones were measured three <strike><font color="red">times,</font></strike> <strong><font color="green">times</font></strong> and
+   then averaged, with a different random sorting of the input data
+   prior to each measurement.
+
+8.  Privacy Considerations
+
+   This specification has no impact on user privacy.
+
+<strike><font color="red">11.1.</font></strike>
+
+<strong><font color="green">9.  References
+
+9.1.</font></strong>  Normative References
+
+   [RFC1034]  Mockapetris, P., "Domain names - concepts and facilities",
+              STD 13, RFC 1034, DOI 10.17487/RFC1034, November 1987,
+              &lt;https://www.rfc-editor.org/info/rfc1034&gt;.
+
+   [RFC1035]  Mockapetris, P., "Domain names - implementation and
+              specification", STD 13, RFC 1035, DOI 10.17487/RFC1035,
+              November 1987, &lt;https://www.rfc-editor.org/info/rfc1035&gt;.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119,
+              DOI 10.17487/RFC2119, March 1997,
+              &lt;https://www.rfc-editor.org/info/rfc2119&gt;.
+
+   [RFC4034]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+              Rose, "Resource Records for the DNS Security Extensions",
+              RFC 4034, DOI 10.17487/RFC4034, March 2005,
+              &lt;https://www.rfc-editor.org/info/rfc4034&gt;.
+
+   [RFC6234]  Eastlake 3rd, D. and T. Hansen, "US Secure Hash Algorithms
+              (SHA and SHA-based HMAC and HKDF)", RFC 6234,
+              DOI 10.17487/RFC6234, May 2011,
+              &lt;https://www.rfc-editor.org/info/rfc6234&gt;.
+
+   [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
+              2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
+              May 2017, &lt;https://www.rfc-editor.org/info/rfc8174&gt;.
+
+<strike><font color="red">11.2.</font></strike>
+
+<strong><font color="green">9.2.</font></strong>  Informative References
+
+   <strong><font color="green">[BCP201]   Housley, R., "Guidelines for Cryptographic Algorithm
+              Agility and Selecting Mandatory-to-Implement Algorithms",
+              BCP 201, RFC 7696, November 2015.
+
+              &lt;https://www.rfc-editor.org/info/bcp201&gt;</font></strong>
+
+   [CZDS]     Internet Corporation for Assigned Names and <strike><font color="red">Numbers,</font></strike> <strong><font color="green">Numbers
+              (ICANN),</font></strong> "Centralized Zone Data Service", October 2018,
+              &lt;https://czds.icann.org/&gt;.
+
+   <strike><font color="red">[disk-full-failure]</font></strike>
+
+   <strong><font color="green">[DISK-FULL-FAILURE]</font></strong>
+              DENIC, "Background of the Partial Failure of the Name
+              Service for .de Domains", May 2010,
+              &lt;https://web.archive.org/web/20100618032705/
+              https://www.denic.de/en/denic-in-dialogue/news/2733.html&gt;.
+
+   <strike><font color="red">[DnsTools]</font></strike>
+
+   <strong><font color="green">[DNS-TOOLS]</font></strong>
+              NIC Chile Labs, "DNS tools for zone signature (file,
+              pkcs11-hsm) and validation, and zone digest (ZONEMD)",
+              April 2020, &lt;https://github.com/niclabs/dns-tools&gt;.
+
+   <strike><font color="red">[I-D.ietf-dprive-xfr-over-tls]</font></strike>
+
+   <strong><font color="green">[DPRIVE-XFR-OVER-TLS]</font></strong>
+              Toorop, W., Dickinson, S., Sahib, S., Aras, P., and A.
+              Mankin, "DNS Zone Transfer-over-TLS", <strike><font color="red">draft-ietf-dprive-
+              xfr-over-tls-02 (work</font></strike> <strong><font color="green">Work</font></strong> in <strike><font color="red">progress), July 2020.</font></strike> <strong><font color="green">Progress,
+              November 2020, &lt;https://tools.ietf.org/html/draft-ietf-
+              dprive-xfr-over-tls-04&gt;.</font></strong>
+
+   [InterNIC]
+              <strike><font color="red">ICANN, "InterNIC FTP site",</font></strike> <strong><font color="green">InterNIC, "Index of ftp://rs.internic.net/",</font></strong> May 2018,
+              &lt;ftp://ftp.internic.net/domain/&gt;.
+
+   <strike><font color="red">[ldns-zone-digest]</font></strike>
+
+   <strong><font color="green">[LDNS-ZONE-DIGEST]</font></strong>
+              Verisign, "Implementation of Message Digests for DNS Zones
+              using the ldns library", July 2018,
+              &lt;https://github.com/verisign/ldns-zone-digest&gt;.
+
+   [RFC1995]  Ohta, M., "Incremental Zone Transfer in DNS", RFC 1995,
+              DOI 10.17487/RFC1995, August 1996,
+              &lt;https://www.rfc-editor.org/info/rfc1995&gt;.
+
+   [RFC2065]  Eastlake 3rd, D. and C. Kaufman, "Domain Name System
+              Security Extensions", RFC 2065, DOI 10.17487/RFC2065,
+              January 1997, &lt;https://www.rfc-editor.org/info/rfc2065&gt;.
+
+   [RFC2136]  Vixie, P., Ed., Thomson, S., Rekhter, Y., and J. Bound,
+              "Dynamic Updates in the Domain Name System (DNS UPDATE)",
+              RFC 2136, DOI 10.17487/RFC2136, April 1997,
+              &lt;https://www.rfc-editor.org/info/rfc2136&gt;.
+
+   [RFC2535]  Eastlake 3rd, D., "Domain Name System Security
+              Extensions", RFC 2535, DOI 10.17487/RFC2535, March 1999,
+              &lt;https://www.rfc-editor.org/info/rfc2535&gt;.
+
+   [RFC2845]  Vixie, P., Gudmundsson, O., Eastlake 3rd, D., and B.
+              Wellington, "Secret Key Transaction Authentication for DNS
+              (TSIG)", RFC 2845, DOI 10.17487/RFC2845, May 2000,
+              &lt;https://www.rfc-editor.org/info/rfc2845&gt;.
+
+   [RFC2931]  Eastlake 3rd, D., "DNS Request and Transaction Signatures
+              ( SIG(0)s )", RFC 2931, DOI 10.17487/RFC2931, September
+              2000, &lt;https://www.rfc-editor.org/info/rfc2931&gt;.
+
+   [RFC3258]  Hardie, T., "Distributing Authoritative Name Servers via
+              Shared Unicast Addresses", RFC 3258, DOI 10.17487/RFC3258,
+              April 2002, &lt;https://www.rfc-editor.org/info/rfc3258&gt;.
+
+   [RFC4880]  Callas, J., Donnerhacke, L., Finney, H., Shaw, D., and R.
+              Thayer, "OpenPGP Message Format", RFC 4880,
+              DOI 10.17487/RFC4880, November 2007,
+              &lt;https://www.rfc-editor.org/info/rfc4880&gt;.
+
+   [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
+              Security (DNSSEC) Hashed Authenticated Denial of
+              Existence", RFC 5155, DOI 10.17487/RFC5155, March 2008,
+              &lt;https://www.rfc-editor.org/info/rfc5155&gt;.
+
+   [RFC5751]  Ramsdell, B. and S. Turner, "Secure/Multipurpose Internet
+              Mail Extensions (S/MIME) Version 3.2 Message
+              Specification", RFC 5751, DOI 10.17487/RFC5751, January
+              2010, &lt;https://www.rfc-editor.org/info/rfc5751&gt;.
+
+   [RFC5936]  Lewis, E. and A. Hoenes, Ed., "DNS Zone Transfer Protocol
+              (AXFR)", RFC 5936, DOI 10.17487/RFC5936, June 2010,
+              &lt;https://www.rfc-editor.org/info/rfc5936&gt;.
+
+   <strike><font color="red">[RFC7696]  Housley, R., "Guidelines for Cryptographic Algorithm
+              Agility and Selecting Mandatory-to-Implement Algorithms",
+              BCP 201, RFC 7696, DOI 10.17487/RFC7696, November 2015,
+              &lt;https://www.rfc-editor.org/info/rfc7696&gt;.</font></strike>
+
+   [RFC8126]  Cotton, M., Leiba, B., and T. Narten, "Guidelines for
+              Writing an IANA Considerations Section in RFCs", BCP 26,
+              RFC 8126, DOI 10.17487/RFC8126, June 2017,
+              &lt;https://www.rfc-editor.org/info/rfc8126&gt;.
+
+   [RFC8484]  Hoffman, P. and P. McManus, "DNS Queries over HTTPS
+              (DoH)", RFC 8484, DOI 10.17487/RFC8484, October 2018,
+              &lt;https://www.rfc-editor.org/info/rfc8484&gt;.
+
+   [RFC8499]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
+              Terminology", BCP 219, RFC 8499, DOI 10.17487/RFC8499,
+              January 2019, &lt;https://www.rfc-editor.org/info/rfc8499&gt;.
+
+   [RFC8806]  Kumari, W. and P. Hoffman, "Running a Root Server Local to
+              a Resolver", RFC 8806, DOI 10.17487/RFC8806, June 2020,
+              &lt;https://www.rfc-editor.org/info/rfc8806&gt;.
+
+   [RFC8901]  Huque, S., Aras, P., Dickinson, J., Vcelak, J., and D.
+              Blacka, "Multi-Signer DNSSEC Models", RFC 8901,
+              DOI 10.17487/RFC8901, September 2020,
+              &lt;https://www.rfc-editor.org/info/rfc8901&gt;.
+
+   <strike><font color="red">[RootServers]</font></strike>
+
+   <strong><font color="green">[ROOT-SERVERS]</font></strong>
+              Root Server Operators, <strike><font color="red">"Root Server Technical Operations",</font></strike> <strong><font color="green">"root-servers.org",</font></strong> July 2018,
+              &lt;https://www.root-servers.org/&gt;.
+
+   [RPZ]      Wikipedia, "Response policy zone", May 2020,
+              &lt;https://en.wikipedia.org/w/
+              index.php?title=Response_policy_zone&amp;oldid=960043728&gt;.
+
+   <strike><font color="red">[ZoneDigestHackathon]</font></strike>
+
+   <strong><font color="green">[ZONE-DIGEST-HACKATHON]</font></strong>
+              Kerr, S., "Prototype implementation of ZONEMD for the IETF
+              102 <strike><font color="red">hackathon in Python",</font></strike> <strong><font color="green">hackathon",</font></strong> July 2018,
+              &lt;https://github.com/shane-kerr/ZoneDigestHackathon&gt;.
+
+Appendix A.  Example Zones <strike><font color="red">With</font></strike> <strong><font color="green">with</font></strong> Digests
+
+   This appendix contains example zones with accurate ZONEMD records.
+   These can be used to verify an implementation of the zone digest
+   protocol.
+
+A.1.  Simple EXAMPLE Zone
+
+   Here, the EXAMPLE zone contains an SOA record, NS and glue records,
+   and a ZONEMD record.
+
+   example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                     1800 900 604800 86400 )
+                 86400   IN  NS      ns1
+                 86400   IN  NS      ns2
+                 86400   IN  ZONEMD  2018031900 1 1 (
+                                     c68090d90a7aed71
+                                     6bc459f9340e3d7c
+                                     1370d4d24b7e2fc3
+                                     a1ddc0b9a87153b9
+                                     a9713b3c9ae5cc27
+                                     777f98b8e730044c )
+   ns1           3600    IN  A       203.0.113.63
+   ns2           3600    IN  AAAA    2001:db8::63
+
+A.2.  Complex EXAMPLE Zone
+
+   Here, the EXAMPLE zone contains duplicate RRs, <strike><font color="red">and</font></strike> an occluded RR, and
+   one out-of-zone RR.
+
+   example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                     1800 900 604800 86400 )
+                 86400   IN  NS      ns1
+                 86400   IN  NS      ns2
+                 86400   IN  ZONEMD  2018031900 1 1 (
+                                     31cefb03814f5062
+                                     ad12fa951ba0ef5f
+                                     8da6ae354a415767
+                                     246f7dc932ceb1e7
+                                     42a2108f529db6a3
+                                     3a11c01493de358d )
+   ns1           3600    IN  A       203.0.113.63
+   ns2           3600    IN  AAAA    2001:db8::63
+   occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
+   sub           7200    IN  NS      ns1
+   duplicate     300     IN  TXT     "I must be digested just once"
+   duplicate     300     IN  TXT     "I must be digested just once"
+   foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
+   non-apex      900     IN  ZONEMD  2018031900 1 1 (
+                                     616c6c6f77656420
+                                     6275742069676e6f
+                                     7265642e20616c6c
+                                     6f77656420627574
+                                     2069676e6f726564
+                                     2e20616c6c6f7765 )
+
+A.3.  EXAMPLE Zone with <strike><font color="red">multiple digests</font></strike> <strong><font color="green">Multiple Digests</font></strong>
+
+   Here, the EXAMPLE zone contains multiple ZONEMD records.  It has both
+   SHA384 and SHA512 digests using the SIMPLE scheme.  It also includes
+   ZONEMD records with Scheme and Hash Algorithm values in the private
+   range (240-254).  These additional private-range digests are not
+   verifiable.
+
+   example.      86400   IN  SOA     ns1 admin 2018031900 (
+                                     1800 900 604800 86400 )
+   example.      86400   IN  NS      ns1.example.
+   example.      86400   IN  NS      ns2.example.
+   example.      86400   IN  ZONEMD  2018031900 1 1 (
+                                     62e6cf51b02e54b9
+                                     b5f967d547ce4313
+                                     6792901f9f88e637
+                                     493daaf401c92c27
+                                     9dd10f0edb1c56f8
+                                     080211f8480ee306 )
+   example.      86400   IN  ZONEMD  2018031900 1 2 (
+                                     08cfa1115c7b948c
+                                     4163a901270395ea
+                                     226a930cd2cbcf2f
+                                     a9a5e6eb85f37c8a
+                                     4e114d884e66f176
+                                     eab121cb02db7d65
+                                     2e0cc4827e7a3204
+                                     f166b47e5613fd27 )
+   example.      86400   IN  ZONEMD  2018031900 1 240 (
+                                     e2d523f654b9422a
+                                     96c5a8f44607bbee )
+   example.      86400   IN  ZONEMD  2018031900 241 1 (
+                                     e1846540e33a9e41
+                                     89792d18d5d131f6
+                                     05fc283e )
+   ns1.example.  3600    IN  A       203.0.113.63
+   ns2.example.  86400   IN  TXT     "This example has multiple digests"
+   ns2.example.  3600    IN  AAAA    2001:db8::63
+
+A.4.  The URI.ARPA Zone
+
+   The URI.ARPA zone retrieved 2018-10-21.  Note this sample zone has
+   (expired) <strike><font color="red">signatures,</font></strike> <strong><font color="green">signatures</font></strong> but no signature for the ZONEMD RR.
+
+   ; &lt;&lt;&gt;&gt; DiG 9.9.4 &lt;&lt;&gt;&gt; @lax.xfr.dns.icann.org uri.arpa axfr
+   ; (2 servers found)
+   ;; global options: +cmd
+   uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
+       noc.dns.icann.org. 2018100702 10800 3600 1209600 3600 )
+   uri.arpa.         3600    IN      RRSIG   NSEC 8 2 3600 (
+       20181028142623 20181007205525 47155 uri.arpa.
+       eEC4w/oXLR1Epwgv4MBiDtSBsXhqrJVvJWUpbX8XpetAvD35bxwNCUTi
+       /pAJVUXefegWeiriD2rkTgCBCMmn7YQIm3gdR+HjY/+o3BXNQnz97f+e
+       HAE9EDDzoNVfL1PyV/2fde9tDeUuAGVVwmD399NGq9jWYMRpyri2kysr q/g= )
+   uri.arpa.         86400   IN      RRSIG   NS 8 2 86400 (
+       20181028172020 20181007175821 47155 uri.arpa.
+       ATyV2A2A8ZoggC+68u4GuP5MOUuR+2rr3eWOkEU55zAHld/7FiBxl4ln
+       4byJYy7NudUwlMOEXajqFZE7DVl8PpcvrP3HeeGaVzKqaWj+aus0jbKF
+       Bsvs2b1qDZemBfkz/IfAhUTJKnto0vSUicJKfItu0GjyYNJCz2CqEuGD Wxc= )
+   uri.arpa.         600     IN      RRSIG   MX 8 2 600 (
+       20181028170556 20181007175821 47155 uri.arpa.
+       e7/r3KXDohX1lyVavetFFObp8fB8aXT76HnN9KCQDxSnSghNM83UQV0t
+       lTtD8JVeN1mCvcNFZpagwIgB7XhTtm6Beur/m5ES+4uSnVeS6Q66HBZK
+       A3mR95IpevuVIZvvJ+GcCAQpBo6KRODYvJ/c/ZG6sfYWkZ7qg/Em5/+3 4UI= )
+   uri.arpa.         3600    IN      RRSIG   DNSKEY 8 2 3600 (
+       20181028152832 20181007175821 15796 uri.arpa.
+       nzpbnh0OqsgBBP8St28pLvPEQ3wZAUdEBuUwil+rtjjWlYYiqjPxZ286
+       XF4Rq1usfV5x71jZz5IqswOaQgia91ylodFpLuXD6FTGs2nXGhNKkg1V
+       chHgtwj70mXU72GefVgo8TxrFYzxuEFP5ZTP92t97FVWVVyyFd86sbbR
+       6DZj3uA2wEvqBVLECgJLrMQ9Yy7MueJl3UA4h4E6zO2JY9Yp0W9woq0B
+       dqkkwYTwzogyYffPmGAJG91RJ2h6cHtFjEZe2MnaY2glqniZ0WT9vXXd
+       uFPm0KD9U77Ac+ZtctAF9tsZwSdAoL365E2L1usZbA+K0BnPPqGFJRJk
+       5R0A1w== )
+   uri.arpa.         3600    IN      RRSIG   DNSKEY 8 2 3600 (
+       20181028152832 20181007175821 55480 uri.arpa.
+       lWtQV/5szQjkXmbcD47/+rOW8kJPksRFHlzxxmzt906+DBYyfrH6uq5X
+       nHvrUlQO6M12uhqDeL+bDFVgqSpNy+42/OaZvaK3J8EzPZVBHPJykKMV
+       63T83aAiJrAyHzOaEdmzLCpalqcEE2ImzlLHSafManRfJL8Yuv+JDZFj
+       2WDWfEcUuwkmIZWX11zxp+DxwzyUlRl7x4+ok5iKZWIg5UnBAf6B8T75
+       WnXzlhCw3F2pXI0a5LYg71L3Tp/xhjN6Yy9jGlIRf5BjB59X2zra3a2R
+       PkI09SSnuEwHyF1mDaV5BmQrLGRnCjvwXA7ho2m+vv4SP5dUdXf+GTeA
+       1HeBfw== )
+   uri.arpa.         3600    IN      RRSIG   SOA 8 2 3600 (
+       20181029114753 20181008222815 47155 uri.arpa.
+       qn8yBNoHDjGdT79U2Wu9IIahoS0YPOgYP8lG+qwPcrZ1BwGiHywuoUa2
+       Mx6BWZlg+HDyaxj2iOmox+IIqoUHhXUbO7IUkJFlgrOKCgAR2twDHrXu
+       9BUQHy9SoV16wYm3kBTEPyxW5FFm8vcdnKAF7sxSY8BbaYNpRIEjDx4A JUc= )
+   uri.arpa.         3600    IN      NSEC    ftp.uri.arpa. NS SOA (
+       MX RRSIG NSEC DNSKEY )
+   uri.arpa.         86400   IN      NS      a.iana-servers.net.
+   uri.arpa.         86400   IN      NS      b.iana-servers.net.
+   uri.arpa.         86400   IN      NS      c.iana-servers.net.
+   uri.arpa.         86400   IN      NS      ns2.lacnic.net.
+   uri.arpa.         86400   IN      NS      sec3.apnic.net.
+   uri.arpa.         600     IN      MX      10 pechora.icann.org.
+   uri.arpa.         3600    IN      DNSKEY  256 3 8 (
+       AwEAAcBi7tSart2J599zbYWspMNGN70IBWb4ziqyQYH9MTB/VCz6WyUK
+       uXunwiJJbbQ3bcLqTLWEw134B6cTMHrZpjTAb5WAwg4XcWUu8mdcPTiL
+       Bl6qVRlRD0WiFCTzuYUfkwsh1Rbr7rvrxSQhF5rh71zSpwV5jjjp65Wx
+       SdJjlH0B )
+   uri.arpa.         3600    IN      DNSKEY  257 3 8 (
+       AwEAAbNVv6ulgRdO31MtAehz7j3ALRjwZglWesnzvllQl/+hBRZr9QoY
+       cO2I+DkO4Q1NKxox4DUIxj8SxPO3GwDuOFR9q2/CFi2O0mZjafbdYtWc
+       3zSdBbi3q0cwCIx7GuG9eqlL+pg7mdk9dgdNZfHwB0LnqTD8ebLPsrO/
+       Id7kBaiqYOfMlZnh2fp+2h6OOJZHtY0DK1UlssyB5PKsE0tVzo5s6zo9
+       iXKe5u+8WTMaGDY49vG80JPAKE7ezMiH/NZcUMiE0PRZ8D3foq2dYuS5
+       ym+vA83Z7v8A+Rwh4UGnjxKB8zmr803V0ASAmHz/gwH5Vb0nH+LObwFt
+       l3wpbp+Wpm8= )
+   uri.arpa.         3600    IN      DNSKEY  257 3 8 (
+       AwEAAbwnFTakCvaUKsXji4mgmxZUJi1IygbnGahbkmFEa0L16J+TchKR
+       wcgzVfsxUGa2MmeA4hgkAooC3uy+tTmoMsgy8uq/JAj24DjiHzd46LfD
+       FK/qMidVqFpYSHeq2Vv5ojkuIsx4oe4KsafGWYNOczKZgH5loGjN2aJG
+       mrIm++XCphOskgCsQYl65MIzuXffzJyxlAuts+ecAIiVeqRaqQfr8LRU
+       7wIsLxinXirprtQrbor+EtvlHp9qXE6ARTZDzf4jvsNpKvLFZtmxzFf3
+       e/UJz5eHjpwDSiZL7xE8aE1o1nGfPtJx9ZnB3bapltaJ5wY+5XOCKgY0
+       xmJVvNQlwdE= )
+   ftp.uri.arpa.     3600    IN      RRSIG   NSEC 8 3 3600 (
+       20181028080856 20181007175821 47155 uri.arpa.
+       HClGAqPxzkYkAT7Q/QNtQeB6YrkP6EPOef+9Qo5/2zngwAewXEAQiyF9
+       jD1USJiroM11QqBS3v3aIdW/LXORs4Ez3hLcKNO1cKHsOuWAqzmE+BPP
+       Arfh8N95jqh/q6vpaB9UtMkQ53tM2fYU1GszOLN0knxbHgDHAh2axMGH lqM= )
+   ftp.uri.arpa.     604800  IN      RRSIG   NAPTR 8 3 604800 (
+       20181028103644 20181007205525 47155 uri.arpa.
+       WoLi+vZzkxaoLr2IGZnwkRvcDf6KxiWQd1WZP/U+AWnV+7MiqsWPZaf0
+       9toRErerGoFOiOASNxZjBGJrRgjmavOM9U+LZSconP9zrNFd4dIu6kp5
+       YxlQJ0uHOvx1ZHFCj6lAt1ACUIw04ZhMydTmi27c8MzEOMepvn7iH7r7 k7k= )
+   ftp.uri.arpa.     3600    IN      NSEC    http.uri.arpa. NAPTR (
+       RRSIG NSEC )
+   ftp.uri.arpa.     604800  IN      NAPTR   0 0 "" "" (
+       "!^ftp://([^:/?#]*).*$!\\1!i" . )
+   http.uri.arpa.    3600    IN      RRSIG   NSEC 8 3 3600 (
+       20181029010647 20181007175821 47155 uri.arpa.
+       U03NntQ73LHWpfLmUK8nMsqkwVsOGW2KdsyuHYAjqQSZvKbtmbv7HBmE
+       H1+Ii3Z+wtfdMZBy5aC/6sHdx69BfZJs16xumycMlAy6325DKTQbIMN+
+       ift9GrKBC7cgCd2msF/uzSrYxxg4MJQzBPvlkwXnY3b7eJSlIXisBIn7 3b8= )
+   http.uri.arpa.    604800  IN      RRSIG   NAPTR 8 3 604800 (
+       20181029011815 20181007205525 47155 uri.arpa.
+       T7mRrdag+WSmG+n22mtBSQ/0Y3v+rdDnfQV90LN5Fq32N5K2iYFajF7F
+       Tp56oOznytfcL4fHrqOE0wRc9NWOCCUec9C7Wa1gJQcllEvgoAM+L6f0
+       RsEjWq6+9jvlLKMXQv0xQuMX17338uoD/xiAFQSnDbiQKxwWMqVAimv5 7Zs= )
+   http.uri.arpa.    3600    IN      NSEC    mailto.uri.arpa. NAPTR (
+       RRSIG NSEC )
+   http.uri.arpa.    604800  IN      NAPTR   0 0 "" "" (
+       "!^http://([^:/?#]*).*$!\\1!i" . )
+   mailto.uri.arpa.  3600    IN      RRSIG   NSEC 8 3 3600 (
+       20181028110727 20181007175821 47155 uri.arpa.
+       GvxzVL85rEukwGqtuLxek9ipwjBMfTOFIEyJ7afC8HxVMs6mfFa/nEM/
+       IdFvvFg+lcYoJSQYuSAVYFl3xPbgrxVSLK125QutCFMdC/YjuZEnq5cl
+       fQciMRD7R3+znZfm8d8u/snLV9w4D+lTBZrJJUBe1Efc8vum5vvV7819 ZoY= )
+   mailto.uri.arpa.  604800  IN      RRSIG   NAPTR 8 3 604800 (
+       20181028141825 20181007205525 47155 uri.arpa.
+       MaADUgc3fc5v++M0YmqjGk3jBdfIA5RuP62hUSlPsFZO4k37erjIGCfF
+       j+g84yc+QgbSde0PQHszl9fE/+SU5ZXiS9YdcbzSZxp2erFpZOTchrpg
+       916T4vx6i59scodjb0l6bDyZ+mtIPrc1w6b4hUyOUTsDQoAJYxdfEuMg Vy4= )
+   mailto.uri.arpa.  3600    IN      NSEC    urn.uri.arpa. NAPTR (
+       RRSIG NSEC )
+   mailto.uri.arpa.  604800  IN      NAPTR   0 0 "" "" (
+       "!^mailto:(.*)@(.*)$!\\2!i" . )
+   urn.uri.arpa.     3600    IN      RRSIG   NSEC 8 3 3600 (
+       20181028123243 20181007175821 47155 uri.arpa.
+       Hgsw4Deops1O8uWyELGe6hpR/OEqCnTHvahlwiQkHhO5CSEQrbhmFAWe
+       UOkmGAdTEYrSz+skLRQuITRMwzyFf4oUkZihGyhZyzHbcxWfuDc/Pd/9
+       DSl56gdeBwy1evn5wBTms8yWQVkNtphbJH395gRqZuaJs3LD/qTyJ5Dp LvA= )
+   urn.uri.arpa.     604800  IN      RRSIG   NAPTR 8 3 604800 (
+       20181029071816 20181007205525 47155 uri.arpa.
+       ALIZD0vBqAQQt40GQ0Efaj8OCyE9xSRJRdyvyn/H/wZVXFRFKrQYrLAS
+       D/K7q6CMTOxTRCu2J8yes63WJiaJEdnh+dscXzZkmOg4n5PsgZbkvUSW
+       BiGtxvz5jNncM0xVbkjbtByrvJQAO1cU1mnlDKe1FmVB1uLpVdA9Ib4J hMU= )
+   urn.uri.arpa.     3600    IN      NSEC    uri.arpa. NAPTR RRSIG (
+       NSEC )
+   urn.uri.arpa.     604800  IN      NAPTR   0 0 "" "" (
+       "/urn:([^:]+)/\\1/i" . )
+   uri.arpa.         3600    IN      SOA     sns.dns.icann.org. (
+       noc.dns.icann.org. 2018100702 10800 3600 1209600 3600 )
+   ;; Query time: 66 msec
+   ;; SERVER: 192.0.32.132#53(192.0.32.132)
+   ;; WHEN: Sun Oct 21 20:39:28 UTC 2018
+   ;; XFR size: 34 records (messages 1, bytes 3941)
+   uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
+       1291b78ddf7669b1a39d014d87626b709b55774c5d7d58fa
+       dc556439889a10eaf6f11d615900a4f996bd46279514e473 )
+
+A.5.  The ROOT-SERVERS.NET Zone
+
+   The ROOT-SERVERS.NET zone retrieved 2018-10-21.
+
+   root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
+       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
+   root-servers.net.     3600000 IN  NS      a.root-servers.net.
+   root-servers.net.     3600000 IN  NS      b.root-servers.net.
+   root-servers.net.     3600000 IN  NS      c.root-servers.net.
+   root-servers.net.     3600000 IN  NS      d.root-servers.net.
+   root-servers.net.     3600000 IN  NS      e.root-servers.net.
+   root-servers.net.     3600000 IN  NS      f.root-servers.net.
+   root-servers.net.     3600000 IN  NS      g.root-servers.net.
+   root-servers.net.     3600000 IN  NS      h.root-servers.net.
+   root-servers.net.     3600000 IN  NS      i.root-servers.net.
+   root-servers.net.     3600000 IN  NS      j.root-servers.net.
+   root-servers.net.     3600000 IN  NS      k.root-servers.net.
+   root-servers.net.     3600000 IN  NS      l.root-servers.net.
+   root-servers.net.     3600000 IN  NS      m.root-servers.net.
+   a.root-servers.net.   3600000 IN  AAAA    2001:503:ba3e::2:30
+   a.root-servers.net.   3600000 IN  A       198.41.0.4
+   b.root-servers.net.   3600000 IN  MX      20 mail.isi.edu.
+   b.root-servers.net.   3600000 IN  AAAA    2001:500:200::b
+   b.root-servers.net.   3600000 IN  A       199.9.14.201
+   c.root-servers.net.   3600000 IN  AAAA    2001:500:2::c
+   c.root-servers.net.   3600000 IN  A       192.33.4.12
+   d.root-servers.net.   3600000 IN  AAAA    2001:500:2d::d
+   d.root-servers.net.   3600000 IN  A       199.7.91.13
+   e.root-servers.net.   3600000 IN  AAAA    2001:500:a8::e
+   e.root-servers.net.   3600000 IN  A       192.203.230.10
+   f.root-servers.net.   3600000 IN  AAAA    2001:500:2f::f
+   f.root-servers.net.   3600000 IN  A       192.5.5.241
+   g.root-servers.net.   3600000 IN  AAAA    2001:500:12::d0d
+   g.root-servers.net.   3600000 IN  A       192.112.36.4
+   h.root-servers.net.   3600000 IN  AAAA    2001:500:1::53
+   h.root-servers.net.   3600000 IN  A       198.97.190.53
+   i.root-servers.net.   3600000 IN  MX      10 mx.i.root-servers.org.
+   i.root-servers.net.   3600000 IN  AAAA    2001:7fe::53
+   i.root-servers.net.   3600000 IN  A       192.36.148.17
+   j.root-servers.net.   3600000 IN  AAAA    2001:503:c27::2:30
+   j.root-servers.net.   3600000 IN  A       192.58.128.30
+   k.root-servers.net.   3600000 IN  AAAA    2001:7fd::1
+   k.root-servers.net.   3600000 IN  A       193.0.14.129
+   l.root-servers.net.   3600000 IN  AAAA    2001:500:9f::42
+   l.root-servers.net.   3600000 IN  A       199.7.83.42
+   m.root-servers.net.   3600000 IN  AAAA    2001:dc3::35
+   m.root-servers.net.   3600000 IN  A       202.12.27.33
+   root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
+       nstld.verisign-grs.com. 2018091100 14400 7200 1209600 3600000 )
+   root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
+       f1ca0ccd91bd5573d9f431c00ee0101b2545c97602be0a97
+       8a3b11dbfc1c776d5b3e86ae3d973d6b5349ba7f04340f79 )
+
+Appendix B.  Implementation Status
+
+   <strike><font color="red">RFC Editor: Please retain this section upon publication.</font></strike>
+
+   This section records the status of known implementations of the
+   protocol defined by this specification at the time of publication,
+   and is inspired by the concepts described in <strike><font color="red">RFC7942.</font></strike> <strong><font color="green">RFC 7942.</font></strong>
+
+   Please note that the listing of any individual implementation here
+   does not imply endorsement by the IETF.  Furthermore, no effort has
+   been spent to verify the information presented here that was supplied
+   by IETF contributors.  This is not intended as, and must not be
+   construed to be, a catalog of available implementations or their
+   features.  Readers are advised to note that other implementations may
+   exist.
+
+B.1.  Authors' Implementation
+
+   The authors have an <strike><font color="red">open source</font></strike> <strong><font color="green">open-source</font></strong> implementation in C, using the ldns
+   library <strike><font color="red">[ldns-zone-digest].</font></strike> <strong><font color="green">[LDNS-ZONE-DIGEST].</font></strong>  This implementation is able to perform
+   the following functions:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Read an input zone and output a zone with the ZONEMD placeholder.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Compute <strong><font color="green">the</font></strong> zone digest over <strong><font color="green">the</font></strong> signed zone and update the ZONEMD
+      record.
+
+   <strike><font color="red">o  Re-compute</font></strike>
+
+   <strong><font color="green">*  Recompute</font></strong> DNSSEC <strike><font color="red">signature</font></strike> <strong><font color="green">signatures</font></strong> over the ZONEMD record.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Verify the zone digest from an input zone.
+
+   This implementation does not:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Perform DNSSEC validation of the ZONEMD record during
+      verification.
+
+B.2.  Shane Kerr's Implementation
+
+   Shane Kerr wrote an implementation of this specification during the
+   IETF 102 hackathon <strike><font color="red">[ZoneDigestHackathon].</font></strike> <strong><font color="green">[ZONE-DIGEST-HACKATHON].</font></strong>  This implementation is
+   in Python and is able to perform the following functions:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Read an input zone and output a zone with ZONEMD record.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Verify the zone digest from an input zone.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Output the ZONEMD record in its defined presentation format.
+
+   This implementation does not:
+
+   <strike><font color="red">o  Re-compute</font></strike>
+
+   <strong><font color="green">*  Recompute</font></strong> DNSSEC <strike><font color="red">signature</font></strike> <strong><font color="green">signatures</font></strong> over the ZONEMD record.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Perform DNSSEC validation of the ZONEMD record.
+
+B.3.  NIC Chile <strike><font color="red">Labs</font></strike> <strong><font color="green">Lab's</font></strong> Implementation
+
+   NIC Chile Labs wrote an implementation of this specification as part
+   of "dns-tools" suite <strike><font color="red">[DnsTools],</font></strike> <strong><font color="green">[DNS-TOOLS],</font></strong> which besides digesting, can also
+   sign and verify zones.  This implementation is in Go and is able to
+   perform the following functions:
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Compute zone digest over signed zone and update the ZONEMD record.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Verify the zone digest from an input zone.
+
+   <strike><font color="red">o</font></strike>
+
+   <strong><font color="green">*</font></strong>  Perform DNSSEC validation of the ZONEMD record during
+      verification.
+
+   <strike><font color="red">o  Re-compute</font></strike>
+
+   <strong><font color="green">*  Recompute</font></strong> DNSSEC <strike><font color="red">signature</font></strike> <strong><font color="green">signatures</font></strong> over the ZONEMD record.
+
+<strike><font color="red">9.</font></strike>
+
+Acknowledgments
+
+   The authors wish to thank David Blacka, Scott Hollenbeck, and Rick
+   Wilhelm for providing feedback on early drafts of this document.
+   Additionally, they thank Joe Abley, Mark Andrews, Ralph Dolmans,
+   Donald <strike><font color="red">Eastlake,</font></strike> <strong><font color="green">Eastlake 3rd,</font></strong> Richard Gibson, Olafur Gudmundsson, Bob Harold,
+   Paul Hoffman, Evan Hunt, Shumon Huque, Tatuya Jinmei, Mike St. Johns,
+   Burt Kaliski, Shane Kerr, Matt Larson, Barry Leiba, John Levine, Ed
+   Lewis, Matt Pounsett, Mukund Sivaraman, Petr Spacek, Ondrej Sury,
+   Willem Toorop, Florian Weimer, Tim Wicinski, Wouter Wijngaards, Paul
+   Wouters, and other members of the DNSOP <strike><font color="red">working group</font></strike> <strong><font color="green">Working Group</font></strong> for their
+   input.
+
+Authors' Addresses
+
+   Duane Wessels
+   Verisign
+   12061 Bluemont Way
+   Reston, VA 20190
+   <strong><font color="green">United States of America</font></strong>
+
+   Phone: +1 703 948-3200
+   Email: dwessels@verisign.com
+   URI:   https://verisign.com
+
+   Piet Barber
+   Verisign
+   12061 Bluemont Way
+   Reston, VA 20190
+   <strong><font color="green">United States of America</font></strong>
+
+   Phone: +1 703 948-3200
+   Email: pbarber@verisign.com
+   URI:   https://verisign.com
+
+   Matt Weinberg
+   Amazon
+
+   Email: matweinb@amazon.com
+   URI:   https://amazon.com
+
+   Warren Kumari
+   Google
+   1600 Amphitheatre Parkway
+   Mountain View, CA 94043
+   <strong><font color="green">United States of America</font></strong>
+
+   Email: warren@kumari.net
+
+   Wes Hardaker
+   USC/ISI
+   P.O. Box 382
+   Davis, CA 95617
+   <strong><font color="green">United States of America</font></strong>
+
+   Email: ietf@hardakers.net
+</pre>
+
+</body></html>
