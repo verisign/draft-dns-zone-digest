@@ -5,19 +5,20 @@ example.      86400   IN  SOA     ns1 admin 2018031900 (
               86400   IN  NS      ns1
               86400   IN  NS      ns2
               86400   IN  ZONEMD  2018031900 1 1 (
-                                  31cefb03814f5062
-                                  ad12fa951ba0ef5f
-                                  8da6ae354a415767
-                                  246f7dc932ceb1e7
-                                  42a2108f529db6a3
-                                  3a11c01493de358d )
+                                  9e2a34515bce089f
+                                  f40efb19f4d965c8
+                                  4850a45714ee50b4
+                                  7254af8a3c0ca02c
+                                  419846b0e51fe195
+                                  833aa9a2a99c12a8 )
 ns1           3600    IN  A       203.0.113.63
-ns2           3600    IN  AAAA    2001:db8::63
+NS2           3600    IN  AAAA    2001:db8::63
 occluded.sub  7200    IN  TXT     "I'm occluded but must be digested"
 sub           7200    IN  NS      ns1
 duplicate     300     IN  TXT     "I must be digested just once"
 duplicate     300     IN  TXT     "I must be digested just once"
 foo.test.     555     IN  TXT     "out-of-zone data must be excluded"
+UPPERCASE     3600    IN  TXT     "uppercase owner names must be canonicalized"
 non-apex      900     IN  ZONEMD  2018031900 1 1 (
                                   616c6c6f77656420
                                   6275742069676e6f

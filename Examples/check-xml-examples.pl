@@ -10,15 +10,15 @@ my $fn = shift || die "usage: $0 xmlfile\n";
 open(F, $fn) or die "$fn: $!\n";
 
 my $xml_string;
-my $entities;
+my $entities = { 'amp' => '' };
 while (<F>) {
 # <!ENTITY RFC8174 PUBLIC "" "http://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8174.xml">
 # <!ENTITY RRNAME "ZONEMD">
-	if (/^<!ENTITY\s+(\w+)\s+.*"([^"]+)">$/) {
+	if (/^<!ENTITY\s+(\S+)\s+.*"([^"]+)">$/) {
 		$entities->{$1} = $2;
 		next;
 	}
-	while (/\&(\w+);/) {
+	while (/\&(\S+);/) {
 		my $k = $1;
 		my $v = $entities->{$k};
 		s/\&$k;/$v/;
