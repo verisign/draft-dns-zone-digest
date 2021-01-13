@@ -1233,7 +1233,7 @@ DW: yes, lets match the IANA registry
         </t>
       </section>
       <section numbered="true" toc="default">
-        <name>Attacks against the Zone Digest</name>
+        <name>Attacks Against the Zone Digest</name>
         <t>
           An attacker, whose goal is to modify zone content before it is used
           by the victim, may consider a number of different approaches.
