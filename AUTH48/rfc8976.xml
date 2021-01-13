@@ -111,21 +111,23 @@ version="3">
 Original:
 
 ZONEMD does not replace DNSSEC.  Whereas DNSSEC protects individual
-RRSets (DNS data with fine granularity), ZONEMD protects a zone's
+RRsets (DNS data with fine granularity), ZONEMD protects a zone's
 data as a whole, whether consumed by authoritative name servers,
 recursive name servers, or any other applications.
 
 Currently:
 
 ZONEMD does not replace DNSSEC:
-DNSSEC protects individual RRSets (DNS data with
+DNSSEC protects individual RRsets (DNS data with
 fine granularity), whereas ZONEMD protects a zone's data
 as a whole, whether consumed by authoritative name
 servers, recursive name servers, or any other applications.
 
+DW: reviewed and accepted
+
 -->
         ZONEMD does not replace DNSSEC:
-        DNSSEC protects individual RRSets (DNS data with
+        DNSSEC protects individual RRsets (DNS data with
         fine granularity), whereas ZONEMD protects a zone's data
         as a whole, whether consumed by authoritative name
         servers, recursive name servers, or any other applications.
@@ -265,8 +267,8 @@ Updated:
  <t>
           Why not simply rely on DNSSEC, which provides certain data security
           guarantees?  For zones that are signed, a recipient could validate
-          all of the signed RRSets.  Additionally, denial-of-existence records
-          prove that RRSets have not been added or removed.  However,
+          all of the signed RRsets.  Additionally, denial-of-existence records
+          prove that RRsets have not been added or removed.  However,
           delegations (non-apex NS records) are not signed by DNSSEC and
           neither are any glue records.  ZONEMD protects the integrity of
           delegation, glue, and other records that are not otherwise covered
@@ -299,8 +301,10 @@ Original:
 
  Non-detached signatures are of course possible, but
  these necessarily change the format of the file being distributed;
+
+DW: changed to attached
 -->
-	  Non-detached
+	  Attached
           signatures are of course possible, but these necessarily change the
           format of the file being distributed; a zone signed with OpenPGP or
           S/MIME no longer looks like a DNS zone and could not directly be
@@ -314,7 +318,7 @@ Original:
           of the first generation DNSSEC Security Extensions.  It
           describes a zone transfer signature, identified as the AXFR SIG, which
           is similar to the technique proposed by this document.
-          That is, it proposes ordering all (signed) RRSets in a zone,
+          That is, it proposes ordering all (signed) RRsets in a zone,
           hashing their contents, and then signing the zone hash.
           The AXFR SIG is described only for use during zone
           transfers.  It did not postulate the need to validate
@@ -329,10 +333,13 @@ Suggested:
 Furthermore, its successor, [RFC2535], omits the AXFR SIG while at
 the same time introducing an IXFR SIG.  (Note: RFC 2535 was obsoleted by RFCs 4033, 4034, and 4035.)
 
+DW: accepted
+
 -->
 	  Furthermore,
           its successor, <xref target="RFC2535" format="default"/>, omits the AXFR
           SIG while at the same time introducing an IXFR SIG.
+          (Note: RFC 2535 was obsoleted by RFCs 4033, 4034, and 4035.)
         </t>
       </section>
 
@@ -424,6 +431,8 @@ Or perhaps:
    ([RFC3258]).
    ...
    ICANN operates the Centralized Zone Data Service ([CZDS]), which is a...
+
+DW: yes please update citations as appropriate.  I did not make any changes for this.
 -->
         </section>
         <section numbered="true" toc="default">
@@ -558,6 +567,8 @@ Scheme defined for ZONEMD records
 
 Perhaps:
 Herein, the SIP for Instant Messaging and Presence Leveraging (SIMPLE), with Scheme value 1, is the only standardized Scheme defined for ZONEMD records
+
+DW: No, SIMPLE is not an initialism and perhaps writing it in all-caps is a mistake.  It is only intented as a name (mnemonic?) for the scheme.
 -->
           <t>
             Herein, SIMPLE, with Scheme value 1, is the only standardized
@@ -660,11 +671,13 @@ Herein, the SIP for Instant Messaging and Presence Leveraging (SIMPLE), with Sch
 
 If the current list of preferred values for "type" (https://www.rfc-editor.org/materials/sourcecode-types.txt)
 does not contain an applicable type, then feel free to let us know.
+
+DW: added types to two sourcecode elements.
 -->
 
 	
 	
-<sourcecode>
+<sourcecode type="dns-rr">
 example.com. 86400 IN ZONEMD 2018031500 1 1 (
     FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE
     7EB1A7B641A47BA7FED2DD5B97AE499FAFA4F22C6BD647DE )
@@ -690,7 +703,7 @@ Updated:
    schemes, including the Private Use code points.
 -->
         <t>
-          The ZONEMD RRSet <bcp14>MAY</bcp14> contain multiple records to support algorithm
+          The ZONEMD RRset <bcp14>MAY</bcp14> contain multiple records to support algorithm
           agility <xref target="BCP201" format="default"/>.
 
           When multiple ZONEMD RRs are present, each <bcp14>MUST</bcp14>
@@ -766,12 +779,14 @@ Sign the Zone (Optional)
 
 Perhaps B:
 Optionally, Sign the Zone
+
+DW: I like option B
 -->
-        <name>Optionally Sign the Zone</name>
+        <name>Optionally, Sign the Zone</name>
         <t>
           Following the addition of placeholder records, the zone may be signed with DNSSEC.
           When the digest calculation is complete, and the ZONEMD record is updated,
-          the signature(s) for the ZONEMD RRSet <bcp14>MUST</bcp14> be recalculated and
+          the signature(s) for the ZONEMD RRset <bcp14>MUST</bcp14> be recalculated and
           updated as well.
           Therefore, the signer is not required to calculate a signature over the placeholder record at
           this step in the process, but it is harmless to do so.
@@ -801,7 +816,7 @@ Optionally, Sign the Zone
             section="6.1" sectionFormat="bare"/>, <xref target="RFC4034"
             section="6.2" sectionFormat="bare"/>, and <xref target="RFC4034"
             section="6.3" sectionFormat="bare"/> of <xref target="RFC4034"
-            format="default"/> with the additional provision that RRSets
+            format="default"/> with the additional provision that RRsets
             having the same owner name <bcp14>MUST</bcp14> be numerically
             ordered, in ascending order, by their numeric RR TYPE.
           </t>
@@ -825,7 +840,7 @@ Optionally, Sign the Zone
               <bcp14>MUST</bcp14> be omitted.</li>
               <li>The placeholder apex ZONEMD RR(s) <bcp14>MUST NOT</bcp14> be included.</li>
               <li>If the zone is signed, DNSSEC RRs <bcp14>MUST</bcp14> be included, except:</li>
-              <li>The RRSIG covering the apex ZONEMD RRSet <bcp14>MUST NOT</bcp14> be included
+              <li>The RRSIG covering the apex ZONEMD RRset <bcp14>MUST NOT</bcp14> be included
                 because the RRSIG will be updated after all digests have been calculated.</li>
             </ul>
 <!-- [rfced] In Section 3.3.1.1, should the last bullet (after the previous "except" qualifier") be indented to show it is dependent on the previous bullet?
@@ -833,16 +848,18 @@ Optionally, Sign the Zone
 Original:
     -  If the zone is signed, DNSSEC RRs MUST be included, except:
 
-    -  The RRSIG covering the apex ZONEMD RRSet MUST NOT be included
+    -  The RRSIG covering the apex ZONEMD RRset MUST NOT be included
        because the RRSIG will be updated after all digests have been
        calculated.
 
 Perhaps:
     -  If the zone is signed, DNSSEC RRs MUST be included, except:
 
-       -  The RRSIG covering the apex ZONEMD RRSet MUST NOT be included
+       -  The RRSIG covering the apex ZONEMD RRset MUST NOT be included
           because the RRSIG will be updated after all digests have been
           calculated.
+
+DW: no strong opinion.  IMO its okay as-is. Because it is the very last bullet in the list I don't think it can really be misinterpreted.
 -->
 
           </section>
@@ -856,7 +873,7 @@ Perhaps:
             </t>
 
 
- <sourcecode>
+ <sourcecode type="pseudocode">
 digest = hash( RR(1) | RR(2) | RR(3) | ... )
 
 where "|" denotes concatenation.
@@ -873,7 +890,7 @@ where "|" denotes concatenation.
         </t>
         <t>
           If the zone is signed with DNSSEC, the RRSIG record(s) covering the ZONEMD
-          RRSet <bcp14>MUST</bcp14> then be added or updated.  Because the ZONEMD placeholder was added prior to signing,
+          RRset <bcp14>MUST</bcp14> then be added or updated.  Because the ZONEMD placeholder was added prior to signing,
           the zone will already have the appropriate denial-of-existence (NSEC, NSEC3) records.
         </t>
         <t>
@@ -916,6 +933,8 @@ Perhaps:
       MAY ignore a ZONEMD RR if its Scheme and Hash Algorithm violates local policy.
 
    1.  The verifier MUST first determine whether or not...
+
+DW: yes, that sounds good.  I didn't change the XML because I'm not sure how to get the Note paragraph indented.
 -->
       <t>
         The recipient of a zone that has a ZONEMD RR verifies the zone
@@ -939,22 +958,22 @@ Perhaps:
         <li anchor="verify-check-existence">
             For zones where signatures are expected, the existence of the apex
             ZONEMD record <bcp14>MUST</bcp14> be validated.  If the DNSSEC
-            data proves the ZONEMD RRSet does not exist, digest verification
+            data proves the ZONEMD RRset does not exist, digest verification
             cannot occur.  If the DNSSEC data proves the ZONEMD does exist,
             but is not found in the zone, digest verification <bcp14>MUST
             NOT</bcp14> be considered successful.
           </li>
         <li anchor="verify-dnssec-validate">
-            For zones where signatures are expected, the SOA and ZONEMD RRSets
+            For zones where signatures are expected, the SOA and ZONEMD RRsets
             <bcp14>MUST</bcp14> have valid signatures, chaining up to a trust
-            anchor.  If DNSSEC validation of the SOA or ZONEMD RRSets fails,
+            anchor.  If DNSSEC validation of the SOA or ZONEMD RRsets fails,
             digest verification <bcp14>MUST NOT</bcp14> be considered
             successful.
           </li>
         <li anchor="verify-check-digest-count">
             When multiple ZONEMD RRs are present, each <bcp14>MUST</bcp14>
             specify a unique Scheme and Hash Algorithm tuple.  If the ZONEMD
-            RRSet contains more than one RR with the same Scheme and Hash
+            RRset contains more than one RR with the same Scheme and Hash
             Algorithm, digest verification for those ZONEMD RRs <bcp14>MUST
             NOT</bcp14> be considered successful.
           </li>
@@ -1071,7 +1090,10 @@ Perhaps:
 
 </dl>
 
-<!--[rfced] We note that the ZONEMD Schemes Registry lists this document as a reference for the "Reserved" values 0 and 255.  Should this be reflected in this document as well? The same is true about the "Reserved" values in the ZONEMD Hash Algorithms registry.  Please advise.-->
+<!--[rfced] We note that the ZONEMD Schemes Registry lists this document as a reference for the "Reserved" values 0 and 255.  Should this be reflected in this document as well? The same is true about the "Reserved" values in the ZONEMD Hash Algorithms registry.  Please advise.
+
+DW: yes, lets match the IANA registry
+-->
         <table anchor="scheme-table" align="center">
           <name>ZONEMD Scheme Registry</name>
           <thead>
@@ -1087,7 +1109,7 @@ Perhaps:
               <td align="left">0</td>
               <td align="left">Reserved</td>
               <td align="left"/>
-              <td align="left"/>
+              <td align="left">[RFC8976]</t>
             </tr>
             <tr>
               <td align="left">1</td>
@@ -1111,7 +1133,7 @@ Perhaps:
               <td align="left">255</td>
               <td align="left">Reserved</td>
               <td align="left"/>
-              <td align="left"/>
+              <td align="left">[RFC8976]</t>
             </tr>
           </tbody>
         </table>
@@ -1158,7 +1180,7 @@ Perhaps:
               <td align="left">0</td>
               <td align="left">Reserved</td>
               <td align="left"/>
-              <td align="left"/>
+              <td align="left">[RFC8976]</t>
             </tr>
             <tr>
               <td align="left">1</td>
@@ -1188,7 +1210,7 @@ Perhaps:
               <td align="left">255</td>
               <td align="left">Reserved</td>
               <td align="left"/>
-              <td align="left"/>
+              <td align="left">[RFC8976]</t>
             </tr>
           </tbody>
         </table>
@@ -1251,7 +1273,7 @@ Perhaps:
           <xref target="rrtype" format="default"/> recommends only publishing multiple ZONEMD RRs
           when transitioning to a new scheme or hash algorithm.  Once the transition
           is complete, the old scheme or hash algorithm should be removed from
-          the ZONEMD RRSet.
+          the ZONEMD RRset.
         </t>
       </section>
       <section numbered="true" toc="default">
@@ -1261,14 +1283,14 @@ Perhaps:
           validation of a ZONEMD record is limited in time.
           If the DS record(s) or trust anchors for the zone to be verified
           are no longer available, the recipient cannot validate
-          the ZONEMD RRSet.
+          the ZONEMD RRset.
           This could happen even if the ZONEMD signature is still current
           (not expired), since the zone's DS record(s)
           may have been withdrawn following a Key Signing Key (KSK) rollover.
         </t>
         <t>
           For zones where it may be important to validate a ZONEMD
-          RRSet through its entire signature validity period, the zone
+          RRset through its entire signature validity period, the zone
           operator should ensure that KSK rollover timing takes this
           into consideration.
         </t>
@@ -1478,15 +1500,15 @@ Perhaps:
 
 <!--[rfced] Please review the guidance in the online portion of the RFC Style Guide (https://www.rfc-editor.org/styleguide/part2/) as pertains to referencing GitHub and let us know how we may update any references to necessary.
 
+DW: I've made changes to try matching the style guidelines, please check my work
 -->
 
         <reference anchor="LDNS-ZONE-DIGEST" target="https://github.com/verisign/ldns-zone-digest">
           <front>
             <title>Implementation of Message Digests for DNS Zones using the ldns library</title>
-            <author>
-              <organization>Verisign</organization>
-            </author>
-            <date year="2018" month="July"/>
+            <date year="2021" month="January"/>
+            <seriesinfo>commit 71c0cd1</seriesinfo>
+            <url>https://github.com/verisign/ldns-zone-digest</url>
           </front>
         </reference>
 
@@ -1495,9 +1517,9 @@ Perhaps:
         <reference anchor="ZONE-DIGEST-HACKATHON" target="https://github.com/shane-kerr/ZoneDigestHackathon">
           <front>
             <title>Prototype implementation of ZONEMD for the IETF 102 hackathon</title>
-            <author initials="S." surname="Kerr" fullname="Shane Kerr">
-          </author>
-            <date year="2018" month="July"/>
+            <date year="2019" month="August"/>
+            <seriesinfo>commit 76ad7a7</seriesinfo>
+            <url>https://github.com/shane-kerr/ZoneDigestHackathon</url>
           </front>
         </reference>
 
@@ -1507,10 +1529,9 @@ Perhaps:
           <front>
             <title>DNS tools for zone signature (file, pkcs11-hsm)
       and validation, and zone digest (ZONEMD)</title>
-            <author>
-              <organization>NIC Chile Labs</organization>
-            </author>
-            <date year="2020" month="April"/>
+            <date year="2020" month="December"/>
+            <seriesinfo>commit 489de21</seriesinfo>
+            <url>https://github.com/niclabs/dns-tools</url>
           </front>
         </reference>
 
@@ -1665,11 +1686,13 @@ Perhaps:
    The following sample zone is the URI.ARPA zone retrieved 2018-10-21. Note this sample zone
    ...
    The following sample zone is the ROOT-SERVERS.NET zone retrieved 2018-10-21.
+
+DW: Updated
 -->
       <section numbered="true" toc="default">
         <name>The URI.ARPA Zone</name>
         <t>
-          The URI.ARPA zone retrieved 2018-10-21.  Note this sample zone has
+          The following sample zone is the URI.ARPA zone retrieved 2018-10-21.  Note this sample zone has
           (expired) signatures but no signature for the ZONEMD RR.
         </t>
 <sourcecode type="dns-rr">
@@ -1815,7 +1838,7 @@ uri.arpa.       3600    IN      ZONEMD  2018100702 1 1 (
       <section numbered="true" toc="default">
         <name>The ROOT-SERVERS.NET Zone</name>
         <t>
-          The ROOT-SERVERS.NET zone retrieved 2018-10-21.
+          The following sample zone is the ROOT-SERVERS.NET zone retrieved 2018-10-21.
         </t>
 <sourcecode type="dns-rr">
 root-servers.net.     3600000 IN  SOA     a.root-servers.net. (
@@ -2002,6 +2025,8 @@ may be made consistent.
 a) RRSet vs. RRset
 
 We see mostly RRSet in the document, but past use in RFCs seems to favor the latter.
+
+DW: Let's use RRset since thats what the DNS Terminology RFC 8499 uses.
 
 b) Field names
 
