@@ -1,0 +1,11 @@
+uri.arpa.	3600	IN	SOA	sns.dns.icann.org. noc.dns.icann.org. 2018100702 10800 3600 1209600 3600
+urn.uri.arpa.	604800	IN	NAPTR	0 0 "" "" "/urn:([^:]+)/\\1/i" .
+mailto.uri.arpa.	604800	IN	NAPTR	0 0 "" "" "!^mailto:(.*)@(.*)$!\\2!i" .
+http.uri.arpa.	604800	IN	NAPTR	0 0 "" "" "!^http://([^:/?#]*).*$!\\1!i" .
+ftp.uri.arpa.	604800	IN	NAPTR	0 0 "" "" "!^ftp://([^:/?#]*).*$!\\1!i" .
+uri.arpa.	600	IN	MX	10 pechora.icann.org.
+uri.arpa.	86400	IN	NS	sec3.apnic.net.
+uri.arpa.	86400	IN	NS	ns2.lacnic.net.
+uri.arpa.	86400	IN	NS	c.iana-servers.net.
+uri.arpa.	86400	IN	NS	b.iana-servers.net.
+uri.arpa.	86400	IN	NS	a.iana-servers.net.
