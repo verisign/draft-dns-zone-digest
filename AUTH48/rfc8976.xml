@@ -67,7 +67,7 @@ version="3">
         </postal>
         <email>warren@kumari.net</email>
       </address>
-    </author>
+  </author>
 
     <author fullname="Wes Hardaker" initials="W." surname="Hardaker">
       <organization>USC/ISI</organization>
@@ -392,11 +392,14 @@ version="3">
        
 
         <t>
-    The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>", "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL
-    NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>", "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>",
-    "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are to be interpreted as
-    described in BCP&nbsp;14 <xref target="RFC2119"/> <xref target="RFC8174"/> 
-    when, and only when, they appear in all capitals, as shown here.
+    The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>",
+    "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL
+    NOT</bcp14>", "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>",
+    "<bcp14>RECOMMENDED</bcp14>", "<bcp14>NOT RECOMMENDED</bcp14>",
+    "<bcp14>MAY</bcp14>", and "<bcp14>OPTIONAL</bcp14>" in this document are
+    to be interpreted as described in BCP&nbsp;14 <xref target="RFC2119"/>
+    <xref target="RFC8174"/> when, and only when, they appear in all capitals,
+    as shown here.
         </t>
 
         <t>
@@ -562,7 +565,7 @@ version="3">
           text.
         </li>
 </ul>
-  </section>
+      </section>
       <section numbered="true" toc="default">
         <name>ZONEMD Example</name>
         <t>
@@ -785,7 +788,7 @@ violates local policy.  </t></aside>
       where signatures are not expected, or if DNSSEC validation is not
       performed, digest verification continues at step <xref
       target="verify-check-digest-count" format="counter"/> below.
-          </li>
+    </li>
         <li anchor="verify-check-existence">
             For zones where signatures are expected, the existence of the apex
             ZONEMD record <bcp14>MUST</bcp14> be validated.  If the DNSSEC
@@ -793,21 +796,21 @@ violates local policy.  </t></aside>
             cannot occur.  If the DNSSEC data proves the ZONEMD does exist,
             but is not found in the zone, digest verification <bcp14>MUST
             NOT</bcp14> be considered successful.
-          </li>
+        </li>
         <li anchor="verify-dnssec-validate">
             For zones where signatures are expected, the SOA and ZONEMD RRsets
             <bcp14>MUST</bcp14> have valid signatures, chaining up to a trust
             anchor.  If DNSSEC validation of the SOA or ZONEMD RRsets fails,
             digest verification <bcp14>MUST NOT</bcp14> be considered
             successful.
-          </li>
+        </li>
         <li anchor="verify-check-digest-count">
             When multiple ZONEMD RRs are present, each <bcp14>MUST</bcp14>
             specify a unique Scheme and Hash Algorithm tuple.  If the ZONEMD
             RRset contains more than one RR with the same Scheme and Hash
             Algorithm, digest verification for those ZONEMD RRs <bcp14>MUST
             NOT</bcp14> be considered successful.
-          </li>
+        </li>
         <li>
           <t>
             Loop over all apex ZONEMD RRs and perform the following steps:
@@ -816,37 +819,37 @@ violates local policy.  </t></aside>
           SOA Serial field <bcp14>MUST</bcp14> exactly match the ZONEMD Serial
           field.  If the fields do not match, digest verification <bcp14>MUST
           NOT</bcp14> be considered successful with this ZONEMD RR.
-              </li>
+        </li>
             <li>
                 The Scheme field <bcp14>MUST</bcp14> be checked.  If the
                 verifier does not support the given scheme, verification
                 <bcp14>MUST NOT</bcp14> be considered successful with this
                 ZONEMD RR.
-              </li>
+            </li>
             <li>
                 The Hash Algorithm field <bcp14>MUST</bcp14> be checked.  If
                 the verifier does not support the given hash algorithm,
                 verification <bcp14>MUST NOT</bcp14> be considered successful
                 with this ZONEMD RR.
-              </li>
+            </li>
             <li>
                 The Digest field size <bcp14>MUST</bcp14> be checked.  If the
                 size of the given Digest field is smaller than 12 octets, or
                 if the size is not equal to the size expected for the
                 corresponding Hash Algorithm, verification <bcp14>MUST
                 NOT</bcp14> be considered successful with this ZONEMD RR.
-              </li>
+            </li>
             <li>
                 The zone digest is computed over the zone data as described in
                 <xref target="collate-iterate" format="default"/> using the
                 Scheme and Hash Algorithm for the current ZONEMD RR.
-              </li>
+            </li>
             <li>
                 The computed digest is compared to the received digest.  If
                 the two digest values match, verification is considered
                 successful.  Otherwise, verification <bcp14>MUST NOT</bcp14>
                 be considered successful for this ZONEMD RR.
-              </li>
+            </li>
           </ol>
         </li>
       </ol>
@@ -1085,11 +1088,11 @@ violates local policy.  </t></aside>
           only with DNSSEC validation.
         </t>
         <t>
-          As stated in <xref target="BCP201" format="default"/>, cryptographic algorithms
-          age and become weaker as cryptanalysis techniques and computing
-          resources improve with time.
-          Implementors and publishers of zone digests should anticipate
-          the need for algorithm agility on long timescales.
+          As stated in <xref target="BCP201" format="default"/>,
+          cryptographic algorithms age and become weaker as cryptanalysis
+          techniques and computing resources improve with time.  Implementors
+          and publishers of zone digests should anticipate the need for
+          algorithm agility on long timescales.
         </t>
       </section>
       <section numbered="true" toc="default">
@@ -1276,12 +1279,12 @@ violates local policy.  </t></aside>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2065.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2136.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2535.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2845.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8945.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.2931.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.3258.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.4880.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5155.xml"/>
-        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5751.xml"/>
+        <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.8551.xml"/>
         <xi:include href="https://xml2rfc.ietf.org/public/rfc/bibxml/reference.RFC.5936.xml"/>
 
 
@@ -1816,5 +1819,5 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
     </section>
 
 
-  </back>
+</back>
 </rfc>
