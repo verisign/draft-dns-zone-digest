@@ -106,26 +106,6 @@ version="3">
       </t>
       <t>
 
-<!--[rfced] Please review this edit to ensure we have not changed the intended meaning.
-
-Original:
-
-ZONEMD does not replace DNSSEC.  Whereas DNSSEC protects individual
-RRsets (DNS data with fine granularity), ZONEMD protects a zone's
-data as a whole, whether consumed by authoritative name servers,
-recursive name servers, or any other applications.
-
-Currently:
-
-ZONEMD does not replace DNSSEC:
-DNSSEC protects individual RRsets (DNS data with
-fine granularity), whereas ZONEMD protects a zone's data
-as a whole, whether consumed by authoritative name
-servers, recursive name servers, or any other applications.
-
-DW: reviewed and accepted
-
--->
         ZONEMD does not replace DNSSEC:
         DNSSEC protects individual RRsets (DNS data with
         fine granularity), whereas ZONEMD protects a zone's data
@@ -247,17 +227,7 @@ DW: reviewed and accepted
           these reasons, it is preferable to protect the integrity of the data
           itself.
         </t>
-       
-<!-- [rfced] FYI: We've capitalized  "opt-out" to "Opt-Out" per its usage in RFC 5155. Please let us know if this is not preferred.
-
-Original: 
-   Furthermore, zones that employ NSEC3 with opt-out [RFC5155] are
-   susceptible to the removal or addition of names between the signed nodes.
-
-Updated: 
-   Furthermore, zones that employ NSEC3 with Opt-Out [RFC5155] are
-   susceptible to the removal or addition of names between the signed nodes.
--->
+    
  <t>
           Why not simply rely on DNSSEC, which provides certain data security
           guarantees?  For zones that are signed, a recipient could validate
@@ -271,14 +241,7 @@ Updated:
           or addition of names between the signed nodes.  Whereas DNSSEC
           primarily protects consumers of DNS response messages, this protocol
           protects consumers of zones.
-        </t>
-
-<!-- [rfced] Reference RFC 5751 has been obsoleted by RFC 8551. We will update to point to the latter unless we hear objection.
-
-Original:
-   There are existing tools and protocols that provide data security,
-   such as OpenPGP [RFC4880] and S/MIME [RFC5751].
--->
+ </t>
 
         <t>
           There are existing tools and protocols that provide data security,
@@ -289,21 +252,11 @@ Original:
           this is a detached signature with no strong association to the
           corresponding zone file other than its timestamp.
 
-<!--[rfced] Would "attached signatures" be easier to read here? 
-
-Original:
-
- Non-detached signatures are of course possible, but
- these necessarily change the format of the file being distributed;
-
-DW: changed to attached
--->
-	  Attached
-          signatures are of course possible, but these necessarily change the
-          format of the file being distributed; a zone signed with OpenPGP or
-          S/MIME no longer looks like a DNS zone and could not directly be
-          loaded into a name server.  Once loaded, the signature data is lost,
-          so it cannot be further propagated.
+  Attached signatures are of course possible, but these necessarily change the
+  format of the file being distributed; a zone signed with OpenPGP or S/MIME
+  no longer looks like a DNS zone and could not directly be loaded into a name
+  server.  Once loaded, the signature data is lost, so it cannot be further
+  propagated.
         </t>
         <t>
           It seems the desire for data security in DNS zones was envisioned
@@ -317,23 +270,10 @@ DW: changed to attached
           The AXFR SIG is described only for use during zone
           transfers.  It did not postulate the need to validate
           zone data distributed outside of the DNS.
-<!--[rfced] We suggest updating the following text to give the reader more information on RFC 2535.  We see these RFCs are cited elsewhere in the document, but as other relationships for RFC 2535 are mentioned here, it seems appropriate.
 
-Original:
-Furthermore, its successor, [RFC2535], omits the AXFR SIG, while at
-the same time introducing an IXFR SIG.
-   
-Suggested:
-Furthermore, its successor, [RFC2535], omits the AXFR SIG while at
-the same time introducing an IXFR SIG.  (Note: RFC 2535 was obsoleted by RFCs 4033, 4034, and 4035.)
-
-DW: accepted
-
--->
-	  Furthermore,
-          its successor, <xref target="RFC2535" format="default"/>, omits the AXFR
-          SIG while at the same time introducing an IXFR SIG.
-          (Note: RFC 2535 was obsoleted by RFCs 4033, 4034, and 4035.)
+  Furthermore, its successor, <xref target="RFC2535"
+  format="default"/>, omits the AXFR SIG while at the same time introducing an
+  IXFR SIG.  (Note: RFC 2535 was obsoleted by RFCs 4033, 4034, and 4035.)
         </t>
       </section>
 
@@ -531,17 +471,6 @@ DW: accepted
             as input to the hashing function.
           </t>
 
-<!-- [rfced] Does "SIMPLE" expand to "SIP for Instant Messaging and Presence Leveraging Extensions"?  
-
-Original:
-Herein, SIMPLE, with Scheme value 1, is the only standardized
-Scheme defined for ZONEMD records
-
-Perhaps:
-Herein, the SIP for Instant Messaging and Presence Leveraging (SIMPLE), with Scheme value 1, is the only standardized Scheme defined for ZONEMD records
-
-DW: No, SIMPLE is not an initialism and perhaps writing it in all-caps is a mistake.  It is only intented as a name (mnemonic?) for the scheme.
--->
           <t>
             Herein, SIMPLE, with Scheme value 1, is the only standardized
             Scheme defined for ZONEMD records and it <bcp14>MUST</bcp14> be
@@ -639,16 +568,8 @@ DW: No, SIMPLE is not an initialism and perhaps writing it in all-caps is a mist
         <t>
           The following example shows a ZONEMD RR in presentation format:
         </t>
-<!-- [rfced] We have not included a "type" for each snippet marked as "sourcecode" in the XML file.  Please review and let us know which (if any) "type" attribute of each sourcecode element in the XML file should be used.
 
-If the current list of preferred values for "type" (https://www.rfc-editor.org/materials/sourcecode-types.txt)
-does not contain an applicable type, then feel free to let us know.
 
-DW: added types to two sourcecode elements.
--->
-
-	
-	
 <sourcecode type="dns-rr">
 example.com. 86400 IN ZONEMD 2018031500 1 1 (
     FEBE3D4CE2EC2FFA4BA99D46CD69D6D29711E55217057BEE
@@ -732,27 +653,16 @@ example.com. 86400 IN ZONEMD 2018031500 1 1 (
       </section>
       <section numbered="true" toc="default">
 
-<!--[rfced] Should the title of Section 3.2 be updated to one of the following?
 
-Original:
-Optionally Sign the Zone 
-
-Perhaps A:
-Sign the Zone (Optional)
-
-Perhaps B:
-Optionally, Sign the Zone
-
-DW: I like option B
--->
         <name>Optionally, Sign the Zone</name>
         <t>
-          Following the addition of placeholder records, the zone may be signed with DNSSEC.
-          When the digest calculation is complete, and the ZONEMD record is updated,
-          the signature(s) for the ZONEMD RRset <bcp14>MUST</bcp14> be recalculated and
-          updated as well.
-          Therefore, the signer is not required to calculate a signature over the placeholder record at
-          this step in the process, but it is harmless to do so.
+          Following the addition of placeholder records, the zone may be
+          signed with DNSSEC.  When the digest calculation is complete, and
+          the ZONEMD record is updated, the signature(s) for the ZONEMD RRset
+          <bcp14>MUST</bcp14> be recalculated and updated as well.  Therefore,
+          the signer is not required to calculate a signature over the
+          placeholder record at this step in the process, but it is harmless
+          to do so.
         </t>
       </section>
       <section anchor="collate-iterate" numbered="true" toc="default">
@@ -806,33 +716,18 @@ DW: I like option B
               <li>The RRSIG covering the apex ZONEMD RRset <bcp14>MUST NOT</bcp14> be included
                 because the RRSIG will be updated after all digests have been calculated.</li>
             </ul>
-<!-- [rfced] In Section 3.3.1.1, should the last bullet (after the previous "except" qualifier") be indented to show it is dependent on the previous bullet?
 
-Original:
-    -  If the zone is signed, DNSSEC RRs MUST be included, except:
-
-    -  The RRSIG covering the apex ZONEMD RRset MUST NOT be included
-       because the RRSIG will be updated after all digests have been
-       calculated.
-
-Perhaps:
-    -  If the zone is signed, DNSSEC RRs MUST be included, except:
-
-       -  The RRSIG covering the apex ZONEMD RRset MUST NOT be included
-          because the RRSIG will be updated after all digests have been
-          calculated.
-
-DW: no strong opinion.  IMO its okay as-is. Because it is the very last bullet in the list I don't think it can really be misinterpreted.
--->
 
           </section>
           <section numbered="true" toc="default">
             <name>SIMPLE Scheme Digest Calculation</name>
             <t>
-              A zone digest using the SIMPLE scheme is calculated by concatenating all RRs in the zone,
-              in the format and order described in <xref target="scheme-simple" format="default"/>
-              subject to the inclusion/exclusion rules described in <xref target="simple-inclusion-exclusion" format="default"/>,
-              and then applying the chosen hash algorithm:
+              A zone digest using the SIMPLE scheme is calculated by
+              concatenating all RRs in the zone, in the format and order
+              described in <xref target="scheme-simple" format="default"/>
+              subject to the inclusion/exclusion rules described in <xref
+              target="simple-inclusion-exclusion" format="default"/>, and then
+              applying the chosen hash algorithm:
             </t>
 
 
@@ -872,42 +767,15 @@ where "|" denotes concatenation.
     <section anchor="verifying" numbered="true" toc="default">
       <name>Verifying Zone Digest</name>
 
-<!-- [rfced] Should the text introducing the steps at the beginning of Section 4 be updated to have all text after "as follows" in a note to emphasize the bullets beneath it relate to the text "as follows:"?
-
-Original:
-   
-   The recipient of a zone that has a ZONEMD RR verifies the zone by
-   calculating the digest as follows.  If multiple ZONEMD RRs are
-   present in the zone, e.g., during an algorithm rollover, a match
-   using any one of the recipient's supported Schemes and Hash
-   Algorithms is sufficient to verify the zone.  The verifier MAY ignore
-   a ZONEMD RR if its Scheme and Hash Algorithm violates local policy.
-
-   1.  The verifier MUST first determine whether or not...
-
-Perhaps:
-   
-   The recipient of a zone that has a ZONEMD RR verifies the zone by
-   calculating the digest as follows: 
-      
-      Note: If multiple ZONEMD RRs are present in the zone, e.g., during
-      an algorithm rollover, a match using any one of the recipient's supported
-      Schemes and Hash Algorithms is sufficient to verify the zone.  The verifier
-      MAY ignore a ZONEMD RR if its Scheme and Hash Algorithm violates local policy.
-
-   1.  The verifier MUST first determine whether or not...
-
-DW: yes, that sounds good.  I didn't change the XML because I'm not sure how to get the Note paragraph indented.
--->
       <t>
-        The recipient of a zone that has a ZONEMD RR verifies the zone
-        by calculating the digest as follows.
-          If multiple ZONEMD RRs are present in the zone, e.g.,
-          during an algorithm rollover, a match using any one of the recipient's
-          supported Schemes and Hash Algorithms is sufficient to verify the zone.
-          The verifier <bcp14>MAY</bcp14> ignore a ZONEMD RR if its Scheme and Hash Algorithm
-          violates local policy.
+        The recipient of a zone that has a ZONEMD RR verifies the zone by
+        calculating the digest as follows:
       </t>
+<aside><t>Note: If multiple ZONEMD RRs are present in the zone, e.g., during an
+algorithm rollover, a match using any one of the recipient's supported Schemes
+and Hash Algorithms is sufficient to verify the zone.  The verifier
+<bcp14>MAY</bcp14> ignore a ZONEMD RR if its Scheme and Hash Algorithm
+violates local policy.  </t></aside>
       <ol spacing="normal" type="1"><li anchor="verify-check-dnssec"> The
       verifier <bcp14>MUST</bcp14> first determine whether or not to expect
       DNSSEC records in the zone.  By examining locally configured trust
@@ -1053,10 +921,6 @@ DW: yes, that sounds good.  I didn't change the XML because I'm not sure how to 
 
 </dl>
 
-<!--[rfced] We note that the ZONEMD Schemes Registry lists this document as a reference for the "Reserved" values 0 and 255.  Should this be reflected in this document as well? The same is true about the "Reserved" values in the ZONEMD Hash Algorithms registry.  Please advise.
-
-DW: yes, lets match the IANA registry
--->
         <table anchor="scheme-table" align="center">
           <name>ZONEMD Scheme Registry</name>
           <thead>
@@ -1461,25 +1325,30 @@ DW: yes, lets match the IANA registry
           </front>
         </reference>
 
-<!--[rfced] Please review the guidance in the online portion of the RFC Style Guide (https://www.rfc-editor.org/styleguide/part2/) as pertains to referencing GitHub and let us know how we may update any references to necessary.
-
-DW: I've made changes to try matching the style guidelines, please check my work
--->
-
         <reference anchor="LDNS-ZONE-DIGEST" target="https://github.com/verisign/ldns-zone-digest">
           <front>
-            <title>Implementation of Message Digests for DNS Zones using the ldns library, commit 71c0cd1</title>
+            <title>Implementation of Message Digests for DNS Zones using the ldns library</title>
+<author>
+<organization>
+</organization>
+</author>
             <date year="2021" month="January"/>
           </front>
+<refcontent>commit 71c0cd1</refcontent>
         </reference>
 
 
 
         <reference anchor="ZONE-DIGEST-HACKATHON" target="https://github.com/shane-kerr/ZoneDigestHackathon">
           <front>
-            <title>Prototype implementation of ZONEMD for the IETF 102 hackathon, commit 76ad7a7</title>
+            <title>Prototype implementation of ZONEMD for the IETF 102 hackathon</title>
+<author>
+<organization>
+</organization>
+</author>
             <date year="2019" month="August"/>
           </front>
+<refcontent>commit 76ad7a7</refcontent>
         </reference>
 
 
@@ -1487,9 +1356,14 @@ DW: I've made changes to try matching the style guidelines, please check my work
         <reference anchor="DNS-TOOLS" target="https://github.com/niclabs/dns-tools">
           <front>
             <title>DNS tools for zone signature (file, pkcs11-hsm)
-      and validation, and zone digest (ZONEMD), commit 489de21</title>
+      and validation, and zone digest (ZONEMD)</title>
+<author>
+<organization>
+</organization>
+</author>
             <date year="2020" month="December"/>
           </front>
+<refcontent>commit 489de21</refcontent>
         </reference>
 
 
@@ -1608,53 +1482,39 @@ non-apex      900     IN  ZONEMD  2018031900 1 1 (
           private-range digests are not verifiable.
         </t>
 <sourcecode type="dns-rr">
-example.      86400   IN  SOA     ns1 admin 2018031900 (
-                                  1800 900 604800 86400 )
-example.      86400   IN  NS      ns1.example.
-example.      86400   IN  NS      ns2.example.
-example.      86400   IN  ZONEMD  2018031900 1 1 (
-                                  62e6cf51b02e54b9
-                                  b5f967d547ce4313
-                                  6792901f9f88e637
-                                  493daaf401c92c27
-                                  9dd10f0edb1c56f8
-                                  080211f8480ee306 )
-example.      86400   IN  ZONEMD  2018031900 1 2 (
-                                  08cfa1115c7b948c
-                                  4163a901270395ea
-                                  226a930cd2cbcf2f
-                                  a9a5e6eb85f37c8a
-                                  4e114d884e66f176
-                                  eab121cb02db7d65
-                                  2e0cc4827e7a3204
-                                  f166b47e5613fd27 )
-example.      86400   IN  ZONEMD  2018031900 1 240 (
-                                  e2d523f654b9422a
-                                  96c5a8f44607bbee )
-example.      86400   IN  ZONEMD  2018031900 241 1 (
-                                  e1846540e33a9e41
-                                  89792d18d5d131f6
-                                  05fc283e )
-ns1.example.  3600    IN  A       203.0.113.63
-ns2.example.  86400   IN  TXT     "This example has multiple digests"
-NS2.EXAMPLE.  3600    IN  AAAA    2001:db8::63
+example.      86400  IN  SOA     ns1 admin 2018031900 (
+                                 1800 900 604800 86400 )
+example.      86400  IN  NS      ns1.example.
+example.      86400  IN  NS      ns2.example.
+example.      86400  IN  ZONEMD  2018031900 1 1 (
+                                 62e6cf51b02e54b9
+                                 b5f967d547ce4313
+                                 6792901f9f88e637
+                                 493daaf401c92c27
+                                 9dd10f0edb1c56f8
+                                 080211f8480ee306 )
+example.      86400  IN  ZONEMD  2018031900 1 2 (
+                                 08cfa1115c7b948c
+                                 4163a901270395ea
+                                 226a930cd2cbcf2f
+                                 a9a5e6eb85f37c8a
+                                 4e114d884e66f176
+                                 eab121cb02db7d65
+                                 2e0cc4827e7a3204
+                                 f166b47e5613fd27 )
+example.      86400  IN  ZONEMD  2018031900 1 240 (
+                                 e2d523f654b9422a
+                                 96c5a8f44607bbee )
+example.      86400  IN  ZONEMD  2018031900 241 1 (
+                                 e1846540e33a9e41
+                                 89792d18d5d131f6
+                                 05fc283e )
+ns1.example.  3600   IN  A       203.0.113.63
+ns2.example.  86400  IN  TXT     "This example has multiple digests"
+NS2.EXAMPLE.  3600   IN  AAAA    2001:db8::63
 </sourcecode>
       </section>
 
-<!-- [rfced] May we update the first sentence of Appendix A.4 and A.5 to be compelete sentences?
-
-Original:
-   The URI.ARPA zone retrieved 2018-10-21. Note this sample zone
-   ...
-   The ROOT-SERVERS.NET zone retrieved 2018-10-21.
-
-Perhaps:
-   The following sample zone is the URI.ARPA zone retrieved 2018-10-21. Note this sample zone
-   ...
-   The following sample zone is the ROOT-SERVERS.NET zone retrieved 2018-10-21.
-
-DW: Updated
--->
       <section numbered="true" toc="default">
         <name>The URI.ARPA Zone</name>
         <t>
@@ -1790,8 +1650,8 @@ urn.uri.arpa.   3600    IN      RRSIG   NSEC 8 3 3600 (
     JuKkMiC3/j9iM3V8/izcouXWAVGnSZjkOgEgFPhutMqoylQNRcSkbEZQzF
     K8B/PIVdzZF0Y5xkO6zaKQjOzz6OkSaNPIo1a7Vyyl3wDY/uLCRRAHRJfp
     knuY7O+AUNXvVVIEYJqZggd4kl/Rjh1GTzPYZTRrVi5eQidI1LqCOeg= )
-</sourcecode>
-      </section>
+  </sourcecode>
+</section>
       <section numbered="true" toc="default">
         <name>The ROOT-SERVERS.NET Zone</name>
         <t>
@@ -1876,29 +1736,10 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
         <ul spacing="normal">
           <li>Read an input zone and output a zone with the ZONEMD placeholder.</li>
 
-<!-- [rfced] FYI: We've updated the following sentence with the article "the" before "zone digest" and "signed zone" to be consistent with the formats of other list items in Appendix B.1. Please let us know if this is incorrect.
 
-Original:
-   - Read an input zone and output a zone with the ZONEMD placeholder.
-   - Compute zone digest over signed zone and update the ZONEMD record.
-
-Updated:
-   - Read an input zone and output a zone with the ZONEMD placeholder.
-   - Compute the zone digest over the signed zone and update the ZONEMD record.
--->
           <li>Compute the zone digest over the signed zone and update the ZONEMD
           record.</li>
 
-<!-- [rfced] FYI: We've updated "DNSSEC signature" to "DNSSEC signatures" in the following sentence for consistency with other uses in this document.
-
-Note: This applies to three instances in Appendix B.
-
-Original:
-  Re-compute DNSSEC signature over the ZONEMD record.
-
-Updated:
-  Recompute DNSSEC signatures over the ZONEMD record.
--->
           <li>Recompute DNSSEC signatures over the ZONEMD record.</li>
           <li>Verify the zone digest from an input zone.</li>
         </ul>
@@ -1951,8 +1792,6 @@ Updated:
       <name>Acknowledgments</name>
       <t>
 
-<!-- [rfced] FYI: We've updated "Donald Eastlake" to "Donald Eastlake 3rd" per his preferred naming convention.
--->
         The authors wish to thank <contact fullname="David Blacka"/>, <contact
         fullname="Scott Hollenbeck"/>, and <contact fullname="Rick Wilhelm"/>
         for providing feedback on early drafts of this document.
@@ -1975,22 +1814,6 @@ Updated:
         Group for their input.
       </t>
     </section>
-<!-- [rfced] Throughout the text, the following terminology appears to be used 
-inconsistently. Please review these occurrences and let us know if/how they
-may be made consistent.  
-
-a) RRSet vs. RRset
-
-We see mostly RRSet in the document, but past use in RFCs seems to favor the latter.
-
-DW: Let's use RRset since thats what the DNS Terminology RFC 8499 uses.
-
-b) Field names
-
-We will assume that lowercase occurrences of the following terms are not referring to the field name unless we hear otherwise:
-
-Serial, Scheme, Hash Algorithm, Digest
--->
 
 
   </back>
