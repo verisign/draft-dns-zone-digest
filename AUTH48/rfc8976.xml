@@ -149,10 +149,10 @@ DW: reviewed and accepted
         In the DNS, a zone is the collection of authoritative resource records
         (RRs) sharing a common origin (<xref target="RFC8499"
         format="default"/>).  Zones are often stored as files in the so-called
-        "master file format" <xref target="RFC1034" format="default"/>.  Zones
+        "master file format" (<xref target="RFC1034" format="default"/>).  Zones
         are generally distributed among name servers using the zone transfer
-        (AXFR) <xref target="RFC5936" format="default"/> and incremental zone
-        transfer (IXFR) <xref target="RFC1995" format="default"/> protocols.
+        (AXFR) (<xref target="RFC5936" format="default"/>) and incremental zone
+        transfer (IXFR) (<xref target="RFC1995" format="default"/>) protocols.
         They can also be distributed outside of the DNS with any file transfer
         protocol such as FTP, HTTP, and rsync, or even as email attachments.
         Currently, there is no standard way to compute a hash or message
@@ -202,27 +202,21 @@ DW: reviewed and accepted
       <section numbered="true" toc="default">
         <name>Alternative Approaches</name>
 
-<!-- [rfced] Reference RFC 2845 (TSIGs) has been obsoleted by RFC 8945. We will update to the latter unless we hear objection.
-
-Original:
-   Perhaps the most widely used is
-   DNS transaction signatures (TSIG [RFC2845]).
--->
         <t>
           One approach to preventing data tampering and corruption is to
           secure the distribution channel.  The DNS has a number of features
           that are already used for channel security.  Perhaps the most widely
-          used is DNS transaction signatures (TSIGs <xref target="RFC2845"
+          used is DNS transaction signatures (TSIGs) (<xref target="RFC8945"
           format="default"/>). A TSIG uses shared secret keys and a message
           digest to protect individual query and response messages. It is
-          generally used to authenticate and validate UPDATE <xref
-          target="RFC2136" format="default"/>, AXFR <xref target="RFC5936"
-          format="default"/>, and IXFR <xref target="RFC1995"
-          format="default"/> messages.
+          generally used to authenticate and validate UPDATE (<xref
+          target="RFC2136" format="default"/>), AXFR (<xref target="RFC5936"
+          format="default"/>), and IXFR (<xref target="RFC1995"
+          format="default"/>) messages.
         </t>
         <t>
-          DNS Request and Transaction Signatures (SIG(0)) <xref
-          target="RFC2931" format="default"/> is another protocol extension
+          DNS Request and Transaction Signatures (SIG(0)) (<xref
+          target="RFC2931" format="default"/>) is another protocol extension
           that authenticates individual DNS transactions.  Whereas SIG records
           normally cover specific RR types, SIG(0) is used to sign an entire
           DNS message.  Unlike TSIG, SIG(0) uses public key cryptography
@@ -231,27 +225,27 @@ Original:
         <t>
           The Transport Layer Security protocol suite also provides channel
           security.  The DPRIVE Working Group is in the process of specifying
-          DNS Zone Transfer-over-TLS <xref
-          target="I-D.ietf-dprive-xfr-over-tls" format="default"/>.  One can
+          DNS Zone Transfer-over-TLS (<xref
+          target="I-D.ietf-dprive-xfr-over-tls" format="default"/>).  One can
           also easily imagine the distribution of zones over HTTPS-enabled web
-          servers as well as DNS-over-HTTPS <xref target="RFC8484"
-          format="default"/>.
+          servers as well as DNS-over-HTTPS (<xref target="RFC8484"
+          format="default"/>).
         </t>
         <t>
-          Unfortunately, the protections provided by these channel
-          security techniques are (in practice) ephemeral and are not retained after the
-          data transfer is complete.  They ensure that the client
-          receives the data from the expected server and that the
-          data sent by the server is not modified during transmission.
-          However, they do not guarantee that the server transmits the
-          data as originally published and do not provide any methods
-          to verify data that is read after transmission is complete.
-          For example, a name server loading saved zone data upon restart
-          cannot guarantee that the on-disk data has not been modified.
-          Such modification could be the result of
-          an accidental corruption of the file or perhaps an incomplete
-          saving of the file <xref target="DISK-FULL-FAILURE" format="default"/>.
-          For these reasons, it is preferable to protect the integrity of the data itself.
+          Unfortunately, the protections provided by these channel security
+          techniques are (in practice) ephemeral and are not retained after
+          the data transfer is complete.  They ensure that the client receives
+          the data from the expected server and that the data sent by the
+          server is not modified during transmission.  However, they do not
+          guarantee that the server transmits the data as originally published
+          and do not provide any methods to verify data that is read after
+          transmission is complete.  For example, a name server loading saved
+          zone data upon restart cannot guarantee that the on-disk data has
+          not been modified.  Such modification could be the result of an
+          accidental corruption of the file or perhaps an incomplete saving of
+          the file (<xref target="DISK-FULL-FAILURE" format="default"/>).  For
+          these reasons, it is preferable to protect the integrity of the data
+          itself.
         </t>
        
 <!-- [rfced] FYI: We've capitalized  "opt-out" to "Opt-Out" per its usage in RFC 5155. Please let us know if this is not preferred.
@@ -272,8 +266,8 @@ Updated:
           delegations (non-apex NS records) are not signed by DNSSEC and
           neither are any glue records.  ZONEMD protects the integrity of
           delegation, glue, and other records that are not otherwise covered
-          by DNSSEC. Furthermore, zones that employ NSEC3 with Opt-Out <xref
-          target="RFC5155" format="default"/> are susceptible to the removal
+          by DNSSEC. Furthermore, zones that employ NSEC3 with Opt-Out (<xref
+          target="RFC5155" format="default"/>) are susceptible to the removal
           or addition of names between the signed nodes.  Whereas DNSSEC
           primarily protects consumers of DNS response messages, this protocol
           protects consumers of zones.
@@ -288,8 +282,8 @@ Original:
 
         <t>
           There are existing tools and protocols that provide data security,
-          such as OpenPGP <xref target="RFC4880" format="default"/> and S/MIME
-          <xref target="RFC5751" format="default"/>.  In fact, the
+          such as OpenPGP (<xref target="RFC4880" format="default"/>) and
+          S/MIME (<xref target="RFC8551" format="default"/>).  In fact, the
           internic.net site publishes Pretty Good Privacy (PGP) signatures
           alongside the root zone and other files available there.  However,
           this is a detached signature with no strong association to the
@@ -383,13 +377,13 @@ DW: accepted
         <section numbered="true" toc="default">
           <name>Root Zone</name>
           <t>
-            The root zone <xref target="InterNIC" format="default"/> is one of
+            The root zone (<xref target="InterNIC" format="default"/>) is one of
             the most widely distributed DNS zones on the Internet, served by
-            more than 1000 separate instances <xref target="ROOT-SERVERS"
-            format="default"/> at the time of this writing.  Additionally,
+            more than 1000 separate instances (<xref target="ROOT-SERVERS"
+            format="default"/>) at the time of this writing.  Additionally,
             many organizations configure their own name servers to serve the
             root zone locally.  Reasons for doing so include privacy and
-            reduced access time.  <xref target="RFC8806" format="default"/>
+            reduced access time. <xref target="RFC8806" format="default"/>
             describes one way to do this.  As the root zone spreads beyond its
             traditional deployment boundaries, the verification of the
             completeness of the zone contents becomes more important.
@@ -412,36 +406,14 @@ DW: accepted
             systems.
           </t>
 
-<!-- [rfced] This document parenthesizes certain citations when not used as a noun within the sentence, likely to distinguish them from other citations used as nouns.  Some  citations, however, are still unparenthesized when not used as nouns. May we update all citations to include parentheses when not being used as a noun?
-
-Original: 
-   [RFC8806] describes one way to do this.
-   ...
-   However, modern DNS service has complex provisioning which includes
-   multiple third-party providers ([RFC8901]) and hundreds of anycast instances
-   ([RFC3258]).
-   ...
-   ICANN operates the Centralized Zone Data Service [CZDS], which is a...
-   
-Or perhaps:
-   [RFC8806] describes one way to do this.
-   ...
-   However, modern DNS service has complex provisioning, which includes
-   multiple third-party providers ([RFC8901]) and hundreds of anycast instances
-   ([RFC3258]).
-   ...
-   ICANN operates the Centralized Zone Data Service ([CZDS]), which is a...
-
-DW: yes please update citations as appropriate.  I did not make any changes for this.
--->
-        </section>
+    </section>
         <section numbered="true" toc="default">
           <name>Response Policy Zones</name>
           <t>
             A Response Policy Zone (RPZ) is "a mechanism to introduce a
             customized policy in Domain Name System servers, so that recursive
-            resolvers return possibly modified results" <xref target="RPZ"
-            format="default"/>.  The policy information is carried inside
+            resolvers return possibly modified results" (<xref target="RPZ"
+            format="default"/>).  The policy information is carried inside
             specially constructed DNS zones.  A number of companies provide
             RPZ feeds, which are consumed by name server and firewall
             products.  While RPZs can be signed with DNSSEC, the data is
@@ -452,8 +424,8 @@ DW: yes please update citations as appropriate.  I did not make any changes for 
         <section numbered="true" toc="default">
           <name>Centralized Zone Data Service</name>
           <t>
-            ICANN operates the Centralized Zone Data Service <xref
-            target="CZDS" format="default"/>, which is a repository of
+            ICANN operates the Centralized Zone Data Service (<xref
+            target="CZDS" format="default"/>), which is a repository of
             top-level domain zone files.  Users that have been granted access
             are then able to download zone data.  Adding a zone digest to
             these would provide CZDS users with assurances that the data has
@@ -588,7 +560,7 @@ DW: No, SIMPLE is not an initialism and perhaps writing it in all-caps is a mist
             used to construct the digest.
           </t>
           <t>
-            Herein, SHA384 <xref target="RFC6234" format="default"/>, with
+            Herein, SHA384 (<xref target="RFC6234" format="default"/>), with
             Hash Algorithm value 1, is the only standardized Hash Algorithm
             defined for ZONEMD records that <bcp14>MUST</bcp14> be supported
             by implementations.  When SHA384 is used, the size of the Digest
@@ -597,7 +569,7 @@ DW: No, SIMPLE is not an initialism and perhaps writing it in all-caps is a mist
             digest is published in the ZONEMD record.
           </t>
           <t>
-            SHA512 <xref target="RFC6234" format="default"/>, with Hash
+            SHA512 (<xref target="RFC6234" format="default"/>), with Hash
             Algorithm value 2, is also defined for ZONEMD records and
             <bcp14>SHOULD</bcp14> be supported by implementations.  When
             SHA512 is used, the size of the Digest field is 64 octets.  The
@@ -692,19 +664,10 @@ example.com. 86400 IN ZONEMD 2018031500 1 1 (
           The zone operator <bcp14>MAY</bcp14> choose any of the defined hash algorithms
           and schemes, including the Private Use code points.
         </t>
-<!-- [rfced] FYI: We've capitalized all instances of "private use" for consistency within this document. Please let us know if this is incorrect.
 
-Original: 
-   The zone operator MAY choose any of the defined hash algorithms and
-   schemes, including the private use code points.
-
-Updated: 
-   The zone operator MAY choose any of the defined hash algorithms and
-   schemes, including the Private Use code points.
--->
         <t>
           The ZONEMD RRset <bcp14>MAY</bcp14> contain multiple records to support algorithm
-          agility <xref target="BCP201" format="default"/>.
+          agility (<xref target="BCP201" format="default"/>).
 
           When multiple ZONEMD RRs are present, each <bcp14>MUST</bcp14>
           specify a unique Scheme and Hash Algorithm tuple.  It is
@@ -1907,7 +1870,7 @@ root-servers.net.     3600000 IN  ZONEMD  2018091100 1 1 (
         <name>Authors' Implementation</name>
         <t>
           The authors have an open-source implementation in C, using the ldns
-          library <xref target="LDNS-ZONE-DIGEST" format="default"/>.  This
+          library (<xref target="LDNS-ZONE-DIGEST" format="default"/>).  This
           implementation is able to perform the following functions:
         </t>
         <ul spacing="normal">
@@ -1949,8 +1912,8 @@ Updated:
       <section numbered="true" toc="default">
         <name>Shane Kerr's Implementation</name>
         <t><contact fullname="Shane Kerr"/> wrote an implementation of this
-        specification during the IETF 102 hackathon <xref
-        target="ZONE-DIGEST-HACKATHON" format="default"/>.  This implementation
+        specification during the IETF 102 hackathon (<xref
+        target="ZONE-DIGEST-HACKATHON" format="default"/>).  This implementation
         is in Python and is able to perform the following functions:
         </t>
         <ul spacing="normal">
@@ -1970,7 +1933,7 @@ Updated:
         <name>NIC Chile Lab's Implementation</name>
         <t>
           NIC Chile Labs wrote an implementation of this specification
-          as part of "dns-tools" suite <xref target="DNS-TOOLS" format="default"/>,
+          as part of "dns-tools" suite (<xref target="DNS-TOOLS" format="default"/>),
           which besides digesting, can also sign and verify zones. This
           implementation is in Go and is able to perform the following
           functions:
