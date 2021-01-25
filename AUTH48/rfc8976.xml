@@ -1060,7 +1060,7 @@ violates local policy.  </t></aside>
         </t>
       </section>
       <section numbered="true" toc="default">
-        <name>Attacks Against the Zone Digest</name>
+        <name>Attacks against the Zone Digest</name>
         <t>
           An attacker, whose goal is to modify zone content before it is used
           by the victim, may consider a number of different approaches.
