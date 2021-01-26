@@ -1521,7 +1521,7 @@ NS2.EXAMPLE.  3600   IN  AAAA    2001:db8::63
       <section numbered="true" toc="default">
         <name>The URI.ARPA Zone</name>
         <t>
-          The following sample zone is the URI.ARPA zone retrieved 2018-10-21.  Note this sample zone has
+          The following sample zone is the URI.ARPA zone retrieved 2021-01-21.  Note this sample zone has
           been re-signed with unpublished keys, so that the added ZONEMD RR also has a signature.
         </t>
 <sourcecode type="dns-rr">
