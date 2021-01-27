@@ -1404,6 +1404,16 @@ violates local policy.  </t></aside>
             <date year="2010" month="May"/>
           </front>
         </reference>
+
+        <reference anchor="ZONEMD-TESTS-WIKI" target="https://trac.ietf.org/trac/dnsop/wiki/RFC8976ZONEMDTestCases">
+          <front>
+            <title>RFC 8976 Message Digest for DNS Zones Examples</title>
+            <author>
+              <organization>IETF</organization>
+            </author>
+            <date year="2021" month="January"/>
+          </front>
+        </reference>
       </references>
     </references>
     <section numbered="true" toc="default">
@@ -1411,6 +1421,10 @@ violates local policy.  </t></aside>
       <t>
         This appendix contains example zones with accurate ZONEMD records.  These can be used to
         verify an implementation of the zone digest protocol.
+        Additional and more extensive test
+        cases can be found via the ZONEMD Tests Wiki
+        (<xref target="ZONEMD-TESTS-WIKI"/>)
+        maintained by the IETF DNSOP Working Group.
       </t>
       <section numbered="true" toc="default">
         <name>Simple EXAMPLE Zone</name>
