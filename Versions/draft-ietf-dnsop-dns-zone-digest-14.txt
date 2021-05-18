@@ -5,13 +5,13 @@
 Internet Engineering Task Force                               D. Wessels
 Internet-Draft                                                 P. Barber
 Intended status: Standards Track                                Verisign
-Expires: April 12, 2021                                      M. Weinberg
+Expires: April 18, 2021                                      M. Weinberg
                                                                   Amazon
                                                                W. Kumari
                                                                   Google
                                                              W. Hardaker
                                                                  USC/ISI
-                                                         October 9, 2020
+                                                        October 15, 2020
 
 
                       Message Digest for DNS Zones
@@ -53,7 +53,7 @@ Status of This Memo
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 1]
+Wessels, et al.          Expires April 18, 2021                 [Page 1]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -63,7 +63,7 @@ Internet-Draft               DNS Zone Digest                October 2020
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 12, 2021.
+   This Internet-Draft will expire on April 18, 2021.
 
 Copyright Notice
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 2]
+Wessels, et al.          Expires April 18, 2021                 [Page 2]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -165,7 +165,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 3]
+Wessels, et al.          Expires April 18, 2021                 [Page 3]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -221,7 +221,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 4]
+Wessels, et al.          Expires April 18, 2021                 [Page 4]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -277,7 +277,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 5]
+Wessels, et al.          Expires April 18, 2021                 [Page 5]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -333,7 +333,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 6]
+Wessels, et al.          Expires April 18, 2021                 [Page 6]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -389,7 +389,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 7]
+Wessels, et al.          Expires April 18, 2021                 [Page 7]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -445,7 +445,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 8]
+Wessels, et al.          Expires April 18, 2021                 [Page 8]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -501,7 +501,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                 [Page 9]
+Wessels, et al.          Expires April 18, 2021                 [Page 9]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -557,7 +557,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 10]
+Wessels, et al.          Expires April 18, 2021                [Page 10]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -613,7 +613,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 11]
+Wessels, et al.          Expires April 18, 2021                [Page 11]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -669,7 +669,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 12]
+Wessels, et al.          Expires April 18, 2021                [Page 12]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -725,7 +725,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 13]
+Wessels, et al.          Expires April 18, 2021                [Page 13]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -781,7 +781,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 14]
+Wessels, et al.          Expires April 18, 2021                [Page 14]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -837,7 +837,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 15]
+Wessels, et al.          Expires April 18, 2021                [Page 15]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -893,7 +893,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 16]
+Wessels, et al.          Expires April 18, 2021                [Page 16]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -949,7 +949,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 17]
+Wessels, et al.          Expires April 18, 2021                [Page 17]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1005,7 +1005,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 18]
+Wessels, et al.          Expires April 18, 2021                [Page 18]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1061,7 +1061,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 19]
+Wessels, et al.          Expires April 18, 2021                [Page 19]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1117,7 +1117,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 20]
+Wessels, et al.          Expires April 18, 2021                [Page 20]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1173,7 +1173,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 21]
+Wessels, et al.          Expires April 18, 2021                [Page 21]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1229,7 +1229,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 22]
+Wessels, et al.          Expires April 18, 2021                [Page 22]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1285,7 +1285,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 23]
+Wessels, et al.          Expires April 18, 2021                [Page 23]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1341,7 +1341,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 24]
+Wessels, et al.          Expires April 18, 2021                [Page 24]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1397,7 +1397,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 25]
+Wessels, et al.          Expires April 18, 2021                [Page 25]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1453,7 +1453,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 26]
+Wessels, et al.          Expires April 18, 2021                [Page 26]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1501,15 +1501,15 @@ Internet-Draft               DNS Zone Digest                October 2020
 
    [disk-full-failure]
               DENIC, "Background of the Partial Failure of the Name
-              Service for .de Domains", May 2010, <https://web.archive.o
-              rg/web/20100618032705/https://www.denic.de/en/denic-in-
-              dialogue/news/2733.html>.
+              Service for .de Domains", May 2010,
+              <https://web.archive.org/web/20100618032705/
+              https://www.denic.de/en/denic-in-dialogue/news/2733.html>.
 
 
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 27]
+Wessels, et al.          Expires April 18, 2021                [Page 27]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1565,7 +1565,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 28]
+Wessels, et al.          Expires April 18, 2021                [Page 28]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1621,7 +1621,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 29]
+Wessels, et al.          Expires April 18, 2021                [Page 29]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1677,7 +1677,7 @@ A.2.  Complex EXAMPLE Zone
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 30]
+Wessels, et al.          Expires April 18, 2021                [Page 30]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1733,7 +1733,7 @@ A.3.  EXAMPLE Zone with multiple digests
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 31]
+Wessels, et al.          Expires April 18, 2021                [Page 31]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1789,7 +1789,7 @@ A.4.  The URI.ARPA Zone
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 32]
+Wessels, et al.          Expires April 18, 2021                [Page 32]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1845,7 +1845,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 33]
+Wessels, et al.          Expires April 18, 2021                [Page 33]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1901,7 +1901,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 34]
+Wessels, et al.          Expires April 18, 2021                [Page 34]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -1957,7 +1957,7 @@ A.5.  The ROOT-SERVERS.NET Zone
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 35]
+Wessels, et al.          Expires April 18, 2021                [Page 35]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -2013,7 +2013,7 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 36]
+Wessels, et al.          Expires April 18, 2021                [Page 36]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -2069,7 +2069,7 @@ B.2.  Shane Kerr's Implementation
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 37]
+Wessels, et al.          Expires April 18, 2021                [Page 37]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -2125,7 +2125,7 @@ Authors' Addresses
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 38]
+Wessels, et al.          Expires April 18, 2021                [Page 38]
 
 Internet-Draft               DNS Zone Digest                October 2020
 
@@ -2181,4 +2181,4 @@ Internet-Draft               DNS Zone Digest                October 2020
 
 
 
-Wessels, et al.          Expires April 12, 2021                [Page 39]
+Wessels, et al.          Expires April 18, 2021                [Page 39]
