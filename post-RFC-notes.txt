@@ -1,0 +1,11 @@
+masterfile format allows some fields to be omitted / inherited.
+e.g. ownername and TTL.  Can be a challenge for digest calculation.
+
+All RRs in an RRset should have the same TTL, but maybe they don't,
+in violation of RFC 2181.  As long as the TTLs aren't changed between
+publisher and recipient, ZONEMD should still work.  But for zones that
+have varying TTLs in an RRset ZONEMD may not be reliable.
+
+Some RR types have Domain Name fields that are not subject to
+canonicalization.  e.g. NSEC, as clarified in RFC 6840.  It means that
+for those RRs case must always be preserved.
